@@ -1,22 +1,40 @@
 # Solid OFN-RPP
 
+```html
+<script type="module" src="https://cdn.skypack.dev/@startinblox/core@0.17"></script>
+<script type="module" src="https://cdn.skypack.dev/@startinblox/router@0.11"></script>
+<script type="module" src="https://cdn.skypack.dev/@startinblox/component-ofn-rpp"></script>
+
+<solid-ofn-rpp data-src="https://n8n.openfoodnetwork.org.uk/webhook/regen/producers" uniq="regenerative-produce-portal"></solid-ofn-rpp>
+```
+
 ## Developpers
 
-Installation:
+### Installation
 
 ```bash
 npm install
 ```
 
-Build with:
+Build for production with:
 
 ```bash
 npm run build
 # npm run serve
 ```
 
-Dev mode:
+Build for dev while watching for changes with:
 
 ```bash
 npm run watch
+```
+
+### Icons
+
+Based on [unplugin-icons](https://github.com/unplugin/unplugin-icons) - webcomponent method.
+
+```js
+import '~icons/mdi/account-box';
+/* ... */
+<icon-mdi-account-box></icon-mdi-account-box>
 ```
