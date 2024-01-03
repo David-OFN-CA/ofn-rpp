@@ -54,12 +54,14 @@
     "last 2 Chrome versions"
   ],
   "dependencies": {
+    "@iconify-json/mdi": "^1.1.64",
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.2",
     "postcss": "^8.4.32",
     "postcss-preset-env": "^9.3.0",
     "postcss-scss": "^4.0.9",
     "sass": "^1.69.7",
+    "unplugin-icons": "^0.18.1",
     "vite": "^4.5.1"
   }
 }

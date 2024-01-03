@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
+import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
   build: {
@@ -9,4 +10,12 @@ export default defineConfig({
       fileName: () => 'index.js',
     },
   },
+  plugins: [
+    Icons({
+      compiler: 'web-components',
+      webComponents: {
+        autoDefine: true,
+      },
+    })
+  ],
 })

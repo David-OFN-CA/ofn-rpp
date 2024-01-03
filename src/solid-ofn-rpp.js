@@ -1,4 +1,5 @@
 import style from './styles/index.scss?inline';
+import '~icons/mdi/account-box';
 import('./utils.js').then(utils => {
   import(/* @vite-ignore */utils.coreVersion()).then(core => {
     customElements.define(
@@ -11,7 +12,7 @@ import('./utils.js').then(utils => {
 
         static get propsDefinition() {
           return {
-            apiSrc: "api-src",
+            dataSrc: "data-src",
             uniq: "uniq"
           };
         }
@@ -30,6 +31,7 @@ import('./utils.js').then(utils => {
               <ul>
                 <solid-route name="${this.route}-producers-list">
                   <li>
+                    <icon-mdi-account-box></icon-mdi-account-box>
                     <a>${this.localize('producersList.name')}</a>
                   </li>
                 </solid-route>
@@ -97,7 +99,7 @@ import('./utils.js').then(utils => {
         }
 
         template(props) {
-          this.apiSrc = props.apiSrc;
+          this.dataSrc = props.dataSrc;
           this.uniq = props.uniq || utils.uniq();
           this.route = this.uniq;
           return `
