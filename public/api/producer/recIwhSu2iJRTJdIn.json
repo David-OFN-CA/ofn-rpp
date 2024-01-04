@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recIwhSu2iJRTJdIn.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recIwhSu2iJRTJdIn.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recIwhSu2iJRTJdIn.json"},
   "dfc-b:websitePage": "thestillroom.com.au",
   "dfc-b:hasSocialMedia": {
     "@id": "#",

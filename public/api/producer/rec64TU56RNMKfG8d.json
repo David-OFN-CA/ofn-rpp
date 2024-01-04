@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/rec64TU56RNMKfG8d.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/rec64TU56RNMKfG8d.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/rec64TU56RNMKfG8d.json"},
   "dfc-b:email": "hello@commongroundproject.com.au",
   "dfc-b:websitePage": "www.commongroundproject.com.au",
   "dfc-b:hasSocialMedia": {

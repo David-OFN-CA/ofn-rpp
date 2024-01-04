@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recjBYlXskXtilPBC.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recjBYlXskXtilPBC.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recjBYlXskXtilPBC.json"},
   "dfc-b:email": "kirsten.larsen76+farm@gmail.com",
   "dfc-b:websitePage": "",
   "dfc-b:hasSocialMedia": {

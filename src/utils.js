@@ -1,4 +1,4 @@
-const componentName = 'ofn-rpp';
+const componentName = "ofn-rpp";
 
 export function path() {
   let path = ".";
@@ -16,14 +16,31 @@ export function uniq() {
 
 export const CLIENT_CONTEXT = {
   "@vocab": "",
-  "dfc": "dfc",
-  "dc": "dc",
+  dfc: "dfc",
+  dc: "dc",
   "dfc-b": "dfc-b",
   "dfc-p": "dfc-p",
   "dfc-t": "dfc-t",
   "dfc-m": "dfc-m",
   "dfc-pt": "dfc-p",
   "dfc-f": "dfc-f",
-  "ontosec": "ontosec",
-  "name": "name"
+  ontosec: "ontosec",
+  name: "name",
+};
+
+export const sanitize = (input) => {
+  const tmp = document.createElement("div");
+  tmp.innerHTML = input;
+  return tmp.textContent || tmp.innerText || "";
+};
+
+export const truncate = (str, length) => {
+  if (str.length > length) {
+    const lastSpaceIndex = str.substr(0, length).lastIndexOf(" ");
+    str =
+      lastSpaceIndex !== -1
+        ? str.substr(0, lastSpaceIndex) + "..."
+        : str.substr(0, length) + "...";
+  }
+  return str;
 };

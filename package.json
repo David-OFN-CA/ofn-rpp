@@ -54,9 +54,11 @@
     "last 2 Chrome versions"
   ],
   "dependencies": {
+    "@fontsource/open-sans": "^5.0.20",
     "@iconify-json/mdi": "^1.1.64",
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.2",
+    "materialize-css": "^1.0.0-rc.2",
     "postcss": "^8.4.32",
     "postcss-preset-env": "^9.3.0",
     "postcss-scss": "^4.0.9",

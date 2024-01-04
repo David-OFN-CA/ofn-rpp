@@ -18,28 +18,39 @@
     <script type="module" src="./src/index.js"></script>
   </head>
   <body>
-    <ul>
-      <li>
-        <solid-link next="regenerative-produce-portal-producers-list">
-          <icon-mdi-account-box></icon-mdi-account-box> Producers List
-        </solid-link>
-      </li>
-      <li>
-        <solid-link next="regenerative-produce-portal-products-list">
-          Products List
-        </solid-link>
-      </li>
-      <li>
-        <solid-link next="regenerative-produce-portal-producer-details" data-src="http://localhost:5173/api/producer/rec2aFRu0H3Czf2IG.json">
-          Producer Details
-        </solid-link>
-      </li>
-      <li>
-        <solid-link next="regenerative-produce-portal-product-details" data-src="http://localhost:5173/api/product/rec07CR18S2eerIyc.json">
-          Product Details
-        </solid-link>
-      </li>
-    </ul>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Examples</a>
+        <ul class="right">
+          <li>
+            <solid-link next="regenerative-produce-portal-producers-list">
+              <a><icon-mdi-home-silo></icon-mdi-home-silo> Producers List</a>
+            </solid-link>
+          </li>
+          <li>
+            <solid-link next="regenerative-produce-portal-products-list">
+              <a><icon-mdi-food-apple></icon-mdi-food-apple> Products List</a>
+            </solid-link>
+          </li>
+          <li>
+            <solid-link
+              next="regenerative-produce-portal-producer-details"
+              data-src="http://localhost:5173/api/producer/recXJrzz9mquDaCv7.json"
+            >
+              <a><icon-mdi-home-silo></icon-mdi-home-silo> Producer Details</a>
+            </solid-link>
+          </li>
+          <li>
+            <solid-link
+              next="regenerative-produce-portal-product-details"
+              data-src="http://localhost:5173/api/product/rec07CR18S2eerIyc.json"
+            >
+              <a><icon-mdi-food-apple></icon-mdi-food-apple> Product Details</a>
+            </solid-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <solid-ofn-rpp
       producers-src="http://localhost:5173/api/producers.json"
       products-src="http://localhost:5173/api/products.json"

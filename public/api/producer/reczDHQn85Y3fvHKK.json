@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/reczDHQn85Y3fvHKK.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/reczDHQn85Y3fvHKK.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/reczDHQn85Y3fvHKK.json"},
   "dfc-b:websitePage": "www.bellobeef.com.au",
   "dfc-b:hasSocialMedia": {
     "@id": "#",

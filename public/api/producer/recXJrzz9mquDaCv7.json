@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recXJrzz9mquDaCv7.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recXJrzz9mquDaCv7.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recXJrzz9mquDaCv7.json"},
   "dfc-b:email": "hello@farmingforgood.com.au",
   "dfc-b:websitePage": "farmingforgood.com.au",
   "dfc-b:hasSocialMedia": {

@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recW1epOZsVUhJvRI.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recW1epOZsVUhJvRI.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recW1epOZsVUhJvRI.json"},
   "dfc-b:email": "murrnong@gmail.com",
   "dfc-b:websitePage": "www.murrnong.com",
   "dfc-b:hasSocialMedia": {

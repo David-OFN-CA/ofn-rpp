@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recVIrkdXWbRzs8IQ.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recVIrkdXWbRzs8IQ.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recVIrkdXWbRzs8IQ.json"},
   "dfc-b:hasPhoneNumber": "0427229322",
   "dfc-b:email": "geoff@geoffthechef.com.au",
   "dfc-b:websitePage": "",

@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recALjpHmGmqsXpaW.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recALjpHmGmqsXpaW.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recALjpHmGmqsXpaW.json"},
   "dfc-b:websitePage": "",
   "dfc-b:hasSocialMedia": {
     "@id": "#",

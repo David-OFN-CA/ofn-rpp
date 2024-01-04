@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recrIQDQMQpTODtjB.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recrIQDQMQpTODtjB.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recrIQDQMQpTODtjB.json"},
   "dfc-b:websitePage": "reedycreekprovidore.au",
   "dfc-b:hasSocialMedia": {
     "@id": "#",

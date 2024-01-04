@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/recHYLgKXBhtgemfb.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recHYLgKXBhtgemfb.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/recHYLgKXBhtgemfb.json"},
   "dfc-b:websitePage": "www.handfortheland.com",
   "dfc-b:hasSocialMedia": {
     "@id": "#",

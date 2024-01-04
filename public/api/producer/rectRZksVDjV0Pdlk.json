@@ -1,7 +1,7 @@
 {
   "@id": "http://localhost:5173/api/producer/rectRZksVDjV0Pdlk.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/rectRZksVDjV0Pdlk.json",
+  "dfc-b:hasAddress": {"@id":"http://localhost:5173/api/addresses/rectRZksVDjV0Pdlk.json"},
   "dfc-b:websitePage": "www.cockatoocreekfarm.com.au",
   "dfc-b:hasSocialMedia": {
     "@id": "#",
