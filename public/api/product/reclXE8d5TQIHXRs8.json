@@ -17,5 +17,7 @@
   "ofn:spree_product_id": 24088,
   "ofn:image": "https://s3.amazonaws.com/ofn_production/8dr5h22ca48vrfgtd2q3p2p6kalw",
   "ofn:Type": "non local vegetable",
-  "dfc-b:suppliedBy": "/api/producer/recjBYlXskXtilPBC.json"
+  "dfc-b:suppliedBy": {
+    "@id": "/api/producer/recjBYlXskXtilPBC.json"
+  }
 }

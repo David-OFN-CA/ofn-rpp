@@ -16,5 +16,7 @@
   "dfc-b:totalTheoreticalStock": 0,
   "ofn:spree_product_id": 28376,
   "ofn:image": "https://s3.amazonaws.com/ofn_production/xyov99mksbk7rrzh9hbj6gkm3b9a",
-  "dfc-b:suppliedBy": "/api/producer/recW1epOZsVUhJvRI.json"
+  "dfc-b:suppliedBy": {
+    "@id": "/api/producer/recW1epOZsVUhJvRI.json"
+  }
 }
