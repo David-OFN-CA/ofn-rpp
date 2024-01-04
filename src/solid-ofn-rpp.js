@@ -6,7 +6,7 @@ import('./utils.js').then(utils => {
   import(/* @vite-ignore */utils.coreVersion()).then(core => {
 
     // Custom widget for producer description, original contains some unsafe html
-    customElements.define("safe-html-value",
+    customElements.define("custom-safe-html-value",
       class extends core.SolidTemplateElement {
         constructor() {
           super();
@@ -22,6 +22,53 @@ import('./utils.js').then(utils => {
           return utils.truncate(utils.sanitize(value), 125);
         }
       });
+
+      // Custom widget for badges (simple array)
+      customElements.define("custom-multiple-badge",
+        class extends core.SolidTemplateElement {
+          constructor() {
+            super();
+          }
+          static get propsDefinition() {
+            return {
+              value: "value"
+            };
+          }
+          template({
+            value
+          }) {
+            const badges = value.split(',');
+            let res = '';
+            for(let badge of badges) {
+              if(badge.length > 0) {
+                res += `<div class="badge" data-badge-caption="">${badge}</div>`
+              }
+            }
+            return res;
+          }
+        });
+
+        // Custom widget for First Nations Led
+        customElements.define("custom-badge-firstnationsled",
+          class extends core.SolidTemplateElement {
+            constructor() {
+              super();
+            }
+            static get propsDefinition() {
+              return {
+                value: "value"
+              };
+            }
+            template({
+              value
+            }) {
+              if(value.length > 0) {
+                return `<div class="badge" data-badge-caption="">First Nations Led</div>`;
+              } else {
+                return "";
+              }
+            }
+          });
 
     customElements.define(
       "solid-ofn-rpp",
@@ -69,9 +116,21 @@ import('./utils.js').then(utils => {
         viewProducersList(props={}) {
           let render = `
             <div id="${this.route}-producers-list" data-view="${this.route}-producers-list" class="row">
-              <div class="col s4"></div>
+              <div class="col s4">
+                <div class="loader" id="loader-producers-list-filters">
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+              </div>
               <div class="col s8">
+                <div class="loader" id="loader-producers-list">
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
                 <solid-display
+                  loader-id="loader-producers-list"
                   data-src="${this.producersSrc}"
                   fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity), set-description(ofn:long_description), set-tags(ofn:First_Nations_country, ofn:Produce_category))))))"
 
@@ -82,7 +141,7 @@ import('./utils.js').then(utils => {
                   widget-set-card-panel="div"
                   class-set-card-panel="card-panel z-depth-1"
                   widget-set-card-wrapper="div"
-                  class-set-card-wrapper="row valign-wrapper"
+                  class-set-card-wrapper="row no-margin-bottom valign-wrapper"
 
                   widget-set-left-panel="div"
                   class-set-left-panel="col s2"
@@ -94,16 +153,20 @@ import('./utils.js').then(utils => {
                   class-set-right-panel="col s10"
 
                   widget-set-title="div"
+                  class-set-title="row valign-wrapper"
                   widget-dfc-b:name="solid-display-value"
-                  class-dfc-b:name="dfc_b_name bold"
+                  class-dfc-b:name="col dfc_b_name"
                   widget-dfc-b:hasAddress.dfc-b:hasCity="solid-display-value"
+                  class-dfc-b:hasAddress.dfc-b:hasCity="col dfc_b_address"
 
                   widget-set-description="div"
-                  widget-ofn:long_description="safe-html-value"
+                  class-set-description="row"
+                  widget-ofn:long_description="custom-safe-html-value"
+                  class-ofn:long_description="col s12"
 
                   widget-set-tags="div"
-                  widget-ofn:First_Nations_country="solid-display-value"
-                  widget-ofn:Produce_category="solid-display-value"
+                  widget-ofn:First_Nations_country="custom-badge-firstnationsled"
+                  widget-ofn:Produce_category="custom-multiple-badge"
 
                   ></solid-display>
                 </div>

@@ -38,14 +38,53 @@
 // @import "materialize-css/sass/components/timepicker";
 
 :root {
-    font-family: Open Sans, sans-serif;  
+  font-family: Open Sans, sans-serif;
+  letter-spacing: -0.022em;
+}
+
+.hidden,
+[hidden] {
+  display: none;
+}
+
+.loader {
+  margin-top: 30px;
+  padding: 60px;
+  margin-bottom: 30px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: left;
+  background-color: #ede7e2;
+  color: #191c1d;
+  border-radius: 41px;
+  text-transform: uppercase;
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 6px;
+  margin-bottom: 6px;
 }
 
 .dfc_b_name {
-    display: inline-block;
-    font-size: 19px;
-    font-weight: 600;
-    line-height: 25px;
-    letter-spacing: -0.022em;
-    text-align: left;
+  display: inline-block;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 25px;
+  text-align: left;
+}
+
+.dfc_b_address {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: left;
 }
