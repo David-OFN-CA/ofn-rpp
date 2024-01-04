@@ -1,0 +1,9 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/addresses/recVIrkdXWbRzs8IQ.json",
+  "@type": "dfc-b:Address",
+  "dfc-b:hasStreet": "42 MacKay Street",
+  "dfc-b:hasPostalCode": "3683",
+  "dfc-b:hasCity": "Chiltern",
+  "dfc-b:hasCountry": "Australia"
+}

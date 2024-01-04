@@ -1,0 +1,42 @@
+{
+  "@id": "/api/producer/recHYLgKXBhtgemfb.json",
+  "@type": "dfc-b:Enterprise",
+  "dfc-b:hasAddress": "/api/addresses/recHYLgKXBhtgemfb.json",
+  "dfc-b:websitePage": "www.handfortheland.com",
+  "dfc-b:hasSocialMedia": {
+    "@id": "#",
+    "@type": "ldp:Container",
+    "ldp:contains": [
+      {
+        "@id": "/api/social_medias/recHYLgKXBhtgemfb-facebook.json"
+      }
+    ]
+  },
+  "dfc-b:name": "Handfortheland",
+  "dfc-b:hasDescription": "We are grass fed beef and free range egg producers based in south west Victoria",
+  "dfc-b:VATnumber": "92 798 861 583",
+  "ofn:long_description": "<p>We have been managing holistically sice the early 1990's and providing training in Holistic Management since 1996. We have regenerated our current property from bare ground, capeweed and thistles to solid perennial grass.This mananagement leads to tasty food with high nutrient density and healthy fats.</p>",
+  "ofn:contact_name": "Graeme Hand",
+  "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/public/images/enterprises/logos/2075/original/Handfortheland_high_2800px.png",
+  "dfc-b:supplies": {
+    "@id": "/api/products.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Assurance_partnerships": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Certifications": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Supporting_evidence": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "@context": "/api/context.jsonld"
+}

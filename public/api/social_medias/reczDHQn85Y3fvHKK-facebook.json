@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/reczDHQn85Y3fvHKK-facebook.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "facebook",
+  "dfc-b:URL": "https://www.facebook.com/bellingenbeef/"
+}

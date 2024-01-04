@@ -1,0 +1,9 @@
+{
+  "ofn:Creation_date": "2023-12-19",
+  "ofn:Title": "Bio-Intensive Market Gardening - circular organic matter recycling (no chemicals)",
+  "ofn:Classification": ["Practices", "Nutrient density"],
+  "ofn:Description": "We follow organic farming practises using no chemicals, feeding our soil with compost and worm castings created from our cafe food waste and rock dust. Our compost ingredients include carbon and nitrogen from within the farm boundaries where we continue to plant biomass plants to use carbon in the compost, with each input feeding different organisms of the soil food web. ",
+  "@type": "ofn:supporting evidence",
+  "@id": "/api/assurance/recgmRbyKZkLZYTpo.json",
+  "@context": "/api/context.jsonld"
+}

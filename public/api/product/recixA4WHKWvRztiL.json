@@ -1,0 +1,21 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/product/recixA4WHKWvRztiL.json",
+  "@type": "dfc-b:SuppliedProduct",
+  "dfc-b:name": "est. 8-10kg - pay 8kg now",
+  "dfc-b:description": "A half sheep (mutton), approx. 8-10kg: 1 leg, 1 l shoulder, 1 rack, loin chops, chump chops, 1 rib, 1 shank, neck chops, sausages. \n\nWe can provide cut sheet for you to fill out if you would like to specify your own cuts.",
+  "dfc-b:hasType": "dfc-pt:non-local-vegetable",
+  "dfc-b:hasQuantity": {
+    "@type": "dfc-b:QuantitativeValue",
+    "dfc-b:hasUnit": "dfc-m:Gram",
+    "dfc-b:value": 8000
+  },
+  "dfc-b:alcoholPercentage": 0,
+  "dfc-b:lifetime": "",
+  "dfc-b:usageOrStorageCondition": "",
+  "dfc-b:totalTheoreticalStock": 0,
+  "ofn:spree_product_id": 10085,
+  "ofn:image": "https://s3.amazonaws.com/ofn_production/fwsuxk7tv22ay5d8gdi73jcr9ey8",
+  "ofn:Type": "non local vegetable",
+  "dfc-b:suppliedBy": "/api/producer/recjBYlXskXtilPBC.json"
+}

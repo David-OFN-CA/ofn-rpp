@@ -1,0 +1,6 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/assurances.json",
+  "@type": "ldp:Container",
+  "ldp:contains": []
+}

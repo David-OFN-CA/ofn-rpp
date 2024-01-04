@@ -1,0 +1,11 @@
+{
+  "ofn:Creation_date": "2023-12-04",
+  "ofn:Title": "ANU Farm Dams Research",
+  "ofn:Classification": ["Ecological - Water"],
+  "ofn:Description": "We are a participant in the ANU Sustainable Farm Dams study, which monitors three of our farm dams in their journey to wetland restoration. This is a water quality report from this project.",
+  "ofn:Service_provider": ["recpZlMWH9qB14sKB"],
+  "ofn:Documentation_permissions": "Publicly available",
+  "@type": "ofn:supporting evidence",
+  "@id": "/api/assurance/recAmJx6YFmRH134j.json",
+  "@context": "/api/context.jsonld"
+}

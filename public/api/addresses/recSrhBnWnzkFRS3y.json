@@ -1,0 +1,9 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/addresses/recSrhBnWnzkFRS3y.json",
+  "@type": "dfc-b:Address",
+  "dfc-b:hasStreet": "Lot 6 Tilley Lane",
+  "dfc-b:hasPostalCode": "2325",
+  "dfc-b:hasCity": "Watagan",
+  "dfc-b:hasCountry": "Australia"
+}

@@ -1,0 +1,11 @@
+{
+  "ofn:Creation_date": "2023-12-04",
+  "ofn:Title": "Soil Carbon ERF Project - Benchmarking Underway",
+  "ofn:Classification": ["Ecological - Carbon", "Ecological - Soil health"],
+  "ofn:Description": "Initial testing in early 2023 shows soil carbon of 2.6-3.7% (3 sites at 15cm depth). We are currently undergoing comprehensive soil carbon benchmarking so that we know exactly where we're at and how much soil carbon sequestration we are achieving. Our Agriprove project is also part of an RMIT Research Project undertaking much more comprehensive sampling than usual (1 x 1m core per hectare).",
+  "ofn:Service_provider": ["recjrXnhwj8tmht1y"],
+  "ofn:Documentation_permissions": "Available on request",
+  "@type": "ofn:supporting evidence",
+  "@id": "/api/assurance/rech34EA5K4XzwGnB.json",
+  "@context": "/api/context.jsonld"
+}

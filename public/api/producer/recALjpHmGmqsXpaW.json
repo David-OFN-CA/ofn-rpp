@@ -1,0 +1,46 @@
+{
+  "@id": "/api/producer/recALjpHmGmqsXpaW.json",
+  "@type": "dfc-b:Enterprise",
+  "dfc-b:hasAddress": "/api/addresses/recALjpHmGmqsXpaW.json",
+  "dfc-b:websitePage": "",
+  "dfc-b:hasSocialMedia": {
+    "@id": "#",
+    "@type": "ldp:Container",
+    "ldp:contains": [
+      {
+        "@id": "/api/social_medias/recALjpHmGmqsXpaW-facebook.json"
+      }
+    ]
+  },
+  "dfc-b:name": "Brooklands Free Range Farms",
+  "dfc-b:hasDescription": "Jono & Nats with their daughter Ruby run an ethical, sustainable Free Range Rare Breeds Farm with Berkshire Pigs, British White Cattle & Finn Sheep",
+  "dfc-b:VATnumber": "",
+  "dfc-b:supplies": {
+    "@id": "/api/products.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:long_description": "<p>&#34;Brooklands Free Range Farms&#34; is nestled within the seven clusters of volcanic soil with the majestic view of the volcano Mt Karoocheang and bordered by the spring fed Captains Creek in Blampied, just out of Daylesford. We are graced with 100 acres of free to range grazing, natural treed shelters and enormouse trout and redfin filled dams. </p><p>In a holistic roaming environment we raise rare breed pigs - Berkshires for pork, Cattle - British Whites for beef and FinnSheep lamb and handspinner wool.</p><p>&#34;Brooklands&#34; is the name of the first settled farm in New Zealand by the Hurst family, a long line of farmers and today continues on in Australia. </p><p>Jono Hurst grew up on the family farm running &#34;Braeside&#34; a large sheep, deer and cattle farm in a small town called Waihaorunga in the South Island of New Zealand and is still run today by his parents.</p><p>Natalie has worked in the veterinary industry for over 30 years, has studied equine herbal medicine and small animal nutrition currently running a small Welsh Mountain Pony stud with holistic principles and training.</p><p>Both Jono and Natalie have extensive restuarant and food experience- Jono when first arriving in Australia worked at Donovan's in St Kilda, Fenix in Richmond and manged Livebait, Mecca Bah and Salto. Natalie living 5 years in London worked for the prestigious Mustard Catering for the Royal Family.</p><p>&#34;We aim to give the best possible life to an animal that are bred for the plate, which in turn creates the best flavour and the knowledge that what you are eating was raised in a holistic and fresh air and natural food environment.&#34;</p>",
+  "ofn:contact_name": "Jono and Nat",
+  "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/public/images/enterprises/logos/1039/original/Brookfields_logo.png",
+  "dfc-b:affiliates": [
+    "https://openfoodnetwork.org.au/api/dfc/enterprise_groups/14",
+    "https://openfoodnetwork.org.au/api/dfc/enterprise_groups/11"
+  ],
+  "ofn:Assurance_partnerships": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Certifications": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Supporting_evidence": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "@context": "/api/context.jsonld"
+}

@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/recIwhSu2iJRTJdIn-whatsapp_phone.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "whatsapp_phone",
+  "dfc-b:URL": "0404076292"
+}

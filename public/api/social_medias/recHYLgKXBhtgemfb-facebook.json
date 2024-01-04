@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/recHYLgKXBhtgemfb-facebook.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "facebook",
+  "dfc-b:URL": "www.facebook.com/handfortheland"
+}

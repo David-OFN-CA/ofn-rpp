@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/recALjpHmGmqsXpaW-facebook.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "facebook",
+  "dfc-b:URL": "https://www.facebook.com/Brooklands-Free-Range-Farms-Blampied-Central-Highlands-Vic-628794950520595"
+}

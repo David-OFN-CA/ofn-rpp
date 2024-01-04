@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/recrIQDQMQpTODtjB-instagram.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "instagram",
+  "dfc-b:URL": "juneepasturedeggs"
+}

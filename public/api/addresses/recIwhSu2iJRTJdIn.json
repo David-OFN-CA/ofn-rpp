@@ -1,0 +1,9 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/addresses/recIwhSu2iJRTJdIn.json",
+  "@type": "dfc-b:Address",
+  "dfc-b:hasStreet": "1 Nowra Road",
+  "dfc-b:hasPostalCode": "2577",
+  "dfc-b:hasCity": "Moss Vale",
+  "dfc-b:hasCountry": "Australia"
+}

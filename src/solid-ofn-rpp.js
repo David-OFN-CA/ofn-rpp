@@ -1,5 +1,6 @@
 import style from './styles/index.scss?inline';
 import '~icons/mdi/account-box';
+import { CLIENT_CONTEXT } from './utils.js';
 import('./utils.js').then(utils => {
   import(/* @vite-ignore */utils.coreVersion()).then(core => {
     customElements.define(
@@ -20,6 +21,9 @@ import('./utils.js').then(utils => {
         styles() {
           let render = `
           <style>${style}</style>
+          <script id="client-context" type="application/ld+json" data-default-context>
+            ${JSON.stringify(utils.CLIENT_CONTEXT)}
+          </script>
           `;
           return render;
         }
@@ -65,7 +69,9 @@ import('./utils.js').then(utils => {
         viewProducersList(props={}) {
           let render = `
             <div id="${this.route}-producers-list" data-view="${this.route}-producers-list">
-              Hello World!
+              <solid-display
+                data-src="${this.dataSrc}"
+              ></solid-display>
             </div>
           `;
           return render;

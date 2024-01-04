@@ -1,0 +1,49 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/producers.json",
+  "@type": "ldp:Container",
+  "ldp:contains": [
+    {
+      "@id": "/api/producer/recjBYlXskXtilPBC.json"
+    },
+    {
+      "@id": "/api/producer/recXJrzz9mquDaCv7.json"
+    },
+    {
+      "@id": "/api/producer/recW1epOZsVUhJvRI.json"
+    },
+    {
+      "@id": "/api/producer/rectRZksVDjV0Pdlk.json"
+    },
+    {
+      "@id": "/api/producer/recHYLgKXBhtgemfb.json"
+    },
+    {
+      "@id": "/api/producer/recVIrkdXWbRzs8IQ.json"
+    },
+    {
+      "@id": "/api/producer/rec64TU56RNMKfG8d.json"
+    },
+    {
+      "@id": "/api/producer/rec2aFRu0H3Czf2IG.json"
+    },
+    {
+      "@id": "/api/producer/recALjpHmGmqsXpaW.json"
+    },
+    {
+      "@id": "/api/producer/reczDHQn85Y3fvHKK.json"
+    },
+    {
+      "@id": "/api/producer/recrIQDQMQpTODtjB.json"
+    },
+    {
+      "@id": "/api/producer/recSrhBnWnzkFRS3y.json"
+    },
+    {
+      "@id": "/api/producer/recIwhSu2iJRTJdIn.json"
+    },
+    {
+      "@id": "/api/producer/recaaryaB0oaTKamH.json"
+    }
+  ]
+}

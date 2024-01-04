@@ -1,0 +1,10 @@
+{
+  "ofn:Creation_date": "2023-12-12",
+  "ofn:Title": "Australian Holistic Management Co-operative Member",
+  "ofn:Classification": ["Participation"],
+  "ofn:Description": "Member since ...",
+  "ofn:Service_provider": ["recAaheaB5BShVpMs"],
+  "@type": "ofn:supporting evidence",
+  "@id": "/api/assurance/recWi8jTvExpXrCSm.json",
+  "@context": "/api/context.jsonld"
+}

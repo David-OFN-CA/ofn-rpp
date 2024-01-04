@@ -1,0 +1,9 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/addresses/rec64TU56RNMKfG8d.json",
+  "@type": "dfc-b:Address",
+  "dfc-b:hasStreet": "675 Anglesea Road",
+  "dfc-b:hasPostalCode": "3217",
+  "dfc-b:hasCity": "Freshwater Creek",
+  "dfc-b:hasCountry": "Australia"
+}

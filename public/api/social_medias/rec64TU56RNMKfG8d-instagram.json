@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/rec64TU56RNMKfG8d-instagram.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "instagram",
+  "dfc-b:URL": "common_ground_project"
+}

@@ -1,0 +1,37 @@
+{
+  "@id": "/api/producer/recaaryaB0oaTKamH.json",
+  "@type": "dfc-b:Enterprise",
+  "dfc-b:hasAddress": "/api/addresses/recaaryaB0oaTKamH.json",
+  "dfc-b:hasSocialMedia": {
+    "@id": "#",
+    "@type": "ldp:Container",
+    "ldp:contains": [
+      {
+        "@id": "/api/social_medias/recaaryaB0oaTKamH-whatsapp_phone.json"
+      }
+    ]
+  },
+  "dfc-b:name": "Moyarra Pastoral",
+  "ofn:contact_name": "Burke",
+  "dfc-b:supplies": {
+    "@id": "/api/products.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Assurance_partnerships": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Certifications": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Supporting_evidence": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "@context": "/api/context.jsonld"
+}

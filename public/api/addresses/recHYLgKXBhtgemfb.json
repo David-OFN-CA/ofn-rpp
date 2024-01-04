@@ -1,0 +1,9 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/addresses/recHYLgKXBhtgemfb.json",
+  "@type": "dfc-b:Address",
+  "dfc-b:hasStreet": "150 Caroona Lane",
+  "dfc-b:hasPostalCode": "3302",
+  "dfc-b:hasCity": "Branxholme",
+  "dfc-b:hasCountry": "Australia"
+}

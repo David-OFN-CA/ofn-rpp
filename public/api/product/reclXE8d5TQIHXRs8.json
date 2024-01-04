@@ -1,0 +1,21 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/product/reclXE8d5TQIHXRs8.json",
+  "@type": "dfc-b:SuppliedProduct",
+  "dfc-b:name": "Lamb Cutlets",
+  "dfc-b:description": "\r\n\r\n",
+  "dfc-b:hasType": "dfc-pt:non-local-vegetable",
+  "dfc-b:hasQuantity": {
+    "@type": "dfc-b:QuantitativeValue",
+    "dfc-b:hasUnit": "dfc-m:Piece",
+    "dfc-b:value": 1
+  },
+  "dfc-b:alcoholPercentage": 0,
+  "dfc-b:lifetime": "",
+  "dfc-b:usageOrStorageCondition": "",
+  "dfc-b:totalTheoreticalStock": 0,
+  "ofn:spree_product_id": 24088,
+  "ofn:image": "https://s3.amazonaws.com/ofn_production/8dr5h22ca48vrfgtd2q3p2p6kalw",
+  "ofn:Type": "non local vegetable",
+  "dfc-b:suppliedBy": "/api/producer/recjBYlXskXtilPBC.json"
+}

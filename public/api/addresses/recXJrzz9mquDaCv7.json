@@ -1,0 +1,9 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/addresses/recXJrzz9mquDaCv7.json",
+  "@type": "dfc-b:Address",
+  "dfc-b:hasStreet": "929 East Barham Road",
+  "dfc-b:hasPostalCode": "2732",
+  "dfc-b:hasCity": "Barham",
+  "dfc-b:hasCountry": "Australia"
+}

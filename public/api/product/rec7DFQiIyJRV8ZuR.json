@@ -1,0 +1,20 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/product/rec7DFQiIyJRV8ZuR.json",
+  "@type": "dfc-b:SuppliedProduct",
+  "dfc-b:name": "Small Farmers Box",
+  "dfc-b:description": "<p class=\"\" style=\"font-size: 17px;text-align: left;\">Feeds approx. 2ppl </p><p class=\"\" style=\"font-size: 17px;text-align: left;\">A great option for a top up of vegetables!</p><p class=\"\" style=\"font-size: 17px;text-align: left;\">Updated every Friday and harvested fresh every week!</p><p class=\"\" style=\"font-size: 17px;text-align: left;\"><strong><b>This Weeks Box  28/9 - 2/10</b></strong></p><p class=\"\" style=\"font-size: 17px;text-align: left;\">Spring Salad Mix, Spring Onions, Coriander, Mint, French Breakfast Radish, Celery, Rainbow Beetroots , Fennel, Hakurei Turnips, Adirondack Blue Potatoes </p>",
+  "dfc-b:hasType": "dfc-pt:non-local-vegetable",
+  "dfc-b:hasQuantity": {
+    "@type": "dfc-b:QuantitativeValue",
+    "dfc-b:hasUnit": "dfc-m:Piece",
+    "dfc-b:value": 1
+  },
+  "dfc-b:alcoholPercentage": 0,
+  "dfc-b:lifetime": "",
+  "dfc-b:usageOrStorageCondition": "",
+  "dfc-b:totalTheoreticalStock": 0,
+  "ofn:spree_product_id": 16590,
+  "ofn:image": "https://s3.amazonaws.com/ofn_production/q3e8isinl17mxu5i96uukt8fvqko",
+  "dfc-b:suppliedBy": "/api/producer/rec64TU56RNMKfG8d.json"
+}

@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/recVIrkdXWbRzs8IQ-twitter.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "twitter",
+  "dfc-b:URL": "GeoffTheChef18"
+}

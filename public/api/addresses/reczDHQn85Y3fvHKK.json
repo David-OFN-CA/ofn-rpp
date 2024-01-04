@@ -1,0 +1,9 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/addresses/reczDHQn85Y3fvHKK.json",
+  "@type": "dfc-b:Address",
+  "dfc-b:hasStreet": "Levenvale Farm",
+  "dfc-b:hasPostalCode": "2454",
+  "dfc-b:hasCity": "Bellingen",
+  "dfc-b:hasCountry": "Australia"
+}

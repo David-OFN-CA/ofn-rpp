@@ -1,0 +1,20 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/product/recjwQbhfseF3kRZ7.json",
+  "@type": "dfc-b:SuppliedProduct",
+  "dfc-b:name": "Fresh figs",
+  "dfc-b:description": "<p>Delicious organically grown fresh figs</p>",
+  "dfc-b:hasType": "dfc-pt:non-local-vegetable",
+  "dfc-b:hasQuantity": {
+    "@type": "dfc-b:QuantitativeValue",
+    "dfc-b:hasUnit": "dfc-m:Gram",
+    "dfc-b:value": 500
+  },
+  "dfc-b:alcoholPercentage": 0,
+  "dfc-b:lifetime": "",
+  "dfc-b:usageOrStorageCondition": "",
+  "dfc-b:totalTheoreticalStock": 0,
+  "ofn:spree_product_id": 18088,
+  "ofn:image": "https://s3.amazonaws.com/ofn_production/cvm5te45gug1wm53pbb992rllcqj",
+  "dfc-b:suppliedBy": "/api/producer/recW1epOZsVUhJvRI.json"
+}

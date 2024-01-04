@@ -1,0 +1,7 @@
+{
+  "@context": "/api/context.jsonld",
+  "@id": "/api/social_medias/reczDHQn85Y3fvHKK-linkedin.json",
+  "@type": "dfc-b:SocialMedia",
+  "dfc-b:name": "linkedin",
+  "dfc-b:URL": "https://www.linkedin.com/in/georgina-baker-b46a29213/"
+}

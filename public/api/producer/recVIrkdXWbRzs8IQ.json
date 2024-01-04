@@ -1,0 +1,61 @@
+{
+  "@id": "/api/producer/recVIrkdXWbRzs8IQ.json",
+  "@type": "dfc-b:Enterprise",
+  "dfc-b:hasAddress": "/api/addresses/recVIrkdXWbRzs8IQ.json",
+  "dfc-b:hasPhoneNumber": "0427229322",
+  "dfc-b:email": "geoff@geoffthechef.com.au",
+  "dfc-b:websitePage": "",
+  "dfc-b:hasSocialMedia": {
+    "@id": "#",
+    "@type": "ldp:Container",
+    "ldp:contains": [
+      {
+        "@id": "/api/social_medias/recVIrkdXWbRzs8IQ-facebook.json"
+      },
+      {
+        "@id": "/api/social_medias/recVIrkdXWbRzs8IQ-instagram.json"
+      },
+      {
+        "@id": "/api/social_medias/recVIrkdXWbRzs8IQ-twitter.json"
+      }
+    ]
+  },
+  "dfc-b:name": "Geoff the Chef",
+  "dfc-b:hasDescription": "We make yummy preserves and pre-packaged, ready to eat foods",
+  "dfc-b:VATnumber": "31051707496",
+  "dfc-b:supplies": {
+    "@id": "/api/products.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:long_description": "<p>As well as supplying and using our own fresh produce, we aim to take all the good quality produce that is slightly &#34;imperfect&#34; in appearance making it less suitable to be sold fresh, and convert it into delicious, nutritious foods and meals.</p>",
+  "ofn:contact_name": "Geoff",
+  "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/public/images/enterprises/logos/3094/original/cheflogo300sq.jpg",
+  "ofn:First_Nations_country": "Yorta Yorta",
+  "ofn:Practices": [
+    "Management of bodies of water, wetland, riparian areas, and associated habitats",
+    "Tree / Shrub Establishment",
+    "Replacing chemical/synthetic inputs with biological inputs",
+    "Pollinator Habitats, Insectary Strips, or Wildlife Habitat Reclamation of Mined Land or Erosion Treatment",
+    "Perennial Planting",
+    "Mulching"
+  ],
+  "ofn:Produce_category": ["Fruit", "Vegetables", "Eggs", "Value added goods"],
+  "ofn:Wholesale_enquiry_preferences": ["Email", "Phone"],
+  "ofn:Assurance_partnerships": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Certifications": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "ofn:Supporting_evidence": {
+    "@id": "/api/assurances.json",
+    "@type": "ldp:Container",
+    "ldp:contains": []
+  },
+  "@context": "/api/context.jsonld"
+}
