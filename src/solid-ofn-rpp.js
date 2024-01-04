@@ -63,7 +63,7 @@ import('./utils.js').then(utils => {
               value
             }) {
               if(value.length > 0) {
-                return `<div class="badge" data-badge-caption="">First Nations Led</div>`;
+                return `<div class="badge first_nations_led" data-badge-caption="">First Nations Led</div>`;
               } else {
                 return "";
               }
@@ -139,7 +139,7 @@ import('./utils.js').then(utils => {
                   widget-set-card-col="div"
                   class-set-card-col="col s12"
                   widget-set-card-panel="div"
-                  class-set-card-panel="card-panel z-depth-1"
+                  class-set-card-panel="card-panel"
                   widget-set-card-wrapper="div"
                   class-set-card-wrapper="row no-margin-bottom valign-wrapper"
 
