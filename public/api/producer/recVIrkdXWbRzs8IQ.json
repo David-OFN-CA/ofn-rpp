@@ -1,7 +1,7 @@
 {
-  "@id": "/api/producer/recVIrkdXWbRzs8IQ.json",
+  "@id": "http://localhost:5173/api/producer/recVIrkdXWbRzs8IQ.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "/api/addresses/recVIrkdXWbRzs8IQ.json",
+  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recVIrkdXWbRzs8IQ.json",
   "dfc-b:hasPhoneNumber": "0427229322",
   "dfc-b:email": "geoff@geoffthechef.com.au",
   "dfc-b:websitePage": "",
@@ -10,13 +10,13 @@
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/social_medias/recVIrkdXWbRzs8IQ-facebook.json"
+        "@id": "http://localhost:5173/api/social_medias/recVIrkdXWbRzs8IQ-facebook.json"
       },
       {
-        "@id": "/api/social_medias/recVIrkdXWbRzs8IQ-instagram.json"
+        "@id": "http://localhost:5173/api/social_medias/recVIrkdXWbRzs8IQ-instagram.json"
       },
       {
-        "@id": "/api/social_medias/recVIrkdXWbRzs8IQ-twitter.json"
+        "@id": "http://localhost:5173/api/social_medias/recVIrkdXWbRzs8IQ-twitter.json"
       }
     ]
   },
@@ -24,7 +24,7 @@
   "dfc-b:hasDescription": "We make yummy preserves and pre-packaged, ready to eat foods",
   "dfc-b:VATnumber": "31051707496",
   "dfc-b:supplies": {
-    "@id": "/api/products.json",
+    "@id": "http://localhost:5173/api/products.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
@@ -43,19 +43,19 @@
   "ofn:Produce_category": ["Fruit", "Vegetables", "Eggs", "Value added goods"],
   "ofn:Wholesale_enquiry_preferences": ["Email", "Phone"],
   "ofn:Assurance_partnerships": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
-  "@context": "/api/context.jsonld"
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

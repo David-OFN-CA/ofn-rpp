@@ -1,20 +1,20 @@
 {
-  "@id": "/api/producer/recrIQDQMQpTODtjB.json",
+  "@id": "http://localhost:5173/api/producer/recrIQDQMQpTODtjB.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "/api/addresses/recrIQDQMQpTODtjB.json",
+  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recrIQDQMQpTODtjB.json",
   "dfc-b:websitePage": "reedycreekprovidore.au",
   "dfc-b:hasSocialMedia": {
     "@id": "#",
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/social_medias/recrIQDQMQpTODtjB-facebook.json"
+        "@id": "http://localhost:5173/api/social_medias/recrIQDQMQpTODtjB-facebook.json"
       },
       {
-        "@id": "/api/social_medias/recrIQDQMQpTODtjB-instagram.json"
+        "@id": "http://localhost:5173/api/social_medias/recrIQDQMQpTODtjB-instagram.json"
       },
       {
-        "@id": "/api/social_medias/recrIQDQMQpTODtjB-linkedin.json"
+        "@id": "http://localhost:5173/api/social_medias/recrIQDQMQpTODtjB-linkedin.json"
       }
     ]
   },
@@ -24,24 +24,24 @@
   "ofn:long_description": "<p><span style=\"float: none;\">Our free ranging hens enjoy fresh pasture, bugs and worms. Junee Pastured Eggs are delivered within days of being laid. They are guaranteed to be fresh, tasty and nutritious.</span></p>",
   "ofn:contact_name": "George Main",
   "dfc-b:supplies": {
-    "@id": "/api/products.json",
+    "@id": "http://localhost:5173/api/products.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Assurance_partnerships": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
-  "@context": "/api/context.jsonld"
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

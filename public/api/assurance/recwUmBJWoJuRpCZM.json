@@ -4,6 +4,6 @@
   "ofn:Classification": ["Practices", "Ecological - Soil health"],
   "ofn:Description": "We have been active in regenerating soil on a 4 acre block over the last four years, with a focus on minimal soil disturbance. We broadfork to gently aerate the soil, improving water infiltration and helping crops establish deeper root systems. We then add soil amendments including compost, worm castings and rock dust to feed the soil with fertility. This is incorporated into the top layer of soil with a battery powered tilther, which breaks up hard rocky soil, cultivating the surface that can be directly seeded into or transplanted. We do this to ensure it has the ability to reabsorb carbon through the mycelial bed. ",
   "@type": "ofn:supporting evidence",
-  "@id": "/api/assurance/recwUmBJWoJuRpCZM.json",
-  "@context": "/api/context.jsonld"
+  "@id": "http://localhost:5173/api/assurance/recwUmBJWoJuRpCZM.json",
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

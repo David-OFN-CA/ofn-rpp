@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/social_medias/recXJrzz9mquDaCv7-instagram.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/social_medias/recXJrzz9mquDaCv7-instagram.json",
   "@type": "dfc-b:SocialMedia",
   "dfc-b:name": "instagram",
   "dfc-b:URL": "bundarra_farm"

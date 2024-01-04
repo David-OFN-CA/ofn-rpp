@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/rectRZksVDjV0Pdlk.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/rectRZksVDjV0Pdlk.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "Main Rd",
   "dfc-b:hasPostalCode": "5203",

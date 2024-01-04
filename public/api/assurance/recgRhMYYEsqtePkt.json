@@ -5,6 +5,6 @@
   "ofn:Description": "We get our cover crop seed from Down Under Covers in Lockington, Victoria",
   "ofn:Service_provider": ["recIxkQAV4DbsyKMf"],
   "@type": "ofn:supporting evidence",
-  "@id": "/api/assurance/recgRhMYYEsqtePkt.json",
-  "@context": "/api/context.jsonld"
+  "@id": "http://localhost:5173/api/assurance/recgRhMYYEsqtePkt.json",
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

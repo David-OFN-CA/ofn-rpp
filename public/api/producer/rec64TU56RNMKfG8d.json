@@ -1,7 +1,7 @@
 {
-  "@id": "/api/producer/rec64TU56RNMKfG8d.json",
+  "@id": "http://localhost:5173/api/producer/rec64TU56RNMKfG8d.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "/api/addresses/rec64TU56RNMKfG8d.json",
+  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/rec64TU56RNMKfG8d.json",
   "dfc-b:email": "hello@commongroundproject.com.au",
   "dfc-b:websitePage": "www.commongroundproject.com.au",
   "dfc-b:hasSocialMedia": {
@@ -9,10 +9,10 @@
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/social_medias/rec64TU56RNMKfG8d-facebook.json"
+        "@id": "http://localhost:5173/api/social_medias/rec64TU56RNMKfG8d-facebook.json"
       },
       {
-        "@id": "/api/social_medias/rec64TU56RNMKfG8d-instagram.json"
+        "@id": "http://localhost:5173/api/social_medias/rec64TU56RNMKfG8d-instagram.json"
       }
     ]
   },
@@ -20,14 +20,14 @@
   "dfc-b:hasDescription": "Common Ground Project is a regenerative farm and social enterprise on a mission to connect and empower our community through food & farming.",
   "dfc-b:VATnumber": "78632729634",
   "dfc-b:supplies": {
-    "@id": "/api/products.json",
+    "@id": "http://localhost:5173/api/products.json",
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/product/rec07CR18S2eerIyc.json"
+        "@id": "http://localhost:5173/api/product/rec07CR18S2eerIyc.json"
       },
       {
-        "@id": "/api/product/rec7DFQiIyJRV8ZuR.json"
+        "@id": "http://localhost:5173/api/product/rec7DFQiIyJRV8ZuR.json"
       }
     ]
   },
@@ -62,35 +62,35 @@
   "ofn:Household_buy_label": "Common Ground Project Website Shop",
   "ofn:Household_URL": "https://www.commongroundproject.com.au/shop",
   "ofn:Assurance_partnerships": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "/api/assurances-rec64TU56RNMKfG8d.json",
+    "@id": "http://localhost:5173/api/assurances-rec64TU56RNMKfG8d.json",
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/assurance/recwUmBJWoJuRpCZM.json"
+        "@id": "http://localhost:5173/api/assurance/recwUmBJWoJuRpCZM.json"
       },
       {
-        "@id": "/api/assurance/recgmRbyKZkLZYTpo.json"
+        "@id": "http://localhost:5173/api/assurance/recgmRbyKZkLZYTpo.json"
       },
       {
-        "@id": "/api/assurance/recaTaGOArIligZuR.json"
+        "@id": "http://localhost:5173/api/assurance/recaTaGOArIligZuR.json"
       },
       {
-        "@id": "/api/assurance/reczax59GJ3DZWiMd.json"
+        "@id": "http://localhost:5173/api/assurance/reczax59GJ3DZWiMd.json"
       },
       {
-        "@id": "/api/assurance/recbFQeBYIyT8Qrvv.json"
+        "@id": "http://localhost:5173/api/assurance/recbFQeBYIyT8Qrvv.json"
       }
     ]
   },
-  "@context": "/api/context.jsonld"
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

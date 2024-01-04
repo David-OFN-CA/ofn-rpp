@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/product/recjwQbhfseF3kRZ7.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/product/recjwQbhfseF3kRZ7.json",
   "@type": "dfc-b:SuppliedProduct",
   "dfc-b:name": "Fresh figs",
   "dfc-b:description": "<p>Delicious organically grown fresh figs</p>",
@@ -17,6 +17,6 @@
   "ofn:spree_product_id": 18088,
   "ofn:image": "https://s3.amazonaws.com/ofn_production/cvm5te45gug1wm53pbb992rllcqj",
   "dfc-b:suppliedBy": {
-    "@id": "/api/producer/recW1epOZsVUhJvRI.json"
+    "@id": "http://localhost:5173/api/producer/recW1epOZsVUhJvRI.json"
   }
 }

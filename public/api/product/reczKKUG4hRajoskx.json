@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/product/reczKKUG4hRajoskx.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/product/reczKKUG4hRajoskx.json",
   "@type": "dfc-b:SuppliedProduct",
   "dfc-b:name": "Bundarra Fricandeaux (12 per Carton)",
   "dfc-b:description": "<div>The Fricandeaux is a tasty morsel wrapped in caul fat simply made from pork mince, potatoes, onion, salt and pepper. This is a traditional and regional French delight much like a potted terrine. Not to be shared, these are too delicious and should be kept a secret. Best eaten at room temperature with crusty bread, dijon mustard and other charcuterie. Fabulous in a sandwich too.</div><div>170g jar</div>",
@@ -18,6 +18,6 @@
   "ofn:image": "https://s3.amazonaws.com/ofn_production/k9a888dzh4rczcg62spghawl9qao",
   "ofn:Type": "non local vegetable",
   "dfc-b:suppliedBy": {
-    "@id": "/api/producer/recXJrzz9mquDaCv7.json"
+    "@id": "http://localhost:5173/api/producer/recXJrzz9mquDaCv7.json"
   }
 }

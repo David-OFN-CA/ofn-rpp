@@ -1,46 +1,46 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/products",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/products",
   "@type": "ldp:Container",
   "ldp:contains": [
     {
-      "@id": "/api/product/recdguW8Gqt80wZGN.json"
+      "@id": "http://localhost:5173/api/product/recdguW8Gqt80wZGN.json"
     },
     {
-      "@id": "/api/product/recjwQbhfseF3kRZ7.json"
+      "@id": "http://localhost:5173/api/product/recjwQbhfseF3kRZ7.json"
     },
     {
-      "@id": "/api/product/rec9FMFTuTJ9tNLvO.json"
+      "@id": "http://localhost:5173/api/product/rec9FMFTuTJ9tNLvO.json"
     },
     {
-      "@id": "/api/product/recV8hvbcLELCUTvn.json"
+      "@id": "http://localhost:5173/api/product/recV8hvbcLELCUTvn.json"
     },
     {
-      "@id": "/api/product/recixA4WHKWvRztiL.json"
+      "@id": "http://localhost:5173/api/product/recixA4WHKWvRztiL.json"
     },
     {
-      "@id": "/api/product/recrrvU2Km9fPZ2iV.json"
+      "@id": "http://localhost:5173/api/product/recrrvU2Km9fPZ2iV.json"
     },
     {
-      "@id": "/api/product/reclXE8d5TQIHXRs8.json"
+      "@id": "http://localhost:5173/api/product/reclXE8d5TQIHXRs8.json"
     },
     {
-      "@id": "/api/product/recy24VXWj2zHjqrx.json"
+      "@id": "http://localhost:5173/api/product/recy24VXWj2zHjqrx.json"
     },
     {
-      "@id": "/api/product/rec07CR18S2eerIyc.json"
+      "@id": "http://localhost:5173/api/product/rec07CR18S2eerIyc.json"
     },
     {
-      "@id": "/api/product/rec7DFQiIyJRV8ZuR.json"
+      "@id": "http://localhost:5173/api/product/rec7DFQiIyJRV8ZuR.json"
     },
     {
-      "@id": "/api/product/recIwGpbSYWO1QC0V.json"
+      "@id": "http://localhost:5173/api/product/recIwGpbSYWO1QC0V.json"
     },
     {
-      "@id": "/api/product/reczKKUG4hRajoskx.json"
+      "@id": "http://localhost:5173/api/product/reczKKUG4hRajoskx.json"
     },
     {
-      "@id": "/api/product/recTjijuKYbD5M67B.json"
+      "@id": "http://localhost:5173/api/product/recTjijuKYbD5M67B.json"
     }
   ]
 }

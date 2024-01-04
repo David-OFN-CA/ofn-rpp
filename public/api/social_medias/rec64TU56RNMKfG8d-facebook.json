@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/social_medias/rec64TU56RNMKfG8d-facebook.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/social_medias/rec64TU56RNMKfG8d-facebook.json",
   "@type": "dfc-b:SocialMedia",
   "dfc-b:name": "facebook",
   "dfc-b:URL": "www.facebook.com/commongroundprojectaustralia"

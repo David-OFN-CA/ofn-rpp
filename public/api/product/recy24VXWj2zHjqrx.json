@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/product/recy24VXWj2zHjqrx.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/product/recy24VXWj2zHjqrx.json",
   "@type": "dfc-b:SuppliedProduct",
   "dfc-b:name": "Lamb Racks",
   "dfc-b:description": "\r\n\r\n",
@@ -18,6 +18,6 @@
   "ofn:image": "https://s3.amazonaws.com/ofn_production/70fdna03j18wen9mck0fz7hlezzd",
   "ofn:Type": "non local vegetable",
   "dfc-b:suppliedBy": {
-    "@id": "/api/producer/recjBYlXskXtilPBC.json"
+    "@id": "http://localhost:5173/api/producer/recjBYlXskXtilPBC.json"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/recjBYlXskXtilPBC.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/recjBYlXskXtilPBC.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "855 Benalla-Warrenbayne Rd",
   "dfc-b:hasPostalCode": "3670",

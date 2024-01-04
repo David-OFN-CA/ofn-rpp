@@ -1,6 +1,5 @@
 import style from './styles/index.scss?inline';
 import '~icons/mdi/account-box';
-import { CLIENT_CONTEXT } from './utils.js';
 import('./utils.js').then(utils => {
   import(/* @vite-ignore */utils.coreVersion()).then(core => {
     customElements.define(
@@ -13,7 +12,8 @@ import('./utils.js').then(utils => {
 
         static get propsDefinition() {
           return {
-            dataSrc: "data-src",
+            producersSrc: "producers-src",
+            productsSrc: "products-src",
             uniq: "uniq"
           };
         }
@@ -21,9 +21,6 @@ import('./utils.js').then(utils => {
         styles() {
           let render = `
           <style>${style}</style>
-          <script id="client-context" type="application/ld+json" data-default-context>
-            ${JSON.stringify(utils.CLIENT_CONTEXT)}
-          </script>
           `;
           return render;
         }
@@ -70,7 +67,7 @@ import('./utils.js').then(utils => {
           let render = `
             <div id="${this.route}-producers-list" data-view="${this.route}-producers-list">
               <solid-display
-                data-src="${this.dataSrc}"
+                data-src="${this.producersSrc}"
               ></solid-display>
             </div>
           `;
@@ -80,7 +77,9 @@ import('./utils.js').then(utils => {
         viewProductsList(props={}) {
           let render = `
             <div id="${this.route}-products-list" data-view="${this.route}-products-list">
-              Hello World!
+            <solid-display
+              data-src="${this.productsSrc}"
+            ></solid-display>
             </div>
           `;
           return render;
@@ -105,7 +104,8 @@ import('./utils.js').then(utils => {
         }
 
         template(props) {
-          this.dataSrc = props.dataSrc;
+          this.producersSrc = props.producersSrc;
+          this.productsSrc = props.productsSrc;
           this.uniq = props.uniq || utils.uniq();
           this.route = this.uniq;
           return `

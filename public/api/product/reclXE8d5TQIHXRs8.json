@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/product/reclXE8d5TQIHXRs8.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/product/reclXE8d5TQIHXRs8.json",
   "@type": "dfc-b:SuppliedProduct",
   "dfc-b:name": "Lamb Cutlets",
   "dfc-b:description": "\r\n\r\n",
@@ -18,6 +18,6 @@
   "ofn:image": "https://s3.amazonaws.com/ofn_production/8dr5h22ca48vrfgtd2q3p2p6kalw",
   "ofn:Type": "non local vegetable",
   "dfc-b:suppliedBy": {
-    "@id": "/api/producer/recjBYlXskXtilPBC.json"
+    "@id": "http://localhost:5173/api/producer/recjBYlXskXtilPBC.json"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/recIwhSu2iJRTJdIn.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/recIwhSu2iJRTJdIn.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "1 Nowra Road",
   "dfc-b:hasPostalCode": "2577",

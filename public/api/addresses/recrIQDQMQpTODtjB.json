@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/recrIQDQMQpTODtjB.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/recrIQDQMQpTODtjB.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "2940 Dirnaseer Road",
   "dfc-b:hasPostalCode": "2666",

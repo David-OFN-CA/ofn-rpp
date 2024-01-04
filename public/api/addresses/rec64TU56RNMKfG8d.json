@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/rec64TU56RNMKfG8d.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/rec64TU56RNMKfG8d.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "675 Anglesea Road",
   "dfc-b:hasPostalCode": "3217",

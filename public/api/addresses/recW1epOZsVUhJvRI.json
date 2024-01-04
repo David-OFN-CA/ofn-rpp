@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/recW1epOZsVUhJvRI.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/recW1epOZsVUhJvRI.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "4446 Murchison Violet Town Road",
   "dfc-b:hasPostalCode": "3669",

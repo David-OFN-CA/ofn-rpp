@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/product/recIwGpbSYWO1QC0V.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/product/recIwGpbSYWO1QC0V.json",
   "@type": "dfc-b:SuppliedProduct",
   "dfc-b:name": "Bundarra Rillettes (12 per Carton)",
   "dfc-b:description": "<div>Rillettes are traditional french charcuterie, confit torn pork seasoned with French spices, salt and pepper, sealed in a layer of creamy fat. To be gobbled up with cornichon and crusty bread, best eaten with other charcuterie such as capocollo, fricandeaux and ham.</div><div>170g jar</div>",
@@ -18,6 +18,6 @@
   "ofn:image": "https://s3.amazonaws.com/ofn_production/mcp0gybf284bu3mkud5xu83g9w0c",
   "ofn:Type": "non local vegetable",
   "dfc-b:suppliedBy": {
-    "@id": "/api/producer/recXJrzz9mquDaCv7.json"
+    "@id": "http://localhost:5173/api/producer/recXJrzz9mquDaCv7.json"
   }
 }

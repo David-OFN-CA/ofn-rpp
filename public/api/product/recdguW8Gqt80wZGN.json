@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/product/recdguW8Gqt80wZGN.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/product/recdguW8Gqt80wZGN.json",
   "@type": "dfc-b:SuppliedProduct",
   "dfc-b:name": "Oranges Mediterranean Sweet organic",
   "dfc-b:description": "<p>Sweet, juicy and delicious smaller orange that peels as easily as a mandarin.</p>",
@@ -17,6 +17,6 @@
   "ofn:spree_product_id": 16342,
   "ofn:image": "https://s3.amazonaws.com/ofn_production/ay52xre3gyi7gvwh4jd1xdrjcm0n",
   "dfc-b:suppliedBy": {
-    "@id": "/api/producer/recW1epOZsVUhJvRI.json"
+    "@id": "http://localhost:5173/api/producer/recW1epOZsVUhJvRI.json"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/recaaryaB0oaTKamH.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/recaaryaB0oaTKamH.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "275 Andersons Inlet Rd",
   "dfc-b:hasPostalCode": "3951",

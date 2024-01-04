@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/addresses/recVIrkdXWbRzs8IQ.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/addresses/recVIrkdXWbRzs8IQ.json",
   "@type": "dfc-b:Address",
   "dfc-b:hasStreet": "42 MacKay Street",
   "dfc-b:hasPostalCode": "3683",

@@ -5,6 +5,6 @@
   "ofn:Description": "We brew 1000L batches of Nutri Soil Biological Solution vermicastings with molasses and apply it to cover crops across the entire farm with our DIY compost tea applicator.",
   "ofn:Service_provider": ["recvd4m5ksu816oly"],
   "@type": "ofn:supporting evidence",
-  "@id": "/api/assurance/recftBoO6hFXkSODa.json",
-  "@context": "/api/context.jsonld"
+  "@id": "http://localhost:5173/api/assurance/recftBoO6hFXkSODa.json",
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

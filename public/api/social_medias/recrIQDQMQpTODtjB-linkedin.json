@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/social_medias/recrIQDQMQpTODtjB-linkedin.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/social_medias/recrIQDQMQpTODtjB-linkedin.json",
   "@type": "dfc-b:SocialMedia",
   "dfc-b:name": "linkedin",
   "dfc-b:URL": "www.linkedin.com/company/reedy-creek-providore"

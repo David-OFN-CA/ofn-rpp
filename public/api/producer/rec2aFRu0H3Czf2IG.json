@@ -1,17 +1,17 @@
 {
-  "@id": "/api/producer/rec2aFRu0H3Czf2IG.json",
+  "@id": "http://localhost:5173/api/producer/rec2aFRu0H3Czf2IG.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "/api/addresses/rec2aFRu0H3Czf2IG.json",
+  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/rec2aFRu0H3Czf2IG.json",
   "dfc-b:websitePage": "grazedandgrown.com.au",
   "dfc-b:hasSocialMedia": {
     "@id": "#",
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/social_medias/rec2aFRu0H3Czf2IG-facebook.json"
+        "@id": "http://localhost:5173/api/social_medias/rec2aFRu0H3Czf2IG-facebook.json"
       },
       {
-        "@id": "/api/social_medias/rec2aFRu0H3Czf2IG-instagram.json"
+        "@id": "http://localhost:5173/api/social_medias/rec2aFRu0H3Czf2IG-instagram.json"
       }
     ]
   },
@@ -19,7 +19,7 @@
   "dfc-b:hasDescription": "Passionately raising heritage breed pigs, pastured eggs & seasonal produce",
   "dfc-b:VATnumber": "61 724 131 141",
   "dfc-b:supplies": {
-    "@id": "/api/products.json",
+    "@id": "http://localhost:5173/api/products.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
@@ -27,19 +27,19 @@
   "ofn:contact_name": "Peter Armstrong",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/public/images/enterprises/logos/3515/original/IMAG3106.jpg",
   "ofn:Assurance_partnerships": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
-  "@context": "/api/context.jsonld"
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

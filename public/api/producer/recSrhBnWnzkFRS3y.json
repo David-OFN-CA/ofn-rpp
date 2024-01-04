@@ -1,16 +1,16 @@
 {
-  "@id": "/api/producer/recSrhBnWnzkFRS3y.json",
+  "@id": "http://localhost:5173/api/producer/recSrhBnWnzkFRS3y.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "/api/addresses/recSrhBnWnzkFRS3y.json",
+  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recSrhBnWnzkFRS3y.json",
   "dfc-b:hasSocialMedia": {
     "@id": "#",
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/social_medias/recSrhBnWnzkFRS3y-instagram.json"
+        "@id": "http://localhost:5173/api/social_medias/recSrhBnWnzkFRS3y-instagram.json"
       },
       {
-        "@id": "/api/social_medias/recSrhBnWnzkFRS3y-linkedin.json"
+        "@id": "http://localhost:5173/api/social_medias/recSrhBnWnzkFRS3y-linkedin.json"
       }
     ]
   },
@@ -21,24 +21,24 @@
   "ofn:contact_name": "Joshua Staines",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/hk846ojaeb3nh17x3hbijaa0zkep",
   "dfc-b:supplies": {
-    "@id": "/api/products.json",
+    "@id": "http://localhost:5173/api/products.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Assurance_partnerships": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
-  "@context": "/api/context.jsonld"
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

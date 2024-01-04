@@ -5,6 +5,6 @@
   "ofn:Description": "Attended 3 day Grazing Clinic in Barham, August 2023 as part of the Resilient Pastures for a Changing Climate project run by the Western Murray Land Improvement Group.",
   "ofn:Service_provider": ["recGuz7OGBfMObE91"],
   "@type": "ofn:supporting evidence",
-  "@id": "/api/assurance/recYnnt2u4DYsiaAG.json",
-  "@context": "/api/context.jsonld"
+  "@id": "http://localhost:5173/api/assurance/recYnnt2u4DYsiaAG.json",
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

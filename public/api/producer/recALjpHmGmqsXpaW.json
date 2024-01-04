@@ -1,14 +1,14 @@
 {
-  "@id": "/api/producer/recALjpHmGmqsXpaW.json",
+  "@id": "http://localhost:5173/api/producer/recALjpHmGmqsXpaW.json",
   "@type": "dfc-b:Enterprise",
-  "dfc-b:hasAddress": "/api/addresses/recALjpHmGmqsXpaW.json",
+  "dfc-b:hasAddress": "http://localhost:5173/api/addresses/recALjpHmGmqsXpaW.json",
   "dfc-b:websitePage": "",
   "dfc-b:hasSocialMedia": {
     "@id": "#",
     "@type": "ldp:Container",
     "ldp:contains": [
       {
-        "@id": "/api/social_medias/recALjpHmGmqsXpaW-facebook.json"
+        "@id": "http://localhost:5173/api/social_medias/recALjpHmGmqsXpaW-facebook.json"
       }
     ]
   },
@@ -16,7 +16,7 @@
   "dfc-b:hasDescription": "Jono & Nats with their daughter Ruby run an ethical, sustainable Free Range Rare Breeds Farm with Berkshire Pigs, British White Cattle & Finn Sheep",
   "dfc-b:VATnumber": "",
   "dfc-b:supplies": {
-    "@id": "/api/products.json",
+    "@id": "http://localhost:5173/api/products.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
@@ -24,23 +24,23 @@
   "ofn:contact_name": "Jono and Nat",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/public/images/enterprises/logos/1039/original/Brookfields_logo.png",
   "dfc-b:affiliates": [
-    "https://openfoodnetwork.org.au/api/dfc/enterprise_groups/14",
-    "https://openfoodnetwork.org.au/api/dfc/enterprise_groups/11"
+    "https://openfoodnetwork.org.auhttp://localhost:5173/api/dfc/enterprise_groups/14",
+    "https://openfoodnetwork.org.auhttp://localhost:5173/api/dfc/enterprise_groups/11"
   ],
   "ofn:Assurance_partnerships": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
-  "@context": "/api/context.jsonld"
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

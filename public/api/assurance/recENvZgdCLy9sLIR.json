@@ -6,6 +6,6 @@
   "ofn:Service_provider": ["recD5o0OSllqFyKxE"],
   "ofn:Documentation_permissions": "Available on request",
   "@type": "ofn:supporting evidence",
-  "@id": "/api/assurance/recENvZgdCLy9sLIR.json",
-  "@context": "/api/context.jsonld"
+  "@id": "http://localhost:5173/api/assurance/recENvZgdCLy9sLIR.json",
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

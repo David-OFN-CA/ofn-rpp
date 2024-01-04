@@ -5,6 +5,6 @@
   "ofn:Description": "Member since ...",
   "ofn:Service_provider": ["recAaheaB5BShVpMs"],
   "@type": "ofn:supporting evidence",
-  "@id": "/api/assurance/recWi8jTvExpXrCSm.json",
-  "@context": "/api/context.jsonld"
+  "@id": "http://localhost:5173/api/assurance/recWi8jTvExpXrCSm.json",
+  "@context": "http://localhost:5173/api/context.jsonld"
 }

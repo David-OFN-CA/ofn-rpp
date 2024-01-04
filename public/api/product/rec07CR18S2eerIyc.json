@@ -1,6 +1,6 @@
 {
-  "@context": "/api/context.jsonld",
-  "@id": "/api/product/rec07CR18S2eerIyc.json",
+  "@context": "http://localhost:5173/api/context.jsonld",
+  "@id": "http://localhost:5173/api/product/rec07CR18S2eerIyc.json",
   "@type": "dfc-b:SuppliedProduct",
   "dfc-b:name": "Seasonal Farmers Box",
   "dfc-b:description": "<div><p class=\"\"></p><p class=\"\" style=\"font-size: 17px;text-align: left;\">Feeds approx. 4ppl </p><p class=\"\" style=\"font-size: 17px;text-align: left;\">Updated every Friday and harvested fresh every week!</p><p class=\"\" style=\"font-size: 17px;text-align: left;\"><strong><b>This Weeks Box  28/9 - 2/10</b></strong></p><p class=\"\" style=\"font-size: 17px;text-align: left;\">Spring Salad Mix, Spring Saute Greens Mix, Spring Onions, Coriander, Mint, French Breakfast Radish, Celery, Rainbow Beetroots , Fennel, Adirondack Blue Potatoes, Hakurei Turnips, Dutch Carrots, Leek</p><!--EndFragment--><br/><br/><br/></div>",
@@ -17,6 +17,6 @@
   "ofn:spree_product_id": 16282,
   "ofn:image": "https://s3.amazonaws.com/ofn_production/r0jvwn7rmfeajxf23ge6hn9qhfyf",
   "dfc-b:suppliedBy": {
-    "@id": "/api/producer/rec64TU56RNMKfG8d.json"
+    "@id": "http://localhost:5173/api/producer/rec64TU56RNMKfG8d.json"
   }
 }
