@@ -29,29 +29,10 @@ import('./utils.js').then(utils => {
           let render = `
           <nav id="${this.uniq}-nav">
             <solid-router default-route="${this.route}-producers-list">
-              <ul>
-                <solid-route name="${this.route}-producers-list">
-                  <li>
-                    <icon-mdi-account-box></icon-mdi-account-box>
-                    <a>${this.localize('producersList.name')}</a>
-                  </li>
-                </solid-route>
-                <solid-route name="${this.route}-products-list">
-                  <li>
-                    <a>${this.localize('productsList.name')}</a>
-                  </li>
-                </solid-route>
-                <solid-route name="${this.route}-producer-details">
-                  <li>
-                    <a>${this.localize('producerDetails.name')}</a>
-                  </li>
-                </solid-route>
-                <solid-route name="${this.route}-product-details">
-                  <li>
-                    <a>${this.localize('productDetails.name')}</a>
-                  </li>
-                </solid-route>
-              </ul>
+                <solid-route name="${this.route}-producers-list"></solid-route>
+                <solid-route name="${this.route}-products-list"></solid-route>
+                <solid-route name="${this.route}-producer-details" use-id></solid-route>
+                <solid-route name="${this.route}-product-details" use-id></solid-route>
             </solid-router>
           </nav>
           `;
