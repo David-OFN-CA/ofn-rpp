@@ -26,6 +26,7 @@ export const CLIENT_CONTEXT = {
   "dfc-f": "dfc-f",
   ontosec: "ontosec",
   name: "name",
+  "ofn:First_Nations_country": "ofn:first_nations_country",
 };
 
 export const sanitize = (input) => {

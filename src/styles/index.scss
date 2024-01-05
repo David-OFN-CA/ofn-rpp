@@ -24,13 +24,13 @@
 // @import "materialize-css/sass/components/tabs";
 // @import "materialize-css/sass/components/tooltip";
 @import "materialize-css/sass/components/buttons";
-// @import "materialize-css/sass/components/dropdown";
+@import "materialize-css/sass/components/dropdown";
 // @import "materialize-css/sass/components/waves";
 // @import "materialize-css/sass/components/modal";
 // @import "materialize-css/sass/components/collapsible";
-// @import "materialize-css/sass/components/chips";
+@import "materialize-css/sass/components/chips";
 // @import "materialize-css/sass/components/materialbox";
-// @import "materialize-css/sass/components/forms/forms";
+@import "materialize-css/sass/components/forms/forms";
 // @import "materialize-css/sass/components/table_of_contents";
 // @import "materialize-css/sass/components/sidenav";
 // @import "materialize-css/sass/components/preloader";
@@ -47,60 +47,120 @@
   letter-spacing: -0.022em;
 }
 
-.hidden,
-[hidden] {
-  display: none;
-}
-
-.loader {
-  margin-top: 30px;
-  padding: 60px;
-  margin-bottom: 30px;
-}
-
-.no-margin-bottom {
-  margin-bottom: 0;
-}
-
-.card-panel {
-  box-shadow: 0px 4px 4px 0px #0000000d;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  text-align: left;
-  background-color: #ede7e2;
-  color: #191c1d;
-  border-radius: 41px;
-  text-transform: uppercase;
-  padding: 4px;
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-right: 6px;
-  margin-bottom: 6px;
-  &.first_nations_led {
-    background-image: url(/Australian_Aboriginal_Flag.png);
-    background-repeat: no-repeat;
-    background-size: 31px 15px;
-    padding-left: 50px;
-    background-position: 12px;
+solid-ofn-rpp {
+  .hidden,
+  [hidden] {
+    display: none;
   }
-}
 
-.dfc_b_name {
-  display: inline-block;
-  font-size: 19px;
-  font-weight: 600;
-  line-height: 25px;
-  text-align: left;
-}
+  .bold {
+    font-weight: 600;
+  }
 
-.dfc_b_address {
-  display: inline-block;
-  font-size: 16px;
-  line-height: 21px;
-  text-align: left;
+  .bold-16-21 {
+    @extend .bold;
+    font-size: 16px;
+    line-height: 21px;
+  }
+
+  .loader {
+    margin-top: 30px;
+    padding: 60px;
+    margin-bottom: 30px;
+  }
+
+  .no-margin-bottom {
+    margin-bottom: 0;
+  }
+
+  .card-panel {
+    box-shadow: 0px 4px 4px 0px #0000000d;
+  }
+
+  .chip {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    height: auto;
+    text-align: left;
+    background-color: #ede7e2;
+    color: #191c1d;
+    border-radius: 41px;
+    text-transform: uppercase;
+    padding: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    &.first_nations_led {
+      background-image: url(/Australian_Aboriginal_Flag.png);
+      background-repeat: no-repeat;
+      background-size: 31px 15px;
+      padding-left: 50px;
+      background-position: 12px;
+    }
+  }
+
+  .dfc_b_name {
+    display: inline-block;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 25px;
+    text-align: left;
+  }
+
+  .dfc_b_address {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: left;
+  }
+
+  .filterby {
+    @extend .bold-16-21;
+    text-align: left;
+  }
+
+  solid-form-search > form {
+    margin-top: 15px;
+  }
+
+  .filter.card {
+    box-shadow: 0px 0px 4px 0px #00000014;
+    border-radius: 4px;
+    .card-content {
+      padding: 0;
+      width: 100%;
+      .switch {
+        label {
+          @extend .valign-wrapper;
+          @extend .bold-16-21;
+          color: #191c1d;
+          background-image: url(/Australian_Aboriginal_Flag.png);
+          background-repeat: no-repeat;
+          background-size: 31px 15px;
+          padding-left: 60px;
+          background-position: 12px;
+          text-align: left;
+          .lever {
+            margin-left: auto;
+          }
+        }
+      }
+
+      &.padding {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .browser-default {
+          @extend .bold-16-21;
+          color: #191c1d;
+          border: none;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
 }

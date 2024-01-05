@@ -1,5 +1,34 @@
 import style from './styles/index.scss?inline';
-// import 'materialize-css/dist/js/materialize.min.js'; // Not required
+import 'materialize-css/dist/js/materialize.min.js'; // Not required
+// import 'materialize-css/js/cash.js';
+// import 'materialize-css/js/component.js';
+// import 'materialize-css/js/global.js';
+// import 'materialize-css/js/anime.min.js';
+// import 'materialize-css/js/collapsible.js';
+// import 'materialize-css/js/dropdown.js';
+// import 'materialize-css/js/modal.js';
+// import 'materialize-css/js/materialbox.js';
+// import 'materialize-css/js/parallax.js';
+// import 'materialize-css/js/tabs.js';
+// import 'materialize-css/js/tooltip.js';
+// import 'materialize-css/js/waves.js';
+// import 'materialize-css/js/toasts.js';
+// import 'materialize-css/js/sidenav.js';
+// import 'materialize-css/js/scrollspy.js';
+// import 'materialize-css/js/autocomplete.js';
+// import 'materialize-css/js/forms.js';
+// import 'materialize-css/js/slider.js';
+// import 'materialize-css/js/cards.js';
+// import 'materialize-css/js/chips.js';
+// import 'materialize-css/js/pushpin.js';
+// import 'materialize-css/js/buttons.js';
+// import 'materialize-css/js/datepicker.js';
+// import 'materialize-css/js/timepicker.js';
+// import 'materialize-css/js/characterCounter.js';
+// import 'materialize-css/js/carousel.js';
+// import 'materialize-css/js/tapTarget.js';
+// import 'materialize-css/js/select.js';
+// import 'materialize-css/js/range.js';
 import '~icons/mdi/home-silo';
 import '~icons/mdi/food-apple';
 import('./utils.js').then(utils => {
@@ -23,52 +52,76 @@ import('./utils.js').then(utils => {
         }
       });
 
-      // Custom widget for badges (simple array)
-      customElements.define("custom-multiple-badge",
-        class extends core.SolidTemplateElement {
-          constructor() {
-            super();
-          }
-          static get propsDefinition() {
-            return {
-              value: "value"
-            };
-          }
-          template({
-            value
-          }) {
-            const badges = value.split(',');
-            let res = '';
-            for(let badge of badges) {
-              if(badge.length > 0) {
-                res += `<div class="badge" data-badge-caption="">${badge}</div>`
-              }
+    // Custom widget for badges (simple array)
+    customElements.define("custom-multiple-badge",
+      class extends core.SolidTemplateElement {
+        constructor() {
+          super();
+        }
+        static get propsDefinition() {
+          return {
+            value: "value"
+          };
+        }
+        template({
+          value
+        }) {
+          const badges = value.split(',');
+          let res = '';
+          for(let badge of badges) {
+            if(badge.length > 0) {
+              res += `<div class="chip">${badge}</div>`
             }
-            return res;
           }
-        });
+          return res;
+        }
+      });
 
-        // Custom widget for First Nations Led
-        customElements.define("custom-badge-firstnationsled",
-          class extends core.SolidTemplateElement {
-            constructor() {
-              super();
-            }
-            static get propsDefinition() {
-              return {
-                value: "value"
-              };
-            }
-            template({
-              value
-            }) {
-              if(value.length > 0) {
-                return `<div class="badge first_nations_led" data-badge-caption="">First Nations Led</div>`;
-              } else {
-                return "";
-              }
-            }
-          });
+    // Custom widget for First Nations Led
+    customElements.define("custom-badge-firstnationsled",
+      class extends core.SolidTemplateElement {
+        constructor() {
+          super();
+        }
+        static get propsDefinition() {
+          return {
+            value: "value"
+          };
+        }
+        template({
+          value
+        }) {
+          if(value.length > 0) {
+            return `<div class="chip first_nations_led">First Nations Led</div>`;
+          } else {
+            return "";
+          }
+        }
+      });
+
+    // Custom widget for filtering First Nations Led
+    customElements.define("custom-search-firstnationsled",
+      class extends core.SolidTemplateElement {
+        constructor() {
+          super();
+        }
+        static get propsDefinition() {
+          return {
+            value: "value"
+          };
+        }
+        template({
+          value
+        }) {
+          return `<div class="switch">
+            <label>
+              First Nations Led
+              <input type="checkbox" onchange="javascript:document.querySelector('[filtered-by=producers-list-filters-${value}]').toggleAttribute('required-ofn:First_Nations_country');document.querySelector('[filtered-by=producers-list-filters-${value}]').component.populate();">
+              <span class="lever"></span>
+            </label>
+          </div>`;
+        }
+      });
 
     customElements.define(
       "solid-ofn-rpp",
@@ -114,25 +167,181 @@ import('./utils.js').then(utils => {
         }
 
         viewProducersList(props={}) {
+
+          const producers = core.store.getData(this.producersSrc, utils.CLIENT_CONTEXT);
+          let producerNames = [], productCategories = [], addresses = [];
+          producers.then(async (p) => {
+            for(let producer of p['ldp:contains']) {
+              let producerName = await producer['dfc-b:name'];
+              if(producerName) {
+                producerNames.push(producerName);
+              }
+              let producerCategories = await producer['ofn:Produce_category'];
+              if(producerCategories) {
+                productCategories = productCategories.concat(producerCategories);
+              }
+              let producerAddress = await producer['dfc-b:hasAddress'];
+              if(producerAddress) {
+                let producerStreet = await producerAddress['dfc-b:hasStreet'];
+                if(producerStreet) {
+                  addresses.push(producerStreet);
+                }
+                let producerPostalCode = await producerAddress['dfc-b:hasPostalCode'];
+                if(producerStreet) {
+                  addresses.push(producerPostalCode);
+                }
+                let producerCity = await producerAddress['dfc-b:hasCity'];
+                if(producerStreet) {
+                  addresses.push(producerCity);
+                }
+                let producerCountry = await producerAddress['dfc-b:hasCountry'];
+                if(producerStreet) {
+                  addresses.push(producerCountry);
+                }
+              }
+            }
+
+            producerNames = Array.from(new Set(producerNames.sort())).reduce((acc, value) => ({ ...acc, [value]: null }), {});
+            productCategories = Array.from(new Set(productCategories.sort())).join(', ');
+            // NOTICE: change to mutation observer
+            document.querySelector('#producers-list-filters-regenerative-produce-portal').setAttribute('enum-ofn:Produce_category', productCategories);
+            document.querySelector('solid-form-dropdown-placeholder[name="ofn:Produce_category"]').setAttribute('enum', productCategories);
+
+            addresses = Array.from(new Set(addresses.sort())).reduce((acc, value) => ({ ...acc, [value]: null }), {});
+
+            Array.from(document.querySelectorAll('select')).map(select => select.classList.add('browser-default'));
+
+            setTimeout(() => {
+              M.Autocomplete.init(document.querySelectorAll('input[type="text"][name="search-field"]'), {
+                data: producerNames,
+                limit: 3
+              });
+              M.Autocomplete.init(document.querySelectorAll('input[type="text"][name="address"]'), {
+                data: addresses,
+                limit: 3
+              });
+              M.FormSelect.init(document.querySelectorAll('select'))
+            }, 0);
+          });
+
           let render = `
             <div id="${this.route}-producers-list" data-view="${this.route}-producers-list" class="row">
               <div class="col s4">
-                <div class="loader" id="loader-producers-list-filters">
-                  <div class="progress">
-                    <div class="indeterminate"></div>
+                <div class="row">
+                  <div class="col s9 offset-s2">
+                    <!--<div class="loader" id="loader-producers-list-filters-${this.uniq}">
+                      <div class="progress">
+                        <div class="indeterminate"></div>
+                      </div>
+                    </div>-->
+                    <solid-form-search
+                      id="producers-list-filters-${this.uniq}"
+                      loader-id="loader-producers-list-filters-${this.uniq}"
+                      fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))), set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:Supporting_evidence)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Produce_category)))), set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:Assurance_partnerships)))), set-line-certifications(set-line-certifications-col(set-line-certifications-panel(set-line-certifications-wrapper(ofn:Certifications)))), set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
+
+                      class-set-line-field="row"
+                      search-search-field="dfc-b:name, ofn:long_description"
+                      widget-search-field="solid-form-label-text"
+                      class-search-field="input-field col s12"
+                      label-search-field="search for producers"
+
+                      class-filterBy-row="row" 
+                      widget-filterBy-row="div"
+                      class-filterBy="col s12 filterby"
+                      widget-filterBy="div"
+                      value-filterBy="Filter by"
+
+                      widget-set-line-fnc="div"
+                      class-set-line-fnc="row no-margin-bottom"
+                      widget-set-line-fnc-col="div"
+                      class-set-line-fnc-col="col s12"
+                      widget-set-line-fnc-panel="div"
+                      class-set-line-fnc-panel="filter card horizontal"
+                      widget-set-line-fnc-wrapper="div"
+                      class-set-line-fnc-wrapper="card-content"
+                      value-ofn:First_Nations_country="${this.uniq}"
+                      widget-ofn:First_Nations_country="custom-search-firstnationsled"
+                      class-ofn:First_Nations_country="input-field col s12"
+
+                      widget-set-line-ecological="div"
+                      class-set-line-ecological="row no-margin-bottom"
+                      widget-set-line-ecological-col="div"
+                      class-set-line-ecological-col="col s12"
+                      widget-set-line-ecological-panel="div"
+                      class-set-line-ecological-panel="filter card horizontal"
+                      widget-set-line-ecological-wrapper="div"
+                      class-set-line-ecological-wrapper="card-content padding"
+                      auto-range-ofn:Supporting_evidence=""
+                      widget-ofn:Supporting_evidence='solid-form-dropdown-placeholder'
+                      class-ofn:Supporting_evidence="col s12"
+                      label-ofn:Supporting_evidence="Ecological outcomes"
+
+                      widget-set-line-produce="div"
+                      class-set-line-produce="row no-margin-bottom"
+                      widget-set-line-produce-col="div"
+                      class-set-line-produce-col="col s12"
+                      widget-set-line-produce-panel="div"
+                      class-set-line-produce-panel="filter card horizontal"
+                      widget-set-line-produce-wrapper="div"
+                      class-set-line-produce-wrapper="card-content padding"
+                      enum-ofn:Produce_category=""
+                      widget-ofn:Produce_category='solid-form-dropdown-placeholder'
+                      class-ofn:Produce_category="col s12"
+                      label-ofn:Produce_category="Produce types"
+
+                      widget-set-line-assurance="div"
+                      class-set-line-assurance="row no-margin-bottom"
+                      widget-set-line-assurance-col="div"
+                      class-set-line-assurance-col="col s12"
+                      widget-set-line-assurance-panel="div"
+                      class-set-line-assurance-panel="filter card horizontal"
+                      widget-set-line-assurance-wrapper="div"
+                      class-set-line-assurance-wrapper="card-content padding"
+                      auto-range-ofn:Assurance_partnerships=""
+                      widget-ofn:Assurance_partnerships='solid-form-dropdown-placeholder'
+                      class-ofn:Assurance_partnerships="col s12"
+                      label-ofn:Assurance_partnerships="Assurance Partners"
+
+                      widget-set-line-certifications="div"
+                      class-set-line-certifications="row no-margin-bottom"
+                      widget-set-line-certifications-col="div"
+                      class-set-line-certifications-col="col s12"
+                      widget-set-line-certifications-panel="div"
+                      class-set-line-certifications-panel="filter card horizontal"
+                      widget-set-line-certifications-wrapper="div"
+                      class-set-line-certifications-wrapper="card-content padding"
+                      auto-range-ofn:Certifications=""
+                      widget-ofn:Certifications='solid-form-dropdown-placeholder'
+                      class-ofn:Certifications="col s12"
+                      label-ofn:Certifications="Certifications"
+
+                      widget-set-line-address="div"
+                      class-set-line-address="row no-margin-bottom"
+                      widget-set-line-address-col="div"
+                      class-set-line-address-col="col s12"
+                      widget-set-line-address-panel="div"
+                      class-set-line-address-panel="filter card horizontal"
+                      widget-set-line-address-wrapper="div"
+                      class-set-line-address-wrapper="card-content"
+                      search-address="dfc-b:hasAddress.dfc-b:hasStreet, dfc-b:hasAddress.dfc-b:hasPostalCode, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry"
+                      widget-address='solid-form-label-text'
+                      class-address="input-field col s12"
+                      label-address="Location"
+                    ></solid-form-search>
                   </div>
                 </div>
               </div>
               <div class="col s8">
-                <div class="loader" id="loader-producers-list">
+                <div class="loader" id="loader-producers-list-${this.uniq}">
                   <div class="progress">
                     <div class="indeterminate"></div>
                   </div>
                 </div>
                 <solid-display
-                  loader-id="loader-producers-list"
+                  loader-id="loader-producers-list-${this.uniq}"
                   data-src="${this.producersSrc}"
-                  fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity), set-description(ofn:long_description), set-tags(ofn:First_Nations_country, ofn:Produce_category))))))"
+                  filtered-by="producers-list-filters-${this.uniq}"
+                  fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry), set-description(ofn:long_description), set-tags(ofn:First_Nations_country, ofn:Produce_category))))))"
 
                   widget-set-card-row="div"
                   class-set-card-row="row"
@@ -144,7 +353,7 @@ import('./utils.js').then(utils => {
                   class-set-card-wrapper="row no-margin-bottom valign-wrapper"
 
                   widget-set-left-panel="div"
-                  class-set-left-panel="col s2"
+                  class-set-left-panel="col s2 center"
                   class-ofn:logo_url="responsive-img"
                   widget-ofn:logo_url="solid-display-img"
                   default-ofn:logo_url="https://placehold.co/120"
@@ -158,6 +367,8 @@ import('./utils.js').then(utils => {
                   class-dfc-b:name="col dfc_b_name"
                   widget-dfc-b:hasAddress.dfc-b:hasCity="solid-display-value"
                   class-dfc-b:hasAddress.dfc-b:hasCity="col dfc_b_address"
+                  widget-dfc-b:hasAddress.dfc-b:hasCountry="solid-display-value"
+                  class-dfc-b:hasAddress.dfc-b:hasCountry="col dfc_b_address"
 
                   widget-set-description="div"
                   class-set-description="row"
