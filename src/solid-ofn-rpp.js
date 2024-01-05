@@ -243,6 +243,9 @@ import("./utils.js").then((utils) => {
                 {
                   data: producerNames,
                   limit: 3,
+                  onAutocomplete: () => {
+                    document.querySelector(`[filtered-by=producers-list-filters-${this.uniq}]`).component.populate();
+                  },
                 }
               );
               M.Autocomplete.init(
@@ -250,6 +253,9 @@ import("./utils.js").then((utils) => {
                 {
                   data: addresses,
                   limit: 3,
+                  onAutocomplete: () => {
+                    document.querySelector(`[filtered-by=producers-list-filters-${this.uniq}]`).component.populate();
+                  },
                 }
               );
               M.FormSelect.init(document.querySelectorAll("select"));
@@ -258,9 +264,9 @@ import("./utils.js").then((utils) => {
 
           let render = `
             <div id="${this.route}-producers-list" data-view="${this.route}-producers-list" class="row">
-              <div class="col s4">
+              <div class="col s12 m4">
                 <div class="row">
-                  <div class="col s9 offset-s2">
+                  <div class="col s12 m9 offset-m2">
                     <!--<div class="loader" id="loader-producers-list-filters-${this.uniq}">
                       <div class="progress">
                         <div class="indeterminate"></div>
@@ -363,7 +369,7 @@ import("./utils.js").then((utils) => {
                   </div>
                 </div>
               </div>
-              <div class="col s7">
+              <div class="col s12 m7">
                 <div class="loader" id="loader-producers-list-${this.uniq}">
                   <div class="progress">
                     <div class="indeterminate"></div>
@@ -385,13 +391,13 @@ import("./utils.js").then((utils) => {
                   class-set-card-wrapper="row no-margin-bottom valign-wrapper"
 
                   widget-set-left-panel="div"
-                  class-set-left-panel="col s2 center"
+                  class-set-left-panel="col hide-on-small-only m2 center img-on-mobile"
                   class-ofn:logo_url="responsive-img"
                   widget-ofn:logo_url="solid-display-img"
                   default-ofn:logo_url="https://placehold.co/120"
 
                   widget-set-right-panel="div"
-                  class-set-right-panel="col s10"
+                  class-set-right-panel="col s12 m10"
 
                   widget-set-title="div"
                   class-set-title="row valign-wrapper"

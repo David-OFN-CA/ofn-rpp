@@ -163,4 +163,30 @@ solid-ofn-rpp {
       }
     }
   }
+
+  @media #{$small-and-down} {
+    [name="set-card-panel"] {
+      .img-on-mobile {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        display: block !important;
+        float: none;
+        margin-top: -125px;
+        margin-left: -7px;
+      }
+      [name="set-right-panel"] {
+        [name="set-title"] {
+          display: block;
+          margin-left: 80px;
+          .dfc_b_name,
+          .dfc_b_address {
+            display: block;
+            padding: 3px;
+            float: none !important;
+          }
+        }
+      }
+    }
+  }
 }
