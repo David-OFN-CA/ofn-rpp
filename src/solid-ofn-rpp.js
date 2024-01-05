@@ -1,5 +1,5 @@
-import style from './styles/index.scss?inline';
-import 'materialize-css/dist/js/materialize.min.js'; // Not required
+import style from "./styles/index.scss?inline";
+import "materialize-css/dist/js/materialize.min.js"; // Not required
 // import 'materialize-css/js/cash.js';
 // import 'materialize-css/js/component.js';
 // import 'materialize-css/js/global.js';
@@ -29,90 +29,88 @@ import 'materialize-css/dist/js/materialize.min.js'; // Not required
 // import 'materialize-css/js/tapTarget.js';
 // import 'materialize-css/js/select.js';
 // import 'materialize-css/js/range.js';
-import '~icons/mdi/home-silo';
-import '~icons/mdi/food-apple';
-import('./utils.js').then(utils => {
-  import(/* @vite-ignore */utils.coreVersion()).then(core => {
-
+import "~icons/mdi/home-silo";
+import "~icons/mdi/food-apple";
+import("./utils.js").then((utils) => {
+  import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
     // Custom widget for producer description, original contains some unsafe html
-    customElements.define("custom-safe-html-value",
+    customElements.define(
+      "custom-safe-html-value",
       class extends core.SolidTemplateElement {
         constructor() {
           super();
         }
         static get propsDefinition() {
           return {
-            value: "value"
+            value: "value",
           };
         }
-        template({
-          value
-        }) {
+        template({ value }) {
           return utils.truncate(utils.sanitize(value), 125);
         }
-      });
+      }
+    );
 
     // Custom widget for badges (simple array)
-    customElements.define("custom-multiple-badge",
+    customElements.define(
+      "custom-multiple-badge",
       class extends core.SolidTemplateElement {
         constructor() {
           super();
         }
         static get propsDefinition() {
           return {
-            value: "value"
+            value: "value",
           };
         }
-        template({
-          value
-        }) {
-          const badges = value.split(',');
-          let res = '';
-          for(let badge of badges) {
-            if(badge.length > 0) {
-              res += `<div class="chip">${badge}</div>`
+        template({ value }) {
+          const badges = value.split(",");
+          let res = "";
+          for (let badge of badges) {
+            if (badge.length > 0) {
+              res += `<div class="chip">${badge}</div>`;
             }
           }
           return res;
         }
-      });
+      }
+    );
 
     // Custom widget for First Nations Led
-    customElements.define("custom-badge-firstnationsled",
+    customElements.define(
+      "custom-badge-firstnationsled",
       class extends core.SolidTemplateElement {
         constructor() {
           super();
         }
         static get propsDefinition() {
           return {
-            value: "value"
+            value: "value",
           };
         }
-        template({
-          value
-        }) {
-          if(value.length > 0) {
+        template({ value }) {
+          if (value.length > 0) {
             return `<div class="chip first_nations_led">First Nations Led</div>`;
           } else {
             return "";
           }
         }
-      });
+      }
+    );
 
     // Custom widget for filtering First Nations Led
-    customElements.define("custom-search-firstnationsled",
+    customElements.define(
+      "custom-search-firstnationsled",
       class extends core.SolidTemplateElement {
         constructor() {
           super();
         }
         static get propsDefinition() {
           return {
-            value: "value"
+            value: "value",
           };
         }
-        template({
-          value
-        }) {
+        template({ value }) {
           return `<div class="switch">
             <label>
               First Nations Led
@@ -121,7 +119,8 @@ import('./utils.js').then(utils => {
             </label>
           </div>`;
         }
-      });
+      }
+    );
 
     customElements.define(
       "solid-ofn-rpp",
@@ -135,7 +134,7 @@ import('./utils.js').then(utils => {
           return {
             producersSrc: "producers-src",
             productsSrc: "products-src",
-            uniq: "uniq"
+            uniq: "uniq",
           };
         }
 
@@ -166,61 +165,94 @@ import('./utils.js').then(utils => {
           return render;
         }
 
-        viewProducersList(props={}) {
-
-          const producers = core.store.getData(this.producersSrc, utils.CLIENT_CONTEXT);
-          let producerNames = [], productCategories = [], addresses = [];
+        viewProducersList(props = {}) {
+          const producers = core.store.getData(
+            this.producersSrc,
+            utils.CLIENT_CONTEXT
+          );
+          let producerNames = [],
+            productCategories = [],
+            addresses = [];
           producers.then(async (p) => {
-            for(let producer of p['ldp:contains']) {
-              let producerName = await producer['dfc-b:name'];
-              if(producerName) {
+            for (let producer of p["ldp:contains"]) {
+              let producerName = await producer["dfc-b:name"];
+              if (producerName) {
                 producerNames.push(producerName);
               }
-              let producerCategories = await producer['ofn:Produce_category'];
-              if(producerCategories) {
-                productCategories = productCategories.concat(producerCategories);
+              let producerCategories = await producer["ofn:Produce_category"];
+              if (producerCategories) {
+                productCategories =
+                  productCategories.concat(producerCategories);
               }
-              let producerAddress = await producer['dfc-b:hasAddress'];
-              if(producerAddress) {
-                let producerStreet = await producerAddress['dfc-b:hasStreet'];
-                if(producerStreet) {
+              let producerAddress = await producer["dfc-b:hasAddress"];
+              if (producerAddress) {
+                let producerStreet = await producerAddress["dfc-b:hasStreet"];
+                if (producerStreet) {
                   addresses.push(producerStreet);
                 }
-                let producerPostalCode = await producerAddress['dfc-b:hasPostalCode'];
-                if(producerStreet) {
+                let producerPostalCode = await producerAddress[
+                  "dfc-b:hasPostalCode"
+                ];
+                if (producerStreet) {
                   addresses.push(producerPostalCode);
                 }
-                let producerCity = await producerAddress['dfc-b:hasCity'];
-                if(producerStreet) {
+                let producerCity = await producerAddress["dfc-b:hasCity"];
+                if (producerStreet) {
                   addresses.push(producerCity);
                 }
-                let producerCountry = await producerAddress['dfc-b:hasCountry'];
-                if(producerStreet) {
+                let producerCountry = await producerAddress["dfc-b:hasCountry"];
+                if (producerStreet) {
                   addresses.push(producerCountry);
                 }
               }
             }
 
-            producerNames = Array.from(new Set(producerNames.sort())).reduce((acc, value) => ({ ...acc, [value]: null }), {});
-            productCategories = Array.from(new Set(productCategories.sort())).join(', ');
+            producerNames = Array.from(new Set(producerNames.sort())).reduce(
+              (acc, value) => ({ ...acc, [value]: null }),
+              {}
+            );
+            productCategories = Array.from(
+              new Set(productCategories.sort())
+            ).join(", ");
             // NOTICE: change to mutation observer
-            document.querySelector('#producers-list-filters-regenerative-produce-portal').setAttribute('enum-ofn:Produce_category', productCategories);
-            document.querySelector('solid-form-dropdown-placeholder[name="ofn:Produce_category"]').setAttribute('enum', productCategories);
+            document
+              .querySelector(
+                "#producers-list-filters-regenerative-produce-portal"
+              )
+              .setAttribute("enum-ofn:Produce_category", productCategories);
+            document
+              .querySelector(
+                'solid-form-dropdown-placeholder[name="ofn:Produce_category"]'
+              )
+              .setAttribute("enum", productCategories);
 
-            addresses = Array.from(new Set(addresses.sort())).reduce((acc, value) => ({ ...acc, [value]: null }), {});
+            addresses = Array.from(new Set(addresses.sort())).reduce(
+              (acc, value) => ({ ...acc, [value]: null }),
+              {}
+            );
 
-            Array.from(document.querySelectorAll('select')).map(select => select.classList.add('browser-default'));
+            Array.from(document.querySelectorAll("select")).map((select) =>
+              select.classList.add("browser-default")
+            );
 
             setTimeout(() => {
-              M.Autocomplete.init(document.querySelectorAll('input[type="text"][name="search-field"]'), {
-                data: producerNames,
-                limit: 3
-              });
-              M.Autocomplete.init(document.querySelectorAll('input[type="text"][name="address"]'), {
-                data: addresses,
-                limit: 3
-              });
-              M.FormSelect.init(document.querySelectorAll('select'))
+              M.Autocomplete.init(
+                document.querySelectorAll(
+                  'input[type="text"][name="search-field"]'
+                ),
+                {
+                  data: producerNames,
+                  limit: 3,
+                }
+              );
+              M.Autocomplete.init(
+                document.querySelectorAll('input[type="text"][name="address"]'),
+                {
+                  data: addresses,
+                  limit: 3,
+                }
+              );
+              M.FormSelect.init(document.querySelectorAll("select"));
             }, 0);
           });
 
@@ -331,7 +363,7 @@ import('./utils.js').then(utils => {
                   </div>
                 </div>
               </div>
-              <div class="col s8">
+              <div class="col s7">
                 <div class="loader" id="loader-producers-list-${this.uniq}">
                   <div class="progress">
                     <div class="indeterminate"></div>
@@ -386,7 +418,7 @@ import('./utils.js').then(utils => {
           return render;
         }
 
-        viewProductsList(props={}) {
+        viewProductsList(props = {}) {
           let render = `
             <div id="${this.route}-products-list" data-view="${this.route}-products-list">
             <solid-display
@@ -397,7 +429,7 @@ import('./utils.js').then(utils => {
           return render;
         }
 
-        viewProducerDetails(props={}) {
+        viewProducerDetails(props = {}) {
           let render = `
             <div id="${this.route}-producer-details" data-view="${this.route}-producer-details">
               Hello World!
@@ -406,7 +438,7 @@ import('./utils.js').then(utils => {
           return render;
         }
 
-        viewProductDetails(props={}) {
+        viewProductDetails(props = {}) {
           let render = `
             <div id="${this.route}-product-details" data-view="${this.route}-product-details">
               Hello World!
