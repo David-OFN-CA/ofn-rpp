@@ -178,7 +178,6 @@ import("./utils.js").then((utils) => {
             <solid-route name="${this.route}-producers-list"></solid-route>
             <solid-route name="${this.route}-products-list"></solid-route>
             <solid-route name="${this.route}-producer-details" use-id></solid-route>
-            <solid-route name="${this.route}-product-details" use-id></solid-route>
           </solid-router>
           `;
           return render;
@@ -512,7 +511,7 @@ import("./utils.js").then((utils) => {
             });
           }, 0);
           let render = `
-            <div id="${this.route}-products-list" data-view="${this.route}-products-list" class="row">
+            <div id="${this.route}-products-list" data-view="${this.route}-products-list" class="row products-list">
               <div class="col s12 m4">
                 <div class="row">
                   <div class="col s12 m9 offset-m2">
@@ -635,18 +634,166 @@ import("./utils.js").then((utils) => {
         }
 
         viewProducerDetails(props = {}) {
+          // TODO: Split this solid-display to allow multiple usage of the same field.
+          // Maybe explode everything. 1x field = 1x solid-display ?
           let render = `
-            <div id="${this.route}-producer-details" data-view="${this.route}-producer-details">
-              Hello World!
-            </div>
-          `;
-          return render;
-        }
+            <div id="${this.route}-producer-details" data-view="${this.route}-producer-details" class="row product-details">
+              <div class="col s10 offset-s1">
+                <div class="loader" id="loader-producer-details-${this.uniq}">
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+                <solid-display
+                  loader-id="loader-producer-details-${this.uniq}"
+                  bind-resources=""
+                  fields="${`
+                    set-title-row(
+                      set-title-col(
+                        set-title-panel(
+                          title-header(
+                            title-header-spacer,
+                            title-header-spacer-2(ofn:Produce_category)
+                          ),
+                          title-row(
+                            title-left-panel(ofn:logo_url),
+                            title-right-panel(
+                              title-name(dfc-b:name),
+                              title-address(dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry),
+                              title-description(
+                                dfc-b:hasDescription,
+                                learn-more
+                              ),
+                              title-hr,
+                              title-bottom(
+                                title-assurance-partners(
+                                  title-assurance-partners-text,
+                                  title-assurance-partners-learn-more,
+                                  title-sustainable-table
+                                ),
+                                title-supporting-evidence(
+                                  title-supporting-evidence-text,
+                                  title-supporting-evidence-learn-more,
+                                  ofn:Supporting_evidence
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    ),
+                    how-to-buy,
+                    set-how-to-buy-row(
+                      set-how-to-buy-col(
+                        set-how-to-buy-panel(
+                          set-how-to-buy-wrapper(
+                          )
+                        )
+                      )
+                    ),
+                    about-us,
+                    set-about-us-row(
+                      set-about-us-col(
+                        set-about-us-panel(
+                          set-about-us-wrapper(
+                          )
+                        )
+                      )
+                    ),
+                    supporting-evidence,
+                    set-supporting-evidence(
+                      set-supporting-evidence-filters(
+        
+                      ),
+                      set-supporting-evidence-values(
+                        
+                      )
+                    ),
+                    contact-producer,
+                    set-contact-producer(
+        
+                    )
+                  `.replace(/[ \n]/g, "")}"
 
-        viewProductDetails(props = {}) {
-          let render = `
-            <div id="${this.route}-product-details" data-view="${this.route}-product-details">
-              Hello World!
+                  widget-set-title-row="div"
+                  class-set-title-row="row"
+                  widget-set-title-col="div"
+                  class-set-title-col="col s12"
+                  widget-set-title-panel="div"
+                  class-set-title-panel="card-panel card-round"
+
+                  widget-title-header="div"
+                  class-title-header="row valign-wrapper title-header no-margin-bottom"
+                  widget-title-header-spacer="div"
+                  class-title-header-spacer="col s3"
+                  widget-title-header-spacer-2="div"
+                  class-title-header-spacer-2="col s9"
+                  widget-ofn:Produce_category="custom-multiple-badge"
+                  widget-title-row="div"
+                  class-title-row="row"
+                  widget-title-left-panel="div"
+                  class-title-left-panel="col s3"
+                  class-ofn:logo_url="circle img-120 img-logo"
+                  widget-ofn:logo_url="solid-display-img"
+                  default-ofn:logo_url="https://placehold.co/120"
+                  widget-title-right-panel="div"
+                  class-title-right-panel="col s8 margin-top-10"
+                  widget-title-name="div"
+                  class-title-name="row no-margin-bottom"
+                  widget-dfc-b:name="solid-display-value"
+                  class-dfc-b:name="col s12 flow-text"
+                  widget-title-address="div"
+                  class-title-address="row text-address"
+                  widget-dfc-b:hasAddress.dfc-b:hasCity="solid-display-value"
+                  class-dfc-b:hasAddress.dfc-b:hasCity="col dfc_b_address"
+                  widget-dfc-b:hasAddress.dfc-b:hasCountry="solid-display-value"
+                  class-dfc-b:hasAddress.dfc-b:hasCountry="col dfc_b_address"
+                  widget-title-description="div"
+                  class-title-description="row"
+                  class-dfc-b:hasDescription="col s12 text-18"
+                  widget-learn-more="div"
+                  class-learn-more="col s12 learn-more"
+                  value-learn-more="Learn more about us"
+                  widget-title-hr="hr"
+                  widget-title-bottom="div"
+                  class-title-bottom="row"
+                  widget-title-assurance-partners="div"
+                  class-title-assurance-partners="col s6"
+                  widget-title-assurance-partners-text="div"
+                  class-title-assurance-partners-text="bold-16-21"
+                  value-title-assurance-partners-text="Assurance Partners"
+                  widget-title-assurance-partners-learn-more="div"
+                  value-title-assurance-partners-learn-more="Learn more"
+                  class-title-assurance-partners-learn-more="learn-more"
+
+                  widget-title-supporting-evidence="div"
+                  class-title-supporting-evidence="col s6"
+                  widget-title-supporting-evidence-text="div"
+                  class-title-supporting-evidence-text="bold-16-21"
+                  value-title-supporting-evidence-text="Supporting Evidence"
+                  widget-title-supporting-evidence-learn-more="div"
+                  value-title-supporting-evidence-learn-more="Learn more"
+                  class-title-supporting-evidence-learn-more="learn-more"
+
+                  widget-set-how-to-buy-row="div"
+                  class-set-how-to-buy-row="row"
+                  widget-set-how-to-buy-col="div"
+                  class-set-how-to-buy-col="col s12"
+                  widget-set-how-to-buy-panel="div"
+                  class-set-how-to-buy-panel="card-panel card-round"
+                  widget-set-how-to-buy-wrapper="div"
+                  class-set-how-to-buy-wrapper="row valign-wrapper"
+
+                  widget-set-about-us-row="div"
+                  class-set-about-us-row="row"
+                  widget-set-about-us-col="div"
+                  class-set-about-us-col="col s12"
+                  widget-set-about-us-panel="div"
+                  class-set-about-us-panel="card-panel card-round"
+                  widget-set-about-us-wrapper="div"
+                  class-set-about-us-wrapper="row valign-wrapper"
+                ></solid-display>
+              </div>
             </div>
           `;
           return render;
@@ -662,7 +809,6 @@ import("./utils.js").then((utils) => {
             ${this.routers()}
             ${this.viewProductsList()}
             ${this.viewProducersList()}
-            ${this.viewProductDetails()}
             ${this.viewProducerDetails()}
           `;
         }
