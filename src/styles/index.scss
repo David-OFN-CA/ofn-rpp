@@ -164,6 +164,35 @@ solid-ofn-rpp {
     }
   }
 
+  #regenerative-produce-portal-products-list {
+    .img-168 img {
+      width: 166px;
+      height: 166px;
+    }
+
+    .card-panel {
+      padding: 16px;
+    }
+
+    solid-display-value[name="dfc-b:name"] {
+      @extend .bold;
+      font-size: 17px;
+      line-height: 27px;
+    }
+
+    solid-display-value[name="dfc-b:suppliedBy.dfc-b:name"] {
+      color: #17594A;
+      @extend .bold;
+      font-size: 14px;
+      line-height: 18px;
+      &::before {
+        content: "from ";
+        font-weight: 400;
+        color: #191C1D;
+      }
+    }
+  }
+
   @media #{$small-and-down} {
     [name="set-card-panel"] {
       .img-on-mobile {
@@ -187,6 +216,13 @@ solid-ofn-rpp {
           }
         }
       }
+    }
+    #regenerative-produce-portal-products-list {
+      .img-168 img {
+        width: 120px;
+        height: 120px;
+      }
+  
     }
   }
 }
