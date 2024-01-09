@@ -194,7 +194,7 @@ solid-ofn-rpp {
     }
   }
 
-  .product-details {
+  .producer-details {
     .card-panel.card-round {
       border-radius: 8px;
       border: 1px solid #dedede;
@@ -206,7 +206,7 @@ solid-ofn-rpp {
       overflow: auto;
       position: relative;
       height: 90px;
-      [name="title-header-spacer-2"] {
+      .z-index-2 {
         z-index: 2;
       }
       &::before {
@@ -234,7 +234,8 @@ solid-ofn-rpp {
     .img-120 {
       width: 120px;
       height: 120px;
-      display: block;
+      display: flex;
+      justify-content: center;
     }
 
     .margin-top-10 {
@@ -271,9 +272,26 @@ solid-ofn-rpp {
       font-size: 18px;
     }
 
+    .text-14 {
+      font-size: 14px;
+    }
+
     hr {
       border: 1px solid #ECECEC;
       margin: 30px 10px 40px 10px;
+    }
+
+    h4 {
+      font-size: 32px;
+      @extend .bold;
+      line-height: 42px;
+      color: #000;
+    }
+
+    h5 {
+      font-size: 21px;
+      @extend .bold;
+      line-height: 28px;
     }
   }
 

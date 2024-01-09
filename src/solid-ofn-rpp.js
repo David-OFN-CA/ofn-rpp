@@ -442,6 +442,7 @@ import("./utils.js").then((utils) => {
                   widget-ofn:First_Nations_country="custom-badge-firstnationsled"
                   widget-ofn:Produce_category="custom-multiple-badge"
 
+                  next="${this.route}-producer-details"
                   ></solid-display>
                 </div>
             </div>
@@ -635,14 +636,14 @@ import("./utils.js").then((utils) => {
 
         viewProducerDetails(props = {}) {
           let render = `
-            <div id="${this.route}-producer-details" data-view="${this.route}-producer-details" class="row product-details">
+            <div id="${this.route}-producer-details" data-view="${this.route}-producer-details" class="row producer-details">
               <div class="col s10 offset-s1">
                 <div class="row">
                   <div class="col s12">
                     <div class="card-panel card-round">
                       <div class="row valign-wrapper title-header no-margin-bottom">
                         <div class="col s3"></div>
-                        <div class="col s9">
+                        <div class="col s9 z-index-2">
                           <solid-display
                             bind-resources=""
                             fields="ofn:Produce_category"
@@ -685,20 +686,76 @@ import("./utils.js").then((utils) => {
                               fields="dfc-b:hasDescription"
                               class-dfc-b:hasDescription="col s12 text-18"
                             ></solid-display>
-                            <div class="col s12 learn-more">Learn more about us</div>
+                            <a class="col s12 learn-more" href="#${this.uniq}-about-us">Learn more about us</a>
                           </div>
                           <hr />
                           <div class="row">
                             <div class="col s6">
                               <div class="bold-16-21">Assurance Partners</div>
-                              <div class="learn-more">Learn more</div>
+                              <a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a>
                             </div>
                             <div class="col s6">
                               <div class="bold-16-21">Supporting Evidence</div>
-                              <div class="learn-more">Learn more</div>
+                              <a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a>
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 id="${this.uniq}-how-to-buy">How to buy</h4>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="card-panel card-round">
+                      <div class="row">
+                        <div class="col s4">
+                          <h5>Wholesale customers</h5>
+                          <div class="row">
+                            <solid-display
+                              bind-resources=""
+                              fields="dfc-b:hasDescription"
+                              class-dfc-b:hasDescription="col s12 text-14"
+                            ></solid-display>
+                          </div>
+                        </div>
+                        <div class="col s8">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 id="${this.uniq}-about-us">About us</h4>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="card-panel card-round">
+                      <div class="row">
+                        <div class="col s3">
+                        </div>
+                        <div class="col s9">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 id="${this.uniq}-supporting-evidence">Supporting evidence</h4>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="row">
+                      <div class="col s3">
+                      </div>
+                      <div class="col s8">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 id="${this.uniq}-contact-producer">Contact Producer</h4>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="row">
+                      <div class="col s3">
+                      </div>
+                      <div class="col s8">
                       </div>
                     </div>
                   </div>
