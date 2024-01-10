@@ -759,9 +759,9 @@ import("./utils.js").then((utils) => {
                 <h4 id="${this.uniq}-how-to-buy">How to buy</h4>
                 <div class="row">
                   <div class="col s12">
-                    <div class="card-panel card-round">
+                    <div class="card-panel card-round card-padding">
                       <div class="row">
-                        <div class="col s4">
+                        <div class="col s3">
                           <h5>Wholesale customers</h5>
                           <div class="row">
                             <solid-display
@@ -781,7 +781,7 @@ import("./utils.js").then((utils) => {
                           <div class="row text-light no-margin-bottom"><div class="col s12">Our eCommerce</div></div>
                           <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
                         </div>
-                        <div class="col s8">
+                        <div class="col s8 offset-s1">
                           <h5>Feature products</h5>
                           <!--
                           bind-resources=""
@@ -816,7 +816,7 @@ import("./utils.js").then((utils) => {
                 <h4 id="${this.uniq}-about-us">About us</h4>
                 <div class="row">
                   <div class="col s12">
-                    <div class="card-panel card-round">
+                    <div class="card-panel card-round card-padding">
                       <div class="row">
                         <div class="col s3">
                           <h5>Location</h5>
@@ -861,7 +861,7 @@ import("./utils.js").then((utils) => {
                         <div class="col s9">
                           <div class="row">
                             <div class="col hide-on-small-only m12 margin-top-10">
-                              <img class="responsive-img" src="/kialla_silos.png" />
+                              <img class="responsive-img" style="width: 100%" src="/kialla_silos.png" />
                             </div>
                           </div>
                           <div class="row">

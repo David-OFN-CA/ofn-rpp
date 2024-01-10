@@ -206,6 +206,9 @@ solid-ofn-rpp {
       border: 1px solid #dedede;
       box-shadow: none;
       padding: 0px 12px 24px 12px;
+      &.card-padding {
+        padding: 25px 50px;
+      }
     }
 
     .title-header {
