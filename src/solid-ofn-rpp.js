@@ -31,11 +31,33 @@ import "materialize-css/dist/js/materialize.min.js"; // Not required
 // import 'materialize-css/js/range.js';
 import "~icons/mdi/home-silo";
 import "~icons/mdi/food-apple";
+import "~icons/mdi/open-in-new";
+import "~icons/mdi/facebook";
+import "~icons/mdi/instagram";
+import "~icons/mdi/linkedin";
+import "~icons/mdi/whatsapp";
 import("./utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
     // Custom widget for producer description, original contains some unsafe html
     customElements.define(
       "custom-safe-html-value",
+      class extends core.SolidTemplateElement {
+        constructor() {
+          super();
+        }
+        static get propsDefinition() {
+          return {
+            value: "value",
+          };
+        }
+        template({ value }) {
+          return utils.sanitize(value, false);
+        }
+      }
+    );
+    // Custom widget for producer description, original contains some unsafe html, truncated
+    customElements.define(
+      "custom-safe-html-value-short",
       class extends core.SolidTemplateElement {
         constructor() {
           super();
@@ -145,6 +167,31 @@ import("./utils.js").then((utils) => {
         }
       }
     );
+
+    // Custom widget for social media links
+    core.Sib.register({
+      name: "custom-social-links",
+      use: [core.StoreMixin],
+      empty() {
+        this.element.innerHTML = '';
+      },
+      async populate() {
+        this.element.innerHTML += `
+          <div class="row">`;
+        for(let social of this.resource["ldp:contains"]) {
+          let app = (await social["dfc-b:name"]).replace("_phone", "");
+          let link = await social["dfc-b:URL"];
+          if (!/^https?:\/\//i.test(link)) {
+            link = "https://" + link;
+          }
+          this.element.innerHTML += `
+            <div class="col"><a class="social-link" href="${link}" target="_blank"><icon-mdi-${app} class="icon"></icon-mdi-${app}></a></div>
+          `;
+        }
+        this.element.innerHTML += `
+          </div>`;
+      }
+    });
 
     customElements.define(
       "solid-ofn-rpp",
@@ -288,7 +335,7 @@ import("./utils.js").then((utils) => {
           }, 0);
 
           let render = `
-            <div id="${this.route}-producers-list" data-view="${this.route}-producers-list" class="row">
+            <div id="${this.route}-producers-list" data-view="${this.route}-producers-list" class="row producers-list">
               <div class="col s12 m4">
                 <div class="row">
                   <div class="col s12 m9 offset-m2">
@@ -435,7 +482,7 @@ import("./utils.js").then((utils) => {
 
                   widget-set-description="div"
                   class-set-description="row"
-                  widget-ofn:long_description="custom-safe-html-value"
+                  widget-ofn:long_description="custom-safe-html-value-short"
                   class-ofn:long_description="col s12"
 
                   widget-set-tags="div"
@@ -691,12 +738,17 @@ import("./utils.js").then((utils) => {
                           <hr />
                           <div class="row">
                             <div class="col s6">
-                              <div class="bold-16-21">Assurance Partners</div>
-                              <a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a>
+                              <div class="row"><div class="col s12"><span class="bold-16-21">Assurance Partners</span></div></div>
+                              <div class="row"><div class="col s12"><a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a></div></div>
+                              <div class="row"><div class="col s12"><img class="responsive-img" src="/sustainable_table.png" /></div></div>
+                              <div class="row"><div class="col s12"><span class="text-14 text-light bold underline">Sustainable Table</span></div></div>
                             </div>
                             <div class="col s6">
-                              <div class="bold-16-21">Supporting Evidence</div>
-                              <a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a>
+                              <div class="row"><div class="col s12"><span class="bold-16-21">Supporting Evidence</span></div></div>
+                              <div class="row"><div class="col s12"><a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a></div></div>
+                              <div class="row no-margin-bottom"><div class="col s12"><div class="chip small text-12 peach">1</div><span class="text-14 text-light"> for <span class="underline">ecological outcomes</span></span></div></div>
+                              <div class="row no-margin-bottom"><div class="col s12"><div class="chip small text-12 peach">2</div><span class="text-14 text-light"> for <span class="underline">practices</span></span></div></div>
+                              <div class="row no-margin-bottom"><div class="col s12"><div class="chip small text-12 peach">1</div><span class="text-14 text-light"> for <span class="underline">participation</span></span></div></div>
                             </div>
                           </div>
                         </div>
@@ -715,11 +767,47 @@ import("./utils.js").then((utils) => {
                             <solid-display
                               bind-resources=""
                               fields="dfc-b:hasDescription"
-                              class-dfc-b:hasDescription="col s12 text-14"
+                              class-dfc-b:hasDescription="col s12 text-14 text-light"
                             ></solid-display>
                           </div>
+                          <div class="row"><div class="col s12"><a href="#${this.uniq}-contact-producer" class="waves-effect waves-light btn-small">View contact details</a></div></div>
+                          <div class="row text-light no-margin-bottom"><div class="col s12">Open Food Network</div></div>
+                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
+                          <div class="row text-light no-margin-bottom"><div class="col s12">Fresho</div></div>
+                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
+                          <div class="row text-light no-margin-bottom"><div class="col s12">Some other portal</div></div>
+                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
+                          <h6 class="margin-top-50">Household customers</h6>
+                          <div class="row text-light no-margin-bottom"><div class="col s12">Our eCommerce</div></div>
+                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
                         </div>
                         <div class="col s8">
+                          <h5>Feature products</h5>
+                          <!--
+                          bind-resources=""
+                          nested-field="dfc-b:supplies"
+                          -->
+                          <solid-display
+                            data-src="${this.productsSrc}"
+                            fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
+          
+                            widget-set-card-row="div"
+                            class-set-card-row="row"
+                            widget-set-card-col="div"
+                            class-set-card-col="col s6 m4"
+                            widget-set-card-panel="div"
+                            class-set-card-panel="card-panel"
+                            widget-set-card-wrapper="div"
+          
+                            class-ofn:image="img-200"
+                            widget-ofn:image="solid-display-img"
+                            default-ofn:image="https://placehold.co/200"
+          
+                            widget-set-name="div"
+                            class-set-name="row no-margin-bottom"
+                            widget-dfc-b:name="solid-display-value"
+                            class-dfc-b:name="col s12 truncate"
+                          ></solid-display>
                         </div>
                       </div>
                     </div>
@@ -731,8 +819,67 @@ import("./utils.js").then((utils) => {
                     <div class="card-panel card-round">
                       <div class="row">
                         <div class="col s3">
+                          <h5>Location</h5>
+                          <div class="row">
+                            <solid-display
+                              bind-resources=""
+                              nested-field="dfc-b:hasAddress"
+                              fields="street(dfc-b:hasStreet), city(dfc-b:hasCity, dfc-b:hasPostalCode), country(dfc-b:hasCountry)"
+                              class-street="col s12 text-16 text-light"
+                              class-city="col s12 text-16 text-light"
+                              class-country="col s12 text-16 text-light"
+                            ></solid-display>
+                          </div>
+                          <div class="row">
+                            <solid-display
+                              bind-resources=""
+                              required-ofn:First_Nations_country=""
+                              fields="title, fnc(ofn:First_Nations_country)"
+                              value-title="First Nation Country"
+                              class-title="col s12 text-14 bold"
+                              class-fnc="col s12 text-14"
+                            ></solid-display>
+                          </div>
+                          <div class="row text-link valign-wrapper"><div class="col s12">View map&nbsp;<icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
+                          <h5 class="margin-top-50">Useful links</h5>
+                          <div class="row no-margin-bottom"><div class="col s12">
+                          <solid-display
+                            bind-resources=""
+                            fields="ofn:Household_URL"
+                            link-text-ofn:Household_URL="Visit our website"
+                            class-ofn:Household_URL="text-link text-red"
+                            widget-ofn:Household_URL="solid-display-link-blank"
+                          ></solid-display></div></div>
+                          <div class="row no-margin-bottom">
+                            <solid-display
+                              bind-resources=""
+                              fields="dfc-b:hasSocialMedia"
+                              widget-dfc-b:hasSocialMedia="custom-social-links"
+                            ></solid-display>
+                          </div>
                         </div>
                         <div class="col s9">
+                          <div class="row">
+                            <div class="col hide-on-small-only m12 margin-top-10">
+                              <img class="responsive-img" src="/kialla_silos.png" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col s12">
+                              <solid-display
+                                bind-resources=""
+                                fields="ofn:long_description"
+                                class-ofn:long_description="text-16"
+                                widget-ofn:long_description="custom-safe-html-value"
+                              ></solid-display>
+                            </div>
+                          </div>
+                          <h5>Practices</h5>
+                          <solid-display
+                            bind-resources=""
+                            fields="ofn:Practices"
+                            widget-ofn:Practices="custom-multiple-badge"
+                          ></solid-display>
                         </div>
                       </div>
                     </div>

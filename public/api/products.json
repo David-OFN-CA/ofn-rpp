@@ -1,6 +1,6 @@
 {
   "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/products",
+  "@id": "http://localhost:5173/api/products.json",
   "@type": "ldp:Container",
   "ldp:contains": [
     {

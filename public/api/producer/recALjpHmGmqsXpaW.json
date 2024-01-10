@@ -24,8 +24,8 @@
   "ofn:contact_name": "Jono and Nat",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/public/images/enterprises/logos/1039/original/Brookfields_logo.png",
   "dfc-b:affiliates": [
-    "https://openfoodnetwork.org.auhttp://localhost:5173/api/dfc/enterprise_groups/14",
-    "https://openfoodnetwork.org.auhttp://localhost:5173/api/dfc/enterprise_groups/11"
+    "https://openfoodnetwork.org.au/api/dfc/enterprise_groups/14",
+    "https://openfoodnetwork.org.au/api/dfc/enterprise_groups/11"
   ],
   "ofn:Assurance_partnerships": {
     "@id": "http://localhost:5173/api/assurances.json",

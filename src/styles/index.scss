@@ -49,6 +49,7 @@
 }
 
 solid-ofn-rpp {
+  user-select: none;
   .hidden,
   [hidden] {
     display: none;
@@ -76,6 +77,11 @@ solid-ofn-rpp {
 
   .card-panel {
     box-shadow: 0px 4px 4px 0px #0000000d;
+  }
+
+  .products-list .card-panel[name="set-card-panel"],
+  .producers-list .card-panel[name="set-card-panel"] {
+    cursor: pointer;
   }
 
   .chip {
@@ -242,6 +248,10 @@ solid-ofn-rpp {
       margin-top: 10px;
     }
 
+    .margin-top-50 {
+      margin-top: 50px;
+    }
+
     .text-address {
       line-height: 27px;
       color: #414141;
@@ -251,7 +261,7 @@ solid-ofn-rpp {
       font-size: 14px;
       font-weight: 700;
       line-height: 24px;
-      color: #4B250F;
+      color: #4b250f;
       text-decoration: underline;
       cursor: pointer;
     }
@@ -276,8 +286,44 @@ solid-ofn-rpp {
       font-size: 14px;
     }
 
+    .text-12 {
+      font-size: 12px;
+    }
+
+    .peach {
+      background-color: #fae5af;
+    }
+
+    .text-light {
+      color: #414141;
+    }
+
+    .text-link, .text-link a {
+      color: #17594a;
+      @extend .bold;
+      @extend .text-14;
+      @extend .underline;
+      cursor: pointer;
+      icon-mdi-open-in-new {
+        font-size: 18px;
+      }
+    }
+
+    .text-link.text-red, .text-link.text-red a {
+      color: #4B250F;
+    }
+
+    .btn-small {
+      background-color: #9a4444;
+      text-transform: none;
+    }
+
+    .chip.small {
+      padding: 2px 10px;
+    }
+
     hr {
-      border: 1px solid #ECECEC;
+      border: 1px solid #ececec;
       margin: 30px 10px 40px 10px;
     }
 
@@ -292,6 +338,46 @@ solid-ofn-rpp {
       font-size: 21px;
       @extend .bold;
       line-height: 28px;
+    }
+
+    h6 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 27px;
+      @extend .text-light;
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
+    .img-200 img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .card-panel {
+      padding: 16px;
+      box-shadow: none;
+      [name="set-name"] {
+        @extend .text-14;
+        @extend .bold;
+        line-height: 24px;
+        color: #242424;
+      }
+    }
+
+    .social-link {
+      color: #4B250F;
+      .icon {
+        font-size: 28px;
+      }
+    }
+
+    custom-multiple-badge[name="ofn:Practices"] .chip {
+      border: 1px solid black;
+      border-radius: 26px;
+
     }
   }
 
@@ -319,10 +405,16 @@ solid-ofn-rpp {
         }
       }
     }
-    #regenerative-produce-portal-products-list {
+    .products-list {
       .img-168 img {
         width: 120px;
         height: 120px;
+      }
+    }
+    .product-details {
+      .img-200 img {
+        width: 140px;
+        height: 140px;
       }
     }
   }

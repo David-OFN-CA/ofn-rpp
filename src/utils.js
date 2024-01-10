@@ -29,10 +29,14 @@ export const CLIENT_CONTEXT = {
   "ofn:First_Nations_country": "ofn:first_nations_country",
 };
 
-export const sanitize = (input) => {
+export const sanitize = (input, stripTags=true) => {
   const tmp = document.createElement("div");
   tmp.innerHTML = input;
-  return tmp.textContent || tmp.innerText || "";
+  if(stripTags) {
+    return tmp.textContent || tmp.innerText || "";
+  } else {
+    return tmp.innerHTML;
+  }
 };
 
 export const truncate = (str, length) => {
