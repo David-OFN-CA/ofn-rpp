@@ -60,17 +60,17 @@
   "ofn:Household_buy_label": "Open Food Network",
   "ofn:Household_URL": "https://openfoodnetwork.org.au/murrnong/shop",
   "ofn:Assurance_partnerships": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#recW1epOZsVUhJvRI-ap",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#recW1epOZsVUhJvRI-c",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#recW1epOZsVUhJvRI-se",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

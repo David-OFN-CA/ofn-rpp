@@ -28,17 +28,17 @@
     "https://openfoodnetwork.org.au/api/dfc/enterprise_groups/11"
   ],
   "ofn:Assurance_partnerships": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#recALjpHmGmqsXpaW-ap",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#recALjpHmGmqsXpaW-c",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#recALjpHmGmqsXpaW-se",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

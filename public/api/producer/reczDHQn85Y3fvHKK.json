@@ -30,17 +30,17 @@
   "ofn:contact_name": "Georgina",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/s488usu720x9ngmbnrejyorqdupo",
   "ofn:Assurance_partnerships": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#reczDHQn85Y3fvHKK-ap",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#reczDHQn85Y3fvHKK-c",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#reczDHQn85Y3fvHKK-se",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

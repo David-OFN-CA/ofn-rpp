@@ -27,17 +27,17 @@
   "ofn:contact_name": "Chris Day",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/public/images/enterprises/logos/2572/original/CCF-BEST_LOGO_01.png",
   "ofn:Assurance_partnerships": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#rectRZksVDjV0Pdlk-ap",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Certifications": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#rectRZksVDjV0Pdlk-c",
     "@type": "ldp:Container",
     "ldp:contains": []
   },
   "ofn:Supporting_evidence": {
-    "@id": "http://localhost:5173/api/assurances.json",
+    "@id": "http://localhost:5173/api/assurances.json#rectRZksVDjV0Pdlk-se",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

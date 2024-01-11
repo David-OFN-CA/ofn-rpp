@@ -782,12 +782,9 @@ import("./utils.js").then((utils) => {
                         </div>
                         <div class="col s8 offset-s1">
                           <h5>Feature products</h5>
-                          <!--
-                          bind-resources=""
-                          nested-field="dfc-b:supplies"
-                          -->
                           <solid-display
-                            data-src="${this.productsSrc}"
+                            bind-resources=""
+                            nested-field="dfc-b:supplies"
                             fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
           
                             widget-set-card-row="div"
