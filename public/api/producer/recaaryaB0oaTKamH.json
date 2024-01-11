@@ -14,7 +14,7 @@
   "dfc-b:name": "Moyarra Pastoral",
   "ofn:contact_name": "Burke",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recaaryaB0oaTKamH",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

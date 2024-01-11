@@ -16,7 +16,7 @@
   "dfc-b:hasDescription": "Jono & Nats with their daughter Ruby run an ethical, sustainable Free Range Rare Breeds Farm with Berkshire Pigs, British White Cattle & Finn Sheep",
   "dfc-b:VATnumber": "",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recALjpHmGmqsXpaW",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

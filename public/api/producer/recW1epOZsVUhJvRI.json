@@ -23,7 +23,7 @@
   "dfc-b:hasDescription": "Murrnong is a permaculture farm located at Violet Town, Victoria. All produce is grown from natural inputs – just soil, compost, water and sunshine.",
   "dfc-b:VATnumber": "",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recW1epOZsVUhJvRI",
     "@type": "ldp:Container",
     "ldp:contains": [
       {

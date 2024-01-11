@@ -21,7 +21,7 @@
   "ofn:contact_name": "Joshua Staines",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/hk846ojaeb3nh17x3hbijaa0zkep",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recSrhBnWnzkFRS3y",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

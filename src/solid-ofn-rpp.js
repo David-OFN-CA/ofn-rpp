@@ -499,7 +499,6 @@ import("./utils.js").then((utils) => {
 
         viewProductsList(props = {}) {
           setTimeout(() => {
-            core.store.clearCache(this.productsSrc);
             const products = core.store.getData(
               this.productsSrc,
               utils.CLIENT_CONTEXT

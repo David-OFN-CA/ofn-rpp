@@ -19,7 +19,7 @@
   "dfc-b:hasDescription": "We are a small-scale regenerative farm enterprise located in Yankalilla on the Fleurieu Peninsula who strive to produce nutrient dense food, build rich living organic soils and regenerate the landscape though our  farming practices.",
   "dfc-b:VATnumber": "",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#rectRZksVDjV0Pdlk",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

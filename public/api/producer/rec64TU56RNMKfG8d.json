@@ -20,7 +20,7 @@
   "dfc-b:hasDescription": "Common Ground Project is a regenerative farm and social enterprise on a mission to connect and empower our community through food & farming.",
   "dfc-b:VATnumber": "78632729634",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#rec64TU56RNMKfG8d",
     "@type": "ldp:Container",
     "ldp:contains": [
       {

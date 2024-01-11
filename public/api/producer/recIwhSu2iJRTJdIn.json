@@ -25,7 +25,7 @@
   "ofn:contact_name": "Emma Milosevic",
   "ofn:logo_url": "https://s3.amazonaws.com/ofn_production/163elpslh9cro6fyhnixi613h3g0",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recIwhSu2iJRTJdIn",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

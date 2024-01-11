@@ -24,7 +24,7 @@
   "ofn:long_description": "<p><span style=\"float: none;\">Our free ranging hens enjoy fresh pasture, bugs and worms. Junee Pastured Eggs are delivered within days of being laid. They are guaranteed to be fresh, tasty and nutritious.</span></p>",
   "ofn:contact_name": "George Main",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recrIQDQMQpTODtjB",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

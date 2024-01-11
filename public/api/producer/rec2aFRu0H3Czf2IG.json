@@ -19,7 +19,7 @@
   "dfc-b:hasDescription": "Passionately raising heritage breed pigs, pastured eggs & seasonal produce",
   "dfc-b:VATnumber": "61 724 131 141",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#rec2aFRu0H3Czf2IG",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

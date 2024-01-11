@@ -23,7 +23,7 @@
   "dfc-b:hasDescription": "We farm regeneratively on Barapa Barapa Country, Barham NSW",
   "dfc-b:VATnumber": "",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recXJrzz9mquDaCv7",
     "@type": "ldp:Container",
     "ldp:contains": [
       {

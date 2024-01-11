@@ -24,7 +24,7 @@
   "dfc-b:hasDescription": "We make yummy preserves and pre-packaged, ready to eat foods",
   "dfc-b:VATnumber": "31051707496",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recVIrkdXWbRzs8IQ",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

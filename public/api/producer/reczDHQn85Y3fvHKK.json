@@ -22,7 +22,7 @@
   "dfc-b:hasDescription": "Organic, 100% grass-fed and finished beef",
   "dfc-b:VATnumber": "83377127202",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#reczDHQn85Y3fvHKK",
     "@type": "ldp:Container",
     "ldp:contains": []
   },

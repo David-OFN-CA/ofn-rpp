@@ -17,7 +17,7 @@
   "dfc-b:hasDescription": "",
   "dfc-b:VATnumber": "59-350-238-760",
   "dfc-b:supplies": {
-    "@id": "http://localhost:5173/api/products.json",
+    "@id": "http://localhost:5173/api/products.json#recjBYlXskXtilPBC",
     "@type": "ldp:Container",
     "ldp:contains": [
       {
