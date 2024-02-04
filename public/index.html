@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Solid Open Food Network - Regenerative Produce Portal</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./src/styles/index.scss" />
+    <script
+      type="module"
+      src="https://cdn.skypack.dev/@startinblox/core@0.18"
+    ></script>
+    <!-- Prepare switch to latest core -->
+    <!-- <script
+      type="module"
+      src="https://cdn.skypack.dev/@startinblox/core@latest"
+    ></script> -->
+    <script
+      type="module"
+      src="https://cdn.skypack.dev/@startinblox/router@0.11"
+    ></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Examples</a>
+        <ul class="right">
+          <li>
+            <solid-link next="regenerative-produce-portal-producers-list">
+              <a><icon-mdi-home-silo></icon-mdi-home-silo> Producers List</a>
+            </solid-link>
+          </li>
+          <li>
+            <solid-link next="regenerative-produce-portal-products-list">
+              <a><icon-mdi-food-apple></icon-mdi-food-apple> Products List</a>
+            </solid-link>
+          </li>
+          <li>
+            <solid-link
+              next="regenerative-produce-portal-producer-details"
+              data-src="/api/producer/recXJrzz9mquDaCv7.json"
+            >
+              <a><icon-mdi-home-silo></icon-mdi-home-silo> Producer Details</a>
+            </solid-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--
+      Production URLS:
+      producers-src="https://n8n.openfoodnetwork.org.uk/webhook/regen/producers"
+      products-src="https://n8n.openfoodnetwork.org.uk/webhook/regen/products"
+    -->
+    <solid-ofn-rpp
+      producers-src="/api/producers.json"
+      products-src="/api/products.json"
+      uniq="regenerative-produce-portal"
+    ></solid-ofn-rpp>
+  </body>
+</html>
