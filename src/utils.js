@@ -6,7 +6,9 @@ export function path() {
 }
 
 export function coreVersion() {
-  let coreUrl = "https://cdn.skypack.dev/@startinblox/core";
+  let coreUrl = "https://cdn.skypack.dev/@startinblox/core@0.18";
+  // Prepare switch to latest version
+  // let coreUrl = "https://cdn.skypack.dev/@startinblox/core@latest";
   return coreUrl;
 }
 
