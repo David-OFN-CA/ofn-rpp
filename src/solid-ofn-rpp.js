@@ -11,7 +11,16 @@ import("./utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
 
     const expand = async function(resource, predicate) {
-      return await resource[core.store.getExpandedPredicate(predicate, utils.CLIENT_CONTEXT)];
+      let r = '';
+      if(await resource["@type"] != "ldp:Container") {
+        r = await resource[await core.store.getExpandedPredicate(predicate, utils.CLIENT_CONTEXT)];
+      } else {
+        r = await resource.getResourceData()[predicate];
+      }
+      // if(!r) {
+      //   console.warn(`No ${predicate} within ${resource["@id"]}`);
+      // }
+      return r;
     }
     // Custom widget for producer description, original contains some unsafe html
     customElements.define(
@@ -154,6 +163,7 @@ import("./utils.js").then((utils) => {
         this.element.innerHTML += `
           <div class="row">`;
         for(let social of await expand(this.resource, "ldp:contains")) {
+          social = await core.store.getData(social["@id"], utils.CLIENT_CONTEXT);
           let app = (await expand(social, "dfc-b:name")).replace("_phone", "");
           let link = await expand(social, "dfc-b:URL");
           if (!/^https?:\/\//i.test(link)) {
@@ -223,30 +233,31 @@ import("./utils.js").then((utils) => {
               addresses = [];
             producers.then(async (p) => {
               for (let producer of await expand(p, "ldp:contains")) {
-                let producerName = await expand(producer['@id'], "dfc-b:name");
+                producer = await core.store.getData(producer["@id"], utils.CLIENT_CONTEXT);
+                let producerName = await expand(producer, "dfc-b:name");
                 if (producerName) {
                   producerNames.push(producerName);
                 }
-                let producerCategories = await expand(producer['@id'], "ofn:Produce_category");
+                let producerCategories = await expand(producer, "ofn:Produce_category");
                 if (producerCategories) {
                   productCategories =
                     productCategories.concat(producerCategories);
                 }
-                let producerAddress = await expand(producer['@id'], "dfc-b:hasAddress");
+                let producerAddress = await expand(producer, "dfc-b:hasAddress");
                 if (producerAddress) {
-                  let producerStreet = await expand(producer['@id'], "dfc-b:hasStreet");
+                  let producerStreet = await expand(producer, "dfc-b:hasStreet");
                   if (producerStreet) {
                     addresses.push(producerStreet);
                   }
-                  let producerPostalCode = await expand(producer['@id'], "dfc-b:hasPostalCode");
+                  let producerPostalCode = await expand(producer, "dfc-b:hasPostalCode");
                   if (producerStreet) {
                     addresses.push(producerPostalCode);
                   }
-                  let producerCity = await expand(producer['@id'], "dfc-b:hasCity");
+                  let producerCity = await expand(producer, "dfc-b:hasCity");
                   if (producerStreet) {
                     addresses.push(producerCity);
                   }
-                  let producerCountry = await expand(producer['@id'], "dfc-b:hasCountry");
+                  let producerCountry = await expand(producer, "dfc-b:hasCountry");
                   if (producerStreet) {
                     addresses.push(producerCountry);
                   }
@@ -482,11 +493,12 @@ import("./utils.js").then((utils) => {
                 productCategories = [];
             products.then(async (p) => {
               for (let product of await expand(p, "ldp:contains")) {
-                let productName = await expand(product['@id'], "dfc-b:name");
+                product = await core.store.getData(product["@id"], utils.CLIENT_CONTEXT);
+                let productName = await expand(product, "dfc-b:name");
                 if (productName) {
                   productNames.push(productName);
                 }
-                let productCategory = await expand(product['@id'], "ofn:Type");
+                let productCategory = await expand(product, "ofn:Type");
                 if (productCategory) {
                   productCategories.push(productCategory);
                 }
