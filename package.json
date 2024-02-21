@@ -54,16 +54,16 @@
     "last 2 Chrome versions"
   ],
   "dependencies": {
-    "@fontsource/open-sans": "^5.0.20",
+    "@fontsource/open-sans": "^5.0.24",
     "@iconify-json/mdi": "^1.1.64",
-    "autoprefixer": "^10.4.16",
-    "cssnano": "^6.0.2",
-    "materialize-css": "^1.0.0-rc.2",
-    "postcss": "^8.4.32",
-    "postcss-preset-env": "^9.3.0",
+    "autoprefixer": "^10.4.17",
+    "cssnano": "^6.0.3",
+    "materialize-css": "^1.0.0",
+    "postcss": "^8.4.35",
+    "postcss-preset-env": "^9.4.0",
     "postcss-scss": "^4.0.9",
-    "sass": "^1.69.7",
-    "unplugin-icons": "^0.18.1",
-    "vite": "^4.5.1"
+    "sass": "^1.71.1",
+    "unplugin-icons": "^0.18.5",
+    "vite": "^4.5.2"
   }
 }

@@ -1,7 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/social_medias/recXJrzz9mquDaCv7-linkedin.json",
-  "@type": "dfc-b:SocialMedia",
-  "dfc-b:name": "linkedin",
-  "dfc-b:URL": "www.linkedin.com/laurenmathers"
-}

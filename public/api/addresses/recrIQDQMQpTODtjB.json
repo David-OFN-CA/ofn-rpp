@@ -1,9 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/addresses/recrIQDQMQpTODtjB.json",
-  "@type": "dfc-b:Address",
-  "dfc-b:hasStreet": "2940 Dirnaseer Road",
-  "dfc-b:hasPostalCode": "2666",
-  "dfc-b:hasCity": "Dirnaseer",
-  "dfc-b:hasCountry": "Australia"
-}

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./src/styles/index.scss" />
     <script
       type="module"
-      src="https://cdn.skypack.dev/@startinblox/core@0.18"
+      src="https://cdn.skypack.dev/@startinblox/core"
     ></script>
     <script
       type="module"
@@ -35,7 +35,7 @@
           <li>
             <solid-link
               next="regenerative-produce-portal-producer-details"
-              data-src="http://localhost:5173/api/producer/recXJrzz9mquDaCv7.json"
+              data-src="https://api.regenerative.org.au/webhook/regen/producer?id=recjBYlXskXtilPBC"
             >
               <a><icon-mdi-home-silo></icon-mdi-home-silo> Producer Details</a>
             </solid-link>
@@ -44,8 +44,10 @@
       </div>
     </nav>
     <solid-ofn-rpp
-      producers-src="http://localhost:5173/api/producers.json"
-      products-src="http://localhost:5173/api/products.json"
+      producers-src="https://api.regenerative.org.au/webhook/regen/producers"
+      products-src="https://api.regenerative.org.au/webhook/regen/products"
+      range-product-categories="https://api.regenerative.org.au/webhook/regen/produce_categories"
+      range-producer-assurances="https://api.regenerative.org.au/webhook/regen/assurance_partners"
       uniq="regenerative-produce-portal"
     ></solid-ofn-rpp>
   </body>

@@ -1,9 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/addresses/recALjpHmGmqsXpaW.json",
-  "@type": "dfc-b:Address",
-  "dfc-b:hasStreet": "Blampied - Kooroocheang Road",
-  "dfc-b:hasPostalCode": "3364",
-  "dfc-b:hasCity": "Blampied",
-  "dfc-b:hasCountry": "Australia"
-}

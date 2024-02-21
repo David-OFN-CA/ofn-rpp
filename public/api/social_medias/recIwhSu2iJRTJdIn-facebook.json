@@ -1,7 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/social_medias/recIwhSu2iJRTJdIn-facebook.json",
-  "@type": "dfc-b:SocialMedia",
-  "dfc-b:name": "facebook",
-  "dfc-b:URL": "https://www.facebook.com/people/The-Still-Room/100063646293443/?sk=about"
-}

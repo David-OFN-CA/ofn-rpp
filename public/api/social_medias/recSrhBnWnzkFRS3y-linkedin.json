@@ -1,7 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/social_medias/recSrhBnWnzkFRS3y-linkedin.json",
-  "@type": "dfc-b:SocialMedia",
-  "dfc-b:name": "linkedin",
-  "dfc-b:URL": "https://www.linkedin.com/company/96645521/admin/feed/posts/"
-}

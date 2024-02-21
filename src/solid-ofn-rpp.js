@@ -1,34 +1,5 @@
 import style from "./styles/index.scss?inline";
-import "materialize-css/dist/js/materialize.min.js"; // Not required
-// import 'materialize-css/js/cash.js';
-// import 'materialize-css/js/component.js';
-// import 'materialize-css/js/global.js';
-// import 'materialize-css/js/anime.min.js';
-// import 'materialize-css/js/collapsible.js';
-// import 'materialize-css/js/dropdown.js';
-// import 'materialize-css/js/modal.js';
-// import 'materialize-css/js/materialbox.js';
-// import 'materialize-css/js/parallax.js';
-// import 'materialize-css/js/tabs.js';
-// import 'materialize-css/js/tooltip.js';
-// import 'materialize-css/js/waves.js';
-// import 'materialize-css/js/toasts.js';
-// import 'materialize-css/js/sidenav.js';
-// import 'materialize-css/js/scrollspy.js';
-// import 'materialize-css/js/autocomplete.js';
-// import 'materialize-css/js/forms.js';
-// import 'materialize-css/js/slider.js';
-// import 'materialize-css/js/cards.js';
-// import 'materialize-css/js/chips.js';
-// import 'materialize-css/js/pushpin.js';
-// import 'materialize-css/js/buttons.js';
-// import 'materialize-css/js/datepicker.js';
-// import 'materialize-css/js/timepicker.js';
-// import 'materialize-css/js/characterCounter.js';
-// import 'materialize-css/js/carousel.js';
-// import 'materialize-css/js/tapTarget.js';
-// import 'materialize-css/js/select.js';
-// import 'materialize-css/js/range.js';
+import "materialize-css/dist/js/materialize.min.js";
 import "~icons/mdi/home-silo";
 import "~icons/mdi/food-apple";
 import "~icons/mdi/open-in-new";
@@ -178,9 +149,9 @@ import("./utils.js").then((utils) => {
       async populate() {
         this.element.innerHTML += `
           <div class="row">`;
-        for(let social of this.resource["ldp:contains"]) {
-          let app = (await social["dfc-b:name"]).replace("_phone", "");
-          let link = await social["dfc-b:URL"];
+        for(let social of await this.resource[core.store.getExpandedPredicate("ldp:contains", utils.CLIENT_CONTEXT)]) {
+          let app = (await social[core.store.getExpandedPredicate("dfc-b:name", utils.CLIENT_CONTEXT)]).replace("_phone", "");
+          let link = await social[core.store.getExpandedPredicate("dfc-b:URL", utils.CLIENT_CONTEXT)];
           if (!/^https?:\/\//i.test(link)) {
             link = "https://" + link;
           }
@@ -205,6 +176,8 @@ import("./utils.js").then((utils) => {
           return {
             producersSrc: "producers-src",
             productsSrc: "products-src",
+            rangeProductCategories: "range-product-categories",
+            rangeProducerAssurances: "range-producer-assurances",
             uniq: "uniq",
           };
         }
@@ -245,33 +218,32 @@ import("./utils.js").then((utils) => {
               productCategories = [],
               addresses = [];
             producers.then(async (p) => {
-              for (let producer of p["ldp:contains"]) {
-                let producerName = await producer["dfc-b:name"];
+              for (let producer of await p[core.store.getExpandedPredicate("ldp:contains", utils.CLIENT_CONTEXT)]) {
+                let producerData = await core.store.getData(producer['@id'], utils.CLIENT_CONTEXT);
+                let producerName = await producerData[core.store.getExpandedPredicate("dfc-b:name", utils.CLIENT_CONTEXT)];
                 if (producerName) {
                   producerNames.push(producerName);
                 }
-                let producerCategories = await producer["ofn:Produce_category"];
+                let producerCategories = await producerData["ofn:Produce_category"];
                 if (producerCategories) {
                   productCategories =
                     productCategories.concat(producerCategories);
                 }
-                let producerAddress = await producer["dfc-b:hasAddress"];
+                let producerAddress = await producerData[core.store.getExpandedPredicate("dfc-b:hasAddress", utils.CLIENT_CONTEXT)];
                 if (producerAddress) {
-                  let producerStreet = await producerAddress["dfc-b:hasStreet"];
+                  let producerStreet = await producerAddress[core.store.getExpandedPredicate("dfc-b:hasStreet", utils.CLIENT_CONTEXT)];
                   if (producerStreet) {
                     addresses.push(producerStreet);
                   }
-                  let producerPostalCode = await producerAddress[
-                    "dfc-b:hasPostalCode"
-                  ];
+                  let producerPostalCode = await producerAddress[core.store.getExpandedPredicate("dfc-b:hasPostalCode", utils.CLIENT_CONTEXT)];
                   if (producerStreet) {
                     addresses.push(producerPostalCode);
                   }
-                  let producerCity = await producerAddress["dfc-b:hasCity"];
+                  let producerCity = await producerAddress[core.store.getExpandedPredicate("dfc-b:hasCity", utils.CLIENT_CONTEXT)];
                   if (producerStreet) {
                     addresses.push(producerCity);
                   }
-                  let producerCountry = await producerAddress["dfc-b:hasCountry"];
+                  let producerCountry = await producerAddress[core.store.getExpandedPredicate("dfc-b:hasCountry", utils.CLIENT_CONTEXT)];
                   if (producerStreet) {
                     addresses.push(producerCountry);
                   }
@@ -498,7 +470,7 @@ import("./utils.js").then((utils) => {
         }
 
         viewProductsList(props = {}) {
-          setTimeout(() => {
+          setTimeout(async () => {
             const products = core.store.getData(
               this.productsSrc,
               utils.CLIENT_CONTEXT
@@ -506,12 +478,13 @@ import("./utils.js").then((utils) => {
             let productNames = [],
                 productCategories = [];
             products.then(async (p) => {
-              for (let product of p["ldp:contains"]) {
-                let productName = await product["dfc-b:name"];
+              for (let product of await p[core.store.getExpandedPredicate("ldp:contains", utils.CLIENT_CONTEXT)]) {
+                let productData = await core.store.getData(product['@id'], utils.CLIENT_CONTEXT);
+                let productName = await productData[core.store.getExpandedPredicate("dfc-b:name", utils.CLIENT_CONTEXT)];
                 if (productName) {
                   productNames.push(productName);
                 }
-                let productCategory = await product["ofn:Type"];
+                let productCategory = await productData[core.store.getExpandedPredicate("ofn:Type", utils.CLIENT_CONTEXT)];
                 if (productCategory) {
                   productCategories.push(productCategory);
                 }
@@ -912,6 +885,8 @@ import("./utils.js").then((utils) => {
         template(props) {
           this.producersSrc = props.producersSrc;
           this.productsSrc = props.productsSrc;
+          this.rangeProductCategories = props.rangeProductCategories;
+          this.rangeProducerAssurances = props.rangeProducerAssurances;
           this.uniq = props.uniq || utils.uniq();
           this.route = this.uniq;
           return `

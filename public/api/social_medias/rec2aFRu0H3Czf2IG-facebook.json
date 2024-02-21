@@ -1,7 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/social_medias/rec2aFRu0H3Czf2IG-facebook.json",
-  "@type": "dfc-b:SocialMedia",
-  "dfc-b:name": "facebook",
-  "dfc-b:URL": "https://www.facebook.com/grazedandgrown/"
-}

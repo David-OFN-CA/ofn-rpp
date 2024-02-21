@@ -1,28 +1,28 @@
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
-import Icons from 'unplugin-icons/vite'
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import Icons from "unplugin-icons/vite";
 
 export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        quietDeps: true
-      }
-    }
+        quietDeps: true,
+      },
+    },
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
-      name: 'RPP',
-      fileName: () => 'index.js',
+      entry: resolve(__dirname, "src/index.js"),
+      name: JSON.stringify(process.env.npm_package_name),
+      fileName: () => "index.js",
     },
   },
   plugins: [
     Icons({
-      compiler: 'web-components',
+      compiler: "web-components",
       webComponents: {
         autoDefine: true,
       },
-    })
+    }),
   ],
-})
+});

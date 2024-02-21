@@ -1,9 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/addresses/rec2aFRu0H3Czf2IG.json",
-  "@type": "dfc-b:Address",
-  "dfc-b:hasStreet": "592 Ponsford Road",
-  "dfc-b:hasPostalCode": "2429",
-  "dfc-b:hasCity": "Comboyne",
-  "dfc-b:hasCountry": "Australia"
-}

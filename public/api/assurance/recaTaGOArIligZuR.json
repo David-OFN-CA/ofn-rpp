@@ -1,9 +1,0 @@
-{
-  "ofn:Creation_date": "2023-12-19",
-  "ofn:Title": "Bio-Intensive Market Gardening - Increased Biodiversity",
-  "ofn:Classification": ["Ecological - Biodiversity", "Practices"],
-  "ofn:Description": "We increase diversity on our farm through growing a wide variety of organic seasonal fruits and vegetables, constantly rotating our beds. We have trees and perennials planted around the food-growing areas to form a windbreak and provide food and shelter for pollinators. This  incorporates biodiversity and supportive planting techniques to create a diverse and integrative system.",
-  "@type": "ofn:supporting evidence",
-  "@id": "http://localhost:5173/api/assurance/recaTaGOArIligZuR.json",
-  "@context": "http://localhost:5173/api/context.jsonld"
-}

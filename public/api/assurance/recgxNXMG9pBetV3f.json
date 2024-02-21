@@ -1,9 +1,0 @@
-{
-  "ofn:Creation_date": "2023-12-12",
-  "ofn:Title": "Increased animal diversity, intensive grazing and longer rest periods for paddocks",
-  "ofn:Classification": ["Practices"],
-  "ofn:Description": "We started our Bundarra Berkshires enterprise back in 2010 focusing on free range heritage breed pigs. In 2020, we were enlightened by other farmers who were farming regeneratively. They were surviving droughts, seeing improvements to their farms and livestock and the environment through careful soil management and stock rotations. We've since diversified to now include meat birds, layer chooks and retired dairy beef (and boy do we love their manure!)",
-  "@type": "ofn:supporting evidence",
-  "@id": "http://localhost:5173/api/assurance/recgxNXMG9pBetV3f.json",
-  "@context": "http://localhost:5173/api/context.jsonld"
-}

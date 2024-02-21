@@ -1,9 +1,0 @@
-{
-  "@context": "http://localhost:5173/api/context.jsonld",
-  "@id": "http://localhost:5173/api/addresses/recaaryaB0oaTKamH.json",
-  "@type": "dfc-b:Address",
-  "dfc-b:hasStreet": "275 Andersons Inlet Rd",
-  "dfc-b:hasPostalCode": "3951",
-  "dfc-b:hasCity": "Moyarra",
-  "dfc-b:hasCountry": "Australia"
-}
