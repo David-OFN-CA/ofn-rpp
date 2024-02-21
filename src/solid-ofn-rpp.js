@@ -128,7 +128,7 @@ import("./utils.js").then((utils) => {
           };
         }
         template({ value }) {
-          return `<div class="switch">
+          return core.html`<div class="switch">
             <label>
               First Nations Led
               <input type="checkbox" onchange="javascript:document.querySelector('[filtered-by=products-list-filters-${value}]').toggleAttribute('required-dfc-b:suppliedBy.ofn:First_Nations_country');document.querySelector('[filtered-by=products-list-filters-${value}]').component.populate();">
@@ -183,7 +183,7 @@ import("./utils.js").then((utils) => {
         }
 
         styles() {
-          let render = `
+          let render = core.html`
           <style>${style}</style>
           <script id="client-context" type="application/ld+json" data-default-context>
             ${JSON.stringify(utils.CLIENT_CONTEXT)}
@@ -193,7 +193,7 @@ import("./utils.js").then((utils) => {
         }
 
         routers() {
-          let render = `
+          let render = core.html`
           <solid-router default-route="${this.route}-producers-list">
             <solid-route name="${this.route}-producers-list"></solid-route>
             <solid-route name="${this.route}-products-list"></solid-route>
@@ -204,7 +204,7 @@ import("./utils.js").then((utils) => {
         }
 
         viewWidgets() {
-          let render = ``;
+          let render = core.html``;
           return render;
         }
 
@@ -306,7 +306,7 @@ import("./utils.js").then((utils) => {
             });
           }, 0);
 
-          let render = `
+          let render = core.html`
             <div id="${this.route}-producers-list" data-view="${this.route}-producers-list" class="row producers-list">
               <div class="col s12 m4">
                 <div class="row">
@@ -530,7 +530,7 @@ import("./utils.js").then((utils) => {
               }, 0);
             });
           }, 0);
-          let render = `
+          let render = core.html`
             <div id="${this.route}-products-list" data-view="${this.route}-products-list" class="row products-list">
               <div class="col s12 m4">
                 <div class="row">
@@ -654,7 +654,7 @@ import("./utils.js").then((utils) => {
         }
 
         viewProducerDetails(props = {}) {
-          let render = `
+          let render = core.html`
             <div id="${this.route}-producer-details" data-view="${this.route}-producer-details" class="row producer-details">
               <div class="col s10 offset-s1">
                 <div class="row">
@@ -882,20 +882,23 @@ import("./utils.js").then((utils) => {
           return render;
         }
 
-        template(props) {
-          this.producersSrc = props.producersSrc;
-          this.productsSrc = props.productsSrc;
-          this.rangeProductCategories = props.rangeProductCategories;
-          this.rangeProducerAssurances = props.rangeProducerAssurances;
-          this.uniq = props.uniq || utils.uniq();
+        render() {
+          this.producersSrc = this.props.producersSrc;
+          this.productsSrc = this.props.productsSrc;
+          this.rangeProductCategories = this.props.rangeProductCategories;
+          this.rangeProducerAssurances = this.props.rangeProducerAssurances;
+          this.uniq = this.props.uniq || utils.uniq();
           this.route = this.uniq;
-          return `
-            ${this.styles()}
-            ${this.routers()}
-            ${this.viewProductsList()}
-            ${this.viewProducersList()}
-            ${this.viewProducerDetails()}
-          `;
+          this.fetchLocaleStrings().finally(() => {
+            core.render(core.html`
+              ${this.styles()}
+              ${this.routers()}
+              ${this.viewProductsList()}
+              ${this.viewProducersList()}
+              ${this.viewProducerDetails()}
+            `, this);
+            this.renderCallback();
+          });
         }
 
         _camelize(str) {
