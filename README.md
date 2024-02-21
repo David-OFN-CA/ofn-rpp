@@ -1,7 +1,7 @@
 # Solid OFN-RPP
 
 ```html
-<script type="module" src="https://cdn.skypack.dev/@startinblox/core@0.17"></script>
+<script type="module" src="https://cdn.skypack.dev/@startinblox/core@0.19"></script>
 <script type="module" src="https://cdn.skypack.dev/@startinblox/router@0.11"></script>
 <script type="module" src="https://cdn.skypack.dev/@startinblox/component-ofn-rpp"></script>
 
