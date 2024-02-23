@@ -5,12 +5,13 @@ export const CLIENT_CONTEXT = {
 };
 
 /**
- * A function that returns the current path.
+ * Generate the path from the target URL.
  *
- * @return {string} the current path
+ * @param {string} target - The target URL to generate the path from. Defaults to current directory.
+ * @return {string} The generated path.
  */
-export function path() {
-  let path = ".";
+export function path(target=".") {
+  let path = new URL(target, import.meta.url).href;
   return path;
 }
 

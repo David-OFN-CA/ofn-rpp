@@ -221,16 +221,6 @@ import("./utils.js").then((utils) => {
       },
     });
 
-    // Custom widget for select with ofn:label
-    core.Sib.register({
-      name: "custom-label-select",
-      use: [core.TemplatesDependenciesMixins.FormDropdownMixin, core.TemplatesDependenciesMixins.FormMixin, core.TemplatesDependenciesMixins.RangeMixin, core.BaseWidgetMixin],
-      template(value, attributes) {
-        debugger;
-        this.element.innerHTML += ``;
-      },
-    });
-
     customElements.define(
       "solid-ofn-rpp",
       class extends LitElement {
