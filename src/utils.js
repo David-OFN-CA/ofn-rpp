@@ -1,42 +1,48 @@
-const componentName = "ofn-rpp";
+export const componentName = "ofn-rpp";
 
+export const CLIENT_CONTEXT = {
+  // "ofn:First_Nations_country": "ofn:first_nations_country",
+};
+
+/**
+ * A function that returns the current path.
+ *
+ * @return {string} the current path
+ */
 export function path() {
   let path = ".";
   return path;
 }
 
+/**
+ * Function to retrieve the core version URL.
+ *
+ * @return {string} The URL for the core version.
+ */
 export function coreVersion() {
   let coreUrl = "https://cdn.skypack.dev/@startinblox/core";
+  if(import.meta.env.DEV) {
+    coreUrl = "http://localhost:3000/dist/index.js";
+  }
   return coreUrl;
 }
 
+/**
+ * Generates a unique random string using the Math.random() method.
+ *
+ * @return {string} A unique random string.
+ */
 export function uniq() {
   return Math.random().toString(16).slice(2);
 }
 
-export const CLIENT_CONTEXT = {
-  "@vocab": "",
-  "foaf": "http://xmlns.com/foaf/0.1/",
-  "doap": "http://usefulinc.com/ns/doap#",
-  "ldp": "http://www.w3.org/ns/ldp#",
-  "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-  "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-  "xsd": "http://www.w3.org/2001/XMLSchema#",
-  "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
-  "acl": "http://www.w3.org/ns/auth/acl#",
-  "dfc": "https://github.com/datafoodconsortium/ontology/releases/latest/download/DFC_FullModel.owl#",
-  "dc": "http://purl.org/dc/elements/1.1/#",
-  "dfc-b": "https://github.com/datafoodconsortium/ontology/releases/latest/download/DFC_BusinessOntology.owl#",
-  "dfc-p": "https://github.com/datafoodconsortium/ontology/releases/latest/download/DFC_ProductGlossary.owl#",
-  "dfc-t": "https://github.com/datafoodconsortium/ontology/releases/latest/download/DFC_TechnicalOntology.owl#",
-  "dfc-m": "https://github.com/datafoodconsortium/taxonomies/releases/latest/download/measures.rdf#",
-  "dfc-pt": "https://github.com/datafoodconsortium/taxonomies/releases/latest/download/productTypes.rdf#",
-  "dfc-f": "https://github.com/datafoodconsortium/taxonomies/releases/latest/download/facets.rdf#",
-  "ontosec": "http://www.semanticweb.org/ontologies/2008/11/OntologySecurity.owl#",
-  "name": "name",
-  "ofn:First_Nations_country": "ofn:first_nations_country",
-};
-
+/**
+ * Sanitizes the input by removing HTML tags if stripTags is true, otherwise returns the input as is.
+ *
+ * @param {string} input - The input string to be sanitized
+ * @param {boolean} [stripTags=true] - A boolean indicating whether to strip HTML tags (default is true)
+ * @return {string} The sanitized input string
+ */
 export const sanitize = (input, stripTags=true) => {
   const tmp = document.createElement("div");
   tmp.innerHTML = input;
@@ -47,6 +53,13 @@ export const sanitize = (input, stripTags=true) => {
   }
 };
 
+/**
+ * Truncates a given string to a specified length, adding ellipsis if necessary.
+ *
+ * @param {string} str - The input string to be truncated
+ * @param {number} length - The maximum length of the truncated string
+ * @return {string} The truncated string
+ */
 export const truncate = (str, length) => {
   if (str.length > length) {
     const lastSpaceIndex = str.substr(0, length).lastIndexOf(" ");
@@ -56,4 +69,18 @@ export const truncate = (str, length) => {
         : str.substr(0, length) + "...";
   }
   return str;
+};
+
+/**
+ * Toggles the specified attribute of the element selected by the given selector, and populates the element's component if it is visible.
+ *
+ * @param {string} selector - The CSS selector for the element to be selected.
+ * @param {string} attribute - The name of the attribute to be toggled.
+ */
+export const toggleAndPopulate = (selector, attribute) => {
+  const element = document.querySelector(selector);
+  if (element && element.offsetParent !== null) {
+    element.toggleAttribute(attribute);
+    element.component.populate();
+  }
 };

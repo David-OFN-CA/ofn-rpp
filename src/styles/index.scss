@@ -168,6 +168,30 @@ solid-ofn-rpp {
           }
         }
       }
+
+      &.select-padding {
+        solid-form-dropdown-placeholder {
+          padding: 0; 
+        }
+        .browser-default {
+          // appearance: none;
+          padding: 10px .75rem;
+          @extend .bold-16-21;
+          color: #191c1d;
+          border: none;
+          &:focus {
+            outline: none;
+          }
+        }
+        // select::after {
+        //   content: '\25BC';
+        //   position: absolute;
+        //   right: 10px;
+        //   top: 50%;
+        //   transform: translateY(-50%);
+        //   pointer-events: none;
+        // }
+      }
     }
   }
 

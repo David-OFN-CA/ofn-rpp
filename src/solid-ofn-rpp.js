@@ -1,5 +1,6 @@
-import style from "./styles/index.scss?inline";
+import { LitElement, css, html, unsafeCSS } from "lit";
 import "materialize-css/dist/js/materialize.min.js";
+import style from "./styles/index.scss?inline";
 import "~icons/mdi/home-silo";
 import "~icons/mdi/food-apple";
 import "~icons/mdi/open-in-new";
@@ -7,99 +8,151 @@ import "~icons/mdi/facebook";
 import "~icons/mdi/instagram";
 import "~icons/mdi/linkedin";
 import "~icons/mdi/whatsapp";
+
 import("./utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
-
-    const expand = async function(resource, predicate) {
-      let r = '';
-      if(await resource["@type"] != "ldp:Container") {
-        r = await resource[await core.store.getExpandedPredicate(predicate, utils.CLIENT_CONTEXT)];
+    const expand = async function (resource, predicate) {
+      let r = "";
+      if ((await resource["@type"]) != "ldp:Container") {
+        r = await resource[
+          await core.store.getExpandedPredicate(predicate, utils.CLIENT_CONTEXT)
+        ];
       } else {
         r = await resource.getResourceData()[predicate];
       }
-      // if(!r) {
-      //   console.warn(`No ${predicate} within ${resource["@id"]}`);
-      // }
+      if(import.meta.env.DEV && !r) {
+        console.warn(`No ${predicate} field within ${resource["@id"]}`);
+      }
       return r;
-    }
+    };
+
     // Custom widget for producer description, original contains some unsafe html
     customElements.define(
       "custom-safe-html-value",
-      class extends core.SolidTemplateElement {
+      class extends LitElement {
         constructor() {
           super();
         }
-        static get propsDefinition() {
-          return {
-            value: "value",
-          };
-        }
-        template({ value }) {
-          return utils.sanitize(value, false);
+        static properties = {
+          value: { attribute: "value" },
+        };
+        render() {
+          return html`${utils.sanitize(this.value, false)}`;
         }
       }
     );
     // Custom widget for producer description, original contains some unsafe html, truncated
     customElements.define(
       "custom-safe-html-value-short",
-      class extends core.SolidTemplateElement {
+      class extends LitElement {
         constructor() {
           super();
         }
-        static get propsDefinition() {
-          return {
-            value: "value",
-          };
-        }
-        template({ value }) {
-          return utils.truncate(utils.sanitize(value), 125);
+        static properties = {
+          value: { attribute: "value" },
+        };
+        render() {
+          return html`${utils.truncate(utils.sanitize(this.value), 125)}`;
         }
       }
     );
 
     // Custom widget for badges (simple array)
     customElements.define(
-      "custom-multiple-badge",
-      class extends core.SolidTemplateElement {
+      "custom-multiple-badge-list",
+      class extends LitElement {
         constructor() {
           super();
         }
-        static get propsDefinition() {
-          return {
-            value: "value",
-          };
-        }
-        template({ value }) {
-          const badges = value.split(",");
-          let res = "";
-          for (let badge of badges) {
-            if (badge.length > 0) {
-              res += `<div class="chip">${badge}</div>`;
-            }
+        static properties = {
+          value: { attribute: "value" },
+        };
+        static styles = css`
+          div {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 16px;
+            height: auto;
+            text-align: left;
+            background-color: #ede7e2;
+            color: #191c1d;
+            border-radius: 41px;
+            text-transform: uppercase;
+            padding: 4px;
+            padding-left: 12px;
+            padding-right: 12px;
+            margin-right: 6px;
+            margin-bottom: 6px;
           }
-          return res;
+        `;
+        render() {
+          const badges = this.value.split(",");
+          return html`${badges.map((chip) =>
+            chip.length > 0 ? html`<div>${chip}</div>` : ""
+          )}`;
         }
       }
     );
 
+    // Custom widget for badges (from ldp container)
+    core.Sib.register({
+      name: "custom-multiple-badge",
+      use: [core.StoreMixin],
+      empty() {
+        this.element.innerHTML = "";
+      },
+      async populate() {
+        for (let chip of await expand(this.resource, "ldp:contains")) {
+          chip = await core.store.getData(
+            chip["@id"],
+            utils.CLIENT_CONTEXT
+          );
+          let label = (await expand(chip, "ofn:label"));
+          this.element.innerHTML += `
+            <div class="chip">${label}</div>
+          `;
+        }
+      },
+    });
+
     // Custom widget for First Nations Led
     customElements.define(
       "custom-badge-firstnationsled",
-      class extends core.SolidTemplateElement {
+      class extends LitElement {
         constructor() {
           super();
         }
-        static get propsDefinition() {
-          return {
-            value: "value",
-          };
-        }
-        template({ value }) {
-          if (value.length > 0) {
-            return `<div class="chip first_nations_led">First Nations Led</div>`;
-          } else {
-            return "";
+        static properties = {
+          value: { attribute: "value" },
+        };
+        static styles = css`
+          div {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 16px;
+            height: auto;
+            text-align: left;
+            background-color: #ede7e2;
+            color: #191c1d;
+            border-radius: 41px;
+            text-transform: uppercase;
+            padding: 4px;
+            padding-right: 12px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            background-image: url(/Australian_Aboriginal_Flag.png);
+            background-repeat: no-repeat;
+            background-size: 31px 15px;
+            padding-left: 50px;
+            background-position: 12px;
           }
+        `;
+        render() {
+          return html`${this.value.length > 0
+            ? html`<div>First Nations Led</div>`
+            : ""}`;
         }
       }
     );
@@ -107,45 +160,32 @@ import("./utils.js").then((utils) => {
     // Custom widget for filtering First Nations Led
     customElements.define(
       "custom-search-firstnationsled",
-      class extends core.SolidTemplateElement {
+      class extends LitElement {
         constructor() {
           super();
         }
-        static get propsDefinition() {
-          return {
-            value: "value",
-          };
+        static properties = {
+          value: { attribute: "value" },
+          checkbox: { type: Boolean },
+        };
+        createRenderRoot() {
+          return this;
         }
-        template({ value }) {
-          return `<div class="switch">
+        toggle() {
+          let target = "required-ofn:first_nations_country";
+          setTimeout(() => {
+            utils.toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, target);
+            utils.toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, target);
+          }, 0);
+        }
+        render() {
+          return html`<div class="switch">
             <label>
               First Nations Led
-              <input type="checkbox" onchange="javascript:document.querySelector('[filtered-by=producers-list-filters-${value}]').toggleAttribute('required-ofn:First_Nations_country');document.querySelector('[filtered-by=producers-list-filters-${value}]').component.populate();">
-              <span class="lever"></span>
-            </label>
-          </div>`;
-        }
-      }
-    );
-
-    // Custom widget for filtering First Nations Led on products
-    customElements.define(
-      "custom-search-firstnationsled-products",
-      class extends core.SolidTemplateElement {
-        constructor() {
-          super();
-        }
-        static get propsDefinition() {
-          return {
-            value: "value",
-          };
-        }
-        template({ value }) {
-          return core.html`<div class="switch">
-            <label>
-              First Nations Led
-              <input type="checkbox" onchange="javascript:document.querySelector('[filtered-by=products-list-filters-${value}]').toggleAttribute('required-dfc-b:suppliedBy.ofn:First_Nations_country');document.querySelector('[filtered-by=products-list-filters-${value}]').component.populate();">
-              <span class="lever"></span>
+              <input
+                type="checkbox"
+              />
+              <span class="lever" @click="${this.toggle}"></span>
             </label>
           </div>`;
         }
@@ -157,13 +197,16 @@ import("./utils.js").then((utils) => {
       name: "custom-social-links",
       use: [core.StoreMixin],
       empty() {
-        this.element.innerHTML = '';
+        this.element.innerHTML = "";
       },
       async populate() {
         this.element.innerHTML += `
           <div class="row">`;
-        for(let social of await expand(this.resource, "ldp:contains")) {
-          social = await core.store.getData(social["@id"], utils.CLIENT_CONTEXT);
+        for (let social of await expand(this.resource, "ldp:contains")) {
+          social = await core.store.getData(
+            social["@id"],
+            utils.CLIENT_CONTEXT
+          );
           let app = (await expand(social, "dfc-b:name")).replace("_phone", "");
           let link = await expand(social, "dfc-b:URL");
           if (!/^https?:\/\//i.test(link)) {
@@ -175,50 +218,72 @@ import("./utils.js").then((utils) => {
         }
         this.element.innerHTML += `
           </div>`;
-      }
+      },
+    });
+
+    // Custom widget for select with ofn:label
+    core.Sib.register({
+      name: "custom-label-select",
+      use: [core.TemplatesDependenciesMixins.FormDropdownMixin, core.TemplatesDependenciesMixins.FormMixin, core.TemplatesDependenciesMixins.RangeMixin, core.BaseWidgetMixin],
+      template(value, attributes) {
+        debugger;
+        this.element.innerHTML += ``;
+      },
     });
 
     customElements.define(
       "solid-ofn-rpp",
-      class extends core.SolidTemplateElement {
+      class extends LitElement {
         constructor() {
           super();
-          this.setTranslationsPath(`${utils.path()}/locales`);
         }
 
-        static get propsDefinition() {
-          return {
-            producersSrc: "producers-src",
-            productsSrc: "products-src",
-            rangeProductCategories: "range-product-categories",
-            rangeProducerAssurances: "range-producer-assurances",
-            uniq: "uniq",
-          };
+        static properties = {
+          producersSrc: { attribute: "producers-src" },
+          productsSrc: { attribute: "products-src" },
+          rangeProductCategories: { attribute: "range-product-categories" },
+          rangeProducerAssurances: { attribute: "range-producer-assurances" },
+          uniq: { attribute: "uniq" },
+        };
+
+        createRenderRoot() {
+          return this;
         }
 
-        styles() {
-          let render = core.html`
-          <style>${style}</style>
-          <script id="client-context" type="application/ld+json" data-default-context>
-            ${JSON.stringify(utils.CLIENT_CONTEXT)}
-          </script>
+        style() {
+          return html`<style>
+            ${unsafeCSS(style)}
+          </style>`;
+        }
+
+        context() {
+          return html`
+            <script
+              id="client-context"
+              type="application/ld+json"
+              data-default-context
+            >
+              ${JSON.stringify(utils.CLIENT_CONTEXT)}
+            </script>
           `;
-          return render;
         }
 
         routers() {
-          let render = core.html`
-          <solid-router default-route="${this.route}-producers-list">
-            <solid-route name="${this.route}-producers-list"></solid-route>
-            <solid-route name="${this.route}-products-list"></solid-route>
-            <solid-route name="${this.route}-producer-details" use-id></solid-route>
-          </solid-router>
+          let render = html`
+            <solid-router default-route="${this.route}-producers-list">
+              <solid-route name="${this.route}-producers-list"></solid-route>
+              <solid-route name="${this.route}-products-list"></solid-route>
+              <solid-route
+                name="${this.route}-producer-details"
+                use-id
+              ></solid-route>
+            </solid-router>
           `;
           return render;
         }
 
         viewWidgets() {
-          let render = core.html``;
+          let render = html``;
           return render;
         }
 
@@ -229,36 +294,45 @@ import("./utils.js").then((utils) => {
               utils.CLIENT_CONTEXT
             );
             let producerNames = [],
-              productCategories = [],
-              addresses = [];
+                addresses = [];
             producers.then(async (p) => {
               for (let producer of await expand(p, "ldp:contains")) {
-                producer = await core.store.getData(producer["@id"], utils.CLIENT_CONTEXT);
+                producer = await core.store.getData(
+                  producer["@id"],
+                  utils.CLIENT_CONTEXT
+                );
                 let producerName = await expand(producer, "dfc-b:name");
                 if (producerName) {
                   producerNames.push(producerName);
                 }
-                let producerCategories = await expand(producer, "ofn:Produce_category");
-                if (producerCategories) {
-                  productCategories =
-                    productCategories.concat(producerCategories);
-                }
-                let producerAddress = await expand(producer, "dfc-b:hasAddress");
+                let producerAddress = await expand(
+                  producer,
+                  "dfc-b:hasAddress"
+                );
                 if (producerAddress) {
-                  let producerStreet = await expand(producer, "dfc-b:hasStreet");
+                  let producerStreet = await expand(
+                    producerAddress,
+                    "dfc-b:hasStreet"
+                  );
                   if (producerStreet) {
                     addresses.push(producerStreet);
                   }
-                  let producerPostalCode = await expand(producer, "dfc-b:hasPostalCode");
-                  if (producerStreet) {
+                  let producerPostalCode = await expand(
+                    producerAddress,
+                    "dfc-b:hasPostalCode"
+                  );
+                  if (producerPostalCode) {
                     addresses.push(producerPostalCode);
                   }
-                  let producerCity = await expand(producer, "dfc-b:hasCity");
-                  if (producerStreet) {
+                  let producerCity = await expand(producerAddress, "dfc-b:hasCity");
+                  if (producerCity) {
                     addresses.push(producerCity);
                   }
-                  let producerCountry = await expand(producer, "dfc-b:hasCountry");
-                  if (producerStreet) {
+                  let producerCountry = await expand(
+                    producerAddress,
+                    "dfc-b:hasCountry"
+                  );
+                  if (producerCountry) {
                     addresses.push(producerCountry);
                   }
                 }
@@ -268,20 +342,6 @@ import("./utils.js").then((utils) => {
                 (acc, value) => ({ ...acc, [value]: null }),
                 {}
               );
-              productCategories = Array.from(
-                new Set(productCategories.sort())
-              ).join(", ");
-              // NOTICE: change to mutation observer
-              document
-                .querySelector(
-                  `#producers-list-filters-${this.uniq}`
-                )
-                .setAttribute("enum-ofn:Produce_category", productCategories);
-              document
-                .querySelector(
-                  'solid-form-dropdown-placeholder[name="ofn:Produce_category"]'
-                )
-                .setAttribute("enum", productCategories);
 
               addresses = Array.from(new Set(addresses.sort())).reduce(
                 (acc, value) => ({ ...acc, [value]: null }),
@@ -301,17 +361,27 @@ import("./utils.js").then((utils) => {
                     data: producerNames,
                     limit: 3,
                     onAutocomplete: () => {
-                      document.querySelector(`[filtered-by=producers-list-filters-${this.uniq}]`).component.populate();
+                      document
+                        .querySelector(
+                          `[filtered-by=producers-list-filters-${this.uniq}]`
+                        )
+                        .component.populate();
                     },
                   }
                 );
                 M.Autocomplete.init(
-                  document.querySelectorAll('input[type="text"][name="address"]'),
+                  document.querySelectorAll(
+                    'input[type="text"][name="address"]'
+                  ),
                   {
                     data: addresses,
                     limit: 3,
                     onAutocomplete: () => {
-                      document.querySelector(`[filtered-by=producers-list-filters-${this.uniq}]`).component.populate();
+                      document
+                        .querySelector(
+                          `[filtered-by=producers-list-filters-${this.uniq}]`
+                        )
+                        .component.populate();
                     },
                   }
                 );
@@ -320,12 +390,17 @@ import("./utils.js").then((utils) => {
             });
           }, 0);
 
-          let render = core.html`
-            <div id="${this.route}-producers-list" data-view="${this.route}-producers-list" class="row producers-list">
+          let render = html`
+            <div
+              id="${this.route}-producers-list"
+              data-view="${this.route}-producers-list"
+              class="row producers-list"
+            >
               <div class="col s12 m4">
                 <div class="row">
                   <div class="col s12 m9 offset-m2">
-                    <!--<div class="loader" id="loader-producers-list-filters-${this.uniq}">
+                    <!--<div class="loader" id="loader-producers-list-filters-${this
+                      .uniq}">
                       <div class="progress">
                         <div class="indeterminate"></div>
                       </div>
@@ -333,20 +408,17 @@ import("./utils.js").then((utils) => {
                     <solid-form-search
                       id="producers-list-filters-${this.uniq}"
                       loader-id="loader-producers-list-filters-${this.uniq}"
-                      fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))), set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:Supporting_evidence)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Produce_category)))), set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:Assurance_partnerships)))), set-line-certifications(set-line-certifications-col(set-line-certifications-panel(set-line-certifications-wrapper(ofn:Certifications)))), set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
-
+                      fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))), set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasSupportingEvidence)))), set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
                       class-set-line-field="row"
                       search-search-field="dfc-b:name, ofn:long_description"
                       widget-search-field="solid-form-label-text"
                       class-search-field="input-field col s12"
                       label-search-field="search for producers"
-
-                      class-filterBy-row="row" 
+                      class-filterBy-row="row"
                       widget-filterBy-row="div"
                       class-filterBy="col s12 filterby"
                       widget-filterBy="div"
                       value-filterBy="Filter by"
-
                       widget-set-line-fnc="div"
                       class-set-line-fnc="row no-margin-bottom"
                       widget-set-line-fnc-col="div"
@@ -355,23 +427,9 @@ import("./utils.js").then((utils) => {
                       class-set-line-fnc-panel="filter card horizontal"
                       widget-set-line-fnc-wrapper="div"
                       class-set-line-fnc-wrapper="card-content"
-                      value-ofn:First_Nations_country="${this.uniq}"
-                      widget-ofn:First_Nations_country="custom-search-firstnationsled"
-                      class-ofn:First_Nations_country="input-field col s12"
-
-                      widget-set-line-ecological="div"
-                      class-set-line-ecological="row no-margin-bottom"
-                      widget-set-line-ecological-col="div"
-                      class-set-line-ecological-col="col s12"
-                      widget-set-line-ecological-panel="div"
-                      class-set-line-ecological-panel="filter card horizontal"
-                      widget-set-line-ecological-wrapper="div"
-                      class-set-line-ecological-wrapper="card-content padding"
-                      auto-range-ofn:Supporting_evidence=""
-                      widget-ofn:Supporting_evidence='solid-form-dropdown-placeholder'
-                      class-ofn:Supporting_evidence="col s12"
-                      label-ofn:Supporting_evidence="Ecological outcomes"
-
+                      value-ofn:first_nations_country="${this.uniq}"
+                      widget-ofn:first_nations_country="custom-search-firstnationsled"
+                      class-ofn:first_nations_country="input-field col s12"
                       widget-set-line-produce="div"
                       class-set-line-produce="row no-margin-bottom"
                       widget-set-line-produce-col="div"
@@ -379,12 +437,12 @@ import("./utils.js").then((utils) => {
                       widget-set-line-produce-panel="div"
                       class-set-line-produce-panel="filter card horizontal"
                       widget-set-line-produce-wrapper="div"
-                      class-set-line-produce-wrapper="card-content padding"
-                      enum-ofn:Produce_category=""
-                      widget-ofn:Produce_category='solid-form-dropdown-placeholder'
-                      class-ofn:Produce_category="col s12"
-                      label-ofn:Produce_category="Produce types"
-
+                      class-set-line-produce-wrapper="card-content select-padding"
+                      class-ofn:hasProduceCategory="col s12"
+                      label-ofn:hasProduceCategory="Produce types"
+                      range-ofn:hasProduceCategory="${this.rangeProductCategories}"
+                      widget-ofn:hasProduceCategory="solid-form-dropdown-placeholder"
+                      option-label-ofn:hasProduceCategory="ofn:label"
                       widget-set-line-assurance="div"
                       class-set-line-assurance="row no-margin-bottom"
                       widget-set-line-assurance-col="div"
@@ -392,25 +450,12 @@ import("./utils.js").then((utils) => {
                       widget-set-line-assurance-panel="div"
                       class-set-line-assurance-panel="filter card horizontal"
                       widget-set-line-assurance-wrapper="div"
-                      class-set-line-assurance-wrapper="card-content padding"
-                      auto-range-ofn:Assurance_partnerships=""
-                      widget-ofn:Assurance_partnerships='solid-form-dropdown-placeholder'
-                      class-ofn:Assurance_partnerships="col s12"
-                      label-ofn:Assurance_partnerships="Assurance Partners"
-
-                      widget-set-line-certifications="div"
-                      class-set-line-certifications="row no-margin-bottom"
-                      widget-set-line-certifications-col="div"
-                      class-set-line-certifications-col="col s12"
-                      widget-set-line-certifications-panel="div"
-                      class-set-line-certifications-panel="filter card horizontal"
-                      widget-set-line-certifications-wrapper="div"
-                      class-set-line-certifications-wrapper="card-content padding"
-                      auto-range-ofn:Certifications=""
-                      widget-ofn:Certifications='solid-form-dropdown-placeholder'
-                      class-ofn:Certifications="col s12"
-                      label-ofn:Certifications="Certifications"
-
+                      class-set-line-assurance-wrapper="card-content select-padding"
+                      class-ofn:hasSupportingEvidence="col s12"
+                      label-ofn:hasSupportingEvidence="Supporting Evidence"
+                      range-ofn:hasSupportingEvidence="${this.rangeProducerAssurances}"
+                      widget-ofn:hasSupportingEvidence="solid-form-dropdown-placeholder"
+                      option-label-ofn:hasSupportingEvidence="ofn:Group_name"
                       widget-set-line-address="div"
                       class-set-line-address="row no-margin-bottom"
                       widget-set-line-address-col="div"
@@ -420,7 +465,7 @@ import("./utils.js").then((utils) => {
                       widget-set-line-address-wrapper="div"
                       class-set-line-address-wrapper="card-content"
                       search-address="dfc-b:hasAddress.dfc-b:hasStreet, dfc-b:hasAddress.dfc-b:hasPostalCode, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry"
-                      widget-address='solid-form-label-text'
+                      widget-address="solid-form-label-text"
                       class-address="input-field col s12"
                       label-address="Location"
                     ></solid-form-search>
@@ -437,8 +482,7 @@ import("./utils.js").then((utils) => {
                   loader-id="loader-producers-list-${this.uniq}"
                   data-src="${this.producersSrc}"
                   filtered-by="producers-list-filters-${this.uniq}"
-                  fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry), set-description(ofn:long_description), set-tags(ofn:First_Nations_country, ofn:Produce_category))))))"
-
+                  fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry), set-description(ofn:long_description), set-tags(ofn:First_Nations_country, ofn:hasProduceCategory))))))"
                   widget-set-card-row="div"
                   class-set-card-row="row"
                   widget-set-card-col="div"
@@ -447,16 +491,13 @@ import("./utils.js").then((utils) => {
                   class-set-card-panel="card-panel"
                   widget-set-card-wrapper="div"
                   class-set-card-wrapper="row no-margin-bottom valign-wrapper"
-
                   widget-set-left-panel="div"
                   class-set-left-panel="col hide-on-small-only m2 center img-on-mobile"
                   class-ofn:logo_url="responsive-img"
                   widget-ofn:logo_url="solid-display-img"
                   default-ofn:logo_url="https://placehold.co/120"
-
                   widget-set-right-panel="div"
                   class-set-right-panel="col s12 m10"
-
                   widget-set-title="div"
                   class-set-title="row valign-wrapper"
                   widget-dfc-b:name="solid-display-value"
@@ -465,19 +506,16 @@ import("./utils.js").then((utils) => {
                   class-dfc-b:hasAddress.dfc-b:hasCity="col dfc_b_address"
                   widget-dfc-b:hasAddress.dfc-b:hasCountry="solid-display-value"
                   class-dfc-b:hasAddress.dfc-b:hasCountry="col dfc_b_address"
-
                   widget-set-description="div"
                   class-set-description="row"
                   widget-ofn:long_description="custom-safe-html-value-short"
                   class-ofn:long_description="col s12"
-
                   widget-set-tags="div"
-                  widget-ofn:First_Nations_country="custom-badge-firstnationsled"
-                  widget-ofn:Produce_category="custom-multiple-badge"
-
+                  widget-ofn:first_nations_country="custom-badge-firstnationsled"
+                  widget-ofn:hasProduceCategory="custom-multiple-badge"
                   next="${this.route}-producer-details"
-                  ></solid-display>
-                </div>
+                ></solid-display>
+              </div>
             </div>
           `;
           return render;
@@ -490,10 +528,13 @@ import("./utils.js").then((utils) => {
               utils.CLIENT_CONTEXT
             );
             let productNames = [],
-                productCategories = [];
+              productCategories = [];
             products.then(async (p) => {
               for (let product of await expand(p, "ldp:contains")) {
-                product = await core.store.getData(product["@id"], utils.CLIENT_CONTEXT);
+                product = await core.store.getData(
+                  product["@id"],
+                  utils.CLIENT_CONTEXT
+                );
                 let productName = await expand(product, "dfc-b:name");
                 if (productName) {
                   productNames.push(productName);
@@ -513,9 +554,7 @@ import("./utils.js").then((utils) => {
               ).join(", ");
               // NOTICE: change to mutation observer
               document
-                .querySelector(
-                  `#products-list-filters-${this.uniq}`
-                )
+                .querySelector(`#products-list-filters-${this.uniq}`)
                 .setAttribute("enum-ofn:Type", productCategories);
               document
                 .querySelector(
@@ -536,7 +575,11 @@ import("./utils.js").then((utils) => {
                     data: productNames,
                     limit: 3,
                     onAutocomplete: () => {
-                      document.querySelector(`[filtered-by=products-list-filters-${this.uniq}]`).component.populate();
+                      document
+                        .querySelector(
+                          `[filtered-by=products-list-filters-${this.uniq}]`
+                        )
+                        .component.populate();
                     },
                   }
                 );
@@ -544,12 +587,17 @@ import("./utils.js").then((utils) => {
               }, 0);
             });
           }, 0);
-          let render = core.html`
-            <div id="${this.route}-products-list" data-view="${this.route}-products-list" class="row products-list">
+          let render = html`
+            <div
+              id="${this.route}-products-list"
+              data-view="${this.route}-products-list"
+              class="row products-list"
+            >
               <div class="col s12 m4">
                 <div class="row">
                   <div class="col s12 m9 offset-m2">
-                    <!--<div class="loader" id="loader-products-list-filters-${this.uniq}">
+                    <!--<div class="loader" id="loader-products-list-filters-${this
+                      .uniq}">
                       <div class="progress">
                         <div class="indeterminate"></div>
                       </div>
@@ -557,20 +605,17 @@ import("./utils.js").then((utils) => {
                     <solid-form-search
                       id="products-list-filters-${this.uniq}"
                       loader-id="loader-products-list-filters-${this.uniq}"
-                      fields="set-line-field(set-line-field-col(set-line-field-panel(search-field-product))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_country)))), set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:Supporting_evidence)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type)))), set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(dfc-b:suppliedBy.ofn:Assurance_partnerships))))"
-
+                      fields="set-line-field(set-line-field-col(set-line-field-panel(search-field-product))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_country)))), set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type))))"
                       class-set-line-field="row"
                       search-search-field-product="dfc-b:name, ofn:description"
                       widget-search-field-product="solid-form-label-text"
                       class-search-field-product="input-field col s12"
                       label-search-field-product="search for products"
-
-                      class-filterBy-row="row" 
+                      class-filterBy-row="row"
                       widget-filterBy-row="div"
                       class-filterBy="col s12 filterby"
                       widget-filterBy="div"
                       value-filterBy="Filter by"
-
                       widget-set-line-fnc="div"
                       class-set-line-fnc="row no-margin-bottom"
                       widget-set-line-fnc-col="div"
@@ -579,10 +624,9 @@ import("./utils.js").then((utils) => {
                       class-set-line-fnc-panel="filter card horizontal"
                       widget-set-line-fnc-wrapper="div"
                       class-set-line-fnc-wrapper="card-content"
-                      value-dfc-b:suppliedBy.ofn:First_Nations_country="${this.uniq}"
-                      widget-dfc-b:suppliedBy.ofn:First_Nations_country="custom-search-firstnationsled-products"
-                      class-dfc-b:suppliedBy.ofn:First_Nations_country="input-field col s12"
-
+                      value-dfc-b:suppliedBy.ofn:first_nations_country="${this.uniq}"
+                      widget-dfc-b:suppliedBy.ofn:first_nations_country="custom-search-firstnationsled"
+                      class-dfc-b:suppliedBy.ofn:first_nations_country="input-field col s12"
                       widget-set-line-ecological="div"
                       class-set-line-ecological="row no-margin-bottom"
                       widget-set-line-ecological-col="div"
@@ -590,12 +634,12 @@ import("./utils.js").then((utils) => {
                       widget-set-line-ecological-panel="div"
                       class-set-line-ecological-panel="filter card horizontal"
                       widget-set-line-ecological-wrapper="div"
-                      class-set-line-ecological-wrapper="card-content padding"
-                      auto-range-dfc-b:suppliedBy.ofn:Supporting_evidence=""
-                      widget-dfc-b:suppliedBy.ofn:Supporting_evidence='solid-form-dropdown-placeholder'
-                      class-dfc-b:suppliedBy.ofn:Supporting_evidence="col s12"
-                      label-dfc-b:suppliedBy.ofn:Supporting_evidence="Ecological outcomes"
-
+                      class-set-line-ecological-wrapper="card-content select-padding"
+                      widget-dfc-b:suppliedBy.ofn:hasSupportingEvidence="solid-form-dropdown-placeholder"
+                      class-dfc-b:suppliedBy.ofn:hasSupportingEvidence="col s12"
+                      label-dfc-b:suppliedBy.ofn:hasSupportingEvidence="Supporting Evidence"
+                      range-dfc-b:suppliedBy.ofn:hasSupportingEvidence="${this.rangeProducerAssurances}"
+                      option-label-ofn:hasSupportingEvidence="ofn:Group_name"
                       widget-set-line-produce="div"
                       class-set-line-produce="row no-margin-bottom"
                       widget-set-line-produce-col="div"
@@ -603,24 +647,11 @@ import("./utils.js").then((utils) => {
                       widget-set-line-produce-panel="div"
                       class-set-line-produce-panel="filter card horizontal"
                       widget-set-line-produce-wrapper="div"
-                      class-set-line-produce-wrapper="card-content padding"
+                      class-set-line-produce-wrapper="card-content select-padding"
                       enum-ofn:Type=""
-                      widget-ofn:Type='solid-form-dropdown-placeholder'
+                      widget-ofn:Type="solid-form-dropdown-placeholder"
                       class-ofn:Type="col s12"
                       label-ofn:Type="Produce types"
-
-                      widget-set-line-assurance="div"
-                      class-set-line-assurance="row no-margin-bottom"
-                      widget-set-line-assurance-col="div"
-                      class-set-line-assurance-col="col s12"
-                      widget-set-line-assurance-panel="div"
-                      class-set-line-assurance-panel="filter card horizontal"
-                      widget-set-line-assurance-wrapper="div"
-                      class-set-line-assurance-wrapper="card-content padding"
-                      auto-range-dfc-b:suppliedBy.ofn:Assurance_partnerships=""
-                      widget-dfc-b:suppliedBy.ofn:Assurance_partnerships='solid-form-dropdown-placeholder'
-                      class-dfc-b:suppliedBy.ofn:Assurance_partnerships="col s12"
-                      label-dfc-b:suppliedBy.ofn:Assurance_partnerships="Assurance Partners"
                     ></solid-form-search>
                   </div>
                 </div>
@@ -637,7 +668,6 @@ import("./utils.js").then((utils) => {
                   data-src="${this.productsSrc}"
                   filtered-by="products-list-filters-${this.uniq}"
                   fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name), set-from(dfc-b:suppliedBy.dfc-b:name))))"
-
                   widget-set-card-row="div"
                   class-set-card-row="row"
                   widget-set-card-col="div"
@@ -645,42 +675,44 @@ import("./utils.js").then((utils) => {
                   widget-set-card-panel="div"
                   class-set-card-panel="card-panel"
                   widget-set-card-wrapper="div"
-
                   class-ofn:image="img-168"
                   widget-ofn:image="solid-display-img"
                   default-ofn:image="https://placehold.co/168"
-
                   widget-set-name="div"
                   class-set-name="row no-margin-bottom"
                   widget-dfc-b:name="solid-display-value"
                   class-dfc-b:name="col s12 truncate"
-
                   widget-set-from="div"
                   class-set-from="row no-margin-bottom"
                   widget-dfc-b:suppliedBy.dfc-b:name="solid-display-value"
                   class-dfc-b:suppliedBy.dfc-b:name="col s12 truncate"
-
-                  ></solid-display>
-                </div>
+                ></solid-display>
+              </div>
             </div>
           `;
           return render;
         }
 
         viewProducerDetails() {
-          let render = core.html`
-            <div id="${this.route}-producer-details" data-view="${this.route}-producer-details" class="row producer-details">
+          let render = html`
+            <div
+              id="${this.route}-producer-details"
+              data-view="${this.route}-producer-details"
+              class="row producer-details"
+            >
               <div class="col s10 offset-s1">
                 <div class="row">
                   <div class="col s12">
                     <div class="card-panel card-round">
-                      <div class="row valign-wrapper title-header no-margin-bottom">
+                      <div
+                        class="row valign-wrapper title-header no-margin-bottom"
+                      >
                         <div class="col s3"></div>
                         <div class="col s9 z-index-2">
                           <solid-display
                             bind-resources=""
-                            fields="ofn:Produce_category"
-                            widget-ofn:Produce_category="custom-multiple-badge"
+                            fields="ofn:hasProduceCategory"
+                            widget-ofn:hasProduceCategory="custom-multiple-badge"
                           ></solid-display>
                         </div>
                       </div>
@@ -719,22 +751,98 @@ import("./utils.js").then((utils) => {
                               fields="dfc-b:hasDescription"
                               class-dfc-b:hasDescription="col s12 text-18"
                             ></solid-display>
-                            <a class="col s12 learn-more" href="#${this.uniq}-about-us">Learn more about us</a>
+                            <a
+                              class="col s12 learn-more"
+                              href="#${this.uniq}-about-us"
+                              >Learn more about us</a
+                            >
                           </div>
                           <hr />
                           <div class="row">
                             <div class="col s6">
-                              <div class="row"><div class="col s12"><span class="bold-16-21">Assurance Partners</span></div></div>
-                              <div class="row"><div class="col s12"><a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a></div></div>
-                              <div class="row"><div class="col s12"><img class="responsive-img" src="/sustainable_table.png" /></div></div>
-                              <div class="row"><div class="col s12"><span class="text-14 text-light bold underline">Sustainable Table</span></div></div>
+                              <div class="row">
+                                <div class="col s12">
+                                  <span class="bold-16-21"
+                                    >Assurance Partners</span
+                                  >
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col s12">
+                                  <a
+                                    class="learn-more"
+                                    href="#${this.uniq}-supporting-evidence"
+                                    >Learn more</a
+                                  >
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col s12">
+                                  <img
+                                    class="responsive-img"
+                                    src="/sustainable_table.png"
+                                  />
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col s12">
+                                  <span
+                                    class="text-14 text-light bold underline"
+                                    >Sustainable Table</span
+                                  >
+                                </div>
+                              </div>
                             </div>
                             <div class="col s6">
-                              <div class="row"><div class="col s12"><span class="bold-16-21">Supporting Evidence</span></div></div>
-                              <div class="row"><div class="col s12"><a class="learn-more" href="#${this.uniq}-supporting-evidence">Learn more</a></div></div>
-                              <div class="row no-margin-bottom"><div class="col s12"><div class="chip small text-12 peach">1</div><span class="text-14 text-light"> for <span class="underline">ecological outcomes</span></span></div></div>
-                              <div class="row no-margin-bottom"><div class="col s12"><div class="chip small text-12 peach">2</div><span class="text-14 text-light"> for <span class="underline">practices</span></span></div></div>
-                              <div class="row no-margin-bottom"><div class="col s12"><div class="chip small text-12 peach">1</div><span class="text-14 text-light"> for <span class="underline">participation</span></span></div></div>
+                              <div class="row">
+                                <div class="col s12">
+                                  <span class="bold-16-21"
+                                    >Supporting Evidence</span
+                                  >
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col s12">
+                                  <a
+                                    class="learn-more"
+                                    href="#${this.uniq}-supporting-evidence"
+                                    >Learn more</a
+                                  >
+                                </div>
+                              </div>
+                              <div class="row no-margin-bottom">
+                                <div class="col s12">
+                                  <div class="chip small text-12 peach">1</div>
+                                  <span class="text-14 text-light">
+                                    for
+                                    <span class="underline"
+                                      >ecological outcomes</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                              <div class="row no-margin-bottom">
+                                <div class="col s12">
+                                  <div class="chip small text-12 peach">2</div>
+                                  <span class="text-14 text-light">
+                                    for
+                                    <span class="underline"
+                                      >practices</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                              <div class="row no-margin-bottom">
+                                <div class="col s12">
+                                  <div class="chip small text-12 peach">1</div>
+                                  <span class="text-14 text-light">
+                                    for
+                                    <span class="underline"
+                                      >participation</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -756,16 +864,52 @@ import("./utils.js").then((utils) => {
                               class-dfc-b:hasDescription="col s12 text-14 text-light"
                             ></solid-display>
                           </div>
-                          <div class="row"><div class="col s12"><a href="#${this.uniq}-contact-producer" class="waves-effect waves-light btn-small">View contact details</a></div></div>
-                          <div class="row text-light no-margin-bottom"><div class="col s12">Open Food Network</div></div>
-                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
-                          <div class="row text-light no-margin-bottom"><div class="col s12">Fresho</div></div>
-                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
-                          <div class="row text-light no-margin-bottom"><div class="col s12">Some other portal</div></div>
-                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
+                          <div class="row">
+                            <div class="col s12">
+                              <a
+                                href="#${this.uniq}-contact-producer"
+                                class="waves-effect waves-light btn-small"
+                                >View contact details</a
+                              >
+                            </div>
+                          </div>
+                          <div class="row text-light no-margin-bottom">
+                            <div class="col s12">Open Food Network</div>
+                          </div>
+                          <div class="row text-link valign-wrapper">
+                            <div class="col s8">Visit website</div>
+                            <div class="col s4">
+                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
+                            </div>
+                          </div>
+                          <div class="row text-light no-margin-bottom">
+                            <div class="col s12">Fresho</div>
+                          </div>
+                          <div class="row text-link valign-wrapper">
+                            <div class="col s8">Visit website</div>
+                            <div class="col s4">
+                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
+                            </div>
+                          </div>
+                          <div class="row text-light no-margin-bottom">
+                            <div class="col s12">Some other portal</div>
+                          </div>
+                          <div class="row text-link valign-wrapper">
+                            <div class="col s8">Visit website</div>
+                            <div class="col s4">
+                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
+                            </div>
+                          </div>
                           <h6 class="margin-top-50">Household customers</h6>
-                          <div class="row text-light no-margin-bottom"><div class="col s12">Our eCommerce</div></div>
-                          <div class="row text-link valign-wrapper"><div class="col s8">Visit website</div><div class="col s4"><icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
+                          <div class="row text-light no-margin-bottom">
+                            <div class="col s12">Our eCommerce</div>
+                          </div>
+                          <div class="row text-link valign-wrapper">
+                            <div class="col s8">Visit website</div>
+                            <div class="col s4">
+                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
+                            </div>
+                          </div>
                         </div>
                         <div class="col s8 offset-s1">
                           <h5>Feature products</h5>
@@ -773,7 +917,6 @@ import("./utils.js").then((utils) => {
                             bind-resources=""
                             nested-field="dfc-b:supplies"
                             fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
-          
                             widget-set-card-row="div"
                             class-set-card-row="row"
                             widget-set-card-col="div"
@@ -781,11 +924,9 @@ import("./utils.js").then((utils) => {
                             widget-set-card-panel="div"
                             class-set-card-panel="card-panel"
                             widget-set-card-wrapper="div"
-          
                             class-ofn:image="img-200"
                             widget-ofn:image="solid-display-img"
                             default-ofn:image="https://placehold.co/200"
-          
                             widget-set-name="div"
                             class-set-name="row no-margin-bottom"
                             widget-dfc-b:name="solid-display-value"
@@ -816,23 +957,31 @@ import("./utils.js").then((utils) => {
                           <div class="row">
                             <solid-display
                               bind-resources=""
-                              required-ofn:First_Nations_country=""
+                              required-ofn:first_nations_country=""
                               fields="title, fnc(ofn:First_Nations_country)"
                               value-title="First Nation Country"
                               class-title="col s12 text-14 bold"
                               class-fnc="col s12 text-14"
                             ></solid-display>
                           </div>
-                          <div class="row text-link valign-wrapper"><div class="col s12">View map&nbsp;<icon-mdi-open-in-new></icon-mdi-open-in-new></div></div>
+                          <div class="row text-link valign-wrapper">
+                            <div class="col s12">
+                              View map&nbsp;<icon-mdi-open-in-new
+                              ></icon-mdi-open-in-new>
+                            </div>
+                          </div>
                           <h5 class="margin-top-50">Useful links</h5>
-                          <div class="row no-margin-bottom"><div class="col s12">
-                          <solid-display
-                            bind-resources=""
-                            fields="ofn:Household_URL"
-                            link-text-ofn:Household_URL="Visit our website"
-                            class-ofn:Household_URL="text-link text-red"
-                            widget-ofn:Household_URL="solid-display-link-blank"
-                          ></solid-display></div></div>
+                          <div class="row no-margin-bottom">
+                            <div class="col s12">
+                              <solid-display
+                                bind-resources=""
+                                fields="ofn:Household_URL"
+                                link-text-ofn:Household_URL="Visit our website"
+                                class-ofn:Household_URL="text-link text-red"
+                                widget-ofn:Household_URL="solid-display-link-blank"
+                              ></solid-display>
+                            </div>
+                          </div>
                           <div class="row no-margin-bottom">
                             <solid-display
                               bind-resources=""
@@ -843,8 +992,14 @@ import("./utils.js").then((utils) => {
                         </div>
                         <div class="col s9">
                           <div class="row">
-                            <div class="col hide-on-small-only m12 margin-top-10">
-                              <img class="responsive-img" style="width: 100%" src="/kialla_silos.png" />
+                            <div
+                              class="col hide-on-small-only m12 margin-top-10"
+                            >
+                              <img
+                                class="responsive-img"
+                                style="width: 100%"
+                                src="/kialla_silos.png"
+                              />
                             </div>
                           </div>
                           <div class="row">
@@ -861,21 +1016,21 @@ import("./utils.js").then((utils) => {
                           <solid-display
                             bind-resources=""
                             fields="ofn:Practices"
-                            widget-ofn:Practices="custom-multiple-badge"
+                            widget-ofn:Practices="custom-multiple-badge-list"
                           ></solid-display>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <h4 id="${this.uniq}-supporting-evidence">Supporting evidence</h4>
+                <h4 id="${this.uniq}-supporting-evidence">
+                  Supporting evidence
+                </h4>
                 <div class="row">
                   <div class="col s12">
                     <div class="row">
-                      <div class="col s3">
-                      </div>
-                      <div class="col s8">
-                      </div>
+                      <div class="col s3"></div>
+                      <div class="col s8"></div>
                     </div>
                   </div>
                 </div>
@@ -883,10 +1038,8 @@ import("./utils.js").then((utils) => {
                 <div class="row">
                   <div class="col s12">
                     <div class="row">
-                      <div class="col s3">
-                      </div>
-                      <div class="col s8">
-                      </div>
+                      <div class="col s3"></div>
+                      <div class="col s8"></div>
                     </div>
                   </div>
                 </div>
@@ -897,33 +1050,16 @@ import("./utils.js").then((utils) => {
         }
 
         render() {
-          this.producersSrc = this.props.producersSrc;
-          this.productsSrc = this.props.productsSrc;
-          this.rangeProductCategories = this.props.rangeProductCategories;
-          this.rangeProducerAssurances = this.props.rangeProducerAssurances;
-          this.uniq = this.props.uniq || utils.uniq();
+          if(!this.uniq) this.uniq = utils.uniq();
           this.route = this.uniq;
-          this.fetchLocaleStrings().finally(() => {
-            core.render(core.html`
-              ${this.styles()}
-              ${this.routers()}
-              ${this.viewProductsList()}
-              ${this.viewProducersList()}
-              ${this.viewProducerDetails()}
-            `, this);
-            this.renderCallback();
-          });
-        }
-
-        _camelize(str) {
-          return str.replace(/[-]+(.)/g, (match, chr) => chr.toUpperCase());
-        }
-
-        _uncamelize(str) {
-          return str.replace(
-            /[A-Z]+/g,
-            (match, chr) => "-" + match.toLowerCase()
-          );
+          return html`
+            ${this.context()}
+            ${this.style()}
+            ${this.routers()}
+            ${this.viewProductsList()}
+            ${this.viewProducersList()}
+            ${this.viewProducerDetails()}
+          `;
         }
       }
     );
