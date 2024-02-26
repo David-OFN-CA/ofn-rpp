@@ -238,30 +238,11 @@ solid-ofn-rpp {
     .title-header {
       overflow: auto;
       position: relative;
-      height: 90px;
-      .z-index-2 {
-        z-index: 2;
-      }
-      &::before {
-        content: "";
-        position: absolute;
-        z-index: 1;
-        display: block;
-        background: url(/producer_background.png);
-        background-size: cover;
-        width: 100%;
-        height: 100%;
-        filter: contrast(40%) brightness(1.5);
-        border-radius: 8px 8px 0 0;
-      }
-    }
-
-    .chip {
-      background-color: white;
-    }
-
-    .circle img {
-      border-radius: 50%;
+      background: url(/producer_background.png);
+      background-position: top;
+      background-size: cover;
+      filter: contrast(40%) brightness(1.5);
+      height: 37px;
     }
 
     .img-120 {
@@ -275,8 +256,16 @@ solid-ofn-rpp {
       margin-top: 10px;
     }
 
+    .margin-top-20 {
+      margin-top: 20px;
+    }
+
     .margin-top-50 {
       margin-top: 50px;
+    }
+
+    .margin-right-10 {
+      margin-right: 10px;
     }
 
     .text-address {
@@ -288,17 +277,14 @@ solid-ofn-rpp {
       font-size: 14px;
       font-weight: 700;
       line-height: 24px;
-      color: #4b250f;
-      text-decoration: underline;
+      color: #17594A;
+      text-decoration: nonde;
       cursor: pointer;
     }
 
     .img-logo {
-      position: relative;
-      top: -35px;
       z-index: 2;
-      left: 55%;
-      margin-left: -60px;
+      float: right;
     }
 
     .flow-text {
@@ -325,6 +311,10 @@ solid-ofn-rpp {
       color: #414141;
     }
 
+    .text-green {
+      color: #17594A;
+    }
+
     .text-link, .text-link a {
       color: #17594a;
       @extend .bold;
@@ -332,7 +322,19 @@ solid-ofn-rpp {
       @extend .underline;
       cursor: pointer;
       icon-mdi-open-in-new {
+        vertical-align: text-top;
+        margin-left: 4px;
         font-size: 18px;
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+      .height-18 {
+        height: 18px;
+      }
+      &.text-link-red {
+        color: #9A4444;
       }
     }
 

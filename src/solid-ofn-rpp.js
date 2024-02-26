@@ -1,5 +1,5 @@
-import { LitElement, css, html, unsafeCSS } from "lit";
-import "materialize-css/dist/js/materialize.min.js";
+import { LitElement, html, unsafeCSS } from "lit";
+import makeExpand from './helpers/expand.js';
 import style from "./styles/index.scss?inline";
 import "~icons/mdi/home-silo";
 import "~icons/mdi/food-apple";
@@ -8,218 +8,11 @@ import "~icons/mdi/facebook";
 import "~icons/mdi/instagram";
 import "~icons/mdi/linkedin";
 import "~icons/mdi/whatsapp";
+import "~icons/mdi/email-outline";
 
 import("./utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
-    const expand = async function (resource, predicate) {
-      let r = "";
-      if ((await resource["@type"]) != "ldp:Container") {
-        r = await resource[
-          await core.store.getExpandedPredicate(predicate, utils.CLIENT_CONTEXT)
-        ];
-      } else {
-        r = await resource.getResourceData()[predicate];
-      }
-      if(import.meta.env.DEV && !r) {
-        console.warn(`No ${predicate} field within ${resource["@id"]}`);
-      }
-      return r;
-    };
-
-    // Custom widget for producer description, original contains some unsafe html
-    customElements.define(
-      "custom-safe-html-value",
-      class extends LitElement {
-        constructor() {
-          super();
-        }
-        static properties = {
-          value: { attribute: "value" },
-        };
-        render() {
-          return html`${utils.sanitize(this.value, false)}`;
-        }
-      }
-    );
-    // Custom widget for producer description, original contains some unsafe html, truncated
-    customElements.define(
-      "custom-safe-html-value-short",
-      class extends LitElement {
-        constructor() {
-          super();
-        }
-        static properties = {
-          value: { attribute: "value" },
-        };
-        render() {
-          return html`${utils.truncate(utils.sanitize(this.value), 125)}`;
-        }
-      }
-    );
-
-    // Custom widget for badges (simple array)
-    customElements.define(
-      "custom-multiple-badge-list",
-      class extends LitElement {
-        constructor() {
-          super();
-        }
-        static properties = {
-          value: { attribute: "value" },
-        };
-        static styles = css`
-          div {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 16px;
-            height: auto;
-            text-align: left;
-            background-color: #ede7e2;
-            color: #191c1d;
-            border-radius: 41px;
-            text-transform: uppercase;
-            padding: 4px;
-            padding-left: 12px;
-            padding-right: 12px;
-            margin-right: 6px;
-            margin-bottom: 6px;
-          }
-        `;
-        render() {
-          const badges = this.value.split(",");
-          return html`${badges.map((chip) =>
-            chip.length > 0 ? html`<div>${chip}</div>` : ""
-          )}`;
-        }
-      }
-    );
-
-    // Custom widget for badges (from ldp container)
-    core.Sib.register({
-      name: "custom-multiple-badge",
-      use: [core.StoreMixin],
-      empty() {
-        this.element.innerHTML = "";
-      },
-      async populate() {
-        for (let chip of await expand(this.resource, "ldp:contains")) {
-          chip = await core.store.getData(
-            chip["@id"],
-            utils.CLIENT_CONTEXT
-          );
-          let label = (await expand(chip, "ofn:label"));
-          this.element.innerHTML += `
-            <div class="chip">${label}</div>
-          `;
-        }
-      },
-    });
-
-    // Custom widget for First Nations Led
-    customElements.define(
-      "custom-badge-firstnationsled",
-      class extends LitElement {
-        constructor() {
-          super();
-        }
-        static properties = {
-          value: { attribute: "value" },
-        };
-        static styles = css`
-          div {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 16px;
-            height: auto;
-            text-align: left;
-            background-color: #ede7e2;
-            color: #191c1d;
-            border-radius: 41px;
-            text-transform: uppercase;
-            padding: 4px;
-            padding-right: 12px;
-            margin-right: 6px;
-            margin-bottom: 6px;
-            background-image: url(/Australian_Aboriginal_Flag.png);
-            background-repeat: no-repeat;
-            background-size: 31px 15px;
-            padding-left: 50px;
-            background-position: 12px;
-          }
-        `;
-        render() {
-          return html`${this.value.length > 0
-            ? html`<div>First Nations Led</div>`
-            : ""}`;
-        }
-      }
-    );
-
-    // Custom widget for filtering First Nations Led
-    customElements.define(
-      "custom-search-firstnationsled",
-      class extends LitElement {
-        constructor() {
-          super();
-        }
-        static properties = {
-          value: { attribute: "value" },
-          checkbox: { type: Boolean },
-        };
-        createRenderRoot() {
-          return this;
-        }
-        toggle() {
-          let target = "required-ofn:first_nations_country";
-          setTimeout(() => {
-            utils.toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, target);
-            utils.toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, target);
-          }, 0);
-        }
-        render() {
-          return html`<div class="switch">
-            <label>
-              First Nations Led
-              <input
-                type="checkbox"
-              />
-              <span class="lever" @click="${this.toggle}"></span>
-            </label>
-          </div>`;
-        }
-      }
-    );
-
-    // Custom widget for social media links
-    core.Sib.register({
-      name: "custom-social-links",
-      use: [core.StoreMixin],
-      empty() {
-        this.element.innerHTML = "";
-      },
-      async populate() {
-        this.element.innerHTML += `
-          <div class="row">`;
-        for (let social of await expand(this.resource, "ldp:contains")) {
-          social = await core.store.getData(
-            social["@id"],
-            utils.CLIENT_CONTEXT
-          );
-          let app = (await expand(social, "dfc-b:name")).replace("_phone", "");
-          let link = await expand(social, "dfc-b:URL");
-          if (!/^https?:\/\//i.test(link)) {
-            link = "https://" + link;
-          }
-          this.element.innerHTML += `
-            <div class="col"><a class="social-link" href="${link}" target="_blank"><icon-mdi-${app} class="icon"></icon-mdi-${app}></a></div>
-          `;
-        }
-        this.element.innerHTML += `
-          </div>`;
-      },
-    });
+    const expand = makeExpand(core, utils);
 
     customElements.define(
       "solid-ofn-rpp",
@@ -694,24 +487,13 @@ import("./utils.js").then((utils) => {
                 <div class="row">
                   <div class="col s12">
                     <div class="card-panel card-round">
-                      <div
-                        class="row valign-wrapper title-header no-margin-bottom"
-                      >
-                        <div class="col s3"></div>
-                        <div class="col s9 z-index-2">
-                          <solid-display
-                            bind-resources=""
-                            fields="ofn:hasProduceCategory"
-                            widget-ofn:hasProduceCategory="custom-multiple-badge"
-                          ></solid-display>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col s3">
+                      <div class="row valign-wrapper title-header no-margin-bottom"></div>
+                      <div class="row margin-top-20">
+                        <div class="col s3 margin-top-10">
                           <solid-display
                             bind-resources=""
                             fields="ofn:logo_url"
-                            class-ofn:logo_url="circle img-120 img-logo"
+                            class-ofn:logo_url="img-120 img-logo"
                             widget-ofn:logo_url="solid-display-img"
                             default-ofn:logo_url="https://placehold.co/120"
                           ></solid-display>
@@ -720,9 +502,12 @@ import("./utils.js").then((utils) => {
                           <div class="row no-margin-bottom">
                             <solid-display
                               bind-resources=""
-                              fields="dfc-b:name"
+                              fields="wrapper(dfc-b:name, ofn:hasProduceCategory)"
+                              class-wrapper="valign-wrapper"
+                              widget-wrapper="div"
                               widget-dfc-b:name="solid-display-value"
-                              class-dfc-b:name="col s12 flow-text"
+                              class-dfc-b:name="flow-text margin-right-10"
+                              widget-ofn:hasProduceCategory="custom-multiple-badge-small"
                             ></solid-display>
                           </div>
                           <div class="row text-address">
@@ -750,7 +535,7 @@ import("./utils.js").then((utils) => {
                           <hr />
                           <div class="row">
                             <div class="col s6">
-                              <div class="row">
+                              <div class="row no-margin-bottom">
                                 <div class="col s12">
                                   <span class="bold-16-21"
                                     >Assurance Partners</span
@@ -760,7 +545,7 @@ import("./utils.js").then((utils) => {
                               <div class="row">
                                 <div class="col s12">
                                   <a
-                                    class="learn-more"
+                                    class="learn-more underline"
                                     href="#${this.uniq}-supporting-evidence"
                                     >Learn more</a
                                   >
@@ -768,22 +553,17 @@ import("./utils.js").then((utils) => {
                               </div>
                               <div class="row">
                                 <div class="col s12">
-                                  <img
-                                    class="responsive-img"
-                                    src="/sustainable_table.png"
-                                  />
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col s12">
-                                  <span
-                                    class="text-14 text-light bold underline"
-                                    >Sustainable Table</span
-                                  >
+                                  <solid-display
+                                    bind-resources=""
+                                    nested-field="ofn:hasSupportingEvidence"
+                                    fields="ofn:promo_image_url, ofn:Title"
+                                    widget-ofn:promo_image_url="solid-display-img"
+                                    class-ofn:Title="text-14 text-green bold underline"
+                                  ></solid-display>
                                 </div>
                               </div>
                             </div>
-                            <div class="col s6">
+                            <!-- <div class="col s6">
                               <div class="row">
                                 <div class="col s12">
                                   <span class="bold-16-21"
@@ -794,7 +574,7 @@ import("./utils.js").then((utils) => {
                               <div class="row">
                                 <div class="col s12">
                                   <a
-                                    class="learn-more"
+                                    class="learn-more underline"
                                     href="#${this.uniq}-supporting-evidence"
                                     >Learn more</a
                                   >
@@ -833,7 +613,7 @@ import("./utils.js").then((utils) => {
                                   >
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -846,60 +626,7 @@ import("./utils.js").then((utils) => {
                     <div class="card-panel card-round card-padding">
                       <div class="row">
                         <div class="col s3">
-                          <h5>Wholesale customers</h5>
-                          <div class="row">
-                            <solid-display
-                              bind-resources=""
-                              fields="dfc-b:hasDescription"
-                              class-dfc-b:hasDescription="col s12 text-14 text-light"
-                            ></solid-display>
-                          </div>
-                          <div class="row">
-                            <div class="col s12">
-                              <a
-                                href="#${this.uniq}-contact-producer"
-                                class="waves-effect waves-light btn-small"
-                                >View contact details</a
-                              >
-                            </div>
-                          </div>
-                          <div class="row text-light no-margin-bottom">
-                            <div class="col s12">Open Food Network</div>
-                          </div>
-                          <div class="row text-link valign-wrapper">
-                            <div class="col s8">Visit website</div>
-                            <div class="col s4">
-                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
-                            </div>
-                          </div>
-                          <div class="row text-light no-margin-bottom">
-                            <div class="col s12">Fresho</div>
-                          </div>
-                          <div class="row text-link valign-wrapper">
-                            <div class="col s8">Visit website</div>
-                            <div class="col s4">
-                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
-                            </div>
-                          </div>
-                          <div class="row text-light no-margin-bottom">
-                            <div class="col s12">Some other portal</div>
-                          </div>
-                          <div class="row text-link valign-wrapper">
-                            <div class="col s8">Visit website</div>
-                            <div class="col s4">
-                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
-                            </div>
-                          </div>
-                          <h6 class="margin-top-50">Household customers</h6>
-                          <div class="row text-light no-margin-bottom">
-                            <div class="col s12">Our eCommerce</div>
-                          </div>
-                          <div class="row text-link valign-wrapper">
-                            <div class="col s8">Visit website</div>
-                            <div class="col s4">
-                              <icon-mdi-open-in-new></icon-mdi-open-in-new>
-                            </div>
-                          </div>
+                          <custom-wholesale-buy bind-resources="" uniq="${this.uniq}"></custom-wholesale-buy>
                         </div>
                         <div class="col s8 offset-s1">
                           <h5>Feature products</h5>
@@ -966,7 +693,7 @@ import("./utils.js").then((utils) => {
                               <solid-display
                                 bind-resources=""
                                 fields="ofn:Household_URL"
-                                link-text-ofn:Household_URL="Visit our website"
+                                link-text-ofn:Household_URL="Producer website"
                                 class-ofn:Household_URL="text-link text-red"
                                 widget-ofn:Household_URL="solid-display-link-blank"
                               ></solid-display>
