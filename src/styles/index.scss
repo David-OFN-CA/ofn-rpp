@@ -380,6 +380,11 @@ solid-ofn-rpp {
       text-decoration: underline;
     }
 
+    [name="set-image"] {
+      display: flex;
+      justify-content: center;
+    }
+
     .img-200 {
       width: 200px;
       height: 200px;
