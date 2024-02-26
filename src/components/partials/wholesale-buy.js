@@ -85,7 +85,7 @@ import("../../utils.js").then((utils) => {
           return this._getResource.render({
             pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
             complete: (resource) => {
-
+              this.rendering = html``;
               if(resource["ofn:Wholesale_buy_description"]) {
                 this._addToRender(html`
                   <div class="row">
@@ -95,87 +95,88 @@ import("../../utils.js").then((utils) => {
                   </div>
                 `);
               }
-
-              if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email") && resource["ofn:Wholesale_enquiry_preferences"].includes("Phone")) {
-                this._addToRender(html`
-                  <div class="row">
-                    <div class="col s12">
-                      <a
-                        href="#${this.uniq}-contact-producer"
-                        class="waves-effect waves-light btn-small"
-                      >View contact details</a>
+              if(resource["ofn:Wholesale_enquiry_preferences"]) {
+                if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email") && resource["ofn:Wholesale_enquiry_preferences"].includes("Phone")) {
+                  this._addToRender(html`
+                    <div class="row">
+                      <div class="col s12">
+                        <a
+                          href="#${this.uniq}-contact-producer"
+                          class="waves-effect waves-light btn-small"
+                        >View contact details</a>
+                      </div>
                     </div>
-                  </div>
-                `);
-              } else if(resource["ofn:Wholesale_enquiry_preferences"].includes("Phone")) {
-                this._addToRender(html`
-                  <div class="row text-light no-margin-bottom">
-                    <div class="col s12">Phone number</div>
-                  </div>
-                  <div class="row text-link valign-wrapper">
-                    <div class="col s8 truncate">${resource["dfc-b:hasPhoneNumber"]}</div>
-                    <div class="col s4">
-                      <icon-mdi-phone-in-talk></icon-mdi-phone-in-talk>
-                    </div>
-                  </div>
-                `);
-              }
-              // if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email")) {
-              //   this._addToRender(html`
-              //     <div class="row text-light no-margin-bottom">
-              //       <div class="col s12">Email address</div>
-              //     </div>
-              //     <div class="row text-link valign-wrapper">
-              //       <div class="col s8 truncate">${resource["dfc-b:email"]}</div>
-              //       <div class="col s4">
-              //         <icon-mdi-email-outline></icon-mdi-email-outline>
-              //       </div>
-              //     </div>
-              //   `);
-              // }
-
-              if(resource["ofn:Wholesale_enquiry_preferences"].includes("Direct online purchase")) {
-                if(resource["ofn:Wholesale_URL_1"] && resource["ofn:Wholesale_URL_1_label"]) {
+                  `);
+                } else if(resource["ofn:Wholesale_enquiry_preferences"].includes("Phone")) {
                   this._addToRender(html`
                     <div class="row text-light no-margin-bottom">
-                      <div class="col s12">${resource["ofn:Wholesale_URL_1_label"]}</div>
+                      <div class="col s12">Phone number</div>
                     </div>
-                    <div class="row valign-wrapper">
-                      <div class="col s12">
-                        <a href="${resource["ofn:Wholesale_URL_1"]}" target="_blank" class="text-link text-link-red">
-                          Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
-                        </a>
+                    <div class="row text-link valign-wrapper">
+                      <div class="col s8 truncate">${resource["dfc-b:hasPhoneNumber"]}</div>
+                      <div class="col s4">
+                        <icon-mdi-phone-in-talk></icon-mdi-phone-in-talk>
                       </div>
                     </div>
                   `);
                 }
-                if(resource["ofn:Wholesale_URL_2"] && resource["ofn:Wholesale_URL_2_label"]) {
-                  this._addToRender(html`
-                    <div class="row text-light no-margin-bottom">
-                      <div class="col s12">${resource["ofn:Wholesale_URL_2_label"]}</div>
-                    </div>
-                    <div class="row valign-wrapper">
-                      <div class="col s12">
-                        <a href="${resource["ofn:Wholesale_URL_2"]}" target="_blank" class="text-link text-link-red">
-                          Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
-                        </a>
+                // if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email")) {
+                //   this._addToRender(html`
+                //     <div class="row text-light no-margin-bottom">
+                //       <div class="col s12">Email address</div>
+                //     </div>
+                //     <div class="row text-link valign-wrapper">
+                //       <div class="col s8 truncate">${resource["dfc-b:email"]}</div>
+                //       <div class="col s4">
+                //         <icon-mdi-email-outline></icon-mdi-email-outline>
+                //       </div>
+                //     </div>
+                //   `);
+                // }
+
+                if(resource["ofn:Wholesale_enquiry_preferences"].includes("Direct online purchase")) {
+                  if(resource["ofn:Wholesale_URL_1"] && resource["ofn:Wholesale_URL_1_label"]) {
+                    this._addToRender(html`
+                      <div class="row text-light no-margin-bottom">
+                        <div class="col s12">${resource["ofn:Wholesale_URL_1_label"]}</div>
                       </div>
-                    </div>
-                  `);
-                }
-                if(resource["ofn:Wholesale_URL_3"] && resource["ofn:Wholesale_URL_3_label"]) {
-                  this._addToRender(html`
-                    <div class="row text-light no-margin-bottom">
-                      <div class="col s12">${resource["ofn:Wholesale_URL_3_label"]}</div>
-                    </div>
-                    <div class="row valign-wrapper">
-                      <div class="col s12">
-                        <a href="${resource["ofn:Wholesale_URL_3"]}" target="_blank" class="text-link text-link-red">
-                          Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
-                        </a>
+                      <div class="row valign-wrapper">
+                        <div class="col s12">
+                          <a href="${resource["ofn:Wholesale_URL_1"]}" target="_blank" class="text-link text-link-red">
+                            Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                  `);
+                    `);
+                  }
+                  if(resource["ofn:Wholesale_URL_2"] && resource["ofn:Wholesale_URL_2_label"]) {
+                    this._addToRender(html`
+                      <div class="row text-light no-margin-bottom">
+                        <div class="col s12">${resource["ofn:Wholesale_URL_2_label"]}</div>
+                      </div>
+                      <div class="row valign-wrapper">
+                        <div class="col s12">
+                          <a href="${resource["ofn:Wholesale_URL_2"]}" target="_blank" class="text-link text-link-red">
+                            Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                          </a>
+                        </div>
+                      </div>
+                    `);
+                  }
+                  if(resource["ofn:Wholesale_URL_3"] && resource["ofn:Wholesale_URL_3_label"]) {
+                    this._addToRender(html`
+                      <div class="row text-light no-margin-bottom">
+                        <div class="col s12">${resource["ofn:Wholesale_URL_3_label"]}</div>
+                      </div>
+                      <div class="row valign-wrapper">
+                        <div class="col s12">
+                          <a href="${resource["ofn:Wholesale_URL_3"]}" target="_blank" class="text-link text-link-red">
+                            Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                          </a>
+                        </div>
+                      </div>
+                    `);
+                  }
                 }
               }
 
