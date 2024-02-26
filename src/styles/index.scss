@@ -380,9 +380,17 @@ solid-ofn-rpp {
       text-decoration: underline;
     }
 
-    .img-200 img {
+    .img-200 {
       width: 200px;
       height: 200px;
+      display: flex;
+      justify-content: center;
+      img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+      }
     }
 
     .card-panel {

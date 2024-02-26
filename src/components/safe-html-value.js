@@ -1,4 +1,5 @@
 import { LitElement, html } from "lit";
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import("../utils.js").then((utils) => {
   // Custom widget for producer description, original contains some unsafe html
@@ -12,7 +13,7 @@ import("../utils.js").then((utils) => {
         value: { attribute: "value" },
       };
       render() {
-        return html`${utils.sanitize(this.value, false)}`;
+        return html`${unsafeHTML(utils.sanitize(this.value, false))}`;
       }
     }
   );
