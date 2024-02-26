@@ -196,9 +196,23 @@ solid-ofn-rpp {
   }
 
   .products-list {
-    .img-168 img {
+
+    [name="set-image"] {
+      display: flex;
+      justify-content: center;
+    }
+
+    .img-168 {
       width: 166px;
       height: 166px;
+      display: flex;
+      justify-content: center;
+      img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+      }
     }
 
     .card-panel {
@@ -448,13 +462,13 @@ solid-ofn-rpp {
       }
     }
     .products-list {
-      .img-168 img {
+      .img-168 {
         width: 120px;
         height: 120px;
       }
     }
     .product-details {
-      .img-200 img {
+      .img-200 {
         width: 140px;
         height: 140px;
       }
