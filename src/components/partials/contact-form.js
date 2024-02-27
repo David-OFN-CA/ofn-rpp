@@ -26,23 +26,12 @@ import("@helpers/utils.js").then((utils) => {
          * @return {object} response containing the serialized resource
          */
         async _getProxyValue(resource) {
-          let response = {};
-          for(let property of await resource['properties'])  {
-            let value = resource[property];
-            if(property == "dfc-b:hasPhoneNumber") {
-              value = "Hello, I'm a phone number and my context is wrong.";
-            } else if(!property.startsWith('@')) {
-              value = await resource.get(property);
-              try {
-                if(value && typeof value === "object" && "getProxy" in value) {
-                  value = await this._getProxyValue(value);
-                }
-              } catch (e) {
-                console.error(e);
-              }
-            }
-            response[property] = value;
-          }
+          let response = {
+            "ofn:Wholesale_enquiry_preferences": await resource["ofn:Wholesale_enquiry_preferences"],
+            "dfc-b:hasPhoneNumber": "Hello, I'm a phone number and my context is wrong.", //await resource["dfc-b:hasPhoneNumber"],
+            "dfc-b:email": await resource["dfc-b:email"],
+            "ofn:contact_email_endpoint_uri": await resource["ofn:contact_email_endpoint_uri"],
+          };
           return response;
         }
 
@@ -86,6 +75,7 @@ import("@helpers/utils.js").then((utils) => {
           return this._getResource.render({
             pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
             complete: (resource) => {
+              console.log(resource);
               let render = html``;
               if(resource["ofn:Wholesale_enquiry_preferences"]) {
                 if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email")) {
@@ -163,7 +153,7 @@ import("@helpers/utils.js").then((utils) => {
               }
               return render;
             },
-            error: (e) => html`<p>Error while loading wholesale informations.</p>`
+            error: (e) => html`<p>Error while loading contact form.</p>`
           });
         }
       }

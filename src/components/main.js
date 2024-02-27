@@ -348,8 +348,11 @@ import("@helpers/utils.js").then((utils) => {
                 )
                 .setAttribute("enum", productCategories);
 
-              Array.from(document.querySelectorAll("select")).map((select) =>
-                select.classList.add("browser-default")
+              Array.from(document.querySelectorAll("select")).map((select) => {
+                  if (!select.classList.contains("materialize")) {
+                    select.classList.add("browser-default");
+                  }
+                }
               );
 
               setTimeout(() => {
