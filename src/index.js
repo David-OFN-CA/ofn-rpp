@@ -1,12 +1,2 @@
 import "materialize-css/dist/js/materialize.min.js";
-import "@widgets/badge-firstnationsled.js";
-import "@widgets/display-firstnationsled.js";
-import "@widgets/multiple-badge-list.js";
-import "@widgets/multiple-badge-small.js";
-import "@widgets/multiple-badge.js";
-import "@widgets/safe-html-value-short.js";
-import "@widgets/safe-html-value.js";
-import "@widgets/search-firstnationsled.js";
-import "@widgets/social-links.js";
-import "@partials/wholesale-buy.js";
-import "@components/main.js";
+import.meta.glob('./components/**/*.js', {eager: true});

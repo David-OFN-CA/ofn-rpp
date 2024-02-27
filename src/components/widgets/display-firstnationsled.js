@@ -9,9 +9,12 @@ customElements.define(
     static properties = {
       value: { attribute: "value" },
     };
+    createRenderRoot() {
+      return this;
+    }
     render() {
       return html`${this.value.length > 0
-        ? html`<div class="col s12 text-14 bold">First Nations Led</div><div class="col s12 text-14">${this.value}</div>`
+        ? html`<div class="row"><div class="col s12 text-14 bold">First Nations Led</div><div class="col s12 text-14">${this.value}</div></div>`
         : ""}`;
     }
   }

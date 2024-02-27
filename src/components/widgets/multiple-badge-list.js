@@ -17,7 +17,8 @@ customElements.define(
         line-height: 16px;
         height: auto;
         text-align: left;
-        background-color: #ede7e2;
+        background-color: white;
+        border: 1px solid black;
         color: #191c1d;
         border-radius: 41px;
         text-transform: uppercase;

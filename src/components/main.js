@@ -671,31 +671,23 @@ import("@helpers/utils.js").then((utils) => {
                               class-country="col s12 text-16 text-light"
                             ></solid-display>
                           </div>
-                          <div class="row">
-                            <solid-display
-                              bind-resources=""
-                              fields="ofn:First_Nations_country"
-                              widget-ofn:First_Nations_country="custom-display-firstnationsled"
-                            ></solid-display>
-                          </div>
-                          <div class="row text-link valign-wrapper">
-                            <div class="col s12">
+                          <solid-display
+                            bind-resources=""
+                            fields="ofn:First_Nations_country"
+                            widget-ofn:First_Nations_country="custom-display-firstnationsled"
+                          ></solid-display>
+                          <!-- <div class="row valign-wrapper">
+                            <div class="col s12 text-link text-link-red">
                               View map&nbsp;<icon-mdi-open-in-new
                               ></icon-mdi-open-in-new>
                             </div>
-                          </div>
+                          </div> -->
                           <h5 class="margin-top-50">Useful links</h5>
-                          <div class="row no-margin-bottom">
-                            <div class="col s12">
-                              <solid-display
-                                bind-resources=""
-                                fields="ofn:Household_URL"
-                                link-text-ofn:Household_URL="Producer website"
-                                class-ofn:Household_URL="text-link text-red"
-                                widget-ofn:Household_URL="solid-display-link-blank"
-                              ></solid-display>
-                            </div>
-                          </div>
+                          <solid-display
+                            bind-resources=""
+                            fields="ofn:Household_URL"
+                            widget-ofn:Household_URL="custom-display-householdurl"
+                          ></solid-display>
                           <div class="row no-margin-bottom">
                             <solid-display
                               bind-resources=""
@@ -709,11 +701,13 @@ import("@helpers/utils.js").then((utils) => {
                             <div
                               class="col hide-on-small-only m12 margin-top-10"
                             >
-                              <img
-                                class="responsive-img"
+                              <solid-display
+                                bind-resources=""
+                                fields="ofn:promo_image_url"
+                                widget-ofn:promo_image_url="solid-display-img"
+                                class-ofn:promo_image_url="responsive-img"
                                 style="width: 100%"
-                                src="/kialla_silos.png"
-                              />
+                              ></solid-display>
                             </div>
                           </div>
                           <div class="row">

@@ -349,6 +349,9 @@ solid-ofn-rpp {
       }
       &.text-link-red {
         color: #9A4444;
+        a {
+          color: #9A4444;
+        }
       }
     }
 
@@ -424,7 +427,7 @@ solid-ofn-rpp {
     }
 
     .social-link {
-      color: #4B250F;
+      color: #9A4444;
       .icon {
         font-size: 28px;
       }
