@@ -1,7 +1,6 @@
 import { LitElement, html } from "lit";
 
-import("../utils.js").then((utils) => {
-  // Custom widget for producer description, original contains some unsafe html, truncated
+import("@helpers/utils.js").then((utils) => {
   customElements.define(
     "custom-safe-html-value-short",
     class extends LitElement {

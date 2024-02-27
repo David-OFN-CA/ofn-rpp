@@ -1,11 +1,11 @@
-import makeExpand from '../helpers/expand.js';
+import makeExpand from '@helpers/expand.js';
 
-import("../utils.js").then((utils) => {
+import("@helpers/utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
     const expand = makeExpand(core, utils);
-    // Custom widget for badges (from ldp container)
+
     core.Sib.register({
-      name: "custom-multiple-badge",
+      name: "custom-multiple-badge-small",
       use: [core.StoreMixin],
       empty() {
         this.element.innerHTML = "";
@@ -18,7 +18,7 @@ import("../utils.js").then((utils) => {
           );
           let label = (await expand(chip, "ofn:label"));
           this.element.innerHTML += `
-            <div class="chip">${label}</div>
+            <div class="chip small">${label}</div>
           `;
         }
       },

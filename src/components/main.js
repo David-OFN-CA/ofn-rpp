@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from "lit";
-import makeExpand from './helpers/expand.js';
-import style from "./styles/index.scss?inline";
+import makeExpand from '@helpers/expand.js';
+import style from "@styles/index.scss?inline";
 import "~icons/mdi/home-silo";
 import "~icons/mdi/food-apple";
 import "~icons/mdi/open-in-new";
@@ -10,7 +10,7 @@ import "~icons/mdi/linkedin";
 import "~icons/mdi/whatsapp";
 import "~icons/mdi/email-outline";
 
-import("./utils.js").then((utils) => {
+import("@helpers/utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
     const expand = makeExpand(core, utils);
 
@@ -674,11 +674,8 @@ import("./utils.js").then((utils) => {
                           <div class="row">
                             <solid-display
                               bind-resources=""
-                              required-ofn:first_nations_country=""
-                              fields="title, fnc(ofn:First_Nations_country)"
-                              value-title="First Nation Country"
-                              class-title="col s12 text-14 bold"
-                              class-fnc="col s12 text-14"
+                              fields="ofn:First_Nations_country"
+                              widget-ofn:First_Nations_country="custom-display-firstnationsled"
                             ></solid-display>
                           </div>
                           <div class="row text-link valign-wrapper">

@@ -1,6 +1,6 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, html } from "lit";
 
-import("../utils.js").then((utils) => {
+import("@helpers/utils.js").then((utils) => {
   // Custom widget for filtering First Nations Led
   customElements.define(
     "custom-search-firstnationsled",

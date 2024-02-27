@@ -1,6 +1,6 @@
-import makeExpand from '../helpers/expand.js';
+import makeExpand from '@helpers/expand.js';
 
-import("../utils.js").then((utils) => {
+import("@helpers/utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
     const expand = makeExpand(core, utils);
     // Custom widget for social media links

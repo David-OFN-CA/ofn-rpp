@@ -3,7 +3,7 @@ import { Task } from "@lit/task";
 import "~icons/mdi/phone-in-talk";
 import "~icons/mdi/open-in-new";
 
-import("../../utils.js").then((utils) => {
+import("@helpers/utils.js").then((utils) => {
   import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
     // Custom widget for wholesale
     customElements.define(

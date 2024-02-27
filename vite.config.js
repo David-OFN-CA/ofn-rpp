@@ -25,4 +25,13 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      "@components": "/src/components",
+      "@helpers": "/src/helpers",
+      "@partials": "/src/components/partials",
+      "@styles": "/src/styles",
+      "@widgets": "/src/components/widgets",
+    },
+  },
 });
