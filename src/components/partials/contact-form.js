@@ -1,0 +1,172 @@
+import { LitElement, html } from "lit";
+import { Task } from "@lit/task";
+
+import("@helpers/utils.js").then((utils) => {
+  import(/* @vite-ignore */ utils.coreVersion()).then((core) => {
+    customElements.define(
+      "custom-contact-form",
+      class extends LitElement {
+        constructor() {
+          super();
+        }
+
+        static properties = {
+          dataSrc: { attribute: "data-src" },
+          uniq: { attribute: "uniq" },
+        }
+
+        createRenderRoot() {
+          return this;
+        }
+
+        /**
+         * Asynchronously gets the proxy value for the given resource.
+         *
+         * @param {proxy} resource - description of resource
+         * @return {object} response containing the serialized resource
+         */
+        async _getProxyValue(resource) {
+          let response = {};
+          for(let property of await resource['properties'])  {
+            let value = resource[property];
+            if(property == "dfc-b:hasPhoneNumber") {
+              value = "Hello, I'm a phone number and my context is wrong.";
+            } else if(!property.startsWith('@')) {
+              value = await resource.get(property);
+              try {
+                if(value && typeof value === "object" && "getProxy" in value) {
+                  value = await this._getProxyValue(value);
+                }
+              } catch (e) {
+                console.error(e);
+              }
+            }
+            response[property] = value;
+          }
+          return response;
+        }
+
+        _getResource = new Task(this, {
+          task: async ([dataSrc]) => {
+            if(!dataSrc) return;
+            const resource = await core.store.getData(dataSrc, utils.CLIENT_CONTEXT);
+            let response = await this._getProxyValue(resource);
+            return response;
+          },
+          args: () => [this.dataSrc]
+        })
+
+        _submitForm(e) {
+          let form = this.querySelector("form");
+          let responseTarget = this.querySelector("form .response");
+          if(form) {
+            const formData = new FormData(form);
+            fetch(form.action, {
+              method: 'POST',
+              body: formData
+            }).then(response => {
+              if(response.ok) {
+                responseTarget.innerHTML = 'Email submitted successfully';
+              } else {
+                responseTarget.innerHTML = 'Email submission failed';
+              }
+            }).catch(_ => responseTarget.innerHTML = 'Error submitting email');
+          }
+          e.preventDefault();
+        }
+
+        updated() {
+          M.FormSelect.init(this.querySelectorAll("select"));
+        }
+
+        render() {
+          if(!this.dataSrc) return html``;
+          if(!this.uniq) this.uniq = utils.uniq();
+
+          return this._getResource.render({
+            pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
+            complete: (resource) => {
+              let render = html``;
+              if(resource["ofn:Wholesale_enquiry_preferences"]) {
+                if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email")) {
+                  render = html`
+                  <h4 id="${this.uniq}-contact-producer">Contact Producer</h4>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="card-panel card-padding">
+                        <div class="row">
+                          <div class="col s3">
+                            ${resource["ofn:Wholesale_enquiry_preferences"].includes("Phone") ? html`
+                            <div class="row text-light no-margin-bottom">
+                              <div class="col s12">Phone number</div>
+                            </div>
+                            <div class="row no-margin-bottom valign-wrapper">
+                              <div class="col s12 text-link text-link-red">
+                                <a href="tel:${resource["dfc-b:hasPhoneNumber"]}" target="_blank">${resource["dfc-b:hasPhoneNumber"]}&nbsp;<icon-mdi-phone-in-talk></icon-mdi-phone-in-talk></a>
+                              </div>
+                            </div>
+                            ` : html``}
+                            <div class="row text-light no-margin-bottom">
+                              <div class="col s12">Email address</div>
+                            </div>
+                            <div class="row no-margin-bottom valign-wrapper">
+                              <div class="col s12 text-link text-link-red">
+                                <a href="mailto:${resource["dfc-b:email"]}" target="_blank">${resource["dfc-b:email"]}&nbsp;<icon-mdi-email-outline></icon-mdi-email-outline></a>
+                              </div>
+                            </div>
+                          </div>
+                          <form class="col s8" action="${resource["ofn:contact_email_endpoint_uri"]}" method="post">
+                            <h5>Contact form</h5>
+                            <div class="row">
+                              <div class="input-field col s6">
+                                <input id="name" name="name" type="text" class="validate">
+                                <label for="name">Name</label>
+                              </div>
+                              <div class="input-field col s6">
+                                <select id="type" name="type" class="materialize">
+                                  <option value="" disabled selected>Type</option>
+                                  <option value="B2B / wholesale buyer">B2B / wholesale buyer</option>
+                                  <option value="household / consumer buyer">Household / consumer buyer</option>
+                                  <option value="general / other">General / other</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s6">
+                                <input id="from" name="from" type="email" class="validate">
+                                <label for="from">Email address</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <textarea id="text" name="text" class="materialize-textarea"></textarea>
+                                <label for="text">Message</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col s12">
+                                <button
+                                  @click="${this._submitForm}"
+                                  class="waves-effect waves-light btn-small"
+                                >Send message</button>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col s12 response"></div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`;
+                }
+              }
+              return render;
+            },
+            error: (e) => html`<p>Error while loading wholesale informations.</p>`
+          });
+        }
+      }
+    );
+  });
+});

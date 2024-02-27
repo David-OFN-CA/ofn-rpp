@@ -131,8 +131,11 @@ import("@helpers/utils.js").then((utils) => {
                 {}
               );
 
-              Array.from(document.querySelectorAll("select")).map((select) =>
-                select.classList.add("browser-default")
+              Array.from(document.querySelectorAll("select")).map((select) => {
+                  if (!select.classList.contains("materialize")) {
+                    select.classList.add("browser-default");
+                  }
+                }
               );
 
               setTimeout(() => {
@@ -742,15 +745,7 @@ import("@helpers/utils.js").then((utils) => {
                     </div>
                   </div>
                 </div>
-                <h4 id="${this.uniq}-contact-producer">Contact Producer</h4>
-                <div class="row">
-                  <div class="col s12">
-                    <div class="row">
-                      <div class="col s3"></div>
-                      <div class="col s8"></div>
-                    </div>
-                  </div>
-                </div>
+                <custom-contact-form bind-resources="" uniq="${this.uniq}"></custom-contact-form>
               </div>
             </div>
           `;

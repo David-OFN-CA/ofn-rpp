@@ -335,7 +335,9 @@ solid-ofn-rpp {
       @extend .text-14;
       @extend .underline;
       cursor: pointer;
-      icon-mdi-open-in-new {
+      icon-mdi-open-in-new,
+      icon-mdi-email-outline,
+      icon-mdi-phone-in-talk {
         vertical-align: text-top;
         margin-left: 4px;
         font-size: 18px;
