@@ -65,11 +65,6 @@ import("@helpers/utils.js").then((utils) => {
           return render;
         }
 
-        viewWidgets() {
-          let render = html``;
-          return render;
-        }
-
         viewProducersList() {
           setTimeout(() => {
             const producers = core.store.getData(
@@ -131,7 +126,7 @@ import("@helpers/utils.js").then((utils) => {
                 {}
               );
 
-              Array.from(document.querySelectorAll("select")).map((select) => {
+              Array.from(this.querySelectorAll("select")).map((select) => {
                   if (!select.classList.contains("materialize")) {
                     select.classList.add("browser-default");
                   }
@@ -140,14 +135,14 @@ import("@helpers/utils.js").then((utils) => {
 
               setTimeout(() => {
                 M.Autocomplete.init(
-                  document.querySelectorAll(
+                  this.querySelectorAll(
                     'input[type="text"][name="search-field"]'
                   ),
                   {
                     data: producerNames,
                     limit: 3,
                     onAutocomplete: () => {
-                      document
+                      this
                         .querySelector(
                           `[filtered-by=producers-list-filters-${this.uniq}]`
                         )
@@ -156,14 +151,14 @@ import("@helpers/utils.js").then((utils) => {
                   }
                 );
                 M.Autocomplete.init(
-                  document.querySelectorAll(
+                  this.querySelectorAll(
                     'input[type="text"][name="address"]'
                   ),
                   {
                     data: addresses,
                     limit: 3,
                     onAutocomplete: () => {
-                      document
+                      this
                         .querySelector(
                           `[filtered-by=producers-list-filters-${this.uniq}]`
                         )
@@ -171,7 +166,7 @@ import("@helpers/utils.js").then((utils) => {
                     },
                   }
                 );
-                M.FormSelect.init(document.querySelectorAll("select"));
+                M.FormSelect.init(this.querySelectorAll("select"));
               }, 0);
             });
           }, 0);
@@ -339,16 +334,16 @@ import("@helpers/utils.js").then((utils) => {
                 new Set(productCategories.sort())
               ).join(", ");
               // NOTICE: change to mutation observer
-              document
+              this
                 .querySelector(`#products-list-filters-${this.uniq}`)
                 .setAttribute("enum-ofn:Type", productCategories);
-              document
+              this
                 .querySelector(
                   'solid-form-dropdown-placeholder[name="ofn:Type"]'
                 )
                 .setAttribute("enum", productCategories);
 
-              Array.from(document.querySelectorAll("select")).map((select) => {
+              Array.from(this.querySelectorAll("select")).map((select) => {
                   if (!select.classList.contains("materialize")) {
                     select.classList.add("browser-default");
                   }
@@ -357,14 +352,14 @@ import("@helpers/utils.js").then((utils) => {
 
               setTimeout(() => {
                 M.Autocomplete.init(
-                  document.querySelectorAll(
+                  this.querySelectorAll(
                     'input[type="text"][name="search-field-product"]'
                   ),
                   {
                     data: productNames,
                     limit: 3,
                     onAutocomplete: () => {
-                      document
+                      this
                         .querySelector(
                           `[filtered-by=products-list-filters-${this.uniq}]`
                         )
@@ -372,7 +367,7 @@ import("@helpers/utils.js").then((utils) => {
                     },
                   }
                 );
-                M.FormSelect.init(document.querySelectorAll("select"));
+                M.FormSelect.init(this.querySelectorAll("select"));
               }, 0);
             });
           }, 0);
@@ -569,6 +564,7 @@ import("@helpers/utils.js").then((utils) => {
                                 </div>
                               </div>
                             </div>
+                            <!-- Commented: Missing information on how ecological outcomes should work -->
                             <!-- <div class="col s6">
                               <div class="row">
                                 <div class="col s12">
@@ -682,6 +678,7 @@ import("@helpers/utils.js").then((utils) => {
                             fields="ofn:First_Nations_country"
                             widget-ofn:First_Nations_country="custom-display-firstnationsled"
                           ></solid-display>
+                          <!-- Commented: No map link in resource? -->
                           <!-- <div class="row valign-wrapper">
                             <div class="col s12 text-link text-link-red">
                               View map&nbsp;<icon-mdi-open-in-new
