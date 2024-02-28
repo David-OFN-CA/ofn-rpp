@@ -480,6 +480,11 @@ solid-ofn-rpp {
         }
       }
     }
+
+    .flex-img {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   @media #{$small-and-down} {

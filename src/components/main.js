@@ -694,7 +694,7 @@ import("@helpers/utils.js").then((utils) => {
                                 bind-resources=""
                                 fields="ofn:promo_image_url"
                                 widget-ofn:promo_image_url="solid-display-img"
-                                class-ofn:promo_image_url="responsive-img"
+                                class-ofn:promo_image_url="responsive-img flex-img"
                                 style="width: 100%"
                               ></solid-display>
                             </div>
