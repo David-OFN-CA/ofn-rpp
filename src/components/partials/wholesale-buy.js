@@ -32,16 +32,14 @@ import("@helpers/utils.js").then((utils) => {
           let response = {};
           for(let property of await resource['properties'])  {
             let value = resource[property];
-            if(property == "dfc-b:hasPhoneNumber") {
-              value = "Hello, I'm a phone number and my context is wrong.";
-            } else if(!property.startsWith('@')) {
+            if(!property.startsWith('@')) {
               value = await resource.get(property);
               try {
                 if(value && typeof value === "object" && "getProxy" in value) {
                   value = await this._getProxyValue(value);
                 }
               } catch (e) {
-                console.error(e);
+                if(import.meta.env.DEV) console.error(e);
               }
             }
             response[property] = value;

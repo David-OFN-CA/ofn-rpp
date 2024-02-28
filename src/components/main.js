@@ -533,129 +533,115 @@ import("@helpers/utils.js").then((utils) => {
                               >Learn more about us</a
                             >
                           </div>
-                          <hr />
-                          <div class="row">
-                            <div class="col s6">
-                              <div class="row no-margin-bottom">
-                                <div class="col s12">
-                                  <span class="bold-16-21"
-                                    >Assurance Partners</span
-                                  >
+                          <!-- Commented: Missing information on how ecological outcomes should work -->
+                          <conditional-display
+                            bind-resources=""
+                            condition="ofn:hasSupportingEvidence">
+                            <hr />
+                            <div class="row">
+                              <!-- <div class="col s6">
+                                <div class="row no-margin-bottom">
+                                  <div class="col s12">
+                                    <span class="bold-16-21"
+                                      >Assurance Partners</span
+                                    >
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div class="col s12">
-                                  <a
-                                    class="learn-more underline"
-                                    href="#${this.uniq}-supporting-evidence"
-                                    >Learn more</a
-                                  >
+                                <div class="row">
+                                  <div class="col s12">
+                                    <a
+                                      class="learn-more underline"
+                                      href="#${this.uniq}-supporting-evidence"
+                                      >Learn more</a
+                                    >
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div class="col s12">
-                                  <solid-display
-                                    bind-resources=""
-                                    nested-field="ofn:hasSupportingEvidence"
-                                    fields="ofn:promo_image_url, ofn:Title"
-                                    widget-ofn:promo_image_url="solid-display-img"
-                                    class-ofn:Title="text-14 text-green bold underline"
-                                  ></solid-display>
+                                <div class="row">
+                                  <div class="col s12">
+                                    <solid-display
+                                      bind-resources=""
+                                      nested-field="ofn:hasSupportingEvidence"
+                                      fields="ofn:promo_image_url, ofn:Title"
+                                      widget-ofn:promo_image_url="solid-display-img"
+                                      class-ofn:Title="text-14 text-green bold underline"
+                                    ></solid-display>
+                                  </div>
                                 </div>
+                              </div> -->
+                              <div class="col s6">
+                                <div class="row">
+                                  <div class="col s12">
+                                    <span class="bold-16-21"
+                                      >Supporting Evidence</span
+                                    >
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col s12">
+                                    <a
+                                      class="learn-more underline"
+                                      href="#${this.uniq}-supporting-evidence"
+                                      >Learn more</a
+                                    >
+                                  </div>
+                                </div>
+                                <!-- <div class="row no-margin-bottom">
+                                  <div class="col s12">
+                                    <div class="chip small text-12 peach">1</div>
+                                    <span class="text-14 text-light">
+                                      for
+                                      <span class="underline"
+                                        >ecological outcomes</span
+                                      ></span
+                                    >
+                                  </div>
+                                </div> -->
                               </div>
                             </div>
-                            <!-- Commented: Missing information on how ecological outcomes should work -->
-                            <!-- <div class="col s6">
-                              <div class="row">
-                                <div class="col s12">
-                                  <span class="bold-16-21"
-                                    >Supporting Evidence</span
-                                  >
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col s12">
-                                  <a
-                                    class="learn-more underline"
-                                    href="#${this.uniq}-supporting-evidence"
-                                    >Learn more</a
-                                  >
-                                </div>
-                              </div>
-                              <div class="row no-margin-bottom">
-                                <div class="col s12">
-                                  <div class="chip small text-12 peach">1</div>
-                                  <span class="text-14 text-light">
-                                    for
-                                    <span class="underline"
-                                      >ecological outcomes</span
-                                    ></span
-                                  >
-                                </div>
-                              </div>
-                              <div class="row no-margin-bottom">
-                                <div class="col s12">
-                                  <div class="chip small text-12 peach">2</div>
-                                  <span class="text-14 text-light">
-                                    for
-                                    <span class="underline"
-                                      >practices</span
-                                    ></span
-                                  >
-                                </div>
-                              </div>
-                              <div class="row no-margin-bottom">
-                                <div class="col s12">
-                                  <div class="chip small text-12 peach">1</div>
-                                  <span class="text-14 text-light">
-                                    for
-                                    <span class="underline"
-                                      >participation</span
-                                    ></span
-                                  >
-                                </div>
-                              </div>
-                            </div> -->
+                          </conditional-display>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <conditional-display
+                  bind-resources=""
+                  condition="dfc-b:supplies">
+                  <h4 id="${this.uniq}-how-to-buy">How to buy</h4>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="card-panel card-round card-padding">
+                        <div class="row">
+                          <div class="col s3">
+                            <custom-wholesale-buy bind-resources="" uniq="${this.uniq}"></custom-wholesale-buy>
+                          </div>
+                          <div class="col s8 offset-s1">
+                            <h5>Feature products</h5>
+                            <solid-display
+                              bind-resources=""
+                              nested-field="dfc-b:supplies"
+                              fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
+                              widget-set-card-row="div"
+                              class-set-card-row="row"
+                              widget-set-card-col="div"
+                              class-set-card-col="col s6 m4"
+                              widget-set-card-panel="div"
+                              class-set-card-panel="card-panel"
+                              widget-set-card-wrapper="div"
+                              class-ofn:image="img-200"
+                              widget-ofn:image="solid-display-img"
+                              default-ofn:image="https://placehold.co/200"
+                              widget-set-name="div"
+                              class-set-name="row no-margin-bottom"
+                              widget-dfc-b:name="solid-display-value"
+                              class-dfc-b:name="col s12 truncate"
+                            ></solid-display>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <h4 id="${this.uniq}-how-to-buy">How to buy</h4>
-                <div class="row">
-                  <div class="col s12">
-                    <div class="card-panel card-round card-padding">
-                      <div class="row">
-                        <div class="col s3">
-                          <custom-wholesale-buy bind-resources="" uniq="${this.uniq}"></custom-wholesale-buy>
-                        </div>
-                        <div class="col s8 offset-s1">
-                          <h5>Feature products</h5>
-                          <solid-display
-                            bind-resources=""
-                            nested-field="dfc-b:supplies"
-                            fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
-                            widget-set-card-row="div"
-                            class-set-card-row="row"
-                            widget-set-card-col="div"
-                            class-set-card-col="col s6 m4"
-                            widget-set-card-panel="div"
-                            class-set-card-panel="card-panel"
-                            widget-set-card-wrapper="div"
-                            class-ofn:image="img-200"
-                            widget-ofn:image="solid-display-img"
-                            default-ofn:image="https://placehold.co/200"
-                            widget-set-name="div"
-                            class-set-name="row no-margin-bottom"
-                            widget-dfc-b:name="solid-display-value"
-                            class-dfc-b:name="col s12 truncate"
-                          ></solid-display>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </conditional-display>
                 <h4 id="${this.uniq}-about-us">About us</h4>
                 <div class="row">
                   <div class="col s12">
@@ -734,17 +720,41 @@ import("@helpers/utils.js").then((utils) => {
                     </div>
                   </div>
                 </div>
-                <h4 id="${this.uniq}-supporting-evidence">
-                  Supporting evidence
-                </h4>
-                <div class="row">
-                  <div class="col s12">
-                    <div class="row">
-                      <div class="col s3"></div>
-                      <div class="col s8"></div>
+                <conditional-display
+                  bind-resources=""
+                  condition="ofn:hasSupportingEvidence">
+                  <h4 id="${this.uniq}-supporting-evidence">
+                    Supporting evidence
+                  </h4>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="card-panel card-padding">
+                        <div class="row">
+                          <div class="col s3">
+                            <solid-form-search
+                              id="search-supporting-evidence-${this.uniq}"
+                              fields="ofn:Classification"
+                              auto-range-ofn:Classification=""
+                              widget-ofn:Classification="solid-form-checkbox"
+                              option-label-ofn:Classification="ofn:label"
+                            ></solid-form-search>
+                            Coming soon. :)
+                          </div>
+                          <div class="col s8">
+                            <solid-display
+                              bind-resources=""
+                              nested-field="ofn:hasSupportingEvidence"
+                              fields="virtualid"
+                              value-virtualid="store://resource.@id"
+                              widget-virtualid="custom-supporting-evidence"
+                              filtered-by="search-supporting-evidence-${this.uniq}"
+                            ></solid-display>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </conditional-display>
                 <custom-contact-form bind-resources="" uniq="${this.uniq}"></custom-contact-form>
               </div>
             </div>

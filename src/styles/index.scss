@@ -65,6 +65,14 @@ solid-ofn-rpp {
     line-height: 21px;
   }
 
+  .line-height-40 {
+    line-height: 40px;
+  }
+
+  .text-black {
+    color: #191C1D;
+  }
+
   .loader {
     margin-top: 30px;
     padding: 60px;
@@ -106,6 +114,10 @@ solid-ofn-rpp {
       background-size: 31px 15px;
       padding-left: 50px;
       background-position: 12px;
+    }
+    &.white {
+      background-color: white;
+      border: 1px solid black;
     }
   }
 
@@ -247,6 +259,11 @@ solid-ofn-rpp {
       &.card-padding {
         padding: 25px 50px;
       }
+    }
+
+    .card-evidence {
+      box-shadow: 0px 4px 4px 0px #0000000D !important;
+      padding: 30px !important;
     }
 
     .title-header {
@@ -438,7 +455,30 @@ solid-ofn-rpp {
     custom-multiple-badge[name="ofn:Practices"] .chip {
       border: 1px solid black;
       border-radius: 26px;
+    }
 
+    .text-light-grey {
+      color: #6F7D81;
+    }
+
+    .vertical-align-middle {
+      vertical-align: middle;
+    }
+
+    .document-availibility {
+      @extend .text-14;
+      font-weight: 700;
+      line-height: 24px;
+      color: #191C1D;
+      icon-mdi-file-document-check-outline {
+        vertical-align: text-top;
+        margin-left: 4px;
+        font-size: 20px;
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
     }
   }
 

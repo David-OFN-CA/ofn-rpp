@@ -28,7 +28,7 @@ import("@helpers/utils.js").then((utils) => {
         async _getProxyValue(resource) {
           let response = {
             "ofn:Wholesale_enquiry_preferences": await resource["ofn:Wholesale_enquiry_preferences"],
-            "dfc-b:hasPhoneNumber": "Hello, I'm a phone number and my context is wrong.", //await resource["dfc-b:hasPhoneNumber"],
+            "dfc-b:hasPhoneNumber": await resource["dfc-b:hasPhoneNumber"],
             "dfc-b:email": await resource["dfc-b:email"],
             "ofn:contact_email_endpoint_uri": await resource["ofn:contact_email_endpoint_uri"],
           };
@@ -75,7 +75,6 @@ import("@helpers/utils.js").then((utils) => {
           return this._getResource.render({
             pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
             complete: (resource) => {
-              console.log(resource);
               let render = html``;
               if(resource["ofn:Wholesale_enquiry_preferences"]) {
                 if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email")) {
