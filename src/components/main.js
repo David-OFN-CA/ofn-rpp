@@ -11,6 +11,8 @@ import "~icons/mdi/email-outline";
 import * as utils from '@helpers/utils';
 import producerBackground from "/producer_background.png";
 
+console.log(new URL(producerBackground, import.meta.url));
+
 utils.importCore().then(async (core) => {
   const expand = await utils.makeExpand();
   customElements.define(
