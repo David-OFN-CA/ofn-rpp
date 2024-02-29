@@ -28,8 +28,8 @@ import("@helpers/utils.js").then((utils) => {
         }
       }
       render() {
-        return html`<div class="switch cursor-pointer" @click="${this.toggle}">
-          <label>
+        return html`<div class="switch">
+          <label class="padding-15 cursor-pointer" @click="${this.toggle}">
             First Nations Led
             <input
               type="checkbox"

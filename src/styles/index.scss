@@ -501,6 +501,18 @@ solid-ofn-rpp {
     cursor: pointer;
   }
 
+  .no-margin {
+    margin: 0;
+  }
+
+  .no-padding {
+    padding: 0;
+  }
+
+  .padding-15 {
+    padding: 15px;
+  }
+
   @media #{$small-and-down} {
     [name="set-card-panel"] {
       .img-on-mobile {
