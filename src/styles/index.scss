@@ -108,13 +108,6 @@ solid-ofn-rpp {
     padding-right: 12px;
     margin-right: 6px;
     margin-bottom: 6px;
-    &.first_nations_led {
-      background-image: url(/Australian_Aboriginal_Flag.png);
-      background-repeat: no-repeat;
-      background-size: 31px 15px;
-      padding-left: 50px;
-      background-position: 12px;
-    }
     &.white {
       background-color: white;
       border: 1px solid black;
@@ -156,7 +149,6 @@ solid-ofn-rpp {
           @extend .valign-wrapper;
           @extend .bold-16-21;
           color: #191c1d;
-          background-image: url(/Australian_Aboriginal_Flag.png);
           background-repeat: no-repeat;
           background-size: 31px 15px;
           padding-left: 60px;
@@ -269,7 +261,6 @@ solid-ofn-rpp {
     .title-header {
       overflow: auto;
       position: relative;
-      background: url(/producer_background.png);
       background-position: top;
       background-size: cover;
       filter: contrast(40%) brightness(1.5);

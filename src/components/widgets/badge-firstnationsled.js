@@ -1,4 +1,5 @@
 import { LitElement, css, html } from "lit";
+import australianAboriginalFlag from "/Australian_Aboriginal_Flag.png";
 
 customElements.define(
   "custom-badge-firstnationsled",
@@ -25,7 +26,6 @@ customElements.define(
         padding-right: 12px;
         margin-right: 6px;
         margin-bottom: 6px;
-        background-image: url(/Australian_Aboriginal_Flag.png);
         background-repeat: no-repeat;
         background-size: 31px 15px;
         padding-left: 50px;
@@ -34,7 +34,7 @@ customElements.define(
     `;
     render() {
       return html`${this.value.length > 0
-        ? html`<div>First Nations Led</div>`
+        ? html`<div style="background-image: url(${australianAboriginalFlag});">First Nations Led</div>`
         : ""}`;
     }
   }

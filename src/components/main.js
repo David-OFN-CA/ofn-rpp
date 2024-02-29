@@ -9,6 +9,7 @@ import "~icons/mdi/linkedin";
 import "~icons/mdi/whatsapp";
 import "~icons/mdi/email-outline";
 import * as utils from '@helpers/utils';
+import producerBackground from "/producer_background.png";
 
 utils.importCore().then(async (core) => {
   const expand = await utils.makeExpand();
@@ -486,7 +487,7 @@ utils.importCore().then(async (core) => {
               <div class="row">
                 <div class="col s12">
                   <div class="card-panel card-round">
-                    <div class="row valign-wrapper title-header no-margin-bottom"></div>
+                    <div class="row valign-wrapper no-margin-bottom title-header" style="background: url(${producerBackground})"></div>
                     <div class="row margin-top-20">
                       <div class="col s12 m3 margin-top-10">
                         <solid-display

@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit";
 import { toggleAndPopulate } from '@helpers/utils';
+import australianAboriginalFlag from "/Australian_Aboriginal_Flag.png";
 
 // Custom widget for filtering First Nations Led
 customElements.define(
@@ -29,7 +30,7 @@ customElements.define(
     }
     render() {
       return html`<div class="switch">
-        <label class="padding-15 cursor-pointer" @click="${this.toggle}">
+        <label style="background-image: url(${australianAboriginalFlag});" class="padding-15 cursor-pointer" @click="${this.toggle}">
           First Nations Led
           <input
             type="checkbox"
