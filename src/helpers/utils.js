@@ -6,8 +6,6 @@ import truncate from "@helpers/truncate";
 import sanitize from "@helpers/sanitize";
 import uniq from "@helpers/uniq";
 
-export const componentName = "ofn-rpp";
-
 export const CLIENT_CONTEXT = {};
 
 export {
