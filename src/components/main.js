@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from "lit";
+import { LitElement, html, nothing, unsafeCSS } from "lit";
 import style from "@styles/index.scss?inline";
 import "~icons/mdi/home-silo";
 import "~icons/mdi/food-apple";
@@ -24,6 +24,7 @@ utils.importCore().then(async (core) => {
         productsSrc: { attribute: "products-src" },
         rangeProductCategories: { attribute: "range-product-categories" },
         rangeProducerAssurances: { attribute: "range-producer-assurances" },
+        routePrefix: { attribute: "route-prefix" },
         uniq: { attribute: "uniq" },
       };
 
@@ -51,7 +52,7 @@ utils.importCore().then(async (core) => {
 
       routers() {
         let render = html`
-          <solid-router default-route="${this.route}-producers-list">
+          <solid-router default-route="${this.route}-producers-list" route-prefix=${this.routePrefix ?? nothing}>
             <solid-route name="${this.route}-producers-list"></solid-route>
             <solid-route name="${this.route}-products-list"></solid-route>
             <solid-route
@@ -684,37 +685,57 @@ utils.importCore().then(async (core) => {
                           ></solid-display>
                         </div>
                       </div>
-                      <div class="col s12 m9">
-                        <div class="row">
-                          <div
-                            class="col hide-on-small-only m12 margin-top-10"
-                          >
+                      <conditional-display
+                        bind-resources=""
+                        condition="ofn:promo_image_url|ofn:long_description|ofn:Practices">
+                        <div class="col s12 m9">
+                          <conditional-display
+                            bind-resources=""
+                            condition="ofn:promo_image_url|ofn:long_description">
+                            <conditional-display
+                              bind-resources=""
+                              condition="ofn:promo_image_url">
+                              <div class="row">
+                                <div
+                                  class="col hide-on-small-only m12 margin-top-10"
+                                >
+                                  <solid-display
+                                    bind-resources=""
+                                    fields="ofn:promo_image_url"
+                                    widget-ofn:promo_image_url="solid-display-img"
+                                    class-ofn:promo_image_url="responsive-img flex-img"
+                                    style="width: 100%"
+                                  ></solid-display>
+                                </div>
+                              </div>
+                            </conditional-display>
+                            <conditional-display
+                              bind-resources=""
+                              condition="ofn:long_description">
+                              <div class="row">
+                                <div class="col s12">
+                                  <solid-display
+                                    bind-resources=""
+                                    fields="ofn:long_description"
+                                    class-ofn:long_description="text-16"
+                                    widget-ofn:long_description="custom-safe-html-value"
+                                  ></solid-display>
+                                </div>
+                              </div>
+                            </conditional-display>
+                          </conditional-display>
+                          <conditional-display
+                            bind-resources=""
+                            condition="ofn:Practices">
+                            <h5>Practices</h5>
                             <solid-display
                               bind-resources=""
-                              fields="ofn:promo_image_url"
-                              widget-ofn:promo_image_url="solid-display-img"
-                              class-ofn:promo_image_url="responsive-img flex-img"
-                              style="width: 100%"
+                              fields="ofn:Practices"
+                              widget-ofn:Practices="custom-multiple-badge-list"
                             ></solid-display>
-                          </div>
+                          </conditional-display>
                         </div>
-                        <div class="row">
-                          <div class="col s12">
-                            <solid-display
-                              bind-resources=""
-                              fields="ofn:long_description"
-                              class-ofn:long_description="text-16"
-                              widget-ofn:long_description="custom-safe-html-value"
-                            ></solid-display>
-                          </div>
-                        </div>
-                        <h5>Practices</h5>
-                        <solid-display
-                          bind-resources=""
-                          fields="ofn:Practices"
-                          widget-ofn:Practices="custom-multiple-badge-list"
-                        ></solid-display>
-                      </div>
+                      </conditional-display>
                     </div>
                   </div>
                 </div>
