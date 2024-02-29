@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import australianAboriginalFlag from "/Australian_Aboriginal_Flag.png";
+import { assetPath } from "@helpers/utils";
 
 customElements.define(
   "custom-badge-firstnationsled",
@@ -34,7 +34,7 @@ customElements.define(
     `;
     render() {
       return html`${this.value.length > 0
-        ? html`<div style="background-image: url(${australianAboriginalFlag});">First Nations Led</div>`
+        ? html`<div style="background-image: url(${assetPath('/Australian_Aboriginal_Flag.png')});">First Nations Led</div>`
         : ""}`;
     }
   }
