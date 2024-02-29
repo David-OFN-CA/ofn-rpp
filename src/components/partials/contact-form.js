@@ -107,11 +107,11 @@ import("@helpers/utils.js").then((utils) => {
                           <form class="col s12 m8" action="${resource["ofn:contact_email_endpoint_uri"]}" method="post">
                             <h5>Contact form</h5>
                             <div class="row">
-                              <div class="input-field col s6">
+                              <div class="input-field col s12 m6">
                                 <input id="name" name="name" type="text" class="validate">
                                 <label for="name">Name</label>
                               </div>
-                              <div class="input-field col s6">
+                              <div class="input-field col s12 m6">
                                 <select id="type" name="type" class="materialize">
                                   <option value="" disabled selected>Type</option>
                                   <option value="B2B / wholesale buyer">B2B / wholesale buyer</option>
@@ -121,7 +121,7 @@ import("@helpers/utils.js").then((utils) => {
                               </div>
                             </div>
                             <div class="row">
-                              <div class="input-field col s6">
+                              <div class="input-field col s12 m6">
                                 <input id="from" name="from" type="email" class="validate">
                                 <label for="from">Email address</label>
                               </div>
@@ -132,7 +132,15 @@ import("@helpers/utils.js").then((utils) => {
                                 <label for="text">Message</label>
                               </div>
                             </div>
-                            <div class="row">
+                            <div class="row hide-on-med-and-up right-align">
+                              <div class="col s12">
+                                <button
+                                  @click="${this._submitForm}"
+                                  class="waves-effect waves-light btn-small"
+                                >Send message</button>
+                              </div>
+                            </div>
+                            <div class="row hide-on-small-only">
                               <div class="col s12">
                                 <button
                                   @click="${this._submitForm}"
