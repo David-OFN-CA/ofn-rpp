@@ -484,13 +484,13 @@ import("@helpers/utils.js").then((utils) => {
               data-view="${this.route}-producer-details"
               class="row producer-details"
             >
-              <div class="col s10 offset-s1">
+              <div class="col s12 m10 offset-m1">
                 <div class="row">
                   <div class="col s12">
                     <div class="card-panel card-round">
                       <div class="row valign-wrapper title-header no-margin-bottom"></div>
                       <div class="row margin-top-20">
-                        <div class="col s3 margin-top-10">
+                        <div class="col s12 m3 margin-top-10">
                           <solid-display
                             bind-resources=""
                             fields="ofn:logo_url"
@@ -499,7 +499,7 @@ import("@helpers/utils.js").then((utils) => {
                             default-ofn:logo_url="https://placehold.co/120"
                           ></solid-display>
                         </div>
-                        <div class="col s8 margin-top-10">
+                        <div class="col s12 m8 margin-top-10">
                           <div class="row no-margin-bottom">
                             <solid-display
                               bind-resources=""
@@ -533,7 +533,6 @@ import("@helpers/utils.js").then((utils) => {
                               >Learn more about us</a
                             >
                           </div>
-                          <!-- Commented: Missing information on how ecological outcomes should work -->
                           <conditional-display
                             bind-resources=""
                             condition="ofn:hasSupportingEvidence|ofn:hasCertifications">
@@ -542,7 +541,7 @@ import("@helpers/utils.js").then((utils) => {
                               <conditional-display
                                 bind-resources=""
                                 condition="ofn:hasCertifications">
-                                <div class="col s6">
+                                <div class="col s12 m6">
                                   <div class="row no-margin-bottom">
                                     <div class="col s12">
                                       <span class="bold-16-21"
@@ -579,7 +578,7 @@ import("@helpers/utils.js").then((utils) => {
                               <conditional-display
                                 bind-resources=""
                                 condition="ofn:hasSupportingEvidence">
-                                <div class="col s6">
+                                <div class="col s12 m6">
                                   <div class="row no-margin-bottom">
                                     <div class="col s12">
                                       <span class="bold-16-21"
@@ -614,10 +613,10 @@ import("@helpers/utils.js").then((utils) => {
                     <div class="col s12">
                       <div class="card-panel card-round card-padding">
                         <div class="row">
-                          <div class="col s3">
+                          <div class="col s12 m3">
                             <custom-wholesale-buy bind-resources="" uniq="${this.uniq}"></custom-wholesale-buy>
                           </div>
-                          <div class="col s8 offset-s1">
+                          <div class="col s12 m8 offset-m1">
                             <h5>Feature products</h5>
                             <solid-display
                               bind-resources=""
@@ -626,7 +625,7 @@ import("@helpers/utils.js").then((utils) => {
                               widget-set-card-row="div"
                               class-set-card-row="row"
                               widget-set-card-col="div"
-                              class-set-card-col="col s6 m4"
+                              class-set-card-col="col s12 m4"
                               widget-set-card-panel="div"
                               class-set-card-panel="card-panel"
                               widget-set-card-wrapper="div"
@@ -649,7 +648,7 @@ import("@helpers/utils.js").then((utils) => {
                   <div class="col s12">
                     <div class="card-panel card-round card-padding">
                       <div class="row">
-                        <div class="col s3">
+                        <div class="col s12 m3">
                           <h5>Location</h5>
                           <div class="row">
                             <solid-display
@@ -687,7 +686,7 @@ import("@helpers/utils.js").then((utils) => {
                             ></solid-display>
                           </div>
                         </div>
-                        <div class="col s9">
+                        <div class="col s12 m9">
                           <div class="row">
                             <div
                               class="col hide-on-small-only m12 margin-top-10"
@@ -732,7 +731,7 @@ import("@helpers/utils.js").then((utils) => {
                     <div class="col s12">
                       <div class="card-panel card-padding">
                         <div class="row">
-                          <div class="col s3">
+                          <div class="col s12 m3">
                             <solid-form-search
                               id="search-supporting-evidence-${this.uniq}"
                               fields="ofn:Classification"
@@ -742,7 +741,7 @@ import("@helpers/utils.js").then((utils) => {
                             ></solid-form-search>
                             Coming soon. :)
                           </div>
-                          <div class="col s8">
+                          <div class="col s12 m8">
                             <solid-display
                               bind-resources=""
                               nested-field="ofn:hasSupportingEvidence"

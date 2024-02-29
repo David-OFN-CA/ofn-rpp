@@ -532,5 +532,29 @@ solid-ofn-rpp {
         height: 140px;
       }
     }
+    [fields="ofn:logo_url"] > div {
+      display: flex;
+      justify-content: center;
+      .img-logo {
+        float: none!important;
+      }
+    }
+    [fields="wrapper(dfc-b:name, ofn:hasProduceCategory)"] {
+      .valign-wrapper {
+        display: block;
+      }
+      [name="dfc-b:name"],
+      custom-multiple-badge-small {
+        display: flex;
+        justify-content: center;
+        &.margin-right-10 {
+          margin-right: 0 !important;
+        }
+      }
+    }
+    .text-address {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

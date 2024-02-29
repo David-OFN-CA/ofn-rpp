@@ -84,7 +84,7 @@ import("@helpers/utils.js").then((utils) => {
                     <div class="col s12">
                       <div class="card-panel card-padding">
                         <div class="row">
-                          <div class="col s3">
+                          <div class="col s12 m3">
                             ${resource["ofn:Wholesale_enquiry_preferences"].includes("Phone") ? html`
                             <div class="row text-light no-margin-bottom">
                               <div class="col s12">Phone number</div>
@@ -104,7 +104,7 @@ import("@helpers/utils.js").then((utils) => {
                               </div>
                             </div>
                           </div>
-                          <form class="col s8" action="${resource["ofn:contact_email_endpoint_uri"]}" method="post">
+                          <form class="col s12 m8" action="${resource["ofn:contact_email_endpoint_uri"]}" method="post">
                             <h5>Contact form</h5>
                             <div class="row">
                               <div class="input-field col s6">
