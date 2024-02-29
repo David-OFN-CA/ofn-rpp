@@ -42,8 +42,13 @@ import("@helpers/utils.js").then((utils) => {
         _getResource = new Task(this, {
           task: async ([dataSrc, property]) => {
             if(!dataSrc) return;
+            let response = false;
             const resource = await core.store.getData(dataSrc, utils.CLIENT_CONTEXT);
-            let response = await this._getProxyValue(resource, property);
+            if(property.includes("|")) {
+              response = (await Promise.all(property.split('|').map((prop) => this._getProxyValue(resource, prop)))).reduce((r, p) => r || p);
+            } else {
+              response = await this._getProxyValue(resource, property);
+            }
             return response;
           },
           args: () => [this.dataSrc, this.condition]

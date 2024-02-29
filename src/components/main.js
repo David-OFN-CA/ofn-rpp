@@ -536,66 +536,68 @@ import("@helpers/utils.js").then((utils) => {
                           <!-- Commented: Missing information on how ecological outcomes should work -->
                           <conditional-display
                             bind-resources=""
-                            condition="ofn:hasSupportingEvidence">
+                            condition="ofn:hasSupportingEvidence|ofn:hasCertifications">
                             <hr />
                             <div class="row">
-                              <!-- <div class="col s6">
-                                <div class="row no-margin-bottom">
-                                  <div class="col s12">
-                                    <span class="bold-16-21"
-                                      >Assurance Partners</span
-                                    >
+                              <conditional-display
+                                bind-resources=""
+                                condition="ofn:hasCertifications">
+                                <div class="col s6">
+                                  <div class="row no-margin-bottom">
+                                    <div class="col s12">
+                                      <span class="bold-16-21"
+                                        >Assurance Partners</span
+                                      >
+                                    </div>
                                   </div>
+                                  <conditional-display
+                                    bind-resources=""
+                                    condition="ofn:hasSupportingEvidence">
+                                    <div class="row">
+                                      <div class="col s12">
+                                        <a
+                                          class="learn-more underline"
+                                          href="#${this.uniq}-supporting-evidence"
+                                          >Learn more</a
+                                        >
+                                      </div>
+                                    </div>
+                                  </conditional-display>
+                                    <div class="row">
+                                      <div class="col s12">
+                                        <solid-display
+                                          bind-resources=""
+                                          nested-field="ofn:hasCertifications"
+                                          fields="ofn:promo_image_url, ofn:Title"
+                                          widget-ofn:promo_image_url="solid-display-img"
+                                          class-ofn:Title="text-14 text-green bold underline"
+                                        ></solid-display>
+                                      </div>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                  <div class="col s12">
-                                    <a
-                                      class="learn-more underline"
-                                      href="#${this.uniq}-supporting-evidence"
-                                      >Learn more</a
-                                    >
+                              </conditional-display>
+                              <conditional-display
+                                bind-resources=""
+                                condition="ofn:hasSupportingEvidence">
+                                <div class="col s6">
+                                  <div class="row no-margin-bottom">
+                                    <div class="col s12">
+                                      <span class="bold-16-21"
+                                        >Supporting Evidence</span
+                                      >
+                                    </div>
                                   </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col s12">
-                                    <solid-display
-                                      bind-resources=""
-                                      nested-field="ofn:hasSupportingEvidence"
-                                      fields="ofn:promo_image_url, ofn:Title"
-                                      widget-ofn:promo_image_url="solid-display-img"
-                                      class-ofn:Title="text-14 text-green bold underline"
-                                    ></solid-display>
+                                  <div class="row">
+                                    <div class="col s12">
+                                      <a
+                                        class="learn-more underline"
+                                        href="#${this.uniq}-supporting-evidence"
+                                        >Learn more</a
+                                      >
+                                    </div>
                                   </div>
-                                </div>
-                              </div> -->
-                              <div class="col s6">
-                                <div class="row">
-                                  <div class="col s12">
-                                    <span class="bold-16-21"
-                                      >Supporting Evidence</span
-                                    >
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col s12">
-                                    <a
-                                      class="learn-more underline"
-                                      href="#${this.uniq}-supporting-evidence"
-                                      >Learn more</a
-                                    >
-                                  </div>
-                                </div>
-                                <!-- <div class="row no-margin-bottom">
-                                  <div class="col s12">
-                                    <div class="chip small text-12 peach">1</div>
-                                    <span class="text-14 text-light">
-                                      for
-                                      <span class="underline"
-                                        >ecological outcomes</span
-                                      ></span
-                                    >
-                                  </div>
-                                </div> -->
+                                  <custom-supporting-evidence-counter bind-resources=""></custom-supporting-evidence-counter>
+                                </conditional-display>
                               </div>
                             </div>
                           </conditional-display>
