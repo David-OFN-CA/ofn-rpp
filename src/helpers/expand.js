@@ -2,6 +2,12 @@ import { importCore, CLIENT_CONTEXT } from "@helpers/utils";
 
 const core = await importCore();
 
+/**
+ * Retrieves a specific field from a given resource based on a predicate.
+ * @param {object} resource - The resource to retrieve the field from.
+ * @param {string} predicate - The predicate to use for retrieving the field.
+ * @returns {string|string[]} The value of the retrieved field.
+ */
 export default async (resource, predicate) => {
   let r = "";
   if ((await resource["@type"]) != "ldp:Container") {
