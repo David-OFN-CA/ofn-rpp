@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Task } from "@lit/task";
 import '~icons/mdi/file-document-check-outline';
@@ -85,7 +85,7 @@ importCore().then(core => {
       }
 
       render() {
-        if(!this.dataSrc) return html``;
+        if(!this.dataSrc) return nothing;
 
         return this._getResource.render({
           pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,

@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 import { Task } from "@lit/task";
 import "~icons/mdi/phone-in-talk";
 import "~icons/mdi/open-in-new";
@@ -77,7 +77,7 @@ importCore().then(core => {
       }
 
       render() {
-        if(!this.dataSrc) return html``;
+        if(!this.dataSrc) return nothing;
         if(!this.uniq) this.uniq = uniq();
 
         return this._getResource.render({

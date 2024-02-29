@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 import { Task } from "@lit/task";
 import { importCore, CLIENT_CONTEXT, uniq } from '@helpers/utils';
 
@@ -69,7 +69,7 @@ importCore().then(core => {
       }
 
       render() {
-        if(!this.dataSrc) return html``;
+        if(!this.dataSrc) return nothing;
         if(!this.uniq) this.uniq = uniq();
 
         return this._getResource.render({
@@ -94,7 +94,7 @@ importCore().then(core => {
                               <a href="tel:${resource["dfc-b:hasPhoneNumber"]}" target="_blank">${resource["dfc-b:hasPhoneNumber"]}&nbsp;<icon-mdi-phone-in-talk></icon-mdi-phone-in-talk></a>
                             </div>
                           </div>
-                          ` : html``}
+                          ` : nothing}
                           <div class="row text-light no-margin-bottom">
                             <div class="col s12">Email address</div>
                           </div>

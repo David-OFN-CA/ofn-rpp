@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 import { Task } from "@lit/task";
 import { importCore, CLIENT_CONTEXT } from '@helpers/utils';
 
@@ -55,7 +55,7 @@ importCore().then(core => {
       })
 
       render() {
-        if(!this.dataSrc || !this.condition) return html``;
+        if(!this.dataSrc || !this.condition) return nothing;
 
         return this._getResource.render({
           pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
@@ -63,7 +63,7 @@ importCore().then(core => {
             if(resource) {
               return html`<slot></slot>`;
             }
-            return html``;
+            return nothing;
           },
           error: (e) => html`<p>Error while loading condition.</p>`
         });
