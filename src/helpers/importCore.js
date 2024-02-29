@@ -10,10 +10,8 @@ export default async function importCore() {
     if (import.meta.env.DEV) {
       try {
         coreInstance = await import("http://localhost:3000/dist/index.js");
-        console.log("Core: Local");
       } catch {
         coreInstance = await import("https://cdn.skypack.dev/@startinblox/core");
-        console.log("Core: Skypack");
       }
     } else {
       // In production, only return the skypack version
