@@ -15,21 +15,26 @@ import("@helpers/utils.js").then((utils) => {
       createRenderRoot() {
         return this;
       }
+      blocked = false;
       toggle() {
-        let target = "required-ofn:first_nations_country";
-        setTimeout(() => {
-          utils.toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, target);
-          utils.toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, target);
-        }, 0);
+        if(!this.blocked) {
+          this.blocked = true;
+          let target = "required-ofn:first_nations_country";
+          setTimeout(() => {
+            utils.toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, target);
+            utils.toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, target);
+            this.blocked = false;
+          }, 0);
+        }
       }
       render() {
-        return html`<div class="switch">
+        return html`<div class="switch cursor-pointer" @click="${this.toggle}">
           <label>
             First Nations Led
             <input
               type="checkbox"
             />
-            <span class="lever" @click="${this.toggle}"></span>
+            <span class="lever"></span>
           </label>
         </div>`;
       }
