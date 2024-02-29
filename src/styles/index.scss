@@ -547,6 +547,7 @@ solid-ofn-rpp {
       custom-multiple-badge-small {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
         &.margin-right-10 {
           margin-right: 0 !important;
         }
