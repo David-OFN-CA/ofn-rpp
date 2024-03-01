@@ -12,36 +12,12 @@
     ></script>
     <script type="module" src="./src/index.js"></script>
   </head>
-  <body>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="hide-on-small-only brand-logo">Examples</a>
-        <ul class="right">
-          <li>
-            <solid-link next="regenerative-produce-portal-producers-list">
-              <a><icon-mdi-home-silo></icon-mdi-home-silo> Producers List</a>
-            </solid-link>
-          </li>
-          <li>
-            <solid-link next="regenerative-produce-portal-products-list">
-              <a><icon-mdi-food-apple></icon-mdi-food-apple> Products List</a>
-            </solid-link>
-          </li>
-          <li class="hide-on-small-only">
-            <solid-link
-              next="regenerative-produce-portal-producer-details"
-              data-src="https://api.regenerative.org.au/webhook/regen/producer?id=recjBYlXskXtilPBC"
-            >
-              <a><icon-mdi-home-silo></icon-mdi-home-silo> Producer Details</a>
-            </solid-link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  <body style="margin: 0;">
     <solid-ofn-rpp
       producers-src="https://api.regenerative.org.au/webhook/regen/producers"
       products-src="https://api.regenerative.org.au/webhook/regen/products"
       range-product-categories="https://api.regenerative.org.au/webhook/regen/produce_categories"
+      range-producer-certifications="https://api.regenerative.org.au/webhook/regen/certifications"
       range-producer-assurances="https://api.regenerative.org.au/webhook/regen/assurance_partners"
       uniq="regenerative-produce-portal"
     ></solid-ofn-rpp>

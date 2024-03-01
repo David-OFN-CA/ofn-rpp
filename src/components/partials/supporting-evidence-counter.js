@@ -127,20 +127,22 @@ importCore().then(core => {
           pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
           complete: (resource) => {
             this.rendering = html``;
-            for(let classification of resource) {
-              this._addToRender(html`
-                <div class="row no-margin-bottom">
-                  <div class="col s12">
-                    <div class="chip small text-12 bg-green-pea">${classification.counter}</div>
-                    <span class="text-14 text-green-pea">
-                      for
-                      <span class="underline"
-                        >${classification.name}</span
-                      ></span
-                    >
+            if(resource) {
+              for(let classification of resource) {
+                this._addToRender(html`
+                  <div class="row no-margin-bottom">
+                    <div class="col s12">
+                      <div class="chip small text-12 bg-green-pea">${classification.counter}</div>
+                      <span class="text-14 text-green-pea">
+                        for
+                        <span class="underline"
+                          >${classification.name}</span
+                        ></span
+                      >
+                    </div>
                   </div>
-                </div>
-              `);
+                `);
+              }
             }
 
             return html`

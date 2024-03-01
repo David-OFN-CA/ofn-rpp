@@ -24,6 +24,7 @@ utils.importCore().then(async (core) => {
         productsSrc: { attribute: "products-src" },
         rangeProductCategories: { attribute: "range-product-categories" },
         rangeProducerAssurances: { attribute: "range-producer-assurances" },
+        rangeProducerCertifications: { attribute: "range-producer-certifications" },
         routePrefix: { attribute: "route-prefix" },
         uniq: { attribute: "uniq" },
       };
@@ -188,7 +189,7 @@ utils.importCore().then(async (core) => {
                   <solid-form-search
                     id="producers-list-filters-${this.uniq}"
                     loader-id="loader-producers-list-filters-${this.uniq}"
-                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))), set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasSupportingEvidence)))), set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
+                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))), set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasCertifications)))), set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
                     class-set-line-field="row"
                     search-search-field="dfc-b:name, ofn:long_description"
                     widget-search-field="solid-form-label-text"
@@ -231,11 +232,11 @@ utils.importCore().then(async (core) => {
                     class-set-line-assurance-panel="filter card horizontal"
                     widget-set-line-assurance-wrapper="div"
                     class-set-line-assurance-wrapper="card-content select-padding"
-                    class-ofn:hasSupportingEvidence="col s12"
-                    label-ofn:hasSupportingEvidence="Supporting Evidence"
-                    range-ofn:hasSupportingEvidence="${this.rangeProducerAssurances}"
-                    widget-ofn:hasSupportingEvidence="solid-form-dropdown-placeholder"
-                    option-label-ofn:hasSupportingEvidence="ofn:Group_name"
+                    class-ofn:hasCertifications="col s12"
+                    label-ofn:hasCertifications="Supporting Evidence"
+                    range-ofn:hasCertifications="${this.rangeProducerCertifications}"
+                    widget-ofn:hasCertifications="solid-form-dropdown-placeholder"
+                    option-label-ofn:hasCertifications="ofn:Group_name"
                     widget-set-line-address="div"
                     class-set-line-address="row no-margin-bottom"
                     widget-set-line-address-col="div"
@@ -789,6 +790,32 @@ utils.importCore().then(async (core) => {
           ${this.context()}
           ${this.style()}
           ${this.routers()}
+          ${import.meta.env.DEV ? html`
+            <nav>
+              <div class="nav-wrapper">
+                <a href="#" class="hide-on-small-only brand-logo">Examples</a>
+                <ul class="right">
+                  <li>
+                    <solid-link next="regenerative-produce-portal-producers-list">
+                      <a><icon-mdi-home-silo></icon-mdi-home-silo> Producers List</a>
+                    </solid-link>
+                  </li>
+                  <li>
+                    <solid-link next="regenerative-produce-portal-products-list">
+                      <a><icon-mdi-food-apple></icon-mdi-food-apple> Products List</a>
+                    </solid-link>
+                  </li>
+                  <li class="hide-on-small-only">
+                    <solid-link
+                      next="regenerative-produce-portal-producer-details"
+                      data-src="https://api.regenerative.org.au/webhook/regen/producer?id=recjBYlXskXtilPBC"
+                    >
+                      <a><icon-mdi-home-silo></icon-mdi-home-silo> Producer Details</a>
+                    </solid-link>
+                  </li>
+                </ul>
+              </div>
+            </nav>` : nothing}
           ${this.viewProductsList()}
           ${this.viewProducersList()}
           ${this.viewProducerDetails()}
