@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-solid-ofn-rpp {
+//- Pre-requisites
+// Fonts
+@import "@fontsource/open-sans/400.css";
+@import "@fontsource/open-sans/600.css";
+@import "@fontsource/open-sans/700.css";
 
-  //- Pre-requisites
-  // Fonts
-  @import "@fontsource/open-sans/400.css";
-  @import "@fontsource/open-sans/600.css";
-  @import "@fontsource/open-sans/700.css";
+solid-ofn-rpp {
   // Materialize
   @import "materialize-css/sass/components/color-variables";
   @import "materialize-css/sass/components/color-classes";
