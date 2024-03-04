@@ -147,6 +147,8 @@ importCore().then(core => {
                   </div>
                 `);
               }
+            } else {
+              return nothing;
             }
 
             return html`

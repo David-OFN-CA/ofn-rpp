@@ -31,6 +31,9 @@ importCore().then(core => {
             if(container === null) {
               return false;
             }
+            if(typeof container === "object" && "getProxy" in container) {
+              container = (await container['properties']).filter(p => !p.startsWith('@'))
+            }
             return container.length > 0;
           } else {
             return true;

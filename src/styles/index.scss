@@ -481,6 +481,21 @@ solid-ofn-rpp {
     padding: 15px;
   }
 
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    >div {
+      display: contents;
+      label {
+        margin-top: 8px;
+        color: #191C1D;
+        [type="checkbox"]:checked + span:not(.lever)::before {
+          border-color: #0000 #9A4444 #9A4444 #0000;
+        }
+      }
+    }
+  }
+
   @media #{$small-and-down} {
     [name="set-card-panel"] {
       .img-on-mobile {

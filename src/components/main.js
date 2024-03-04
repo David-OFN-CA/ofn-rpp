@@ -535,12 +535,12 @@ utils.importCore().then(async (core) => {
                         </div>
                         <conditional-display
                           bind-resources=""
-                          condition="ofn:hasSupportingEvidence|ofn:hasCertifications">
+                          condition="ofn:hasSupportingEvidence|ofn:hasAssurancePartnerships">
                           <hr />
                           <div class="row">
                             <conditional-display
                               bind-resources=""
-                              condition="ofn:hasCertifications">
+                              condition="ofn:hasAssurancePartnerships">
                               <div class="col s12 m6">
                                 <div class="row no-margin-bottom">
                                   <div class="col s12">
@@ -562,17 +562,16 @@ utils.importCore().then(async (core) => {
                                     </div>
                                   </div>
                                 </conditional-display>
-                                  <div class="row">
-                                    <div class="col s12">
-                                      <solid-display
-                                        bind-resources=""
-                                        nested-field="ofn:hasCertifications"
-                                        fields="ofn:promo_image_url, ofn:Title"
-                                        widget-ofn:promo_image_url="solid-display-img"
-                                        class-ofn:Title="text-14 text-green bold underline"
-                                      ></solid-display>
-                                    </div>
+                                <div class="row">
+                                  <div class="col s12">
+                                    <solid-display
+                                      bind-resources=""
+                                      nested-field="ofn:hasAssurancePartnerships"
+                                      fields="ofn:Assurance_partner"
+                                      widget-ofn:Assurance_partner="custom-assurance-partner"
+                                    ></solid-display>
                                   </div>
+                                </div>
                               </div>
                             </conditional-display>
                             <conditional-display
@@ -752,12 +751,14 @@ utils.importCore().then(async (core) => {
                     <div class="card-panel card-padding">
                       <div class="row">
                         <div class="col s12 m3">
+                          <h6 class="margin-top-50">Filters</h6>
                           <solid-form-search
                             id="search-supporting-evidence-${this.uniq}"
                             fields="ofn:Classification"
                             auto-range-ofn:Classification="ofn:Classification"
                             widget-ofn:Classification="solid-form-multicheckbox"
                             option-label-ofn:Classification="ofn:label"
+                            class-ofn:Classification="flex-column"
                           ></solid-form-search>
                         </div>
                         <div class="col s12 m8">

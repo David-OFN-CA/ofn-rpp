@@ -10,7 +10,7 @@ customElements.define(
     }
     static properties = {
       value: { attribute: "value" },
-      checkbox: { type: Boolean },
+      checkbox: { type: Boolean, default: false },
     };
     createRenderRoot() {
       return this;
@@ -19,6 +19,7 @@ customElements.define(
     toggle() {
       if(!this.blocked) {
         this.blocked = true;
+        this.checkbox = !this.checkbox;
         let target = "required-ofn:first_nations_country";
         setTimeout(() => {
           toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, target, 'ofn:First_Nations_country');
@@ -28,11 +29,13 @@ customElements.define(
       }
     }
     render() {
+      console.log(this.checkbox);
       return html`<div class="switch">
         <label style="background-image: url(${assetPath('/Australian_Aboriginal_Flag.png')});" class="padding-15 cursor-pointer" @click="${this.toggle}">
           First Nations Led
           <input
             type="checkbox"
+            .value="${this.checkbox}"
           />
           <span class="lever"></span>
         </label>
