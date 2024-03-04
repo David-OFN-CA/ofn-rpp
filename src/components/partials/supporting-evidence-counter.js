@@ -32,35 +32,39 @@ importCore().then(core => {
         }
         for(let property of properties)  {
           let value = resource[property];
-          if(!property.startsWith('@')) {
-            value = await resource.get(property);
-            try {
-              if(value && typeof value === "object" && "getProxy" in value) {
-                value = await this._getProxyValue(value);
+          if(value !== null) {
+            if(!property.startsWith('@')) {
+              value = await resource.get(property);
+              try {
+                if(value && typeof value === "object" && "getProxy" in value) {
+                  value = await this._getProxyValue(value);
+                }
+              } catch (e) {
+                if(import.meta.env.DEV) console.error(e);
               }
-            } catch (e) {
-              if(import.meta.env.DEV) console.error(e);
             }
-          }
-          if(property == "ldp:contains") {
-            try {
-              // Bug core? When ldp:contains have only one entry, it is not an array
-              if(!Array.isArray(value) && value !== null) {
-                value = [value];
+            if(property == "ldp:contains") {
+              try {
+                // Bug core? When ldp:contains have only one entry, it is not an array
+                if(!Array.isArray(value)) {
+                  value = [value];
+                }
+                let expandedContainer = [];
+                for(let entry of value) {
+                  if(entry !== null) {
+                    // Grab the whole nested datas from the store using the clientContext
+                    entry = await core.store.getData(entry["@id"], resource['clientContext']);
+                    expandedContainer.push(await this._getProxyValue(entry));
+                  }
+                }
+                // Rewrite the ldp:contains with a complete one
+                value = expandedContainer;
+              } catch (e) {
+                if(import.meta.env.DEV) console.error(e);
               }
-              let expandedContainer = [];
-              for(let entry of value) {
-                // Grab the whole nested datas from the store using the clientContext
-                entry = await core.store.getData(entry["@id"], resource['clientContext']);
-                expandedContainer.push(await this._getProxyValue(entry));
-              }
-              // Rewrite the ldp:contains with a complete one
-              value = expandedContainer;
-            } catch (e) {
-              if(import.meta.env.DEV) console.error(e);
             }
+            response[property] = value;
           }
-          response[property] = value;
         }
         return response;
       }
