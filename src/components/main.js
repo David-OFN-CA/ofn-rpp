@@ -25,6 +25,7 @@ utils.importCore().then(async (core) => {
         rangeProductCategories: { attribute: "range-product-categories" },
         rangeProducerAssurances: { attribute: "range-producer-assurances" },
         rangeProducerCertifications: { attribute: "range-producer-certifications" },
+        rangeProducerOutcomes: { attribute: "range-producer-supporting-evidence" },
         routePrefix: { attribute: "route-prefix" },
         uniq: { attribute: "uniq" },
       };
@@ -186,10 +187,18 @@ utils.importCore().then(async (core) => {
                       <div class="indeterminate"></div>
                     </div>
                   </div>-->
+                  <!-- set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:hasSupportingEvidence.ldp:contains.ofn:Classification)))), -->
+                  <!-- set-line-certification(set-line-certification-col(set-line-certification-panel(set-line-certification-wrapper(ofn:hasCertifications)))), -->
                   <solid-form-search
                     id="producers-list-filters-${this.uniq}"
                     loader-id="loader-producers-list-filters-${this.uniq}"
-                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))), set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasCertifications)))), set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
+                    fields="
+                      set-line-field(set-line-field-col(set-line-field-panel(search-field))),
+                      filterBy-row(filterBy),
+                      set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))),
+                      set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))),
+                      set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner)))),
+                      set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
                     class-set-line-field="row"
                     search-search-field="dfc-b:name, ofn:long_description"
                     widget-search-field="solid-form-label-text"
@@ -211,6 +220,19 @@ utils.importCore().then(async (core) => {
                     value-ofn:first_nations_country="${this.uniq}"
                     widget-ofn:first_nations_country="custom-search-firstnationsled"
                     class-ofn:first_nations_country="input-field col s12 no-margin no-padding"
+                    widget-set-line-ecological="div"
+                    class-set-line-ecological="row no-margin-bottom"
+                    widget-set-line-ecological-col="div"
+                    class-set-line-ecological-col="col s12"
+                    widget-set-line-ecological-panel="div"
+                    class-set-line-ecological-panel="filter card horizontal"
+                    widget-set-line-ecological-wrapper="div"
+                    class-set-line-ecological-wrapper="card-content select-padding"
+                    class-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="col s12"
+                    label-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="Ecological Outcomes"
+                    range-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="${this.rangeProducerOutcomes}"
+                    widget-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="solid-form-dropdown-placeholder"
+                    option-label-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="ofn:label"
                     widget-set-line-produce="div"
                     class-set-line-produce="row no-margin-bottom"
                     widget-set-line-produce-col="div"
@@ -232,11 +254,24 @@ utils.importCore().then(async (core) => {
                     class-set-line-assurance-panel="filter card horizontal"
                     widget-set-line-assurance-wrapper="div"
                     class-set-line-assurance-wrapper="card-content select-padding"
+                    class-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="col s12"
+                    label-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="Assurance Partners"
+                    range-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="${this.rangeProducerAssurances}"
+                    widget-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="solid-form-dropdown-placeholder"
+                    option-label-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="ofn:Group_name"
+                    widget-set-line-certification="div"
+                    class-set-line-certification="row no-margin-bottom"
+                    widget-set-line-certification-col="div"
+                    class-set-line-certification-col="col s12"
+                    widget-set-line-certification-panel="div"
+                    class-set-line-certification-panel="filter card horizontal"
+                    widget-set-line-certification-wrapper="div"
+                    class-set-line-certification-wrapper="card-content select-padding"
                     class-ofn:hasCertifications="col s12"
-                    label-ofn:hasCertifications="Supporting Evidence"
+                    label-ofn:hasCertifications="Certifications"
                     range-ofn:hasCertifications="${this.rangeProducerCertifications}"
                     widget-ofn:hasCertifications="solid-form-dropdown-placeholder"
-                    option-label-ofn:hasCertifications="ofn:Group_name"
+                    option-label-ofn:hasCertifications="ofn:label"
                     widget-set-line-address="div"
                     class-set-line-address="row no-margin-bottom"
                     widget-set-line-address-col="div"
@@ -386,10 +421,16 @@ utils.importCore().then(async (core) => {
                       <div class="indeterminate"></div>
                     </div>
                   </div>-->
+                  <!-- set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification)))), -->
                   <solid-form-search
                     id="products-list-filters-${this.uniq}"
                     loader-id="loader-products-list-filters-${this.uniq}"
-                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field-product))), filterBy-row(filterBy), set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_country)))), set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence)))), set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type))))"
+                    fields="
+                      set-line-field(set-line-field-col(set-line-field-panel(search-field-product))),
+                      filterBy-row(filterBy),
+                      set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_country)))),
+                      set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type)))),
+                      set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))"
                     class-set-line-field="row"
                     search-search-field-product="dfc-b:name, ofn:description"
                     widget-search-field-product="solid-form-label-text"
@@ -419,11 +460,11 @@ utils.importCore().then(async (core) => {
                     class-set-line-ecological-panel="filter card horizontal"
                     widget-set-line-ecological-wrapper="div"
                     class-set-line-ecological-wrapper="card-content select-padding"
-                    widget-dfc-b:suppliedBy.ofn:hasSupportingEvidence="solid-form-dropdown-placeholder"
-                    class-dfc-b:suppliedBy.ofn:hasSupportingEvidence="col s12"
-                    label-dfc-b:suppliedBy.ofn:hasSupportingEvidence="Supporting Evidence"
-                    range-dfc-b:suppliedBy.ofn:hasSupportingEvidence="${this.rangeProducerAssurances}"
-                    option-label-ofn:hasSupportingEvidence="ofn:Group_name"
+                    class-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="col s12"
+                    label-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="Ecological Outcomes"
+                    range-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="${this.rangeProducerOutcomes}"
+                    widget-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="solid-form-dropdown-placeholder"
+                    option-label-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="ofn:label"
                     widget-set-line-produce="div"
                     class-set-line-produce="row no-margin-bottom"
                     widget-set-line-produce-col="div"
@@ -436,6 +477,19 @@ utils.importCore().then(async (core) => {
                     widget-ofn:Type="solid-form-dropdown-placeholder"
                     class-ofn:Type="col s12"
                     label-ofn:Type="Produce types"
+                    widget-set-line-assurance="div"
+                    class-set-line-assurance="row no-margin-bottom"
+                    widget-set-line-assurance-col="div"
+                    class-set-line-assurance-col="col s12"
+                    widget-set-line-assurance-panel="div"
+                    class-set-line-assurance-panel="filter card horizontal"
+                    widget-set-line-assurance-wrapper="div"
+                    class-set-line-assurance-wrapper="card-content select-padding"
+                    class-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="col s12"
+                    label-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="Assurance Partners"
+                    range-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="${this.rangeProducerAssurances}"
+                    widget-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="solid-form-dropdown-placeholder"
+                    option-label-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="ofn:Group_name"
                   ></solid-form-search>
                 </div>
               </div>

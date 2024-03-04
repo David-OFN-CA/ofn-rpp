@@ -15,6 +15,8 @@ On an empty page:
   producers-src="https://api.regenerative.org.au/webhook/regen/producers"
   products-src="https://api.regenerative.org.au/webhook/regen/products"
   range-product-categories="https://api.regenerative.org.au/webhook/regen/produce_categories"
+  range-producer-certifications="https://api.regenerative.org.au/webhook/regen/certifications"
+  range-producer-supporting-evidence="https://api.regenerative.org.au/webhook/regen/supporting_evidence"
   range-producer-assurances="https://api.regenerative.org.au/webhook/regen/assurance_partners"
   uniq="regenerative-produce-portal"
   route-prefix="some-path"></solid-ofn-rpp>
