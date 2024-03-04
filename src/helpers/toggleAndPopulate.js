@@ -4,10 +4,13 @@
  * @param {string} selector - The CSS selector for the element to be selected.
  * @param {string} attribute - The name of the attribute to be toggled.
  */
-export default (selector, attribute) => {
+export default (selector, attribute, value = true) => {
   const element = document.querySelector(selector);
-  if (element && element.offsetParent !== null) {
-    element.toggleAttribute(attribute);
+  if (element && element.offsetParent !== null && !element.hasAttribute(attribute)) {
+    element.setAttribute(attribute, value)
+    element.component.populate();
+  } else {
+    element.removeAttribute(attribute);
     element.component.populate();
   }
 };

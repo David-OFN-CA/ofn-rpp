@@ -755,11 +755,9 @@ utils.importCore().then(async (core) => {
                           <solid-form-search
                             id="search-supporting-evidence-${this.uniq}"
                             fields="ofn:Classification"
-                            auto-range-ofn:Classification=""
-                            widget-ofn:Classification="solid-form-checkbox"
+                            auto-range-ofn:Classification="ofn:Classification"
                             option-label-ofn:Classification="ofn:label"
                           ></solid-form-search>
-                          Coming soon. :)
                         </div>
                         <div class="col s12 m8">
                           <solid-display

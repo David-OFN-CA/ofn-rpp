@@ -21,8 +21,8 @@ customElements.define(
         this.blocked = true;
         let target = "required-ofn:first_nations_country";
         setTimeout(() => {
-          toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, target);
-          toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, target);
+          toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, target, 'ofn:First_Nations_country');
+          toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, target, 'ofn:First_Nations_country');
           this.blocked = false;
         }, 0);
       }
