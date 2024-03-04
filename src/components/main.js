@@ -187,18 +187,10 @@ utils.importCore().then(async (core) => {
                       <div class="indeterminate"></div>
                     </div>
                   </div>-->
-                  <!-- set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:hasSupportingEvidence.ldp:contains.ofn:Classification)))), -->
-                  <!-- set-line-certification(set-line-certification-col(set-line-certification-panel(set-line-certification-wrapper(ofn:hasCertifications)))), -->
                   <solid-form-search
                     id="producers-list-filters-${this.uniq}"
                     loader-id="loader-producers-list-filters-${this.uniq}"
-                    fields="
-                      set-line-field(set-line-field-col(set-line-field-panel(search-field))),
-                      filterBy-row(filterBy),
-                      set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))),
-                      set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))),
-                      set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner)))),
-                      set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
+                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_country)))),${this.rangeProducerOutcomes ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:hasSupportingEvidence.ldp:contains.ofn:Classification))))," : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))),${this.rangeProducerAssurances ? "set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))," : ""}${this.rangeProducerCertifications ? "set-line-certification(set-line-certification-col(set-line-certification-panel(set-line-certification-wrapper(ofn:hasCertifications))))," : ""}set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
                     class-set-line-field="row"
                     search-search-field="dfc-b:name, ofn:long_description"
                     widget-search-field="solid-form-label-text"
@@ -421,16 +413,10 @@ utils.importCore().then(async (core) => {
                       <div class="indeterminate"></div>
                     </div>
                   </div>-->
-                  <!-- set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification)))), -->
                   <solid-form-search
                     id="products-list-filters-${this.uniq}"
                     loader-id="loader-products-list-filters-${this.uniq}"
-                    fields="
-                      set-line-field(set-line-field-col(set-line-field-panel(search-field-product))),
-                      filterBy-row(filterBy),
-                      set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_country)))),
-                      set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type)))),
-                      set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))"
+                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field-product))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_country)))),${this.rangeProducerOutcomes ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification))))," : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type))))${this.rangeProducerAssurances ? ",set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))" : ""}"
                     class-set-line-field="row"
                     search-search-field-product="dfc-b:name, ofn:description"
                     widget-search-field-product="solid-form-label-text"
