@@ -756,6 +756,7 @@ utils.importCore().then(async (core) => {
                             id="search-supporting-evidence-${this.uniq}"
                             fields="ofn:Classification"
                             auto-range-ofn:Classification="ofn:Classification"
+                            widget-ofn:Classification="solid-form-multicheckbox"
                             option-label-ofn:Classification="ofn:label"
                           ></solid-form-search>
                         </div>
