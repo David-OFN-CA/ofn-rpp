@@ -17,6 +17,7 @@ utils.importCore().then(async (core) => {
     class extends LitElement {
       constructor() {
         super();
+        this.initMatomo();
       }
 
       static properties = {
@@ -64,6 +65,27 @@ utils.importCore().then(async (core) => {
           </solid-router>
         `;
         return render;
+      }
+
+      initMatomo() {
+        if(!window._paq) {
+          window._paq = [];
+        }
+        window._paq.push(['trackPageView']);
+        window._paq.push(['enableLinkTracking']);
+        window._paq.push(['trackVisibleContentImpressions', true, 750]);
+        window._paq.push(['enableLinkTracking']);
+      }
+
+      firstUpdated() {
+        let url = location.href;    
+        document.addEventListener('navigate', () => {
+          if (url === location.href) return;
+          url = location.href;
+          console.log(url);
+          window._paq.push(['setCustomUrl', url]);
+          window._paq.push(['trackPageView']);
+        });
       }
 
       viewProducersList() {

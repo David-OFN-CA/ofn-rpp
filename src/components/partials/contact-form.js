@@ -55,6 +55,7 @@ importCore().then(core => {
             body: formData
           }).then(response => {
             if(response.ok) {
+              window._paq.push(['trackContentInteractionNode', this.querySelector('form'), 'submittedContactForm']);
               responseTarget.innerHTML = 'Email submitted successfully';
             } else {
               responseTarget.innerHTML = 'Email submission failed';
