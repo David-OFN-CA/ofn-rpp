@@ -23,7 +23,7 @@ customElements.define(
         if(changed) this.checkbox = !this.checkbox;
         setTimeout(() => {
           toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, "required-ofn:first_nations_country", 'ofn:First_Nations_country');
-          toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, "required-dfc-b:suppliedBy.ofn:First_Nations_country", 'ofn:dfc-b:suppliedBy.First_Nations_country');
+          toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, "required-dfc-b:suppliedBy.ofn:First_Nations_country", 'dfc-b:suppliedBy.ofn:First_Nations_country');
           this.blocked = false;
         }, 0);
       }
