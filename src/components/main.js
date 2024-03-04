@@ -82,7 +82,6 @@ utils.importCore().then(async (core) => {
         document.addEventListener('navigate', () => {
           if (url === location.href) return;
           url = location.href;
-          console.log(url);
           window._paq.push(['setCustomUrl', url]);
           window._paq.push(['trackPageView']);
         });
