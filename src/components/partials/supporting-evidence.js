@@ -115,7 +115,6 @@ importCore().then(core => {
       toggle(e) {
         let target = e.target.getAttribute('value');
         if(target) {
-          console.log(target);
           if(this.filtering.includes(target)) {
             this.filtering = this.filtering.filter(f => f != target);
           } else {
