@@ -128,9 +128,7 @@ importCore().then(core => {
         let target = e.target.getAttribute('target');
         if(target) {
           let targetElement = document.querySelector('custom-supporting-evidence');
-          targetElement.filtering = [target];
-          targetElement.requestUpdate();
-          targetElement.parentElement.parentElement.parentElement.parentElement.parentElement.scrollIntoView();
+          targetElement.navigateToMe(target);
         }
       }
 

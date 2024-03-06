@@ -125,6 +125,12 @@ importCore().then(core => {
         e.preventDefault();
       }
 
+      navigateToMe(target=false) {
+        this.filtering = target ? [target] : [];
+        this.requestUpdate();
+        this.parentElement.parentElement.parentElement.parentElement.parentElement.scrollIntoView();
+      }
+
       render() {
         if(!this.dataSrc) return nothing;
 

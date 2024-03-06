@@ -615,11 +615,7 @@ utils.importCore().then(async (core) => {
                                   condition="ofn:hasSupportingEvidence">
                                   <div class="row">
                                     <div class="col s12">
-                                      <a
-                                        class="learn-more underline"
-                                        href="#${this.uniq}-supporting-evidence"
-                                        >Learn more</a
-                                      >
+                                      <span class="learn-more underline" onclick="document.querySelector('custom-supporting-evidence').navigateToMe()">Learn more</span>
                                     </div>
                                   </div>
                                 </conditional-display>
@@ -641,18 +637,12 @@ utils.importCore().then(async (core) => {
                               <div class="col s12 m6">
                                 <div class="row no-margin-bottom">
                                   <div class="col s12">
-                                    <span class="bold-16-21"
-                                      >Supporting Evidence</span
-                                    >
+                                    <span class="bold-16-21">Supporting Evidence</span>
                                   </div>
                                 </div>
                                 <div class="row">
                                   <div class="col s12">
-                                    <a
-                                      class="learn-more underline"
-                                      href="#${this.uniq}-supporting-evidence"
-                                      >Learn more</a
-                                    >
+                                    <span class="learn-more underline" onclick="document.querySelector('custom-supporting-evidence').navigateToMe()">Learn more</span>
                                   </div>
                                 </div>
                                 <custom-supporting-evidence-counter bind-resources=""></custom-supporting-evidence-counter>
