@@ -26,15 +26,28 @@ importCore().then(core => {
         args: () => [this.dataSrc]
       })
 
+      firstUpdated() {
+        document.addEventListener('navigate', (e) => {
+          console.log(e);
+          if(e.detail.route == `${this.uniq}-products-redirector` && e.explicitOriginalTarget == document.querySelector(`[default-route="${this.uniq}-producers-list"]`)) {
+            window.dispatchEvent(
+              new CustomEvent('requestNavigation', {
+                detail: {
+                  route: `${this.uniq}-products-list`
+                }
+              }),
+            );
+          }
+        });
+      }
+
       render() {
         if(!this.dataSrc || !this.uniq) return nothing;
-
 
         return this._getResource.render({
           pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
           complete: (resource) => {
             if(resource) {
-              console.log(resource);
               window.dispatchEvent(
                 new CustomEvent('requestNavigation', {
                   detail: {
