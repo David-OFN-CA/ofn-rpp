@@ -58,6 +58,7 @@ utils.importCore().then(async (core) => {
           <solid-router default-route="${this.route}-producers-list" route-prefix=${this.routePrefix ?? nothing}>
             <solid-route name="${this.route}-producers-list"></solid-route>
             <solid-route name="${this.route}-products-list"></solid-route>
+            <solid-route name="${this.route}-products-redirector" use-id></solid-route>
             <solid-route
               name="${this.route}-producer-details"
               use-id
@@ -421,6 +422,12 @@ utils.importCore().then(async (core) => {
         }, 0);
         let render = html`
           <div
+            id="${this.route}-products-redirector"
+            data-view="${this.route}-products-redirector"
+          >
+            <custom-redirector bind-resources="" uniq="${this.uniq}"></custom-redirector>
+          </div>
+          <div
             id="${this.route}-products-list"
             data-view="${this.route}-products-list"
             class="row products-list"
@@ -531,6 +538,7 @@ utils.importCore().then(async (core) => {
                 class-set-from="row no-margin-bottom"
                 widget-dfc-b:suppliedBy.dfc-b:name="solid-display-value"
                 class-dfc-b:suppliedBy.dfc-b:name="col s12 truncate"
+                next="${this.route}-products-redirector"
               ></solid-display>
             </div>
           </div>
