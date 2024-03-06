@@ -136,6 +136,13 @@ utils.importCore().then(async (core) => {
                 if (producerCountry) {
                   addresses.push(producerCountry);
                 }
+                let producerRegion = await expand(
+                  producerAddress,
+                  "dfc-b:region"
+                );
+                if (producerRegion) {
+                  addresses.push(producerRegion);
+                }
               }
             }
 
@@ -294,7 +301,7 @@ utils.importCore().then(async (core) => {
                     class-set-line-address-panel="filter card horizontal"
                     widget-set-line-address-wrapper="div"
                     class-set-line-address-wrapper="card-content"
-                    search-address="dfc-b:hasAddress.dfc-b:hasStreet, dfc-b:hasAddress.dfc-b:hasPostalCode, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry"
+                    search-address="dfc-b:hasAddress.dfc-b:hasStreet, dfc-b:hasAddress.dfc-b:hasPostalCode, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry, dfc-b:hasAddress.dfc-b:region"
                     widget-address="solid-form-label-text"
                     class-address="input-field col s12"
                     label-address="Location"
@@ -312,7 +319,7 @@ utils.importCore().then(async (core) => {
                 loader-id="loader-producers-list-${this.uniq}"
                 data-src="${this.producersSrc}"
                 filtered-by="producers-list-filters-${this.uniq}"
-                fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry), set-description(ofn:long_description), set-tags(ofn:First_Nations_country, ofn:hasProduceCategory))))))"
+                fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity, region(dfc-b:hasAddress.dfc-b:region, comma, dfc-b:hasAddress.dfc-b:hasCountry)), set-description(ofn:long_description), set-tags(ofn:First_Nations_country, ofn:hasProduceCategory))))))"
                 widget-set-card-row="div"
                 class-set-card-row="row"
                 widget-set-card-col="div"
@@ -334,8 +341,10 @@ utils.importCore().then(async (core) => {
                 class-dfc-b:name="col dfc_b_name"
                 widget-dfc-b:hasAddress.dfc-b:hasCity="solid-display-value"
                 class-dfc-b:hasAddress.dfc-b:hasCity="col dfc_b_address"
+                widget-dfc-b:hasAddress.dfc-b:region="solid-display-value"
                 widget-dfc-b:hasAddress.dfc-b:hasCountry="solid-display-value"
-                class-dfc-b:hasAddress.dfc-b:hasCountry="col dfc_b_address"
+                value-comma=", "
+                class-region="col dfc_b_address"
                 widget-set-description="div"
                 class-set-description="row"
                 widget-ofn:long_description="custom-safe-html-value-short"
@@ -583,11 +592,13 @@ utils.importCore().then(async (core) => {
                         <div class="row text-address">
                           <solid-display
                             bind-resources=""
-                            fields="dfc-b:hasAddress.dfc-b:hasCity, dfc-b:hasAddress.dfc-b:hasCountry"
+                            fields="dfc-b:hasAddress.dfc-b:hasCity, region(dfc-b:hasAddress.dfc-b:region, comma, dfc-b:hasAddress.dfc-b:hasCountry)"
                             widget-dfc-b:hasAddress.dfc-b:hasCity="solid-display-value"
                             class-dfc-b:hasAddress.dfc-b:hasCity="col dfc_b_address"
+                            widget-dfc-b:hasAddress.dfc-b:region="solid-display-value"
                             widget-dfc-b:hasAddress.dfc-b:hasCountry="solid-display-value"
-                            class-dfc-b:hasAddress.dfc-b:hasCountry="col dfc_b_address"
+                            value-comma=", "
+                            class-region="col dfc_b_address"
                           ></solid-display>
                         </div>
                         <div class="row">
@@ -712,9 +723,11 @@ utils.importCore().then(async (core) => {
                           <solid-display
                             bind-resources=""
                             nested-field="dfc-b:hasAddress"
-                            fields="street(dfc-b:hasStreet), city(dfc-b:hasCity, dfc-b:hasPostalCode), country(dfc-b:hasCountry)"
+                            fields="street(dfc-b:hasStreet), city(dfc-b:hasCity, comma, dfc-b:hasPostalCode), region(dfc-b:region), country(dfc-b:hasCountry)"
                             class-street="col s12 text-16 text-light"
+                            value-comma=", "
                             class-city="col s12 text-16 text-light"
+                            class-region="col s12 text-16 text-light"
                             class-country="col s12 text-16 text-light"
                           ></solid-display>
                         </div>
