@@ -122,6 +122,7 @@ importCore().then(core => {
           }
           this.requestUpdate();
         }
+        e.preventDefault();
       }
 
       render() {
@@ -191,7 +192,7 @@ importCore().then(core => {
               filtersRendering.push(html`
               <div>
                 <label>
-                  <input type="checkbox" .checked="${this.filtering.includes(filter) ?? nothing}"> <span @click="${this.toggle}" value="${filter}">${filter}</span>
+                  <input type="checkbox" ?checked="${this.filtering.includes(filter)}"> <span @click="${this.toggle}" value="${filter}">${filter}</span>
                 </label>
               </div>
               `);
