@@ -91,7 +91,7 @@ importCore().then(core => {
           }
           let supportingEvidence = await this._getProxyValue(await resource["ofn:hasSupportingEvidence"]);
           let certifications = await this._getProxyValue(await resource["ofn:hasCertifications"]);
-          let resources = [...supportingEvidence['ldp:contains'], ...certifications['ldp:contains']];
+          let resources = [...(supportingEvidence['ldp:contains'] || []), ...(certifications['ldp:contains'] || [])];
           let filters = this._generateFilters(resources);
           this.currentProducer = resource['@id'];
           return {
