@@ -811,27 +811,7 @@ utils.importCore().then(async (core) => {
                   <div class="col s12">
                     <div class="card-panel card-padding">
                       <div class="row">
-                        <div class="col s12 m3">
-                          <h6 class="margin-top-50">Filters</h6>
-                          <solid-form-search
-                            id="search-supporting-evidence-${this.uniq}"
-                            fields="ofn:Classification"
-                            auto-range-ofn:Classification="ofn:Classification"
-                            widget-ofn:Classification="solid-form-multicheckbox"
-                            option-label-ofn:Classification="ofn:label"
-                            class-ofn:Classification="flex-column"
-                          ></solid-form-search>
-                        </div>
-                        <div class="col s12 m8">
-                          <solid-display
-                            bind-resources=""
-                            nested-field="ofn:hasSupportingEvidence"
-                            fields="virtualid"
-                            value-virtualid="store://resource.@id"
-                            widget-virtualid="custom-supporting-evidence"
-                            filtered-by="search-supporting-evidence-${this.uniq}"
-                          ></solid-display>
-                        </div>
+                        <custom-supporting-evidence bind-resources=""></custom-supporting-evidence>
                       </div>
                     </div>
                   </div>

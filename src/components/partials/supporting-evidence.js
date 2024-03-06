@@ -11,10 +11,12 @@ importCore().then(core => {
     class extends LitElement {
       constructor() {
         super();
+        this.filtering = [];
+        this.currentProducer = "";
       }
 
       static properties = {
-        dataSrc: { attribute: "value" },
+        dataSrc: { attribute: "data-src" },
       }
 
       createRenderRoot() {
@@ -64,12 +66,38 @@ importCore().then(core => {
         return response;
       }
 
+      _generateFilters(resources) {
+        let filters = [];
+        for(let resource of resources) {
+          if(resource['@type'] == "ofn:supporting_evidence") {
+            if(resource['ofn:Classification']) {
+              for(let classification of resource['ofn:Classification']['ldp:contains']) {
+                filters.push(classification['ofn:label']);
+              }
+            }
+          } else if(resource["@type"] == "ofn:certification") {
+            filters.push("Certifications");
+          }
+        };
+        return Array.from(new Set(filters));
+      }
+
       _getResource = new Task(this, {
         task: async ([dataSrc]) => {
           if(!dataSrc) return;
           const resource = await core.store.getData(dataSrc, CLIENT_CONTEXT);
-          let response = await this._getProxyValue(resource);
-          return response;
+          if(this.currentProducer != resource["@id"]) {
+            this.filtering = [];
+          }
+          let supportingEvidence = await this._getProxyValue(await resource["ofn:hasSupportingEvidence"]);
+          let certifications = await this._getProxyValue(await resource["ofn:hasCertifications"]);
+          let resources = [...supportingEvidence['ldp:contains'], ...certifications['ldp:contains']];
+          let filters = this._generateFilters(resources);
+          this.currentProducer = resource['@id'];
+          return {
+            resources: resources,
+            filters: filters
+          };
         },
         args: () => [this.dataSrc]
       })
@@ -84,41 +112,102 @@ importCore().then(core => {
         this.rendering = html`${this.rendering}${template}`;
       }
 
+      toggle(e) {
+        let target = e.target.getAttribute('value');
+        if(target) {
+          console.log(target);
+          if(this.filtering.includes(target)) {
+            this.filtering = this.filtering.filter(f => f != target);
+          } else {
+            this.filtering.push(target);
+          }
+          this.requestUpdate();
+        }
+      }
+
       render() {
         if(!this.dataSrc) return nothing;
 
         return this._getResource.render({
           pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
-          complete: (resource) => {
+          complete: (datas) => {
             this.rendering = html``;
+            for(let res of datas.resources) {
+              if(this.filtering.length > 0) {
+                if(res['@type'] == "ofn:supporting_evidence") {
+                  let c = [];
+                  for(let classification of res['ofn:Classification']['ldp:contains']) {
+                    if(!this.filtering.includes(classification['ofn:label'])) c.push(true);
+                  }
+                  if(c.length == res['ofn:Classification']['ldp:contains'].length) {
+                    continue;
+                  }
+                } else if(res["@type"] == "ofn:certification") {
+                  if(!this.filtering.includes("Certifications")) continue;
+                }
+              }
+              let resourceRendering = [];
+              if(res['@type'] == "ofn:supporting_evidence") {
+                resourceRendering.push(html`
+                  <div class="text-14 text-light-grey">${res['ofn:Creation_date']}</div>
+                  <span class="text-18 bold text-black line-height-40 margin-right-10">${res['ofn:Title']}</span>
+                `);
 
-            this._addToRender(html`
-              <div class="text-14 text-light-grey">${resource['ofn:Creation_date']}</div>
-              <span class="text-18 bold text-black line-height-40 margin-right-10">${resource['ofn:Title']}</span>
-            `);
+                  for(let classification of res['ofn:Classification']['ldp:contains']) {
+                    resourceRendering.push(html`
+                      <div class="chip white vertical-align-middle">${classification['ofn:label']}</div>
+                    `);
+                  }
 
-            for(let classification of resource['ofn:Classification']['ldp:contains']) {
+                  if(res['ofn:Description']) {
+                    resourceRendering.push(html`
+                      <!-- <div>Source ${res['ofn:???']}</div> -->
+                      <div>${unsafeHTML(sanitize(res['ofn:Description'], false))}</div>
+                    `);
+                  }
+              } else if(res["@type"] == "ofn:certification") {
+                resourceRendering.push(html`
+                  <div class="text-14 text-light-grey">${res['ofn:Creation_date']}</div>
+                  <span class="text-18 bold text-black line-height-40 margin-right-10">${res['ofn:Certification_status']}</span>
+                  <div class="chip white vertical-align-middle">Certification</div>
+                  <div class="row"><div class="col s12 m5">Expiry date: ${res['ofn:Expiry_date']}</div><div class="col s12 m5">Certification ID: ${res['ofn:Certification_ID']}</div></div>
+                `);
+              }
+
+              if(res['ofn:Documentation_permissions']) {
+                resourceRendering.push(html`
+                  <div class="margin-top-20 document-availibility">${res['ofn:Documentation_permissions'].replace('Available on request', 'Documentation available upon direct request to producer')} <icon-mdi-file-document-check-outline></icon-mdi-file-document-check-outline></div>
+                `);
+              }
+
               this._addToRender(html`
-                <div class="chip white vertical-align-middle">${classification['ofn:label']}</div>
+                <div class="card-panel card-evidence">
+                  ${resourceRendering}
+                </div>
               `);
             }
 
-            this._addToRender(html`
-              <!-- <div>Source ${resource['ofn:???']}</div> -->
-              <div>${unsafeHTML(sanitize(resource['ofn:Description'], false))}</div>
-            `);
-
-            if(resource['ofn:Documentation_permissions']) {
-              this._addToRender(html`
-                <div class="margin-top-20 document-availibility">${resource['ofn:Documentation_permissions'].replace('Available on request', 'Documentation available upon direct request to producer')} <icon-mdi-file-document-check-outline></icon-mdi-file-document-check-outline></div>
+            let filtersRendering = [];
+            for(let filter of datas.filters) {
+              filtersRendering.push(html`
+              <div>
+                <label>
+                  <input type="checkbox" .value="${this.filtering.includes(filter) ?? nothing}"> <span @click="${this.toggle}" value="${filter}">${filter}</span>
+                </label>
+              </div>
               `);
             }
 
             return html`
-              <div class="card-panel card-evidence">
-                ${this.rendering}
+              <div class="col s12 m3">
+                <h6 class="margin-top-50">Filters</h6>
+                <div class="flex-column">
+                  ${filtersRendering}
+                </div>
               </div>
-            `;
+              <div class="col s12 m8">
+                ${this.rendering}
+              </div>`;
           },
           error: (e) => html`<p>Error while loading supporting evidence informations.</p>`
         });
