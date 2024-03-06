@@ -124,6 +124,16 @@ importCore().then(core => {
         this.rendering = html`${this.rendering}${template}`;
       }
 
+      navigate(e) {
+        let target = e.target.getAttribute('target');
+        if(target) {
+          let targetElement = document.querySelector('custom-supporting-evidence');
+          targetElement.filtering = [target];
+          targetElement.requestUpdate();
+          targetElement.parentElement.parentElement.parentElement.parentElement.parentElement.scrollIntoView();
+        }
+      }
+
       render() {
         if(!this.dataSrc) nothing;
 
@@ -139,10 +149,7 @@ importCore().then(core => {
                       <div class="chip small text-12 bg-green-pea">${classification.counter}</div>
                       <span class="text-14 text-green-pea">
                         for
-                        <span class="underline"
-                          >${classification.name}</span
-                        ></span
-                      >
+                        <a @click="${this.navigate}" target="${classification.name}" class="underline cursor-pointer text-green-pea">${classification.name}</a></span>
                     </div>
                   </div>
                 `);
