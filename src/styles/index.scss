@@ -32,7 +32,12 @@ solid-ofn-rpp {
   font-family: Open Sans, sans-serif;
   font-weight: 400;
   letter-spacing: -0.022em;
-  user-select: none;
+
+  select, input, label, a,
+  custom-multiple-badge,
+  .chip {
+    user-select: none;
+  }
 
   .hidden,
   [hidden] {
