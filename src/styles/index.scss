@@ -515,6 +515,10 @@ solid-ofn-rpp {
     display: contents;
   }
 
+  solid-form-dropdown-placeholder {
+    padding-right: 10px !important;
+  }
+
   @media #{$small-and-down} {
     [name="set-card-panel"] {
       .img-on-mobile {
