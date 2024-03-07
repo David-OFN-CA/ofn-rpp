@@ -141,7 +141,7 @@ importCore().then(core => {
                     <div class="row valign-wrapper">
                       <div class="col s12">
                         <a href="${resource["ofn:Wholesale_URL_1"]}" target="_blank" class="text-link text-link-red">
-                          Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                          Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
                         </a>
                       </div>
                     </div>
@@ -155,7 +155,7 @@ importCore().then(core => {
                     <div class="row valign-wrapper">
                       <div class="col s12">
                         <a href="${resource["ofn:Wholesale_URL_2"]}" target="_blank" class="text-link text-link-red">
-                          Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                          Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
                         </a>
                       </div>
                     </div>
@@ -169,7 +169,7 @@ importCore().then(core => {
                     <div class="row valign-wrapper">
                       <div class="col s12">
                         <a href="${resource["ofn:Wholesale_URL_3"]}" target="_blank" class="text-link text-link-red">
-                          Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                          Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
                         </a>
                       </div>
                     </div>
@@ -187,7 +187,7 @@ importCore().then(core => {
                 <div class="row text-link valign-wrapper">
                   <div class="col s12">
                     <a href="${resource["ofn:Household_URL"]}" target="_blank" class="text-link text-link-red">
-                      Visit website&nbsp;<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                      Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
                     </a>
                   </div>
                 </div>
