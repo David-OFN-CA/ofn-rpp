@@ -498,6 +498,14 @@ solid-ofn-rpp {
     }
   }
 
+  .background-img {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
   @media #{$small-and-down} {
     [name="set-card-panel"] {
       .img-on-mobile {
