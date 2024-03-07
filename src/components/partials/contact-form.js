@@ -92,7 +92,7 @@ importCore().then(core => {
                           </div>
                           <div class="row no-margin-bottom valign-wrapper">
                             <div class="col s12 text-link text-link-red">
-                              <a href="tel:${resource["dfc-b:hasPhoneNumber"]}" target="_blank">${resource["dfc-b:hasPhoneNumber"]}&nbsp;<icon-mdi-phone-in-talk></icon-mdi-phone-in-talk></a>
+                              <a href="tel:${resource["dfc-b:hasPhoneNumber"]}" target="_blank">${resource["dfc-b:hasPhoneNumber"]}<icon-mdi-phone-in-talk></icon-mdi-phone-in-talk></a>
                             </div>
                           </div>
                           ` : nothing}
@@ -101,7 +101,7 @@ importCore().then(core => {
                           </div>
                           <div class="row no-margin-bottom valign-wrapper">
                             <div class="col s12 text-link text-link-red">
-                              <a class="truncate" href="mailto:${resource["dfc-b:email"]}" target="_blank">${resource["dfc-b:email"]}&nbsp;<icon-mdi-email-outline></icon-mdi-email-outline></a>
+                              <a class="truncate" href="mailto:${resource["dfc-b:email"]}" target="_blank">${resource["dfc-b:email"]}<icon-mdi-email-outline></icon-mdi-email-outline></a>
                             </div>
                           </div>
                         </div>

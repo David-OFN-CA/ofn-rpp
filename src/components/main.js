@@ -739,7 +739,7 @@ utils.importCore().then(async (core) => {
                         <!-- Commented: No map link in resource? -->
                         <!-- <div class="row valign-wrapper">
                           <div class="col s12 text-link text-link-red">
-                            View map&nbsp;<icon-mdi-open-in-new
+                            View map<icon-mdi-open-in-new
                             ></icon-mdi-open-in-new>
                           </div>
                         </div> -->
