@@ -101,7 +101,7 @@ importCore().then(core => {
                           </div>
                           <div class="row no-margin-bottom valign-wrapper">
                             <div class="col s12 text-link text-link-red">
-                              <a href="mailto:${resource["dfc-b:email"]}" target="_blank">${resource["dfc-b:email"]}&nbsp;<icon-mdi-email-outline></icon-mdi-email-outline></a>
+                              <a class="truncate" href="mailto:${resource["dfc-b:email"]}" target="_blank">${resource["dfc-b:email"]}&nbsp;<icon-mdi-email-outline></icon-mdi-email-outline></a>
                             </div>
                           </div>
                         </div>
