@@ -79,6 +79,7 @@ importCore().then(core => {
             filters.push("Certifications");
           }
         };
+        filters.sort();
         return Array.from(new Set(filters));
       }
 
