@@ -9,6 +9,13 @@
 solid-ofn-rpp {
   // Materialize
   @import "materialize-css/sass/components/color-variables";
+
+  $colors: map-merge($colors, (
+    "teal": map-merge($teal, (
+      "lighten-1":  #244b3b // Original: 26a69a
+    ))
+  ));
+
   @import "materialize-css/sass/components/color-classes";
   @import "materialize-css/sass/components/variables";
   @import "materialize-css/sass/components/normalize";
@@ -517,6 +524,15 @@ solid-ofn-rpp {
 
   solid-form-dropdown-placeholder {
     padding-right: 10px !important;
+  }
+
+  [name="set-line-field-panel"] {
+    solid-form-label-text {
+      padding: 0 !important;
+      label {
+        left: 0 !important;
+      }
+    }
   }
 
   @media #{$small-and-down} {
