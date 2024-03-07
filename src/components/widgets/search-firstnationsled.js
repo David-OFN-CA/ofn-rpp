@@ -22,8 +22,8 @@ customElements.define(
         this.blocked = true;
         if(changed) this.checkbox = !this.checkbox;
         setTimeout(() => {
-          toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, "required-ofn:first_nations_country", 'ofn:First_Nations_country');
-          toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, "required-dfc-b:suppliedBy.ofn:First_Nations_country", 'dfc-b:suppliedBy.ofn:First_Nations_country');
+          toggleAndPopulate(`[filtered-by=producers-list-filters-${this.value}]`, "required-ofn:First_Nations_led", 'ofn:First_Nations_led');
+          toggleAndPopulate(`[filtered-by=products-list-filters-${this.value}]`, "required-dfc-b:suppliedBy.ofn:First_Nations_led", 'dfc-b:suppliedBy.ofn:First_Nations_led');
           this.blocked = false;
         }, 0);
       }
