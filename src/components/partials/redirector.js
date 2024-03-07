@@ -28,8 +28,7 @@ importCore().then(core => {
 
       firstUpdated() {
         document.addEventListener('navigate', (e) => {
-          console.log(e);
-          if(e.detail.route == `${this.uniq}-products-redirector` && e.explicitOriginalTarget == document.querySelector(`[default-route="${this.uniq}-producers-list"]`)) {
+          if(e.detail.route == `${this.uniq}-products-redirector` && e.target == document.querySelector(`[default-route="${this.uniq}-producers-list"]`)) {
             window.dispatchEvent(
               new CustomEvent('requestNavigation', {
                 detail: {
