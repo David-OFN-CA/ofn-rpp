@@ -498,12 +498,21 @@ solid-ofn-rpp {
     }
   }
 
+  .bg-img-container {
+    height: 100%;
+    width: 100%;
+  }
+
   .background-img {
     width: 100%;
     height: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+  }
+
+  solid-display>div {
+    display: contents;
   }
 
   @media #{$small-and-down} {

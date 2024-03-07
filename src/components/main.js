@@ -768,17 +768,14 @@ utils.importCore().then(async (core) => {
                               bind-resources=""
                               condition="ofn:promo_image_url">
                               <div class="row">
-                                <div
+                                <solid-display
+                                  bind-resources=""
+                                  fields="ofn:promo_image_url"
+                                  widget-ofn:promo_image_url="custom-display-image"
+                                  class-ofn:promo_image_url="flex-img bg-img-container"
                                   class="col hide-on-small-only m12 margin-top-10"
-                                >
-                                  <solid-display
-                                    bind-resources=""
-                                    fields="ofn:promo_image_url"
-                                    widget-ofn:promo_image_url="solid-display-img"
-                                    class-ofn:promo_image_url="responsive-img flex-img"
-                                    style="width: 100%"
-                                  ></solid-display>
-                                </div>
+                                  style="height: 212px;"
+                                ></solid-display>
                               </div>
                             </conditional-display>
                             <conditional-display
