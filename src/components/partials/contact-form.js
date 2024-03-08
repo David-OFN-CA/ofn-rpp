@@ -50,17 +50,41 @@ importCore().then(core => {
         let responseTarget = this.querySelector("form .response");
         if(form) {
           const formData = new FormData(form);
-          fetch(form.action, {
-            method: 'POST',
-            body: formData
-          }).then(response => {
-            if(response.ok) {
-              window._paq.push(['trackContentInteractionNode', this.querySelector('form'), 'submittedContactForm']);
-              responseTarget.innerHTML = 'Email submitted successfully';
+          let from = formData.get('from'),
+              fromElement = form.querySelector('#from').classList;
+          let type = formData.get('type'),
+              typeElement = form.querySelector('.select-wrapper').classList;
+          if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from)) {
+            fromElement.add('valid');
+            fromElement.remove('invalid');
+          } else {
+            fromElement.add('invalid');
+            fromElement.remove('valid');
+          }
+          if(type == null) {
+            typeElement.add('invalid');
+            typeElement.remove('valid');
+          } else {
+            typeElement.add('valid');
+            typeElement.remove('invalid');
+          }
+          if(from != "" && type != null) {
+            if(formData.get('username') != "") {
+              fetch(form.action, {
+                method: 'POST',
+                body: formData
+              }).then(response => {
+                if(response.ok) {
+                  window._paq.push(['trackContentInteractionNode', this.querySelector('form'), 'submittedContactForm']);
+                  responseTarget.innerHTML = 'Email submitted successfully';
+                } else {
+                  responseTarget.innerHTML = 'Email submission failed';
+                }
+              }).catch(_ => responseTarget.innerHTML = 'Error submitting email');
             } else {
-              responseTarget.innerHTML = 'Email submission failed';
+              responseTarget.innerHTML = 'Email submitted successfully';
             }
-          }).catch(_ => responseTarget.innerHTML = 'Error submitting email');
+          }
         }
         e.preventDefault();
       }
@@ -119,12 +143,14 @@ importCore().then(core => {
                                 <option value="household / consumer buyer">Household / consumer buyer</option>
                                 <option value="general / other">General / other</option>
                               </select>
+                              <span class="helper-text" data-error="You must select a type" data-success=""></span>
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s12 m6">
-                              <input id="from" name="from" type="email" class="validate">
+                              <input id="from" name="from" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="validate">
                               <label for="from">Email address</label>
+                              <span class="helper-text" data-error="Invalid email address" data-success=""></span>
                             </div>
                           </div>
                           <div class="row">
@@ -133,6 +159,7 @@ importCore().then(core => {
                               <label for="text">Message</label>
                             </div>
                           </div>
+                          <input name="username" type="text" class="hidden">
                           <div class="row hide-on-med-and-up right-align">
                             <div class="col s12">
                               <button
