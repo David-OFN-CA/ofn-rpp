@@ -45,29 +45,34 @@ importCore().then(core => {
         args: () => [this.dataSrc]
       })
 
+      /**
+       * Toggles the valid/invalid class on the target element based on the isValid parameter.
+       *
+       * @param {Object} target - The target element's classList to toggle the class on
+       * @param {boolean} [isValid=false] - Indicates whether the class should be valid or invalid
+       * @return {boolean} - Indicates whether the class was successfully toggled
+       */
+      toggleClass(target, isValid=false) {
+        if(!target) return false;
+        if(isValid) {
+          target.add('valid');
+          target.remove('invalid');
+        } else {
+          target.add('invalid');
+          target.remove('valid');
+        }
+        return true;
+      }
+
       _submitForm(e) {
         let form = this.querySelector("form");
         let responseTarget = this.querySelector("form .response");
         if(form) {
           const formData = new FormData(form);
-          let from = formData.get('from'),
-              fromElement = form.querySelector('#from').classList;
-          let type = formData.get('type'),
-              typeElement = form.querySelector('.select-wrapper').classList;
-          if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from)) {
-            fromElement.add('valid');
-            fromElement.remove('invalid');
-          } else {
-            fromElement.add('invalid');
-            fromElement.remove('valid');
-          }
-          if(type == null) {
-            typeElement.add('invalid');
-            typeElement.remove('valid');
-          } else {
-            typeElement.add('valid');
-            typeElement.remove('invalid');
-          }
+          let from = formData.get('from');
+          let type = formData.get('type');
+          this.toggleClass(form.querySelector('#from').classList, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from));
+          this.toggleClass(form.querySelector('.select-wrapper').classList, type !== null);
           if(from != "" && type != null) {
             if(formData.get('username') != "") {
               fetch(form.action, {
