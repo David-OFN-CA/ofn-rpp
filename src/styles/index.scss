@@ -540,6 +540,15 @@ solid-ofn-rpp {
     }
   }
 
+  .source {
+    color: #6F7D81;
+    .source-text {
+      color: #9A4444;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+  }
+
   @media #{$small-and-down} {
     [name="set-card-panel"] {
       .img-on-mobile {

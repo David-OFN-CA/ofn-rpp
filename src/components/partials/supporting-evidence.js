@@ -166,9 +166,20 @@ importCore().then(core => {
                     `);
                   }
 
+                  if(res['ofn:source_label']) {
+                    if(res['ofn:source_uri']) {
+                      resourceRendering.push(html`
+                        <div class="source truncate">Source <a class="source-text" href="${res['ofn:source_uri']}" target="_blank">${res['ofn:source_label']}</a></div>
+                      `);
+                    } else {
+                      resourceRendering.push(html`
+                        <div class="source truncate">Source <span class="source-text">${res['ofn:source_label']}</span></div>
+                      `);
+                    }
+                  }
+
                   if(res['ofn:Description']) {
                     resourceRendering.push(html`
-                      <!-- <div>Source ${res['ofn:???']}</div> -->
                       <div>${unsafeHTML(sanitize(res['ofn:Description'], false))}</div>
                     `);
                   }
