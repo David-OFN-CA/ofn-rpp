@@ -156,7 +156,7 @@ importCore().then(core => {
               let resourceRendering = [];
               if(res['@type'] == "ofn:supporting_evidence") {
                 resourceRendering.push(html`
-                  <div class="text-14 text-light-grey">${res['ofn:Creation_date']}</div>
+                  <div class="text-14 text-light-grey">${(new Date(res['ofn:Creation_date'])).toLocaleDateString()}</div>
                   <span class="text-18 bold text-black line-height-40 margin-right-10">${res['ofn:Title']}</span>
                 `);
 
@@ -174,7 +174,7 @@ importCore().then(core => {
                   }
               } else if(res["@type"] == "ofn:certification") {
                 resourceRendering.push(html`
-                  <div class="text-14 text-light-grey">${res['ofn:Creation_date']}</div>
+                  <div class="text-14 text-light-grey">${(new Date(res['ofn:Creation_date'])).toLocaleDateString()}</div>
                   <span class="text-18 bold text-black line-height-40 margin-right-10">${res['ofn:Certification_status']}</span>
                   <div class="chip white vertical-align-middle">Certification</div>
                   <div class="row"><div class="col s12 m5">Expiry date: ${res['ofn:Expiry_date']}</div><div class="col s12 m5">Certification ID: ${res['ofn:Certification_ID']}</div></div>
