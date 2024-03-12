@@ -74,21 +74,17 @@ importCore().then(core => {
           this.toggleClass(form.querySelector('#from').classList, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from));
           this.toggleClass(form.querySelector('.select-wrapper').classList, type !== null);
           if(from != "" && type != null) {
-            if(formData.get('username') != "") {
-              fetch(form.action, {
-                method: 'POST',
-                body: formData
-              }).then(response => {
-                if(response.ok) {
-                  window._paq.push(['trackContentInteractionNode', this.querySelector('form'), 'submittedContactForm']);
-                  responseTarget.innerHTML = 'Email submitted successfully';
-                } else {
-                  responseTarget.innerHTML = 'Email submission failed';
-                }
-              }).catch(_ => responseTarget.innerHTML = 'Error submitting email');
-            } else {
-              responseTarget.innerHTML = 'Email submitted successfully';
-            }
+            fetch(form.action, {
+              method: 'POST',
+              body: formData
+            }).then(response => {
+              if(response.ok) {
+                window._paq.push(['trackContentInteractionNode', this.querySelector('form'), 'submittedContactForm']);
+                responseTarget.innerHTML = 'Email submitted successfully';
+              } else {
+                responseTarget.innerHTML = 'Email submission failed';
+              }
+            }).catch(_ => responseTarget.innerHTML = 'Error submitting email');
           }
         }
         e.preventDefault();
