@@ -116,6 +116,9 @@ solid-ofn-rpp {
     font-size: 16px;
     line-height: 21px;
     text-align: left;
+    &.with-margin {
+      margin-right: 30px;
+    }
   }
 
   .filterby {

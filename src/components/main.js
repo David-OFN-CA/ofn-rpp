@@ -578,27 +578,29 @@ utils.importCore().then(async (core) => {
                         ></solid-display>
                       </div>
                       <div class="col s12 m8 margin-top-10">
-                        <div class="row no-margin-bottom">
+                        <div class="row no-margin-bottom no-margin-left">
                           <solid-display
                             bind-resources=""
-                            fields="wrapper(dfc-b:name, ofn:hasProduceCategory)"
+                            fields="wrapper(ofn:hasProduceCategory), dfc-b:name"
                             class-wrapper="valign-wrapper"
                             widget-wrapper="div"
                             widget-dfc-b:name="solid-display-value"
-                            class-dfc-b:name="flow-text margin-right-10"
+                            class-dfc-b:name="flow-text"
                             widget-ofn:hasProduceCategory="custom-multiple-badge-small"
+                            class="col s12"
                           ></solid-display>
                         </div>
                         <div class="row text-address">
                           <solid-display
                             bind-resources=""
-                            fields="dfc-b:hasAddress.dfc-b:hasCity, region(dfc-b:hasAddress.dfc-b:region, comma, dfc-b:hasAddress.dfc-b:hasCountry)"
+                            fields="region(dfc-b:hasAddress.dfc-b:hasCity, comma, dfc-b:hasAddress.dfc-b:region), ofn:First_Nations_country"
                             widget-dfc-b:hasAddress.dfc-b:hasCity="solid-display-value"
-                            class-dfc-b:hasAddress.dfc-b:hasCity="col dfc_b_address"
                             widget-dfc-b:hasAddress.dfc-b:region="solid-display-value"
-                            widget-dfc-b:hasAddress.dfc-b:hasCountry="solid-display-value"
-                            value-comma=", "
-                            class-region="col dfc_b_address"
+                            widget-ofn:First_Nations_country="solid-display-value"
+                            value-comma=" - "
+                            class-ofn:First_Nations_country="dfc_b_address"
+                            class-region="dfc_b_address with-margin"
+                            class="col s12"
                           ></solid-display>
                         </div>
                         <div class="row">
@@ -608,7 +610,7 @@ utils.importCore().then(async (core) => {
                             class-dfc-b:hasDescription="col s12 text-18"
                           ></solid-display>
                           <a
-                            class="col s12 learn-more"
+                            class="col s12 learn-more underline"
                             href="#${this.uniq}-about-us"
                             >Learn more about us</a
                           >
@@ -616,7 +618,7 @@ utils.importCore().then(async (core) => {
                         <conditional-display
                           bind-resources=""
                           condition="ofn:hasSupportingEvidence|ofn:hasAssurancePartnerships">
-                          <hr />
+                          <hr style="margin-left: 0; margin-right: 0;" />
                           <div class="row">
                             <conditional-display
                               bind-resources=""
