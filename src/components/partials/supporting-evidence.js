@@ -156,45 +156,53 @@ importCore().then(core => {
               let resourceRendering = [];
               if(res['@type'] == "ofn:supporting_evidence") {
                 resourceRendering.push(html`
-                  <div class="text-14 text-light-grey">${(new Date(res['ofn:Creation_date'])).toLocaleDateString()}</div>
+                  <div class="row no-margin-bottom">
+                    <div class="col s12">
+                      <div class="text-14 text-light-grey">${(new Date(res['ofn:Creation_date'])).toLocaleDateString()}</div>
+                    </div>
+                  </div>
                   <span class="text-18 bold text-black line-height-40 margin-right-10">${res['ofn:Title']}</span>
                 `);
 
-                  for(let classification of res['ofn:Classification']['ldp:contains']) {
-                    resourceRendering.push(html`
-                      <div class="chip white vertical-align-middle">${classification['ofn:label']}</div>
-                    `);
-                  }
-
-                  if(res['ofn:service_provider_label']) {
-                    if(res['ofn:service_provider_uri']) {
-                      resourceRendering.push(html`
-                        <div class="source truncate">Source <a class="source-text" href="${res['ofn:service_provider_uri']}" target="_blank">${res['ofn:service_provider_label']}</a></div>
-                      `);
-                    } else {
-                      resourceRendering.push(html`
-                        <div class="source truncate">Source <span class="source-text">${res['ofn:service_provider_label']}</span></div>
-                      `);
-                    }
-                  }
-
-                  if(res['ofn:Description']) {
-                    resourceRendering.push(html`
-                      <div>${unsafeHTML(sanitize(res['ofn:Description'], false))}</div>
-                    `);
-                  }
+                for(let classification of res['ofn:Classification']['ldp:contains']) {
+                  resourceRendering.push(html`
+                    <div class="chip white vertical-align-middle">${classification['ofn:label']}</div>
+                  `);
+                }
               } else if(res["@type"] == "ofn:certification") {
                 resourceRendering.push(html`
-                  <div class="text-14 text-light-grey">${(new Date(res['ofn:Creation_date'])).toLocaleDateString()}</div>
+                  <div class="row no-margin-bottom">
+                    <div class="col s12">
+                      <div class="text-14 text-light-grey">${(new Date(res['ofn:Creation_date'])).toLocaleDateString()}</div>
+                    </div>
+                  </div>
                   <span class="text-18 bold text-black line-height-40 margin-right-10">${res['ofn:Certification_status']}</span>
                   <div class="chip white vertical-align-middle">Certification</div>
                   <div class="row"><div class="col s12 m5">Expiry date: ${res['ofn:Expiry_date']}</div><div class="col s12 m5">Certification ID: ${res['ofn:Certification_ID']}</div></div>
                 `);
               }
 
+              if(res['ofn:service_provider_label']) {
+                if(res['ofn:service_provider_uri']) {
+                  resourceRendering.push(html`
+                    <div class="row"><div class="col s12"><div class="source truncate">Source <a class="source-text" href="${res['ofn:service_provider_uri']}" target="_blank">${res['ofn:service_provider_label']}</a></div></div></div>
+                  `);
+                } else {
+                  resourceRendering.push(html`
+                    <div class="row"><div class="col s12"><div class="source truncate">Source <span class="source-text">${res['ofn:service_provider_label']}</span></div></div></div>
+                  `);
+                }
+              }
+
+              if(res['ofn:Description']) {
+                resourceRendering.push(html`
+                  <div class="row no-margin-bottom"><div class="col s12">${unsafeHTML(sanitize(res['ofn:Description'], false))}</div></div>
+                `);
+              }
+
               if(res['ofn:Documentation_permissions']) {
                 resourceRendering.push(html`
-                  <div class="margin-top-20 document-availibility">${res['ofn:Documentation_permissions'].replace('Available on request', 'Documentation available upon direct request to producer')} <icon-mdi-file-document-check-outline></icon-mdi-file-document-check-outline></div>
+                  <div class="row no-margin-bottom"><div class="col s12"><div class="margin-top-20 document-availibility">${res['ofn:Documentation_permissions'].replace('Available on request', 'Documentation available upon direct request to producer')} <icon-mdi-file-document-check-outline></icon-mdi-file-document-check-outline></div></div></div>
                 `);
               }
 
