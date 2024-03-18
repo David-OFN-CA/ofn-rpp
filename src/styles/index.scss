@@ -10,13 +10,24 @@ solid-ofn-rpp {
   // Materialize
   @import "materialize-css/sass/components/color-variables";
 
-  $colors: map-merge($colors, (
-    "teal": map-merge($teal, (
-      "lighten-1":  #244b3b // Original: 26a69a
-    ))
-  ));
+  $colors: map-merge(
+    $colors,
+    (
+      "teal":
+        map-merge(
+          $teal,
+          (
+            "lighten-1": #244b3b // Original: 26a69a,
+          )
+        ),
+    )
+  );
 
   @import "materialize-css/sass/components/color-classes";
+
+  $small-screen-up: 701px;
+  $small-screen: 700px;
+
   @import "materialize-css/sass/components/variables";
   @import "materialize-css/sass/components/normalize";
   @import "materialize-css/sass/components/global";
@@ -33,7 +44,10 @@ solid-ofn-rpp {
   font-weight: 400;
   letter-spacing: -0.022em;
 
-  select, input, label, a,
+  select,
+  input,
+  label,
+  a,
   custom-multiple-badge,
   .chip {
     user-select: none;
@@ -59,7 +73,7 @@ solid-ofn-rpp {
   }
 
   .text-black {
-    color: #191C1D;
+    color: #191c1d;
   }
 
   .loader {
@@ -167,11 +181,11 @@ solid-ofn-rpp {
 
       &.select-padding {
         solid-form-dropdown-placeholder {
-          padding: 0; 
+          padding: 0;
         }
         .browser-default {
           // appearance: none;
-          padding: 10px .75rem;
+          padding: 10px 0.75rem;
           @extend .bold-16-21;
           color: #191c1d;
           border: none;
@@ -192,7 +206,6 @@ solid-ofn-rpp {
   }
 
   .products-list {
-
     [name="set-image"] {
       display: flex;
       justify-content: center;
@@ -247,7 +260,7 @@ solid-ofn-rpp {
     }
 
     .card-evidence {
-      box-shadow: 0px 4px 4px 0px #0000000D !important;
+      box-shadow: 0px 4px 4px 0px #0000000d !important;
       padding: 30px !important;
     }
 
@@ -292,7 +305,7 @@ solid-ofn-rpp {
       font-size: 14px;
       font-weight: 700;
       line-height: 24px;
-      color: #17594A;
+      color: #17594a;
       text-decoration: nonde;
       cursor: pointer;
     }
@@ -327,10 +340,11 @@ solid-ofn-rpp {
     }
 
     .text-green {
-      color: #17594A;
+      color: #17594a;
     }
 
-    .text-link, .text-link a {
+    .text-link,
+    .text-link a {
       color: #17594a;
       @extend .bold;
       @extend .text-14;
@@ -351,15 +365,16 @@ solid-ofn-rpp {
         height: 18px;
       }
       &.text-link-red {
-        color: #9A4444;
+        color: #9a4444;
         a {
-          color: #9A4444;
+          color: #9a4444;
         }
       }
     }
 
-    .text-link.text-red, .text-link.text-red a {
-      color: #4B250F;
+    .text-link.text-red,
+    .text-link.text-red a {
+      color: #4b250f;
     }
 
     .btn-small {
@@ -431,7 +446,7 @@ solid-ofn-rpp {
     }
 
     .social-link {
-      color: #9A4444;
+      color: #9a4444;
       .icon {
         font-size: 28px;
       }
@@ -443,15 +458,15 @@ solid-ofn-rpp {
     }
 
     .text-light-grey {
-      color: #6F7D81;
+      color: #6f7d81;
     }
 
     .text-green-pea {
-      color: #17594A;
+      color: #17594a;
     }
 
     .bg-green-pea {
-      background-color: #17594A;
+      background-color: #17594a;
       color: #fff;
     }
 
@@ -463,7 +478,7 @@ solid-ofn-rpp {
       @extend .text-14;
       font-weight: 700;
       line-height: 24px;
-      color: #191C1D;
+      color: #191c1d;
       icon-mdi-file-document-check-outline {
         vertical-align: text-top;
         margin-left: 4px;
@@ -501,13 +516,13 @@ solid-ofn-rpp {
   .flex-column {
     display: flex;
     flex-direction: column;
-    >div {
+    > div {
       display: contents;
       label {
         margin-top: 8px;
-        color: #191C1D;
+        color: #191c1d;
         [type="checkbox"]:checked + span:not(.lever)::before {
-          border-color: #0000 #9A4444 #9A4444 #0000;
+          border-color: #0000 #9a4444 #9a4444 #0000;
         }
       }
     }
@@ -526,7 +541,7 @@ solid-ofn-rpp {
     background-repeat: no-repeat;
   }
 
-  solid-display>div {
+  solid-display > div {
     display: contents;
   }
 
@@ -544,9 +559,9 @@ solid-ofn-rpp {
   }
 
   .source {
-    color: #6F7D81;
+    color: #6f7d81;
     .source-text {
-      color: #9A4444;
+      color: #9a4444;
       text-decoration: underline;
       font-weight: 700;
     }
@@ -592,7 +607,7 @@ solid-ofn-rpp {
       display: flex;
       justify-content: center;
       .img-logo {
-        float: none!important;
+        float: none !important;
       }
     }
     [fields="wrapper(dfc-b:name, ofn:hasProduceCategory)"] {
