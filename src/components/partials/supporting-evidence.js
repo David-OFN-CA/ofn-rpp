@@ -185,11 +185,11 @@ importCore().then(core => {
               if(res['ofn:service_provider_label']) {
                 if(res['ofn:service_provider_uri']) {
                   resourceRendering.push(html`
-                    <div class="row"><div class="col s12"><div class="source truncate">Source <a class="source-text" href="${res['ofn:service_provider_uri']}" target="_blank">${res['ofn:service_provider_label']}</a></div></div></div>
+                    <div class="row"><div class="col s12"><div class="source truncate">Source: <a class="source-text" href="${res['ofn:service_provider_uri']}" target="_blank">${res['ofn:service_provider_label']}</a></div></div></div>
                   `);
                 } else {
                   resourceRendering.push(html`
-                    <div class="row"><div class="col s12"><div class="source truncate">Source <span class="source-text">${res['ofn:service_provider_label']}</span></div></div></div>
+                    <div class="row"><div class="col s12"><div class="source truncate">Source: <span class="source-text">${res['ofn:service_provider_label']}</span></div></div></div>
                   `);
                 }
               }
