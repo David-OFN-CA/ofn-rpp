@@ -86,6 +86,7 @@ importCore().then(core => {
             this.rendering = html``;
             if(resource["ofn:Wholesale_buy_description"]) {
               this._addToRender(html`
+                <h5>Wholesale Customers</h5>
                 <div class="row">
                   <div class="col s12 text-14 text-light">
                     ${resource["ofn:Wholesale_buy_description"]}
