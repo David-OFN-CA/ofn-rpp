@@ -61,8 +61,7 @@ importCore().then(core => {
                 this._addToRender(html`
                   <div class="col s6">
                     <img class="responsive-img" src="${partner["ofn:Logo_URL"]}" alt="${partner["ofn:Group_name"]}" />
-                    <br />
-                    <span class="text-14 text-green bold underline">${partner["ofn:Group_name"]}</span>
+                    <div class="margin-top-10 text-14 text-green bold underline">${partner["ofn:Group_name"]}</div>
                   </div>
                 `);
               }
