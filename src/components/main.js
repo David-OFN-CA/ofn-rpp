@@ -652,6 +652,7 @@ utils.importCore().then(async (core) => {
                                       nested-field="ofn:hasAssurancePartnerships"
                                       fields="ofn:Assurance_partner"
                                       widget-ofn:Assurance_partner="custom-assurance-partner"
+                                      class="row margin-top-10"
                                     ></solid-display>
                                   </div>
                                 </div>

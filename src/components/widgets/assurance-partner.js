@@ -59,15 +59,15 @@ importCore().then(core => {
               this.rendering = html``;
               for(let partner of resource) {
                 this._addToRender(html`
-                  <div class="col s12 m6">
-                    <img src="${partner["ofn:Logo_URL"]}" alt="${partner["ofn:Group_name"]}" />
+                  <div class="col s6">
+                    <img class="responsive-img" src="${partner["ofn:Logo_URL"]}" alt="${partner["ofn:Group_name"]}" />
                     <br />
                     <span class="text-14 text-green bold underline">${partner["ofn:Group_name"]}</span>
                   </div>
                 `);
               }
               return html`
-                <div class="row margin-top-10">
+                <div>
                   ${this.rendering}
                 </div>
               `;
