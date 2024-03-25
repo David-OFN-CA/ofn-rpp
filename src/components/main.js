@@ -682,44 +682,40 @@ utils.importCore().then(async (core) => {
                   </div>
                 </div>
               </div>
-              <conditional-display
-                bind-resources=""
-                condition="dfc-b:supplies">
-                <h4 id="${this.uniq}-how-to-buy">How to buy</h4>
-                <div class="row">
-                  <div class="col s12">
-                    <div class="card-panel card-round card-padding">
-                      <div class="row">
-                        <div class="col s12 m3">
-                          <custom-wholesale-buy bind-resources="" uniq="${this.uniq}"></custom-wholesale-buy>
-                        </div>
-                        <div class="col s12 m8 offset-m1">
-                          <h5>Feature products</h5>
-                          <solid-display
-                            bind-resources=""
-                            nested-field="dfc-b:supplies"
-                            fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
-                            widget-set-card-row="div"
-                            class-set-card-row="row"
-                            widget-set-card-col="div"
-                            class-set-card-col="col s12 l6 xl4"
-                            widget-set-card-panel="div"
-                            class-set-card-panel="card-panel"
-                            widget-set-card-wrapper="div"
-                            class-ofn:image="img-200"
-                            widget-ofn:image="custom-display-image"
-                            default-ofn:image="https://placehold.co/200"
-                            widget-set-name="div"
-                            class-set-name="row no-margin-bottom"
-                            widget-dfc-b:name="solid-display-value"
-                            class-dfc-b:name="col s12 truncate"
-                          ></solid-display>
-                        </div>
+              <h4 id="${this.uniq}-how-to-buy">How to buy</h4>
+              <div class="row">
+                <div class="col s12">
+                  <div class="card-panel card-round card-padding">
+                    <div class="row">
+                      <div class="col s12 m3">
+                        <custom-wholesale-buy bind-resources="" uniq="${this.uniq}"></custom-wholesale-buy>
+                      </div>
+                      <div class="col s12 m8 offset-m1">
+                        <h5>Feature products</h5>
+                        <solid-display
+                          bind-resources=""
+                          nested-field="dfc-b:supplies"
+                          fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
+                          widget-set-card-row="div"
+                          class-set-card-row="row"
+                          widget-set-card-col="div"
+                          class-set-card-col="col s12 l6 xl4"
+                          widget-set-card-panel="div"
+                          class-set-card-panel="card-panel"
+                          widget-set-card-wrapper="div"
+                          class-ofn:image="img-200"
+                          widget-ofn:image="custom-display-image"
+                          default-ofn:image="https://placehold.co/200"
+                          widget-set-name="div"
+                          class-set-name="row no-margin-bottom"
+                          widget-dfc-b:name="solid-display-value"
+                          class-dfc-b:name="col s12 truncate"
+                        ></solid-display>
                       </div>
                     </div>
                   </div>
                 </div>
-              </conditional-display>
+              </div>
               <h4 id="${this.uniq}-about-us">About us</h4>
               <div class="row">
                 <div class="col s12">
