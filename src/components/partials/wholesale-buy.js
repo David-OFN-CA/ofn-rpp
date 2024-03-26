@@ -107,19 +107,19 @@ importCore().then(core => {
                 </div>
               </div>
             `);
-            if(resource["ofn:Wholesale_enquiry_preferences"].includes("Phone")) {
-              this._addToRender(html`
-                <div class="row text-light no-margin-bottom">
-                  <div class="col s12">Phone number</div>
-                </div>
-                <div class="row text-link valign-wrapper">
-                  <div class="col s8 truncate">${resource["dfc-b:hasPhoneNumber"]}</div>
-                  <div class="col s4">
-                    <icon-mdi-phone-in-talk></icon-mdi-phone-in-talk>
-                  </div>
-                </div>
-              `);
-            }
+            // if(resource["ofn:Wholesale_enquiry_preferences"].includes("Phone")) {
+            //   this._addToRender(html`
+            //     <div class="row text-light no-margin-bottom">
+            //       <div class="col s12">Phone number</div>
+            //     </div>
+            //     <div class="row text-link valign-wrapper">
+            //       <div class="col s8 truncate">${resource["dfc-b:hasPhoneNumber"]}</div>
+            //       <div class="col s4">
+            //         <icon-mdi-phone-in-talk></icon-mdi-phone-in-talk>
+            //       </div>
+            //     </div>
+            //   `);
+            // }
             // if(resource["ofn:Wholesale_enquiry_preferences"].includes("Email")) {
             //   this._addToRender(html`
             //     <div class="row text-light no-margin-bottom">
