@@ -27,7 +27,7 @@ customElements.define(
         margin-right: 6px;
         margin-bottom: 6px;
         background-repeat: no-repeat;
-        background-size: 31px 15px;
+        background-size: 25px 15px;
         padding-left: 50px;
         background-position: 12px;
       }
