@@ -79,7 +79,11 @@ importCore().then(core => {
             filters.push("Certifications");
           }
         };
-        filters.sort();
+        filters.sort((a, b) => {
+          if (a === "Other") return 1;
+          if (b === "Other") return -1;
+          return a.localeCompare(b);
+        });
         return Array.from(new Set(filters));
       }
 
