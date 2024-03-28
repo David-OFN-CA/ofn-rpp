@@ -636,15 +636,11 @@ utils.importCore().then(async (core) => {
                                     >
                                   </div>
                                 </div>
-                                <conditional-display
-                                  bind-resources=""
-                                  condition="ofn:hasSupportingEvidence">
-                                  <div class="row">
-                                    <div class="col s12">
-                                      <span class="learn-more underline" onclick="document.querySelector('custom-supporting-evidence').navigateToMe()">Learn more</span>
-                                    </div>
+                                <div class="row">
+                                  <div class="col s12">
+                                    <span class="learn-more underline" onclick="document.querySelector('custom-supporting-evidence').navigateToMe()">Learn more</span>
                                   </div>
-                                </conditional-display>
+                                </div>
                                 <div class="row">
                                   <div class="col s12">
                                     <solid-display
