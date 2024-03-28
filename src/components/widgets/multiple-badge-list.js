@@ -30,7 +30,7 @@ customElements.define(
       }
     `;
     render() {
-      const badges = this.value.replace(/[\[\]\"]/g, "").split(",");
+      const badges = JSON.parse(this.value);
       return html`${badges.map((chip) =>
         chip.length > 0 ? html`<div>${chip}</div>` : ""
       )}`;
