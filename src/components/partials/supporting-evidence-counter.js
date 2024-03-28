@@ -28,7 +28,7 @@ importCore().then(core => {
         let response = {};
         let properties = await resource['properties'];
         if(resource["@type"] == "dfc-b:Enterprise") {
-          properties = ["ofn:hasSupportingEvidence"];
+          properties = ["ofn:hasSupportingEvidence", "ofn:hasCertifications"];
         }
         for(let property of properties)  {
           let value = resource[property];
@@ -71,36 +71,59 @@ importCore().then(core => {
 
       async _formatResource(resource) {
         let supportingEvidences = resource["ofn:hasSupportingEvidence"],
+            certifications = resource["ofn:hasCertifications"],
             response = [];
-        if(supportingEvidences["ldp:contains"] === null) {
+        if(supportingEvidences["ldp:contains"] === null && certifications["ldp:contains"] === null) {
           return false;
         }
-        // Bug core? When ldp:contains have only one entry, it is not an array
-        if(!Array.isArray(supportingEvidences["ldp:contains"])) {
-          supportingEvidences = [supportingEvidences["ldp:contains"]];
-        } else {
-          supportingEvidences = supportingEvidences["ldp:contains"];
-        }
-        for(let evidence of supportingEvidences) {
-          let classifications = evidence["ofn:Classification"];
-          if(classifications["ldp:contains"] !== null) {
-            // Bug core? When ldp:contains have only one entry, it is not an array
-            if(!Array.isArray(classifications["ldp:contains"])) {
-              classifications = [classifications["ldp:contains"]];
-            } else {
-              classifications = classifications["ldp:contains"];
-            }
-            for(let classification of classifications) {
-              classification = classification["ofn:label"];
-              let counter = response.find(o => o.name === classification);
-              if (counter) {
-                counter.counter++;
+        if(supportingEvidences["ldp:contains"] !== null) {
+          // Bug core? When ldp:contains have only one entry, it is not an array
+          if(!Array.isArray(supportingEvidences["ldp:contains"])) {
+            supportingEvidences = [supportingEvidences["ldp:contains"]];
+          } else {
+            supportingEvidences = supportingEvidences["ldp:contains"];
+          }
+          for(let evidence of supportingEvidences) {
+            let classifications = evidence["ofn:Classification"];
+            if(classifications["ldp:contains"] !== null) {
+              // Bug core? When ldp:contains have only one entry, it is not an array
+              if(!Array.isArray(classifications["ldp:contains"])) {
+                classifications = [classifications["ldp:contains"]];
               } else {
-                response.push({ name: classification, counter: 1 });
+                classifications = classifications["ldp:contains"];
+              }
+              for(let classification of classifications) {
+                classification = classification["ofn:label"];
+                let counter = response.find(o => o.name === classification);
+                if (counter) {
+                  counter.counter++;
+                } else {
+                  response.push({ name: classification, counter: 1 });
+                }
               }
             }
           }
         }
+        if(certifications["ldp:contains"] !== null) {
+          if(!Array.isArray(certifications["ldp:contains"])) {
+            certifications = [certifications["ldp:contains"]];
+          } else {
+            certifications = certifications["ldp:contains"];
+          }
+          for(let certification of certifications) {
+            let counter = response.find(o => o.name === "Certifications");
+            if (counter) {
+              counter.counter++;
+            } else {
+              response.push({ name: "Certifications", counter: 1 });
+            }
+          }
+        }
+        response.sort((a, b) => {
+          if (a.name === "Other") return 1;
+          if (b.name === "Other") return -1;
+          return a.name.localeCompare(b.name);
+        });
         return response;
       }
 
