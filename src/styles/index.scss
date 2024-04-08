@@ -17,7 +17,7 @@ solid-ofn-rpp {
         map-merge(
           $teal,
           (
-            "lighten-1": #244b3b // Original: 26a69a,
+            "lighten-1": #244b3b // Original: 26a69a,,
           )
         ),
     )
@@ -479,7 +479,14 @@ solid-ofn-rpp {
       font-weight: 700;
       line-height: 24px;
       color: #191c1d;
-      icon-mdi-file-document-check-outline {
+      a,
+      &.text-red {
+        color: #9a4444;
+        text-decoration: underline;
+      }
+      icon-mdi-file-document-check-outline,
+      icon-mdi-open-in-new {
+        text-decoration: none;
         vertical-align: text-top;
         margin-left: 4px;
         font-size: 20px;

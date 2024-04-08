@@ -210,6 +210,7 @@ utils.importCore().then(async (core) => {
           <div
             id="${this.route}-producers-list"
             data-view="${this.route}-producers-list"
+            no-render=""
             class="row producers-list"
           >
             <div class="col s12 m4">
@@ -436,12 +437,14 @@ utils.importCore().then(async (core) => {
           <div
             id="${this.route}-products-redirector"
             data-view="${this.route}-products-redirector"
+            no-render=""
           >
             <custom-redirector bind-resources="" uniq="${this.uniq}"></custom-redirector>
           </div>
           <div
             id="${this.route}-products-list"
             data-view="${this.route}-products-list"
+            no-render=""
             class="row products-list"
           >
             <div class="col s12 m4">
@@ -563,6 +566,7 @@ utils.importCore().then(async (core) => {
           <div
             id="${this.route}-producer-details"
             data-view="${this.route}-producer-details"
+            no-render=""
             class="row producer-details"
           >
             <div class="col s12 m10 offset-m1">
