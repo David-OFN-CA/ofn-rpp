@@ -282,8 +282,9 @@ importCore().then((core) => {
                       <div class="col">
                         <div class="document-availibility">
                           <a href="${res["ofn:attachment_uri"]}" target="_blank"
-                            >Download documentation</a
-                          >
+                            >Download documentation
+                            <icon-mdi-file-document-check-outline></icon-mdi-file-document-check-outline>
+                          </a>
                         </div>
                       </div>
                     `);
