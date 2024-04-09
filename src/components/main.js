@@ -700,7 +700,7 @@ utils.importCore().then(async (core) => {
                           widget-ofn:image="custom-display-image"
                           default-ofn:image="https://placehold.co/200"
                           widget-set-name="div"
-                          class-set-name="row no-margin-bottom"
+                          class-set-name="row no-margin-bottom margin-top-4"
                           widget-dfc-b:name="solid-display-value"
                           class-dfc-b:name="col s12"
                         ></solid-display>
