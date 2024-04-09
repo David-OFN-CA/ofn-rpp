@@ -274,37 +274,45 @@ importCore().then((core) => {
                 `);
               }
 
-              if (res["ofn:Documentation_permissions"]) {
-                if (res["ofn:attachment_uri"]) {
-                  resourceRendering.push(html`
-                    <div class="row no-margin-bottom">
-                      <div class="col s12 m4">
-                        <div class="margin-top-20 document-availibility text-red">
-                          ${res["ofn:Documentation_permissions"]}
+              if (res["ofn:Documentation_permissions"] || res["ofn:Link"]) {
+                let temp = [];
+                if (res["ofn:Documentation_permissions"]) {
+                  if (res["ofn:attachment_uri"]) {
+                    temp.push(html`
+                      <div class="col">
+                        <div class="document-availibility">
+                          <a href="${res["ofn:attachment_uri"]}" target="_blank"
+                            >Download documentation</a
+                          >
                         </div>
                       </div>
-                      <div class="col s12 m4">
-                        <div class="margin-top-20 document-availibility">
-                          <a href="${res["ofn:attachment_uri"]}"
-                            >Read more
-                            <icon-mdi-open-in-new></icon-mdi-open-in-new
-                          ></a>
-                        </div>
-                      </div>
-                    </div>
-                  `);
-                } else {
-                  resourceRendering.push(html`
-                    <div class="row no-margin-bottom">
-                      <div class="col s12">
-                        <div class="margin-top-20 document-availibility">
-                          ${res["ofn:Documentation_permissions"]}
+                    `);
+                  } else {
+                    temp.push(html`
+                      <div class="col">
+                        <div class="document-availibility text-link-red">
+                          Documentation available on request to the producer
                           <icon-mdi-file-document-check-outline></icon-mdi-file-document-check-outline>
                         </div>
+                      </div>
+                    `);
+                  }
+                }
+                if (res["ofn:Link"]) {
+                  temp.push(html`
+                    <div class="col">
+                      <div class="document-availibility">
+                        <a href="${res["ofn:Link"]}" target="_blank"
+                          >Read more
+                          <icon-mdi-open-in-new></icon-mdi-open-in-new
+                        ></a>
                       </div>
                     </div>
                   `);
                 }
+                resourceRendering.push(html`
+                  <div class="row margin-top-20 no-margin-bottom">${temp}</div>
+                `);
               }
 
               this._addToRender(html`
