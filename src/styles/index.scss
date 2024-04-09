@@ -270,6 +270,10 @@ solid-ofn-rpp {
     }
   }
 
+  .margin-top-4 {
+    margin-top: 4px;
+  }
+
   .producer-details {
     .card-panel.card-round {
       border-radius: 8px;
@@ -300,10 +304,6 @@ solid-ofn-rpp {
       height: 120px;
       display: flex;
       justify-content: center;
-    }
-
-    .margin-top-4 {
-      margin-top: 4px;
     }
 
     .margin-top-10 {
