@@ -17,7 +17,7 @@ solid-ofn-rpp {
         map-merge(
           $teal,
           (
-            "lighten-1": #244b3b // Original: 26a69a,,
+            "lighten-1": #244b3b // Original: 26a69a,,,,,,
           )
         ),
     )
@@ -205,6 +205,28 @@ solid-ofn-rpp {
     }
   }
 
+  .card-container-contents {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    > div > solid-display {
+      display: flex;
+      flex-direction: row;
+      margin: 6px;
+      .card-panel {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+    .img-auto {
+      aspect-ratio: auto 1/1;
+      width: 100%;
+    }
+  }
+
   .products-list {
     [name="set-image"] {
       display: flex;
@@ -212,7 +234,7 @@ solid-ofn-rpp {
     }
 
     .img-168 {
-      width: 166px;
+      aspect-ratio: auto 1/1;
       height: 166px;
       display: flex;
       justify-content: center;
@@ -274,10 +296,14 @@ solid-ofn-rpp {
     }
 
     .img-120 {
-      width: 120px;
+      aspect-ratio: auto 1/1;
       height: 120px;
       display: flex;
       justify-content: center;
+    }
+
+    .margin-top-4 {
+      margin-top: 4px;
     }
 
     .margin-top-10 {
@@ -421,7 +447,7 @@ solid-ofn-rpp {
     }
 
     .img-200 {
-      width: 200px;
+      aspect-ratio: auto 1/1;
       height: 200px;
       display: flex;
       justify-content: center;
@@ -541,6 +567,7 @@ solid-ofn-rpp {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    border-radius: 4px;
   }
 
   .bg-img-container {
@@ -580,7 +607,6 @@ solid-ofn-rpp {
   @media #{$small-and-down} {
     [name="set-card-panel"] {
       .img-on-mobile {
-        width: 100px;
         height: 100px;
         position: absolute;
         display: block !important;
@@ -603,13 +629,16 @@ solid-ofn-rpp {
     }
     .products-list {
       .img-168 {
-        width: 120px;
+        aspect-ratio: auto 1/1;
         height: 120px;
       }
     }
+    .card-container-contents > div > solid-display {
+      width: calc(50% - 13px);
+    }
     .product-details {
       .img-200 {
-        width: 140px;
+        aspect-ratio: auto 1/1;
         height: 140px;
       }
     }
@@ -637,6 +666,30 @@ solid-ofn-rpp {
     .text-address {
       display: flex;
       justify-content: center;
+    }
+  }
+
+  @media only screen and (max-width: 320px) {
+    .card-container-contents > div > solid-display {
+      width: calc(100% - 13px);
+    }
+  }
+
+  @media #{$medium-and-up} {
+    .card-container-contents > div > solid-display {
+      width: calc(33.33% - 13px);
+    }
+  }
+
+  @media #{$large-and-up} {
+    .card-container-contents > div > solid-display {
+      width: calc(25% - 13px);
+    }
+  }
+
+  @media #{$extra-large-and-up} {
+    .card-container-contents > div > solid-display {
+      width: calc(20% - 13px);
     }
   }
 }

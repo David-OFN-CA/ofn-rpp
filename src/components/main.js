@@ -532,29 +532,25 @@ utils.importCore().then(async (core) => {
                 </div>
               </div>
               <solid-display
-                class="row card-container"
+                class="row card-container card-container-contents"
                 loader-id="loader-products-list-${this.uniq}"
                 data-src="${this.productsSrc}"
                 filtered-by="products-list-filters-${this.uniq}"
-                fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name), set-from(dfc-b:suppliedBy.dfc-b:name))))"
-                widget-set-card-row="div"
-                class-set-card-row="row"
-                widget-set-card-col="div"
-                class-set-card-col="col s6 l4 xl3"
-                widget-set-card-panel="div"
-                class-set-card-panel="card-panel"
+                fields="set-card(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name), set-from(dfc-b:suppliedBy.dfc-b:name)))"
+                widget-set-card="div"
+                class-set-card="card-panel"
                 widget-set-card-wrapper="div"
-                class-ofn:image="img-168"
+                class-ofn:image="img-auto"
                 widget-ofn:image="custom-display-image"
                 default-ofn:image="https://placehold.co/168"
                 widget-set-name="div"
-                class-set-name="row no-margin-bottom"
+                class-set-name="row no-margin-bottom margin-top-4"
                 widget-dfc-b:name="solid-display-value"
-                class-dfc-b:name="col s12 truncate"
+                class-dfc-b:name="col s12"
                 widget-set-from="div"
                 class-set-from="row no-margin-bottom"
                 widget-dfc-b:suppliedBy.dfc-b:name="solid-display-value"
-                class-dfc-b:suppliedBy.dfc-b:name="col s12 truncate"
+                class-dfc-b:suppliedBy.dfc-b:name="col s12"
                 next="${this.route}-products-redirector"
               ></solid-display>
             </div>
@@ -693,23 +689,20 @@ utils.importCore().then(async (core) => {
                       <div class="col s12 m8 offset-m1">
                         <h5>Feature products</h5>
                         <solid-display
+                          class="row card-container card-container-contents"
                           bind-resources=""
                           nested-field="dfc-b:supplies"
-                          fields="set-card-col(set-card-panel(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name))))"
-                          widget-set-card-row="div"
-                          class-set-card-row="row"
-                          widget-set-card-col="div"
-                          class-set-card-col="col s12 l6 xl4"
-                          widget-set-card-panel="div"
-                          class-set-card-panel="card-panel"
+                          fields="set-card(set-card-wrapper(set-image(ofn:image), set-name(dfc-b:name)))"
+                          widget-set-card="div"
+                          class-set-card="card-panel"
                           widget-set-card-wrapper="div"
-                          class-ofn:image="img-200"
+                          class-ofn:image="img-auto"
                           widget-ofn:image="custom-display-image"
                           default-ofn:image="https://placehold.co/200"
                           widget-set-name="div"
                           class-set-name="row no-margin-bottom"
                           widget-dfc-b:name="solid-display-value"
-                          class-dfc-b:name="col s12 truncate"
+                          class-dfc-b:name="col s12"
                         ></solid-display>
                       </div>
                     </div>
