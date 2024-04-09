@@ -11,11 +11,14 @@ importCore().then(core => {
     class extends LitElement {
       constructor() {
         super();
+        this.depth = 0;
       }
 
       static properties = {
         dataSrc: { attribute: "data-src" },
         uniq: { attribute: "uniq" },
+        depth: { state: true },
+        madDepth: { state: true },
       }
 
       createRenderRoot() {
@@ -29,13 +32,14 @@ importCore().then(core => {
        * @return {object} response containing the serialized resource
        */
       async _getProxyValue(resource) {
+        this.depth++;
         let response = {};
         for(let property of await resource['properties'])  {
           let value = resource[property];
           if(!property.startsWith('@')) {
             value = await resource.get(property);
             try {
-              if(value && typeof value === "object" && "getProxy" in value) {
+              if(value && typeof value === "object" && "getProxy" in value && this.depth < 3) {
                 value = await this._getProxyValue(value);
               }
             } catch (e) {
@@ -51,6 +55,7 @@ importCore().then(core => {
         task: async ([dataSrc]) => {
           if(!dataSrc) return;
           const resource = await core.store.getData(dataSrc, CLIENT_CONTEXT);
+          this.depth = 0;
           let response = await this._getProxyValue(resource);
           if(!response["ofn:Wholesale_enquiry_preferences"]) {
             response["ofn:Wholesale_enquiry_preferences"] = [];
