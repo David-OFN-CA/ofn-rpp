@@ -12,6 +12,7 @@ importCore().then(core => {
       constructor() {
         super();
         this.depth = 0;
+        this.maxDepth = 3;
       }
 
       static properties = {
@@ -39,7 +40,7 @@ importCore().then(core => {
           if(!property.startsWith('@')) {
             value = await resource.get(property);
             try {
-              if(value && typeof value === "object" && "getProxy" in value && this.depth < 3) {
+              if(value && typeof value === "object" && "getProxy" in value && this.depth < this.maxDepth) {
                 value = await this._getProxyValue(value);
               }
             } catch (e) {

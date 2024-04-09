@@ -13,10 +13,14 @@ importCore().then((core) => {
         super();
         this.filtering = [];
         this.currentProducer = "";
+        this.depth = 0;
+        this.maxDepth = 3;
       }
 
       static properties = {
         dataSrc: { attribute: "data-src" },
+        depth: { state: true },
+        maxDepth: { state: true },
       };
 
       createRenderRoot() {
@@ -30,13 +34,14 @@ importCore().then((core) => {
        * @return {object} response containing the serialized resource
        */
       async _getProxyValue(resource) {
+        this.depth++;
         let response = {};
         for (let property of await resource["properties"]) {
           let value = resource[property];
           if (!property.startsWith("@")) {
             value = await resource.get(property);
             try {
-              if (value && typeof value === "object" && "getProxy" in value) {
+              if (value && typeof value === "object" && "getProxy" in value && this.depth < this.maxDepth) {
                 value = await this._getProxyValue(value);
               }
             } catch (e) {

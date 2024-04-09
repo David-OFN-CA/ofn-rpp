@@ -31,12 +31,14 @@ importCore().then(core => {
           properties = ["ofn:hasSupportingEvidence", "ofn:hasCertifications"];
         }
         for(let property of properties)  {
+          let depth = 0;
           let value = resource[property];
           if(value !== null) {
             if(!property.startsWith('@')) {
               value = await resource.get(property);
               try {
-                if(value && typeof value === "object" && "getProxy" in value) {
+                if(value && typeof value === "object" && "getProxy" in value && depth < 3) {
+                  depth++;
                   value = await this._getProxyValue(value);
                 }
               } catch (e) {
