@@ -34,7 +34,6 @@ importCore().then((core) => {
        * @return {object} response containing the serialized resource
        */
       async _getProxyValue(resource) {
-        this.depth++;
         let response = {};
         for (let property of await resource["properties"]) {
           let value = resource[property];
@@ -42,6 +41,7 @@ importCore().then((core) => {
             value = await resource.get(property);
             try {
               if (value && typeof value === "object" && "getProxy" in value && this.depth < this.maxDepth) {
+                this.depth++;
                 value = await this._getProxyValue(value);
               }
             } catch (e) {
@@ -61,6 +61,7 @@ importCore().then((core) => {
                   entry["@id"],
                   resource["clientContext"]
                 );
+                this.depth = 0;
                 expandedContainer.push(await this._getProxyValue(entry));
               }
               // Rewrite the ldp:contains with a complete one
