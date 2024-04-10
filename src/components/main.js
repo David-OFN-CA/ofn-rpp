@@ -835,7 +835,7 @@ utils.importCore().then(async (core) => {
           ${this.context()}
           ${this.style()}
           ${this.routers()}
-          ${import.meta.env.DEV ? html`
+          <!-- ${import.meta.env.DEV ? html`
             <nav>
               <div class="nav-wrapper">
                 <a href="#" class="hide-on-small-only brand-logo">Examples</a>
@@ -860,7 +860,7 @@ utils.importCore().then(async (core) => {
                   </li>
                 </ul>
               </div>
-            </nav>` : nothing}
+            </nav>` : nothing} -->
           ${this.viewProductsList()}
           ${this.viewProducersList()}
           ${this.viewProducerDetails()}
