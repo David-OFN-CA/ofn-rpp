@@ -90,7 +90,7 @@ solid-ofn-rpp {
     box-shadow: 0px 4px 4px 0px #0000000d;
   }
 
-  .products-list .card-panel[name="set-card-panel"],
+  .products-list .card-panel[name="set-card"],
   .producers-list .card-panel[name="set-card-panel"] {
     cursor: pointer;
   }
@@ -206,7 +206,6 @@ solid-ofn-rpp {
   }
 
   .card-container-contents {
-    cursor: pointer;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
