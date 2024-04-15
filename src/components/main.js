@@ -169,6 +169,12 @@ utils.importCore().then(async (core) => {
             );
 
             setTimeout(() => {
+              this.querySelector(`#producers-list-filters-${this.uniq}`)
+                  .addEventListener('filterChange', (e) => {
+                console.log('filterChange', e.detail);
+                window._paq.push(['trackSiteSearch', e.detail, 'Producers list', false]);
+              });
+
               M.Autocomplete.init(
                 this.querySelectorAll(
                   'input[type="text"][name="search-field"]'
@@ -224,7 +230,7 @@ utils.importCore().then(async (core) => {
                   </div>-->
                   <solid-form-search
                     id="producers-list-filters-${this.uniq}"
-                    debounce="100"
+                    debounce="300"
                     loader-id="loader-producers-list-filters-${this.uniq}"
                     fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_led)))),${this.rangeProducerOutcomes ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:hasSupportingEvidence.ldp:contains.ofn:Classification))))," : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))),${this.rangeProducerAssurances ? "set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))," : ""}${this.rangeProducerCertifications ? "set-line-certification(set-line-certification-col(set-line-certification-panel(set-line-certification-wrapper(ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus))))," : ""}set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
                     class-set-line-field="row"
@@ -414,6 +420,12 @@ utils.importCore().then(async (core) => {
             );
 
             setTimeout(() => {
+              this.querySelector(`#products-list-filters-${this.uniq}`)
+                  .addEventListener('filterChange', (e) => {
+                console.log('filterChange', e.detail);
+                window._paq.push(['trackSiteSearch', e.detail, 'Products list', false]);
+              });
+
               M.Autocomplete.init(
                 this.querySelectorAll(
                   'input[type="text"][name="search-field-product"]'
@@ -459,7 +471,7 @@ utils.importCore().then(async (core) => {
                   </div>-->
                   <solid-form-search
                     id="products-list-filters-${this.uniq}"
-                    debounce="100"
+                    debounce="300"
                     loader-id="loader-products-list-filters-${this.uniq}"
                     fields="set-line-field(set-line-field-col(set-line-field-panel(search-field-product))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_led)))),${this.rangeProducerOutcomes ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification))))," : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type))))${this.rangeProducerAssurances ? ",set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))" : ""}"
                     class-set-line-field="row"
