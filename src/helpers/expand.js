@@ -10,7 +10,11 @@ export default async () => {
    */
   return async (resource, predicate) => {
     let r = "";
-    if ((await resource["@type"]) != "ldp:Container") {
+    const resourceType = await resource["@type"];
+    if (import.meta.env.DEV && !resourceType) {
+      console.warn(`No @type within ${resource["@id"]}`);
+    }
+    if (resourceType != "ldp:Container") {
       r = await resource[
         await core.store.getExpandedPredicate(predicate, CLIENT_CONTEXT)
       ];

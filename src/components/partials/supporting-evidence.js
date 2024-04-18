@@ -40,7 +40,12 @@ importCore().then((core) => {
           if (!property.startsWith("@")) {
             value = await resource.get(property);
             try {
-              if (value && typeof value === "object" && "getProxy" in value && this.depth < this.maxDepth) {
+              if (
+                value &&
+                typeof value === "object" &&
+                "getProxy" in value &&
+                this.depth < this.maxDepth
+              ) {
                 this.depth++;
                 value = await this._getProxyValue(value);
               }

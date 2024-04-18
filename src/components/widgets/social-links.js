@@ -1,4 +1,4 @@
-import { importCore, CLIENT_CONTEXT, makeExpand } from '@helpers/utils';
+import { importCore, CLIENT_CONTEXT, makeExpand } from "@helpers/utils";
 
 importCore().then(async (core) => {
   const expand = await makeExpand();
@@ -13,10 +13,7 @@ importCore().then(async (core) => {
       this.element.innerHTML += `
         <div class="row">`;
       for (let social of await expand(this.resource, "ldp:contains")) {
-        social = await core.store.getData(
-          social["@id"],
-          CLIENT_CONTEXT
-        );
+        social = await core.store.getData(social["@id"], CLIENT_CONTEXT);
         let app = (await expand(social, "dfc-b:name")).replace("_phone", "");
         let link = await expand(social, "dfc-b:URL");
         if (!/^https?:\/\//i.test(link)) {

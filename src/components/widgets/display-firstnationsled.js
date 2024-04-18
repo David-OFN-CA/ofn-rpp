@@ -14,7 +14,10 @@ customElements.define(
     }
     render() {
       return html`${this.value.length > 0
-        ? html`<div class="row"><div class="col s12 text-14 bold">First Nation Country</div><div class="col s12 text-14">${this.value}</div></div>`
+        ? html`<div class="row">
+            <div class="col s12 text-14 bold">First Nation Country</div>
+            <div class="col s12 text-14">${this.value}</div>
+          </div>`
         : ""}`;
     }
   }
