@@ -226,7 +226,7 @@ importCore().then((core) => {
                   </div>
                   <span
                     class="text-18 bold text-black line-height-40 margin-right-10"
-                    >${res["ofn:Certification_status"]}</span
+                    >${res["ofn:certifying_body_name"] || res["ofn:Certification_status"]}</span
                   >
                   <div class="chip white vertical-align-middle">
                     Certification
