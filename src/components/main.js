@@ -769,7 +769,7 @@ utils.importCore().then(async (core) => {
                                 </div>
                                 <div class="row">
                                   <div class="col s12">
-                                    <span class="learn-more underline" onclick="document.querySelector('custom-supporting-evidence').navigateToMe()">Learn more</span>
+                                    <a class="learn-more underline" href="https://regenerative.org.au/who-is-involved/">Learn more</a>
                                   </div>
                                 </div>
                                 <div class="row">
@@ -796,7 +796,7 @@ utils.importCore().then(async (core) => {
                                 </div>
                                 <div class="row">
                                   <div class="col s12">
-                                    <span class="learn-more underline" onclick="document.querySelector('custom-supporting-evidence').navigateToMe()">Learn more</span>
+                                    <a class="learn-more underline" href="https://regenerative.org.au/regenerative-assurance-evidence/">Learn more</a>
                                   </div>
                                 </div>
                                 <custom-supporting-evidence-counter bind-resources=""></custom-supporting-evidence-counter>
@@ -876,8 +876,8 @@ utils.importCore().then(async (core) => {
                         <h5 class="margin-top-50">Useful links</h5>
                         <solid-display
                           bind-resources=""
-                          fields="ofn:Household_URL"
-                          widget-ofn:Household_URL="custom-display-householdurl"
+                          fields="dfc-b:websitePage"
+                          widget-dfc-b:websitePage="custom-display-householdurl"
                         ></solid-display>
                         <div class="row no-margin-bottom">
                           <solid-display
