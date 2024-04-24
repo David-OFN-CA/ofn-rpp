@@ -171,8 +171,22 @@ utils.importCore().then(async (core) => {
             setTimeout(() => {
               this.querySelector(`#producers-list-filters-${this.uniq}`)
                   .addEventListener('filterChange', (e) => {
-                console.log('filterChange', e.detail);
-                window._paq.push(['trackSiteSearch', e.detail, 'Producers list', false]);
+                window._mtm = window._mtm || [];
+                //TODO: edge case of the ofn:First_Nations_led filter ??
+                if (e.detail.type === 'select') {
+                  window._mtm.push({
+                    'event': 'Producer-Filter-Interaction',
+                    'event-category': 'Producer-Filter-Interaction',
+                    'filter-name': e.detail.inputLabel,
+                    'filter-value': e.detail.value
+                  });
+                } else if (e.detail.type === 'input') {
+                  window._mtm.push({
+                    'event': 'Producer-Filter',
+                    'event-category': 'Producer-Filter',
+                    'keyword': e.detail.value
+                  });
+                }
               });
 
               M.Autocomplete.init(
@@ -422,8 +436,22 @@ utils.importCore().then(async (core) => {
             setTimeout(() => {
               this.querySelector(`#products-list-filters-${this.uniq}`)
                   .addEventListener('filterChange', (e) => {
-                console.log('filterChange', e.detail);
-                window._paq.push(['trackSiteSearch', e.detail, 'Products list', false]);
+                window._mtm = window._mtm || [];
+                if (e.detail.type === 'select') {
+                  //TODO: edge case of the ofn:First_Nations_led filter ??
+                  window._mtm.push({
+                    'event': 'Product-Filter-Interaction',
+                    'event-category': 'Product-Filter-Interaction',
+                    'filter-name': e.detail.inputLabel,
+                    'filter-value': e.detail.value
+                  });
+                } else if (e.detail.type === 'input') {
+                  window._mtm.push({
+                    'event': 'Product-Filter',
+                    'event-category': 'Product-Filter',
+                    'keyword': e.detail.value
+                  });
+                }
               });
 
               M.Autocomplete.init(
