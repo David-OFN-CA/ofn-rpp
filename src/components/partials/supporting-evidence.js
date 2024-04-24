@@ -40,7 +40,12 @@ importCore().then((core) => {
           if (!property.startsWith("@")) {
             value = await resource.get(property);
             try {
-              if (value && typeof value === "object" && "getProxy" in value && this.depth < this.maxDepth) {
+              if (
+                value &&
+                typeof value === "object" &&
+                "getProxy" in value &&
+                this.depth < this.maxDepth
+              ) {
                 this.depth++;
                 value = await this._getProxyValue(value);
               }
@@ -221,7 +226,7 @@ importCore().then((core) => {
                   </div>
                   <span
                     class="text-18 bold text-black line-height-40 margin-right-10"
-                    >${res["ofn:Certification_status"]}</span
+                    >${res["ofn:certifying_body_name"] || res["ofn:Certification_status"]}</span
                   >
                   <div class="chip white vertical-align-middle">
                     Certification

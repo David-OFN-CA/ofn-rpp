@@ -14,10 +14,11 @@ customElements.define(
     }
     render() {
       return html`${this.value.length > 0
-        ? html`
-          <div class="row no-margin-bottom valign-wrapper">
+        ? html` <div class="row no-margin-bottom valign-wrapper">
             <div class="col s12 text-link text-link-red">
-              <a href="${this.value}" target="_blank">Producer website<icon-mdi-open-in-new></icon-mdi-open-in-new></a>
+              <a href="${this.value}" target="_blank"
+                >Producer website<icon-mdi-open-in-new></icon-mdi-open-in-new
+              ></a>
             </div>
           </div>`
         : ""}`;

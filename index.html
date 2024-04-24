@@ -12,17 +12,18 @@
     ></script>
     <script type="module" src="./src/index.js"></script>
   </head>
-  <body style="margin: 0;">
-    <solid-ofn-rpp-navigator uniq="regenerative-produce-portal"></solid-ofn-rpp-navigator>
+  <body style="margin: 0">
+    <solid-ofn-rpp-navigator
+      uniq="regenerative-produce-portal"
+    ></solid-ofn-rpp-navigator>
     <solid-ofn-rpp
-      producers-src="https://api.regenerative.org.au/webhook/regen/producers"
-      products-src="https://api.regenerative.org.au/webhook/regen/products"
+      producers-src="https://api.regenerative.org.au/webhook/regen/producer-bundle"
+      products-src="https://api.regenerative.org.au/webhook/regen/product-bundle"
       range-product-categories="https://api.regenerative.org.au/webhook/regen/produce_categories"
       range-producer-assurances="https://api.regenerative.org.au/webhook/regen/assurance_partners"
       range-producer-supporting-evidence="https://api.regenerative.org.au/webhook/regen/supporting_evidence_classifications"
       range-producer-certifications="https://api.regenerative.org.au/webhook/regen/certifications"
       uniq="regenerative-produce-portal"
     ></solid-ofn-rpp>
-
   </body>
 </html>

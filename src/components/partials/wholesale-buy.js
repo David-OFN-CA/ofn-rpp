@@ -2,9 +2,9 @@ import { LitElement, html, nothing } from "lit";
 import { Task } from "@lit/task";
 import "~icons/mdi/phone-in-talk";
 import "~icons/mdi/open-in-new";
-import { importCore, CLIENT_CONTEXT, uniq } from '@helpers/utils';
+import { importCore, CLIENT_CONTEXT, uniq } from "@helpers/utils";
 
-importCore().then(core => {
+importCore().then((core) => {
   // Custom widget for wholesale
   customElements.define(
     "custom-wholesale-buy",
@@ -20,7 +20,7 @@ importCore().then(core => {
         uniq: { attribute: "uniq" },
         depth: { state: true },
         madDepth: { state: true },
-      }
+      };
 
       createRenderRoot() {
         return this;
@@ -34,17 +34,22 @@ importCore().then(core => {
        */
       async _getProxyValue(resource) {
         let response = {};
-        for(let property of await resource['properties'])  {
+        for (let property of await resource["properties"]) {
           let value = resource[property];
-          if(!property.startsWith('@')) {
+          if (!property.startsWith("@")) {
             value = await resource.get(property);
             try {
-              if(value && typeof value === "object" && "getProxy" in value && this.depth < this.maxDepth) {
+              if (
+                value &&
+                typeof value === "object" &&
+                "getProxy" in value &&
+                this.depth < this.maxDepth
+              ) {
                 this.depth++;
                 value = await this._getProxyValue(value);
               }
             } catch (e) {
-              if(import.meta.env.DEV) console.error(e);
+              if (import.meta.env.DEV) console.error(e);
             }
           }
           response[property] = value;
@@ -54,17 +59,17 @@ importCore().then(core => {
 
       _getResource = new Task(this, {
         task: async ([dataSrc]) => {
-          if(!dataSrc) return;
+          if (!dataSrc) return;
           const resource = await core.store.getData(dataSrc, CLIENT_CONTEXT);
           this.depth = 0;
           let response = await this._getProxyValue(resource);
-          if(!response["ofn:Wholesale_enquiry_preferences"]) {
+          if (!response["ofn:Wholesale_enquiry_preferences"]) {
             response["ofn:Wholesale_enquiry_preferences"] = [];
           }
           return response;
         },
-        args: () => [this.dataSrc]
-      })
+        args: () => [this.dataSrc],
+      });
 
       /**
        * Helper function that adds the given template to the current rendering.
@@ -72,7 +77,7 @@ importCore().then(core => {
        * @param {html} template - the template to be added to the rendering
        */
       _addToRender(template) {
-        if(!this.rendering) this.rendering = html``;
+        if (!this.rendering) this.rendering = html``;
         this.rendering = html`${this.rendering}${template}`;
       }
 
@@ -86,14 +91,15 @@ importCore().then(core => {
       }
 
       render() {
-        if(!this.dataSrc) return nothing;
-        if(!this.uniq) this.uniq = uniq();
+        if (!this.dataSrc) return nothing;
+        if (!this.uniq) this.uniq = uniq();
 
         return this._getResource.render({
-          pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
+          pending: () =>
+            html`<div class="progress"><div class="indeterminate"></div></div>`,
           complete: (resource) => {
             this.rendering = html``;
-            if(resource["ofn:Wholesale_buy_description"]) {
+            if (resource["ofn:Wholesale_buy_description"]) {
               this._addToRender(html`
                 <h5>Wholesale Customers</h5>
                 <div class="row">
@@ -109,7 +115,8 @@ importCore().then(core => {
                   <a
                     href="#${this.uniq}-contact-producer"
                     class="waves-effect waves-light btn-small"
-                  >View contact details</a>
+                    >View contact details</a
+                  >
                 </div>
               </div>
             `);
@@ -140,44 +147,81 @@ importCore().then(core => {
             //   `);
             // }
 
-            if(resource["ofn:Wholesale_enquiry_preferences"].includes("Direct online purchase")) {
-              if(resource["ofn:Wholesale_URL_1"] && resource["ofn:Wholesale_URL_1_label"]) {
+            if (
+              resource["ofn:Wholesale_enquiry_preferences"].includes(
+                "Direct online purchase"
+              )
+            ) {
+              if (
+                resource["ofn:Wholesale_URL_1"] &&
+                resource["ofn:Wholesale_URL_1_label"]
+              ) {
                 this._addToRender(html`
                   <div class="row text-light no-margin-bottom">
-                    <div class="col s12">${resource["ofn:Wholesale_URL_1_label"]}</div>
+                    <div class="col s12">
+                      ${resource["ofn:Wholesale_URL_1_label"]}
+                    </div>
                   </div>
                   <div class="row valign-wrapper">
                     <div class="col s12">
-                      <a href="${resource["ofn:Wholesale_URL_1"]}" target="_blank" class="text-link text-link-red">
-                        Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                      <a
+                        href="${resource["ofn:Wholesale_URL_1"]}"
+                        target="_blank"
+                        class="text-link text-link-red"
+                      >
+                        Visit website<icon-mdi-open-in-new
+                          style="font-size: 18px;"
+                        ></icon-mdi-open-in-new>
                       </a>
                     </div>
                   </div>
                 `);
               }
-              if(resource["ofn:Wholesale_URL_2"] && resource["ofn:Wholesale_URL_2_label"]) {
+              if (
+                resource["ofn:Wholesale_URL_2"] &&
+                resource["ofn:Wholesale_URL_2_label"]
+              ) {
                 this._addToRender(html`
                   <div class="row text-light no-margin-bottom">
-                    <div class="col s12">${resource["ofn:Wholesale_URL_2_label"]}</div>
+                    <div class="col s12">
+                      ${resource["ofn:Wholesale_URL_2_label"]}
+                    </div>
                   </div>
                   <div class="row valign-wrapper">
                     <div class="col s12">
-                      <a href="${resource["ofn:Wholesale_URL_2"]}" target="_blank" class="text-link text-link-red">
-                        Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                      <a
+                        href="${resource["ofn:Wholesale_URL_2"]}"
+                        target="_blank"
+                        class="text-link text-link-red"
+                      >
+                        Visit website<icon-mdi-open-in-new
+                          style="font-size: 18px;"
+                        ></icon-mdi-open-in-new>
                       </a>
                     </div>
                   </div>
                 `);
               }
-              if(resource["ofn:Wholesale_URL_3"] && resource["ofn:Wholesale_URL_3_label"]) {
+              if (
+                resource["ofn:Wholesale_URL_3"] &&
+                resource["ofn:Wholesale_URL_3_label"]
+              ) {
                 this._addToRender(html`
                   <div class="row text-light no-margin-bottom">
-                    <div class="col s12">${resource["ofn:Wholesale_URL_3_label"]}</div>
+                    <div class="col s12">
+                      ${resource["ofn:Wholesale_URL_3_label"]}
+                    </div>
                   </div>
                   <div class="row valign-wrapper">
                     <div class="col s12">
-                      <a href="${resource["ofn:Wholesale_URL_3"]}" target="_blank" class="text-link text-link-red">
-                        Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                      <a
+                        href="${resource["ofn:Wholesale_URL_3"]}"
+                        target="_blank"
+                        class="text-link text-link-red"
+                      >
+                        Visit website<icon-mdi-open-in-new
+                          style="font-size: 18px;"
+                        ></icon-mdi-open-in-new>
                       </a>
                     </div>
                   </div>
@@ -185,16 +229,24 @@ importCore().then(core => {
               }
             }
 
-            if(resource["ofn:Selling_to_household"]) {
+            if (resource["ofn:Selling_to_household"]) {
               this._addToRender(html`
                 <h6 class="margin-top-50">Household customers</h6>
                 <div class="row text-light no-margin-bottom">
-                    <div class="col s12">${resource["ofn:Household_buy_label"]}</div>
+                  <div class="col s12">
+                    ${resource["ofn:Household_buy_label"]}
+                  </div>
                 </div>
                 <div class="row text-link valign-wrapper">
                   <div class="col s12">
-                    <a href="${resource["ofn:Household_URL"]}" target="_blank" class="text-link text-link-red">
-                      Visit website<icon-mdi-open-in-new style="font-size: 18px;"></icon-mdi-open-in-new>
+                    <a
+                      href="${resource["ofn:Household_URL"]}"
+                      target="_blank"
+                      class="text-link text-link-red"
+                    >
+                      Visit website<icon-mdi-open-in-new
+                        style="font-size: 18px;"
+                      ></icon-mdi-open-in-new>
                     </a>
                   </div>
                 </div>
@@ -203,7 +255,8 @@ importCore().then(core => {
 
             return this._render();
           },
-          error: (e) => html`<p>Error while loading wholesale informations.</p>`
+          error: (e) =>
+            html`<p>Error while loading wholesale informations.</p>`,
         });
       }
     }

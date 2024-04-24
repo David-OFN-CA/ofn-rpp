@@ -132,9 +132,9 @@ importCore().then((core) => {
                 <div class="col s12">
                   <div class="card-panel card-padding">
                     <div class="row">
-                      ${resource[
-                        "ofn:Wholesale_enquiry_preferences"
-                      ].includes("Email") ||
+                      ${resource["ofn:Wholesale_enquiry_preferences"].includes(
+                        "Email"
+                      ) ||
                       resource["ofn:Wholesale_enquiry_preferences"].includes(
                         "Phone"
                       )

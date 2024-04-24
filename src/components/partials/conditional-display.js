@@ -1,8 +1,8 @@
 import { LitElement, html, nothing } from "lit";
 import { Task } from "@lit/task";
-import { importCore, CLIENT_CONTEXT } from '@helpers/utils';
+import { importCore, CLIENT_CONTEXT } from "@helpers/utils";
 
-importCore().then(core => {
+importCore().then((core) => {
   // Custom widget for wholesale
   customElements.define(
     "conditional-display",
@@ -14,7 +14,7 @@ importCore().then(core => {
       static properties = {
         dataSrc: { attribute: "data-src" },
         condition: { attribute: "condition" },
-      }
+      };
 
       /**
        * Check if a resource exists or if a container isn't empty
@@ -25,14 +25,20 @@ importCore().then(core => {
        */
       async _getProxyValue(resource, property) {
         let response = await resource[property];
-        if(response && typeof response === "object" && "getProxy" in response) {
-          if((await response['properties']).includes("ldp:contains")) {
+        if (
+          response &&
+          typeof response === "object" &&
+          "getProxy" in response
+        ) {
+          if ((await response["properties"]).includes("ldp:contains")) {
             let container = await response.get("ldp:contains");
-            if(container === null) {
+            if (container === null) {
               return false;
             }
-            if(typeof container === "object" && "getProxy" in container) {
-              container = (await container['properties']).filter(p => !p.startsWith('@'))
+            if (typeof container === "object" && "getProxy" in container) {
+              container = (await container["properties"]).filter(
+                (p) => !p.startsWith("@")
+              );
             }
             return container.length > 0;
           } else {
@@ -44,31 +50,38 @@ importCore().then(core => {
 
       _getResource = new Task(this, {
         task: async ([dataSrc, property]) => {
-          if(!dataSrc) return;
+          if (!dataSrc) return;
           let response = false;
           const resource = await core.store.getData(dataSrc, CLIENT_CONTEXT);
-          if(property.includes("|")) {
-            response = (await Promise.all(property.split('|').map((prop) => this._getProxyValue(resource, prop)))).reduce((r, p) => r || p);
+          if (property.includes("|")) {
+            response = (
+              await Promise.all(
+                property
+                  .split("|")
+                  .map((prop) => this._getProxyValue(resource, prop))
+              )
+            ).reduce((r, p) => r || p);
           } else {
             response = await this._getProxyValue(resource, property);
           }
           return response;
         },
-        args: () => [this.dataSrc, this.condition]
-      })
+        args: () => [this.dataSrc, this.condition],
+      });
 
       render() {
-        if(!this.dataSrc || !this.condition) return nothing;
+        if (!this.dataSrc || !this.condition) return nothing;
 
         return this._getResource.render({
-          pending: () => html`<div class="progress"><div class="indeterminate"></div></div>`,
+          pending: () =>
+            html`<div class="progress"><div class="indeterminate"></div></div>`,
           complete: (resource) => {
-            if(resource) {
+            if (resource) {
               return html`<slot></slot>`;
             }
             return nothing;
           },
-          error: (e) => html`<p>Error while loading condition.</p>`
+          error: (e) => html`<p>Error while loading condition.</p>`,
         });
       }
     }

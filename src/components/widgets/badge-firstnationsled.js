@@ -34,7 +34,13 @@ customElements.define(
     `;
     render() {
       return html`${this.value.length > 0
-        ? html`<div style="background-image: url(${assetPath('/Australian_Aboriginal_Flag.png')});">First Nations Led</div>`
+        ? html`<div
+            style="background-image: url(${assetPath(
+              "/Australian_Aboriginal_Flag.png"
+            )});"
+          >
+            First Nations Led
+          </div>`
         : ""}`;
     }
   }

@@ -14,7 +14,10 @@ customElements.define(
     }
     render() {
       return html`${this.value.length > 0
-        ? html`<div class="background-img" style="background-image:url(${this.value})"></div>`
+        ? html`<div
+            class="background-img"
+            style="background-image:url(${this.value})"
+          ></div>`
         : nothing}`;
     }
   }

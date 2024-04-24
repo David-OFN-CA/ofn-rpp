@@ -8,7 +8,7 @@ import "~icons/mdi/instagram";
 import "~icons/mdi/linkedin";
 import "~icons/mdi/whatsapp";
 import "~icons/mdi/email-outline";
-import * as utils from '@helpers/utils';
+import * as utils from "@helpers/utils";
 
 utils.importCore().then(async (core) => {
   const expand = await utils.makeExpand();
@@ -25,8 +25,12 @@ utils.importCore().then(async (core) => {
         productsSrc: { attribute: "products-src" },
         rangeProductCategories: { attribute: "range-product-categories" },
         rangeProducerAssurances: { attribute: "range-producer-assurances" },
-        rangeProducerCertifications: { attribute: "range-producer-certifications" },
-        rangeProducerOutcomes: { attribute: "range-producer-supporting-evidence" },
+        rangeProducerCertifications: {
+          attribute: "range-producer-certifications",
+        },
+        rangeProducerOutcomes: {
+          attribute: "range-producer-supporting-evidence",
+        },
         routePrefix: { attribute: "route-prefix" },
         uniq: { attribute: "uniq" },
       };
@@ -55,10 +59,16 @@ utils.importCore().then(async (core) => {
 
       routers() {
         let render = html`
-          <solid-router default-route="${this.route}-producers-list" route-prefix=${this.routePrefix ?? nothing}>
+          <solid-router
+            default-route="${this.route}-producers-list"
+            route-prefix=${this.routePrefix ?? nothing}
+          >
             <solid-route name="${this.route}-producers-list"></solid-route>
             <solid-route name="${this.route}-products-list"></solid-route>
-            <solid-route name="${this.route}-products-redirector" use-id></solid-route>
+            <solid-route
+              name="${this.route}-products-redirector"
+              use-id
+            ></solid-route>
             <solid-route
               name="${this.route}-producer-details"
               use-id
@@ -69,103 +79,157 @@ utils.importCore().then(async (core) => {
       }
 
       initMatomo() {
-        if(!window._paq) {
+        if (!window._paq) {
           window._paq = [];
         }
-        window._paq.push(['trackPageView']);
-        window._paq.push(['enableLinkTracking']);
-        window._paq.push(['trackVisibleContentImpressions', true, 750]);
-        window._paq.push(['enableLinkTracking']);
+        window._paq.push(["trackPageView"]);
+        window._paq.push(["enableLinkTracking"]);
+        window._paq.push(["trackVisibleContentImpressions", true, 750]);
+        window._paq.push(["enableLinkTracking"]);
       }
 
       firstUpdated() {
-        let url = location.href;    
-        document.addEventListener('navigate', () => {
+        let url = location.href;
+        document.addEventListener("navigate", () => {
           if (url === location.href) return;
           url = location.href;
-          window._paq.push(['setCustomUrl', url]);
-          window._paq.push(['trackPageView']);
-          setTimeout(() => document.querySelector('body').scrollIntoView({
-            behavior: "instant",
-            block: "start",
-            inline: "nearest"
-          }), 0);
+          window._paq.push(["setCustomUrl", url]);
+          window._paq.push(["trackPageView"]);
+          setTimeout(
+            () =>
+              document.querySelector("body").scrollIntoView({
+                behavior: "instant",
+                block: "start",
+                inline: "nearest",
+              }),
+            0
+          );
         });
       }
 
       viewProducersList() {
-        setTimeout(() => {
-          const producers = core.store.getData(
-            this.producersSrc,
-            utils.CLIENT_CONTEXT
-          );
-          let producerNames = [],
-              addresses = [];
-          producers.then(async (p) => {
-            for (let producer of await expand(p, "ldp:contains")) {
-              producer = await core.store.getData(
-                producer["@id"],
-                utils.CLIENT_CONTEXT
+        const producers = core.store.getData(
+          this.producersSrc,
+          utils.CLIENT_CONTEXT
+        );
+        let producerNames = [],
+          addresses = [];
+        producers.then(async (p) => {
+          if (!p) {
+            if (import.meta.env.DEV)
+              console.warn(`Producer list ${p["@id"]} is an invalid container`);
+            return;
+          }
+          for (let producer of await expand(p, "ldp:contains")) {
+            if (!producer) {
+              if (import.meta.env.DEV)
+                console.warn(
+                  `Producer ${producer["@id"]} is an invalid resource`
+                );
+              continue;
+            }
+            producer = await core.store.getData(
+              producer["@id"],
+              utils.CLIENT_CONTEXT
+            );
+            let producerName = await expand(producer, "dfc-b:name");
+            if (producerName) {
+              producerNames.push(producerName);
+            }
+            let producerAddress = await expand(producer, "dfc-b:hasAddress");
+            if (producerAddress) {
+              let producerStreet = await expand(
+                producerAddress,
+                "dfc-b:hasStreet"
               );
-              let producerName = await expand(producer, "dfc-b:name");
-              if (producerName) {
-                producerNames.push(producerName);
+              if (producerStreet) {
+                addresses.push(producerStreet);
               }
-              let producerAddress = await expand(
-                producer,
-                "dfc-b:hasAddress"
+              let producerPostalCode = await expand(
+                producerAddress,
+                "dfc-b:hasPostalCode"
               );
-              if (producerAddress) {
-                let producerStreet = await expand(
-                  producerAddress,
-                  "dfc-b:hasStreet"
-                );
-                if (producerStreet) {
-                  addresses.push(producerStreet);
-                }
-                let producerPostalCode = await expand(
-                  producerAddress,
-                  "dfc-b:hasPostalCode"
-                );
-                if (producerPostalCode) {
-                  addresses.push(producerPostalCode);
-                }
-                let producerCity = await expand(producerAddress, "dfc-b:hasCity");
-                if (producerCity) {
-                  addresses.push(producerCity);
-                }
-                let producerCountry = await expand(
-                  producerAddress,
-                  "dfc-b:hasCountry"
-                );
-                if (producerCountry) {
-                  addresses.push(producerCountry);
-                }
-                let producerRegion = await expand(
-                  producerAddress,
-                  "dfc-b:region"
-                );
-                if (producerRegion) {
-                  addresses.push(producerRegion);
-                }
+              if (producerPostalCode) {
+                addresses.push(producerPostalCode);
+              }
+              let producerCity = await expand(producerAddress, "dfc-b:hasCity");
+              if (producerCity) {
+                addresses.push(producerCity);
+              }
+              let producerCountry = await expand(
+                producerAddress,
+                "dfc-b:hasCountry"
+              );
+              if (producerCountry) {
+                addresses.push(producerCountry);
+              }
+              let producerRegion = await expand(
+                producerAddress,
+                "dfc-b:region"
+              );
+              if (producerRegion) {
+                addresses.push(producerRegion);
               }
             }
+          }
 
-            producerNames = Array.from(new Set(producerNames.sort())).reduce(
-              (acc, value) => ({ ...acc, [value]: null }),
-              {}
-            );
+          producerNames = Array.from(new Set(producerNames.sort())).reduce(
+            (acc, value) => ({ ...acc, [value]: null }),
+            {}
+          );
 
-            addresses = Array.from(new Set(addresses.sort())).reduce(
-              (acc, value) => ({ ...acc, [value]: null }),
-              {}
-            );
-
-            Array.from(this.querySelectorAll("select")).map((select) => {
-                if (!select.classList.contains("materialize")) {
-                  select.classList.add("browser-default");
-                }
+          addresses = Array.from(new Set(addresses.sort())).reduce(
+            (acc, value) => ({ ...acc, [value]: null }),
+            {}
+          );
+          const producersFn = () => {
+            Array.from(
+              this.querySelectorAll(
+                `#producers-list-filters-${this.uniq} select`
+              )
+            ).map((select) => {
+              if (!select.classList.contains("materialize")) {
+                select.classList.add("browser-default");
               }
+            });
+
+            this.querySelector(
+              `#producers-list-filters-${this.uniq}`
+            ).addEventListener("filterChange", (e) => {
+              window._paq.push([
+                "trackSiteSearch",
+                e.detail,
+                "Producers list",
+                false,
+              ]);
+            });
+
+            M.Autocomplete.init(
+              this.querySelectorAll('input[type="text"][name="search-field"]'),
+              {
+                data: producerNames,
+                limit: 3,
+                onAutocomplete: () => {
+                  this.querySelector(
+                    `[filtered-by=producers-list-filters-${this.uniq}]`
+                  ).component.populate();
+                },
+              }
+            );
+            M.Autocomplete.init(
+              this.querySelectorAll('input[type="text"][name="address"]'),
+              {
+                data: addresses,
+                limit: 3,
+                onAutocomplete: () => {
+                  this.querySelector(
+                    `[filtered-by=producers-list-filters-${this.uniq}]`
+                  ).component.populate();
+                },
+              }
+            );
+            M.FormSelect.init(
+              this.querySelectorAll(`${this.route}-producers-list select`)
             );
 
             setTimeout(() => {
@@ -189,42 +253,26 @@ utils.importCore().then(async (core) => {
                 }
               });
 
-              M.Autocomplete.init(
-                this.querySelectorAll(
-                  'input[type="text"][name="search-field"]'
-                ),
-                {
-                  data: producerNames,
-                  limit: 3,
-                  onAutocomplete: () => {
-                    this
-                      .querySelector(
-                        `[filtered-by=producers-list-filters-${this.uniq}]`
-                      )
-                      .component.populate();
-                  },
+              Array.from(document.querySelectorAll(`select`)).map((select) => {
+                if (!select.classList.contains("materialize")) {
+                  select.classList.add("browser-default");
                 }
-              );
-              M.Autocomplete.init(
-                this.querySelectorAll(
-                  'input[type="text"][name="address"]'
-                ),
-                {
-                  data: addresses,
-                  limit: 3,
-                  onAutocomplete: () => {
-                    this
-                      .querySelector(
-                        `[filtered-by=producers-list-filters-${this.uniq}]`
-                      )
-                      .component.populate();
-                  },
-                }
-              );
-              M.FormSelect.init(this.querySelectorAll("select"));
-            }, 0);
+              });
+            }, 500);
+          };
+          window.producersFn = producersFn;
+          let producerAdapted = false;
+          producersFn();
+          document.addEventListener("navigate", (e) => {
+            if (
+              e.detail.route == `${this.route}-producers-list` &&
+              !producerAdapted
+            ) {
+              producerAdapted = true;
+              setTimeout(producersFn, 0);
+            }
           });
-        }, 0);
+        });
 
         let render = html`
           <div
@@ -246,7 +294,15 @@ utils.importCore().then(async (core) => {
                     id="producers-list-filters-${this.uniq}"
                     debounce="300"
                     loader-id="loader-producers-list-filters-${this.uniq}"
-                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_led)))),${this.rangeProducerOutcomes ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:hasSupportingEvidence.ldp:contains.ofn:Classification))))," : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))),${this.rangeProducerAssurances ? "set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))," : ""}${this.rangeProducerCertifications ? "set-line-certification(set-line-certification-col(set-line-certification-panel(set-line-certification-wrapper(ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus))))," : ""}set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
+                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(ofn:First_Nations_led)))),${this
+                      .rangeProducerOutcomes
+                      ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(ofn:hasSupportingEvidence.ldp:contains.ofn:Classification)))),"
+                      : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:hasProduceCategory)))),${this
+                      .rangeProducerAssurances
+                      ? "set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner)))),"
+                      : ""}${this.rangeProducerCertifications
+                      ? "set-line-certification(set-line-certification-col(set-line-certification-panel(set-line-certification-wrapper(ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus)))),"
+                      : ""}set-line-address(set-line-address-col(set-line-address-panel(set-line-address-wrapper(address))))"
                     class-set-line-field="row"
                     search-search-field="dfc-b:name, ofn:long_description"
                     widget-search-field="solid-form-label-text"
@@ -278,7 +334,8 @@ utils.importCore().then(async (core) => {
                     class-set-line-ecological-wrapper="card-content select-padding"
                     class-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="col s12"
                     label-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="Supporting Evidence"
-                    range-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="${this.rangeProducerOutcomes}"
+                    range-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="${this
+                      .rangeProducerOutcomes}"
                     widget-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="solid-form-dropdown-placeholder"
                     option-label-ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="ofn:label"
                     widget-set-line-produce="div"
@@ -291,7 +348,8 @@ utils.importCore().then(async (core) => {
                     class-set-line-produce-wrapper="card-content select-padding"
                     class-ofn:hasProduceCategory="col s12"
                     label-ofn:hasProduceCategory="Produce types"
-                    range-ofn:hasProduceCategory="${this.rangeProductCategories}"
+                    range-ofn:hasProduceCategory="${this
+                      .rangeProductCategories}"
                     widget-ofn:hasProduceCategory="solid-form-dropdown-placeholder"
                     option-label-ofn:hasProduceCategory="ofn:label"
                     widget-set-line-assurance="div"
@@ -304,7 +362,8 @@ utils.importCore().then(async (core) => {
                     class-set-line-assurance-wrapper="card-content select-padding"
                     class-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="col s12"
                     label-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="Assurance Partners"
-                    range-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="${this.rangeProducerAssurances}"
+                    range-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="${this
+                      .rangeProducerAssurances}"
                     widget-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="solid-form-dropdown-placeholder"
                     option-label-ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="ofn:Group_name"
                     widget-set-line-certification="div"
@@ -317,7 +376,8 @@ utils.importCore().then(async (core) => {
                     class-set-line-certification-wrapper="card-content select-padding"
                     class-ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="col s12"
                     label-ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="Certifications"
-                    range-ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="${this.rangeProducerCertifications}"
+                    range-ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="${this
+                      .rangeProducerCertifications}"
                     widget-ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="solid-form-dropdown-placeholder"
                     option-label-ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="ofn:label"
                     widget-set-line-address="div"
@@ -386,54 +446,102 @@ utils.importCore().then(async (core) => {
       }
 
       viewProductsList() {
-        setTimeout(async () => {
-          const products = core.store.getData(
-            this.productsSrc,
-            utils.CLIENT_CONTEXT
-          );
-          let productNames = [],
-            productCategories = [];
-          products.then(async (p) => {
-            for (let product of await expand(p, "ldp:contains")) {
-              product = await core.store.getData(
-                product["@id"],
-                utils.CLIENT_CONTEXT
-              );
-              let productName = await expand(product, "dfc-b:name");
-              if (productName) {
-                productNames.push(productName);
-              }
-              let productCategory = await expand(product, "ofn:Type");
-              if (productCategory) {
-                productCategories.push(productCategory);
-              }
+        const products = core.store.getData(
+          this.productsSrc,
+          utils.CLIENT_CONTEXT
+        );
+        let productNames = [],
+          productCategories = [];
+        products.then(async (p) => {
+          if (!p) {
+            if (import.meta.env.DEV)
+              console.warn(`Product list ${p["@id"]} is an invalid container`);
+            return;
+          }
+          for (let product of await expand(p, "ldp:contains")) {
+            if (!product) {
+              if (import.meta.env.DEV)
+                console.warn(
+                  `Product ${product["@id"]} is an invalid resource`
+                );
+              continue;
             }
-
-            productNames = Array.from(new Set(productNames.sort())).reduce(
-              (acc, value) => ({ ...acc, [value]: null }),
-              {}
+            product = await core.store.getData(
+              product["@id"],
+              utils.CLIENT_CONTEXT
             );
-            productCategories = Array.from(
-              new Set(productCategories.sort())
-            ).join(", ");
-            // NOTICE: change to mutation observer
-            this
-              .querySelector(`#products-list-filters-${this.uniq}`)
-              .setAttribute("enum-ofn:Type", productCategories);
-            this
-              .querySelector(
-                'solid-form-dropdown-placeholder[name="ofn:Type"]'
-              )
-              .setAttribute("enum", productCategories);
+            if (!product) continue;
+            let productName = await expand(product, "dfc-b:name");
+            if (productName) {
+              productNames.push(productName);
+            }
+            let productCategory = await expand(product, "ofn:Type");
+            if (productCategory) {
+              productCategories.push(productCategory);
+            }
+          }
 
-            Array.from(this.querySelectorAll("select")).map((select) => {
+          productNames = Array.from(new Set(productNames.sort())).reduce(
+            (acc, value) => ({ ...acc, [value]: null }),
+            {}
+          );
+          productCategories = Array.from(
+            new Set(productCategories.sort())
+          ).join(", ");
+
+          const producesFn = () => {
+            this.querySelector(
+              `#products-list-filters-${this.uniq}`
+            ).setAttribute("enum-ofn:Type", productCategories);
+            this.querySelector(
+              'solid-form-dropdown-placeholder[name="ofn:Type"]'
+            ).setAttribute("enum", productCategories);
+
+            Array.from(
+              this.querySelectorAll(
+                `#products-list-filters-${this.uniq} select`
+              )
+            ).map((select) => {
+              if (!select.classList.contains("materialize")) {
+                select.classList.add("browser-default");
+              }
+            });
+
+            this.querySelector(
+              `#products-list-filters-${this.uniq}`
+            ).addEventListener("filterChange", (e) => {
+              window._paq.push([
+                "trackSiteSearch",
+                e.detail,
+                "Products list",
+                false,
+              ]);
+            });
+
+            M.Autocomplete.init(
+              this.querySelectorAll(
+                'input[type="text"][name="search-field-product"]'
+              ),
+              {
+                data: productNames,
+                limit: 3,
+                onAutocomplete: () => {
+                  this.querySelector(
+                    `[filtered-by=products-list-filters-${this.uniq}]`
+                  ).component.populate();
+                },
+              }
+            );
+            M.FormSelect.init(
+              this.querySelectorAll(`#${this.route}-products-list select`)
+            );
+            setTimeout(() => {
+              Array.from(document.querySelectorAll(`select`)).map((select) => {
                 if (!select.classList.contains("materialize")) {
                   select.classList.add("browser-default");
                 }
-              }
-            );
+              });
 
-            setTimeout(() => {
               this.querySelector(`#products-list-filters-${this.uniq}`)
                   .addEventListener('filterChange', (e) => {
                 window._mtm = window._mtm || [];
@@ -453,34 +561,30 @@ utils.importCore().then(async (core) => {
                   });
                 }
               });
-
-              M.Autocomplete.init(
-                this.querySelectorAll(
-                  'input[type="text"][name="search-field-product"]'
-                ),
-                {
-                  data: productNames,
-                  limit: 3,
-                  onAutocomplete: () => {
-                    this
-                      .querySelector(
-                        `[filtered-by=products-list-filters-${this.uniq}]`
-                      )
-                      .component.populate();
-                  },
-                }
-              );
-              M.FormSelect.init(this.querySelectorAll("select"));
-            }, 0);
+            }, 500);
+          };
+          let produceAdapted = false;
+          producesFn();
+          document.addEventListener("navigate", (e) => {
+            if (
+              e.detail.route == `${this.route}-products-list` &&
+              !produceAdapted
+            ) {
+              produceAdapted = true;
+              setTimeout(producesFn, 0);
+            }
           });
-        }, 0);
+        });
         let render = html`
           <div
             id="${this.route}-products-redirector"
             data-view="${this.route}-products-redirector"
             no-render=""
           >
-            <custom-redirector bind-resources="" uniq="${this.uniq}"></custom-redirector>
+            <custom-redirector
+              bind-resources=""
+              uniq="${this.uniq}"
+            ></custom-redirector>
           </div>
           <div
             id="${this.route}-products-list"
@@ -501,7 +605,15 @@ utils.importCore().then(async (core) => {
                     id="products-list-filters-${this.uniq}"
                     debounce="300"
                     loader-id="loader-products-list-filters-${this.uniq}"
-                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field-product))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_led)))),${this.rangeProducerOutcomes ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification))))," : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type))))${this.rangeProducerAssurances ? ",set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner))))" : ""}"
+                    fields="set-line-field(set-line-field-col(set-line-field-panel(search-field-product))),filterBy-row(filterBy),set-line-fnc(set-line-fnc-col(set-line-fnc-panel(set-line-fnc-wrapper(dfc-b:suppliedBy.ofn:First_Nations_led)))),${this
+                      .rangeProducerOutcomes
+                      ? "set-line-ecological(set-line-ecological-col(set-line-ecological-panel(set-line-ecological-wrapper(dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification)))),"
+                      : ""}set-line-produce(set-line-produce-col(set-line-produce-panel(set-line-produce-wrapper(ofn:Type))))${this
+                      .rangeProducerAssurances
+                      ? ",set-line-assurance(set-line-assurance-col(set-line-assurance-panel(set-line-assurance-wrapper(dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner)))),"
+                      : ""}${this.rangeProducerCertifications
+                      ? "set-line-certification(set-line-certification-col(set-line-certification-panel(set-line-certification-wrapper(dfc-b:suppliedBy.ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus)))),"
+                      : ""} end"
                     class-set-line-field="row"
                     search-search-field-product="dfc-b:name, ofn:description"
                     widget-search-field-product="solid-form-label-text"
@@ -533,7 +645,8 @@ utils.importCore().then(async (core) => {
                     class-set-line-ecological-wrapper="card-content select-padding"
                     class-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="col s12"
                     label-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="Supporting Evidence"
-                    range-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="${this.rangeProducerOutcomes}"
+                    range-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="${this
+                      .rangeProducerOutcomes}"
                     widget-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="solid-form-dropdown-placeholder"
                     option-label-dfc-b:suppliedBy.ofn:hasSupportingEvidence.ldp:contains.ofn:Classification="ofn:label"
                     widget-set-line-produce="div"
@@ -558,9 +671,25 @@ utils.importCore().then(async (core) => {
                     class-set-line-assurance-wrapper="card-content select-padding"
                     class-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="col s12"
                     label-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="Assurance Partners"
-                    range-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="${this.rangeProducerAssurances}"
+                    range-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="${this
+                      .rangeProducerAssurances}"
                     widget-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="solid-form-dropdown-placeholder"
                     option-label-dfc-b:suppliedBy.ofn:hasAssurancePartnerships.ldp:contains.ofn:Assurance_partner="ofn:Group_name"
+                    widget-set-line-certification="div"
+                    class-set-line-certification="row no-margin-bottom"
+                    widget-set-line-certification-col="div"
+                    class-set-line-certification-col="col s12"
+                    widget-set-line-certification-panel="div"
+                    class-set-line-certification-panel="filter card horizontal"
+                    widget-set-line-certification-wrapper="div"
+                    class-set-line-certification-wrapper="card-content select-padding"
+                    class-dfc-b:suppliedBy.ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="col s12"
+                    label-dfc-b:suppliedBy.ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="Producer Certifications"
+                    range-dfc-b:suppliedBy.ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="${this
+                      .rangeProducerCertifications}"
+                    widget-dfc-b:suppliedBy.ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="solid-form-dropdown-placeholder"
+                    option-label-dfc-b:suppliedBy.ofn:hasCertifications.ldp:contains.ofn:hasCertificationStatus="ofn:label"
+                    widget-end="div"
                   ></solid-form-search>
                 </div>
               </div>
@@ -611,7 +740,9 @@ utils.importCore().then(async (core) => {
               <div class="row">
                 <div class="col s12">
                   <div class="card-panel card-round">
-                    <div class="row valign-wrapper no-margin-bottom title-header" style="background: url(${utils.assetPath('/producer_background.png')})"></div>
+                    <div class="row valign-wrapper no-margin-bottom title-header" style="background: url(${utils.assetPath(
+                      "/producer_background.png"
+                    )})"></div>
                     <div class="row margin-top-20">
                       <div class="col s12 m3 margin-top-10">
                         <solid-display
@@ -724,7 +855,9 @@ utils.importCore().then(async (core) => {
                   <div class="card-panel card-round card-padding">
                     <div class="row">
                       <div class="col s12 m3">
-                        <custom-wholesale-buy bind-resources="" uniq="${this.uniq}"></custom-wholesale-buy>
+                        <custom-wholesale-buy bind-resources="" uniq="${
+                          this.uniq
+                        }"></custom-wholesale-buy>
                       </div>
                       <div class="col s12 m8 offset-m1">
                         <h5>Feature products</h5>
@@ -861,7 +994,9 @@ utils.importCore().then(async (core) => {
                   </div>
                 </div>
               </conditional-display>
-              <custom-contact-form bind-resources="" uniq="${this.uniq}"></custom-contact-form>
+              <custom-contact-form bind-resources="" uniq="${
+                this.uniq
+              }"></custom-contact-form>
             </div>
           </div>
         `;
@@ -869,40 +1004,51 @@ utils.importCore().then(async (core) => {
       }
 
       render() {
-        if(!this.uniq) this.uniq = utils.uniq();
+        if (!this.uniq) this.uniq = utils.uniq();
         this.route = this.uniq;
         return html`
-          ${this.context()}
-          ${this.style()}
-          ${this.routers()}
-          <!-- ${import.meta.env.DEV ? html`
-            <nav>
-              <div class="nav-wrapper">
-                <a href="#" class="hide-on-small-only brand-logo">Examples</a>
-                <ul class="right">
-                  <li>
-                    <solid-link next="regenerative-produce-portal-producers-list">
-                      <a><icon-mdi-home-silo></icon-mdi-home-silo> Producers List</a>
-                    </solid-link>
-                  </li>
-                  <li>
-                    <solid-link next="regenerative-produce-portal-products-list">
-                      <a><icon-mdi-food-apple></icon-mdi-food-apple> Products List</a>
-                    </solid-link>
-                  </li>
-                  <li class="hide-on-small-only">
-                    <solid-link
-                      next="regenerative-produce-portal-producer-details"
-                      data-src="https://api.regenerative.org.au/webhook/regen/producer?id=recjBYlXskXtilPBC"
-                    >
-                      <a><icon-mdi-home-silo></icon-mdi-home-silo> Producer Details</a>
-                    </solid-link>
-                  </li>
-                </ul>
-              </div>
-            </nav>` : nothing} -->
-          ${this.viewProductsList()}
-          ${this.viewProducersList()}
+          ${this.context()} ${this.style()} ${this.routers()}
+          <!-- ${import.meta.env.DEV
+            ? html` <nav>
+                <div class="nav-wrapper">
+                  <a href="#" class="hide-on-small-only brand-logo">Examples</a>
+                  <ul class="right">
+                    <li>
+                      <solid-link
+                        next="regenerative-produce-portal-producers-list"
+                      >
+                        <a
+                          ><icon-mdi-home-silo></icon-mdi-home-silo> Producers
+                          List</a
+                        >
+                      </solid-link>
+                    </li>
+                    <li>
+                      <solid-link
+                        next="regenerative-produce-portal-products-list"
+                      >
+                        <a
+                          ><icon-mdi-food-apple></icon-mdi-food-apple> Products
+                          List</a
+                        >
+                      </solid-link>
+                    </li>
+                    <li class="hide-on-small-only">
+                      <solid-link
+                        next="regenerative-produce-portal-producer-details"
+                        data-src="https://api.regenerative.org.au/webhook/regen/producer?id=recjBYlXskXtilPBC"
+                      >
+                        <a
+                          ><icon-mdi-home-silo></icon-mdi-home-silo> Producer
+                          Details</a
+                        >
+                      </solid-link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>`
+            : nothing} -->
+          ${this.viewProductsList()} ${this.viewProducersList()}
           ${this.viewProducerDetails()}
         `;
       }
