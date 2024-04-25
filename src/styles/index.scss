@@ -40,9 +40,9 @@ solid-ofn-rpp {
   @import "materialize-css/sass/components/chips";
   @import "materialize-css/sass/components/forms/forms";
 
-  font-family: Open Sans, sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.022em;
+  font-family: Open Sans, sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.022em !important;
 
   select,
   input,
@@ -616,7 +616,7 @@ solid-ofn-rpp {
       [name="set-right-panel"] {
         [name="set-title"] {
           display: block;
-          margin-left: 80px;
+          margin-left: 110px;
           .dfc_b_name,
           .dfc_b_address {
             display: block;
