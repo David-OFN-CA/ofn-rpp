@@ -41,8 +41,12 @@ solid-ofn-rpp {
   @import "materialize-css/sass/components/forms/forms";
 
   font-family: Open Sans, sans-serif !important;
-  font-weight: 400 !important;
-  letter-spacing: -0.022em !important;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+
+  * {
+    font-family: Open Sans, sans-serif !important;
+  }
 
   select,
   input,
