@@ -1,5 +1,6 @@
 import importCore from "@helpers/importCore";
 import assetPath from "@helpers/assetPath";
+import capitalize from "@helpers/capitalize";
 import CLIENT_CONTEXT from "/src/context.json";
 import makeExpand from "@helpers/expand";
 import path from "@helpers/path";
@@ -10,6 +11,7 @@ import uniq from "@helpers/uniq";
 
 export {
   assetPath,
+  capitalize,
   CLIENT_CONTEXT,
   importCore,
   makeExpand,

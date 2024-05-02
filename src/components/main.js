@@ -478,7 +478,7 @@ utils.importCore().then(async (core) => {
             }
             let productCategory = await expand(product, "ofn:Type");
             if (productCategory) {
-              productCategories.push(productCategory);
+              productCategories.push(`${utils.capitalize(productCategory)}=${productCategory}`);
             }
           }
 
