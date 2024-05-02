@@ -126,7 +126,7 @@ importCore().then((core) => {
           complete: (resource) => {
             let render = html``;
             render = html` <h4 id="${this.uniq}-contact-producer">
-                Contact Producer
+                Connect with Producer
               </h4>
               <div class="row">
                 <div class="col s12">

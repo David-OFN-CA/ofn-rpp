@@ -101,7 +101,7 @@ importCore().then((core) => {
             this.rendering = html``;
             if (resource["ofn:Wholesale_buy_description"]) {
               this._addToRender(html`
-                <h5>Wholesale Customers</h5>
+                <h5>Wholesale</h5>
                 <div class="row">
                   <div class="col s12 text-14 text-light">
                     ${resource["ofn:Wholesale_buy_description"]}
@@ -115,7 +115,7 @@ importCore().then((core) => {
                   <a
                     href="#${this.uniq}-contact-producer"
                     class="waves-effect waves-light btn-small"
-                    >View contact details</a
+                    >Connect with Producer</a
                   >
                 </div>
               </div>
@@ -231,7 +231,7 @@ importCore().then((core) => {
 
             if (resource["ofn:Selling_to_household"]) {
               this._addToRender(html`
-                <h6 class="margin-top-50">Household customers</h6>
+                <h6 class="margin-top-50">For Household</h6>
                 <div class="row text-light no-margin-bottom">
                   <div class="col s12">
                     ${resource["ofn:Household_buy_label"]}

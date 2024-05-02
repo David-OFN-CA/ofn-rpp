@@ -860,7 +860,7 @@ utils.importCore().then(async (core) => {
                         }"></custom-wholesale-buy>
                       </div>
                       <div class="col s12 m8 offset-m1">
-                        <h5>Feature products</h5>
+                        <h5>Featured</h5>
                         <solid-display
                           class="row card-container card-container-contents"
                           bind-resources=""
