@@ -30,6 +30,7 @@ importCore().then((core) => {
           response.push({
             "ofn:Group_name": await partner["ofn:Group_name"],
             "ofn:Logo_URL": await partner["ofn:Logo_URL"],
+            "ofn:Website": await partner["ofn:Website"],
           });
         }
         return response;
@@ -61,16 +62,21 @@ importCore().then((core) => {
               for (let partner of resource) {
                 this._addToRender(html`
                   <div class="col s6">
-                    <img
-                      class="responsive-img"
-                      src="${partner["ofn:Logo_URL"]}"
-                      alt="${partner["ofn:Group_name"]}"
-                    />
-                    <div
-                      class="margin-top-10 text-14 text-green bold underline"
+                    <a
+                      href="${partner["ofn:Website"]}"
+                      class="learn-more underline"
                     >
-                      ${partner["ofn:Group_name"]}
-                    </div>
+                      <img
+                        class="responsive-img"
+                        src="${partner["ofn:Logo_URL"]}"
+                        alt="${partner["ofn:Group_name"]}"
+                      />
+                      <div
+                        class="margin-top-10 text-14 text-green bold underline"
+                      >
+                        ${partner["ofn:Group_name"]}
+                      </div></a
+                    >
                   </div>
                 `);
               }
