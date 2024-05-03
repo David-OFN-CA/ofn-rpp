@@ -19,7 +19,7 @@ importCore().then((core) => {
         dataSrc: { attribute: "data-src" },
         uniq: { attribute: "uniq" },
         depth: { state: true },
-        madDepth: { state: true },
+        maxDepth: { state: true },
       };
 
       createRenderRoot() {
