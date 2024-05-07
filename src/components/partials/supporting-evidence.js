@@ -147,6 +147,13 @@ importCore().then((core) => {
             this.filtering = this.filtering.filter((f) => f != target);
           } else {
             this.filtering.push(target);
+            window._mtm = window._mtm || [];
+            window._mtm.push({
+              'event': 'Supporting-Evidence-Filter',
+              'event-category': 'Supporting-Evidence-Filter',
+              'producer-name': this.currentProducer,
+              'filter': target
+            });
           }
           this.requestUpdate();
         }
