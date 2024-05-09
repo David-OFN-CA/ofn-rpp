@@ -203,6 +203,7 @@ importCore().then((core) => {
                           `
                         : nothing}
                       <form
+                        id="contact-form-${this.uniq}"
                         class=${classMap({
                           col: true,
                           s12: true,
