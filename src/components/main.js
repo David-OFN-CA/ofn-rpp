@@ -450,7 +450,7 @@ utils.importCore().then(async (core) => {
               <div class="row">
                 <div class="col s12">
                   <div class="row margin-top-20">
-                    <div class="col s12 m3 margin-top-10">
+                    <div class="col s12 m4 margin-top-10">
                       <solid-display
                         bind-resources=""
                         fields="ofn:logo_url"
@@ -459,7 +459,7 @@ utils.importCore().then(async (core) => {
                         default-ofn:logo_url="https://placehold.co/120"
                       ></solid-display>
                     </div>
-                    <div class="col s12 m9 margin-top-10">
+                    <div class="col s12 m8 margin-top-10">
                       <div class="row margin-bottom-10 no-margin-left">
                         <solid-display
                           bind-resources=""
@@ -500,7 +500,7 @@ utils.importCore().then(async (core) => {
               <div class="row">
                 <div class="col s12">
                   <div class="row">
-                    <div class="col s12 m3 line-height-27">
+                    <div class="col s12 m4 line-height-27">
                       <h5>Location</h5>
                       <div class="row">
                         <solid-display
@@ -543,7 +543,7 @@ utils.importCore().then(async (core) => {
                       bind-resources=""
                       condition="ofn:long_description"
                     >
-                      <div class="col s12 m9">
+                      <div class="col s12 m8">
                         <div class="row">
                           <div class="col s12">
                             <solid-display
@@ -562,13 +562,13 @@ utils.importCore().then(async (core) => {
               <div class="row">
                 <div class="col s12">
                   <div class="row">
-                    <div class="col s12 m3">
+                    <div class="col s12 m4">
                       <custom-connect-side
                         bind-resources=""
                         uniq="${this.uniq}"
                       ></custom-connect-side>
                     </div>
-                    <div class="col s12 m9">
+                    <div class="col s12 m8">
                       <custom-connect
                         bind-resources=""
                         uniq="${this.uniq}"
@@ -588,7 +588,12 @@ utils.importCore().then(async (core) => {
         this.route = this.uniq;
         return this._preFetch.render({
           pending: () =>
-            html`<div class="progress"><div class="indeterminate"></div></div>`,
+            html`${this.style()}
+              <div class="row">
+                <div class="col s12">
+                  <div class="progress"><div class="indeterminate"></div></div>
+                </div>
+              </div>`,
           complete: (datas) => {
             if (!datas) {
               return nothing;

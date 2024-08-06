@@ -12,9 +12,9 @@ On an empty page:
 
 ```html
 <solid-ofn-rpp
-  producers-src="https://api.regenerative.org.au/webhook/regen/producers"
-  range-product-categories="https://api.regenerative.org.au/webhook/regen/produce_categories"
-  range-producer-assurances="https://api.regenerative.org.au/webhook/regen/assurance_partners"
+  producers-src="https://api.regenerative.org.au/webhook/regen_CAN/producers"
+  range-product-categories="https://api.regenerative.org.au/webhook/regen_CAN/produce_categories"
+  range-producer-assurances="https://api.regenerative.org.au/webhook/regen_CAN/assurance_partners"
   uniq="regenerative-produce-portal"
   route-prefix="some-path"></solid-ofn-rpp>
 ```
