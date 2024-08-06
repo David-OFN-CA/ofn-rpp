@@ -5,7 +5,7 @@ In your WP `<head>`
 ```html
 <script type="module" src="https://cdn.skypack.dev/@startinblox/core@0.19"></script>
 <script type="module" src="https://cdn.skypack.dev/@startinblox/router@0.12"></script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@startinblox/component-ofn-rpp"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@startinblox/component-ofn-rpp@waterloo"></script>
 ```
 
 On an empty page:
@@ -13,10 +13,7 @@ On an empty page:
 ```html
 <solid-ofn-rpp
   producers-src="https://api.regenerative.org.au/webhook/regen/producers"
-  products-src="https://api.regenerative.org.au/webhook/regen/products"
   range-product-categories="https://api.regenerative.org.au/webhook/regen/produce_categories"
-  range-producer-certifications="https://api.regenerative.org.au/webhook/regen/certifications"
-  range-producer-supporting-evidence="https://api.regenerative.org.au/webhook/regen/supporting_evidence"
   range-producer-assurances="https://api.regenerative.org.au/webhook/regen/assurance_partners"
   uniq="regenerative-produce-portal"
   route-prefix="some-path"></solid-ofn-rpp>

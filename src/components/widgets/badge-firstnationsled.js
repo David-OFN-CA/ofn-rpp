@@ -18,7 +18,8 @@ customElements.define(
         line-height: 16px;
         height: auto;
         text-align: left;
-        background-color: #ede7e2;
+        background-color: transparent;
+        border: 1px solid #191c1d;
         color: #191c1d;
         border-radius: 41px;
         text-transform: uppercase;
@@ -26,10 +27,7 @@ customElements.define(
         padding-right: 12px;
         margin-right: 6px;
         margin-bottom: 6px;
-        background-repeat: no-repeat;
-        background-size: 25px 15px;
-        padding-left: 50px;
-        background-position: 12px;
+        padding-left: 12px;
       }
     `;
     render() {

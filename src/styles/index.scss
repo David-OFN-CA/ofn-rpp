@@ -17,7 +17,7 @@ solid-ofn-rpp {
         map-merge(
           $teal,
           (
-            "lighten-1": #244b3b // Original: 26a69a
+            "lighten-1": #74903c // Original: 26a69a,,
           )
         ),
     )
@@ -65,13 +65,21 @@ solid-ofn-rpp {
   }
 
   .bold {
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .bold-16-21 {
     @extend .bold;
     font-size: 16px;
     line-height: 21px;
+  }
+
+  .line-height-24 {
+    line-height: 24px;
+  }
+
+  .line-height-27 {
+    line-height: 27.84px;
   }
 
   .line-height-40 {
@@ -107,7 +115,8 @@ solid-ofn-rpp {
     line-height: 16px;
     height: auto;
     text-align: left;
-    background-color: #ede7e2;
+    background-color: transparent;
+    border: 1px solid #191c1d;
     color: #191c1d;
     border-radius: 41px;
     text-transform: uppercase;
@@ -118,7 +127,23 @@ solid-ofn-rpp {
     margin-bottom: 6px;
     &.white {
       background-color: white;
-      border: 1px solid black;
+      border: 1px solid #191c1d;
+    }
+    &.chip-filter {
+      cursor: pointer;
+      text-transform: none;
+      border-color: #74903C;
+      height: 32px;
+      border-radius: 32px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 32px;
+      text-align: center;
+      padding: 0 16px;
+      &.active {
+        background-color: #74903C;
+        color: white;
+      }
     }
   }
 
@@ -271,12 +296,24 @@ solid-ofn-rpp {
       margin-top: 10px;
     }
 
+    .margin-bottom-10 {
+      margin-bottom: 10px;
+    }
+
     .margin-top-20 {
       margin-top: 20px;
     }
 
+    .margin-bottom-20 {
+      margin-bottom: 20px;
+    }
+
     .margin-top-50 {
       margin-top: 50px;
+    }
+
+    .margin-top-65 {
+      margin-top: 65px;
     }
 
     .margin-right-10 {
@@ -299,7 +336,8 @@ solid-ofn-rpp {
 
     .img-logo {
       z-index: 2;
-      float: right;
+      border-radius: 4px;
+      box-shadow: 0px 2px 4px 0px #00000040;
     }
 
     .flow-text {
@@ -332,17 +370,24 @@ solid-ofn-rpp {
 
     .text-link,
     .text-link a {
-      color: #17594a;
+      color: #191c1d;
       @extend .bold;
       @extend .text-14;
       @extend .underline;
       cursor: pointer;
+      &:hover {
+        color: #5e431a;
+      }
+      &.text-link-normal {
+        font-weight: 400;
+        font-size: 16px;
+      }
       icon-mdi-open-in-new,
       icon-mdi-email-outline,
       icon-mdi-phone-in-talk {
         vertical-align: text-top;
         margin-left: 4px;
-        font-size: 18px;
+        font-size: 16px;
         svg {
           width: 18px;
           height: 18px;
@@ -352,9 +397,9 @@ solid-ofn-rpp {
         height: 18px;
       }
       &.text-link-red {
-        color: #9a4444;
+        color: #505050;
         a {
-          color: #9a4444;
+          color: #505050;
         }
       }
     }
@@ -364,8 +409,15 @@ solid-ofn-rpp {
       color: #4b250f;
     }
 
+    .cursor-default {
+      cursor: default;
+      &:hover {
+        color: #191c1d;
+      }
+    }
+
     .btn-small {
-      background-color: #9a4444;
+      background-color: #505050;
       text-transform: none;
     }
 
@@ -433,14 +485,17 @@ solid-ofn-rpp {
     }
 
     .social-link {
-      color: #9a4444;
+      color: #505050;
+      &:hover {
+        color: #5e431a;
+      }
       .icon {
         font-size: 28px;
       }
     }
 
     custom-multiple-badge[name="ofn:Practices"] .chip {
-      border: 1px solid black;
+      border: 1px solid #191c1d;
       border-radius: 26px;
     }
 
@@ -468,7 +523,7 @@ solid-ofn-rpp {
       color: #191c1d;
       a,
       &.text-red {
-        color: #9a4444;
+        color: #505050;
         text-decoration: underline;
       }
       icon-mdi-file-document-check-outline,
@@ -516,7 +571,7 @@ solid-ofn-rpp {
         margin-top: 8px;
         color: #191c1d;
         [type="checkbox"]:checked + span:not(.lever)::before {
-          border-color: #0000 #9a4444 #9a4444 #0000;
+          border-color: #0000 #505050 #505050 #0000;
         }
       }
     }
@@ -560,7 +615,7 @@ solid-ofn-rpp {
   .source {
     color: #6f7d81;
     .source-text {
-      color: #9a4444;
+      color: #505050;
       text-decoration: underline;
       font-weight: 700;
     }
@@ -591,12 +646,6 @@ solid-ofn-rpp {
     }
     .card-container-contents > div > solid-display {
       width: calc(50% - 13px);
-    }
-    .product-details {
-      .img-200 {
-        aspect-ratio: auto 1/1;
-        height: 140px;
-      }
     }
     [fields="ofn:logo_url"] > div {
       display: flex;
