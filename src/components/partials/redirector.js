@@ -26,26 +26,6 @@ importCore().then((core) => {
         args: () => [this.dataSrc],
       });
 
-      firstUpdated() {
-        document.addEventListener("navigate", (e) => {
-          if (
-            e.detail.route == `${this.uniq}-products-redirector` &&
-            e.target ==
-              document.querySelector(
-                `[default-route="${this.uniq}-producers-list"]`
-              )
-          ) {
-            window.dispatchEvent(
-              new CustomEvent("requestNavigation", {
-                detail: {
-                  route: `${this.uniq}-products-list`,
-                },
-              })
-            );
-          }
-        });
-      }
-
       render() {
         if (!this.dataSrc || !this.uniq) return nothing;
 

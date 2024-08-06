@@ -96,7 +96,6 @@ solid-ofn-rpp {
     box-shadow: 0px 4px 4px 0px #0000000d;
   }
 
-  .products-list .card-panel[name="set-card"],
   .producers-list .card-panel[name="set-card-panel"] {
     cursor: pointer;
   }
@@ -163,7 +162,7 @@ solid-ofn-rpp {
           color: #191c1d;
           background-repeat: no-repeat;
           background-size: 25px 15px;
-          padding-left: 60px;
+          padding-left: 16px;
           background-position: 12px;
           text-align: left;
           .lever {
@@ -229,49 +228,6 @@ solid-ofn-rpp {
     .img-auto {
       aspect-ratio: auto 1/1;
       width: 100%;
-    }
-  }
-
-  .products-list {
-    [name="set-image"] {
-      display: flex;
-      justify-content: center;
-    }
-
-    .img-168 {
-      aspect-ratio: auto 1/1;
-      height: 166px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      img {
-        width: auto;
-        max-width: 100%;
-        height: auto;
-        max-height: 100%;
-      }
-    }
-
-    .card-panel {
-      padding: 16px;
-    }
-
-    solid-display-value[name="dfc-b:name"] {
-      @extend .bold;
-      font-size: 17px;
-      line-height: 27px;
-    }
-
-    solid-display-value[name="dfc-b:suppliedBy.dfc-b:name"] {
-      color: #17594a;
-      @extend .bold;
-      font-size: 14px;
-      line-height: 18px;
-      &::before {
-        content: "from ";
-        font-weight: 400;
-        color: #191c1d;
-      }
     }
   }
 
@@ -591,7 +547,8 @@ solid-ofn-rpp {
     padding-right: 10px !important;
   }
 
-  [name="set-line-field-panel"] {
+  [name="set-line-field-panel"],
+  [name="set-line-field-panel-2"] {
     solid-form-label-text {
       padding: 0 !important;
       label {
@@ -630,12 +587,6 @@ solid-ofn-rpp {
             float: none !important;
           }
         }
-      }
-    }
-    .products-list {
-      .img-168 {
-        aspect-ratio: auto 1/1;
-        height: 120px;
       }
     }
     .card-container-contents > div > solid-display {

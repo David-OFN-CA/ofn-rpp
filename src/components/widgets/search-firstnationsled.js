@@ -27,11 +27,6 @@ customElements.define(
             "required-ofn:First_Nations_led",
             "ofn:First_Nations_led"
           );
-          toggleAndPopulate(
-            `[filtered-by=products-list-filters-${this.value}]`,
-            "required-dfc-b:suppliedBy.ofn:First_Nations_led",
-            "dfc-b:suppliedBy.ofn:First_Nations_led"
-          );
           this.blocked = false;
         }, 0);
       }
@@ -43,13 +38,10 @@ customElements.define(
       }
       return html`<div class="switch">
         <label
-          style="background-image: url(${assetPath(
-            "/Australian_Aboriginal_Flag.png"
-          )});"
           class="padding-15 cursor-pointer"
           @click="${this.toggle}"
         >
-          First Nations Led
+          Indigenous Led
           <input type="checkbox" .value="${this.checkbox}" />
           <span class="lever"></span>
         </label>

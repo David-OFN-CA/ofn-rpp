@@ -6,8 +6,12 @@
  */
 export default (selector, attribute, value = true) => {
   const element = document.querySelector(selector);
-  if (element && element.offsetParent !== null && !element.hasAttribute(attribute)) {
-    element.setAttribute(attribute, value)
+  if (
+    element &&
+    element.offsetParent !== null &&
+    !element.hasAttribute(attribute)
+  ) {
+    element.setAttribute(attribute, value);
     element.component.populate();
   } else {
     element.removeAttribute(attribute);

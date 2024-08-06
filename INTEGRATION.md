@@ -42,14 +42,6 @@ This must be done before the WP rewrite rules.
 </solid-link>
 ```
 
-## Create a link to products list
-
-```html
-<solid-link next="regenerative-produce-portal-products-list">
-  <a>Products List</a>
-</solid-link>
-```
-
 ## More customization
 
 The `uniq` attribute serves as the identifier for the component and also acts as a prefix for the subrouter. Although required, you are welcome to assign it any value that suits your needs.
