@@ -622,24 +622,42 @@ solid-ofn-rpp {
   }
 
   @media #{$small-and-down} {
+    .sm-padding-none {
+      padding-left: 0;
+      padding-right: 0;
+    }
     [name="set-card-panel"] {
-      .img-on-mobile {
-        height: 100px;
-        position: absolute;
-        display: block !important;
-        float: none;
-        margin-top: -125px;
-        margin-left: -7px;
-      }
-      [name="set-right-panel"] {
-        [name="set-title"] {
-          display: block;
-          margin-left: 110px;
-          .dfc_b_name,
-          .dfc_b_address {
+      position: relative;
+      [name="set-card-wrapper"] {
+        display: contents;
+        [name="set-left-panel"] {
+          display: contents;
+          solid-display-img {
+            display: contents;
+            img {
+              height: 100px;
+              position: absolute;
+              display: block !important;
+              float: none;
+              margin-left: 25px;
+              margin-top: 25px;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+          }
+        }
+        [name="set-right-panel"] {
+          [name="set-title"] {
             display: block;
-            padding: 3px;
-            float: none !important;
+            margin-left: 110px;
+            min-height: 100px;
+            .dfc_b_name,
+            .dfc_b_address {
+              display: block;
+              padding: 3px;
+              float: none !important;
+            }
           }
         }
       }

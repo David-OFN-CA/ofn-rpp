@@ -317,7 +317,7 @@ utils.importCore().then(async (core) => {
               <div class="row no-margin-bottom">
                 <div class="col s12 m4"></div>
                 <div class="col s12 m7">
-                  <div class="padding-15">
+                  <div class="padding-15 sm-padding-none">
                     ${this.assurances.map(
                       (assurance) => html`
                         <div
@@ -410,7 +410,7 @@ utils.importCore().then(async (core) => {
                 widget-set-card-wrapper="div"
                 class-set-card-wrapper="row no-margin-bottom valign-wrapper"
                 widget-set-left-panel="div"
-                class-set-left-panel="col hide-on-small-only m2 center img-on-mobile"
+                class-set-left-panel="col m2 center img-on-mobile"
                 class-ofn:logo_url="responsive-img"
                 widget-ofn:logo_url="solid-display-img"
                 default-ofn:logo_url="https://placehold.co/120"
