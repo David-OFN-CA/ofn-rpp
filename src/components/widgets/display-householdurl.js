@@ -17,7 +17,7 @@ customElements.define(
         ? html` <div class="row no-margin-bottom valign-wrapper">
             <span class="col s12 text-link">
               <a href="${this.value}" target="_blank"
-                >Producer website</a>
+                >Website</a>
             </span>
           </div>`
         : ""}`;

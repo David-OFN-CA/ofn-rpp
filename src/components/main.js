@@ -276,6 +276,7 @@ utils.importCore().then(async (core) => {
 
       _setAssuranceFilter(e) {
         const target = e.target?.closest("[value]");
+        let seeAll = false;
         if (target) {
           const value = target.getAttribute("value");
           const solidFormDropdown = target
@@ -285,6 +286,7 @@ utils.importCore().then(async (core) => {
             );
           if (target.classList.contains("active")) {
             solidFormDropdown.value = "";
+            seeAll = true;
           } else {
             const option = Array.from(
               solidFormDropdown.querySelectorAll("option")
@@ -300,8 +302,15 @@ utils.importCore().then(async (core) => {
           Array.from(
             target.parentElement.querySelectorAll("[value]:not([current])")
           ).map((el) => el.classList.remove("active"));
-          target.classList.toggle("active");
+          if(value !== "") {
+            target.classList.toggle("active");
+          } else {
+            target.classList.toggle("active", true);
+          }
           target.removeAttribute("current");
+          if(seeAll) {
+            document.querySelector("#see-all")?.classList.toggle("active", true);
+          }
         }
       }
 
@@ -329,6 +338,14 @@ utils.importCore().then(async (core) => {
                         </div>
                       `
                     )}
+                    <div
+                      @click=${this._setAssuranceFilter}
+                      value=""
+                      class="chip chip-filter active"
+                      id="see-all"
+                    >
+                      See all
+                    </div>
                   </div>
                 </div>
               </div>
