@@ -262,15 +262,15 @@ utils.importCore().then(async (core) => {
           url = location.href;
           window._paq.push(["setCustomUrl", url]);
           window._paq.push(["trackPageView"]);
-          setTimeout(
-            () =>
-              document.querySelector("body").scrollIntoView({
-                behavior: "instant",
-                block: "start",
-                inline: "nearest",
-              }),
-            0
-          );
+          // setTimeout(
+          //   () =>
+          //     document.querySelector("body").scrollIntoView({
+          //       behavior: "instant",
+          //       block: "start",
+          //       inline: "nearest",
+          //     }),
+          //   0
+          // );
         });
       }
 
