@@ -11,11 +11,11 @@ export default async function importCore() {
       try {
         coreInstance = await import("http://localhost:3000/dist/index.js");
       } catch {
-        coreInstance = await import("https://cdn.skypack.dev/@startinblox/core");
+        coreInstance = await import("https://cdn.skypack.dev/@startinblox/core@0.19");
       }
     } else {
       // In production, only return the skypack version
-      coreInstance = await import("https://cdn.skypack.dev/@startinblox/core");
+      coreInstance = await import("https://cdn.skypack.dev/@startinblox/core@0.19");
     }
   }
   return coreInstance;
