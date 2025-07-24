@@ -1,12 +1,14 @@
-import { resolve } from "path";
-import { defineConfig } from "vite";
+import { resolve } from "node:path";
 import Icons from "unplugin-icons/vite";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
         quietDeps: true,
+        api: "modern-compiler",
+        silenceDeprecations: ["import"],
       },
     },
   },
