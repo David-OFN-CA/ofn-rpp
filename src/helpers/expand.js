@@ -1,7 +1,6 @@
-import { importCore, CLIENT_CONTEXT } from "@helpers/utils";
+import { CLIENT_CONTEXT } from "@helpers/utils";
 
 export default async () => {
-  const core = await importCore();
   /**
    * Retrieves a specific field from a given resource based on a predicate.
    * @param {object} resource - The resource to retrieve the field from.
@@ -16,7 +15,7 @@ export default async () => {
     }
     if (resourceType != "ldp:Container") {
       r = await resource[
-        await core.store.getExpandedPredicate(predicate, CLIENT_CONTEXT)
+        await window.sibStore.getExpandedPredicate(predicate, CLIENT_CONTEXT)
       ];
     } else {
       r = await resource.getResourceData()[predicate];

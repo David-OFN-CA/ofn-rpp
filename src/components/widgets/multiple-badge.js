@@ -10,7 +10,7 @@ importCore().then(async (core) => {
     },
     async populate() {
       for (let chip of await expand(this.resource, "ldp:contains")) {
-        chip = await core.store.getData(chip["@id"], CLIENT_CONTEXT);
+        chip = await window.sibStore.getData(chip["@id"], CLIENT_CONTEXT);
         let label = await expand(chip, "ofn:label");
         this.element.innerHTML += `
           <div class="chip">${label}</div>
