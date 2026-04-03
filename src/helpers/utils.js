@@ -1,4 +1,3 @@
-import importCore from "@helpers/importCore";
 import assetPath from "@helpers/assetPath";
 import capitalize from "@helpers/capitalize";
 import CLIENT_CONTEXT from "/src/context.json";
@@ -13,7 +12,6 @@ export {
   assetPath,
   capitalize,
   CLIENT_CONTEXT,
-  importCore,
   makeExpand,
   path,
   sanitize,
