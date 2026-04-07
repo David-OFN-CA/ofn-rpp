@@ -16,12 +16,17 @@ customElements.define(
         return nothing;
       }
 
-      if (Array.isArray(this.value)) {
-        return html`${this.value.map(
+      let val = this.value;
+      if (typeof val === "string" && /^\[.*\]$/.test(val.trim())) {
+        try { val = JSON.parse(val); } catch {}
+      }
+
+      if (Array.isArray(val)) {
+        return html`${val.map(
           (label) => html`<div class="chip">${label}</div>`,
         )}`;
       }
-      return html`<div class="chip">${this.value}</div>`;
+      return html`<div class="chip">${val}</div>`;
     }
   },
 );
