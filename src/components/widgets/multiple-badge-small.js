@@ -1,23 +1,32 @@
-import { CLIENT_CONTEXT, makeExpand } from "@helpers/utils";
+import { LitElement, html, nothing } from "lit";
 
-import * as core from "https://cdn.jsdelivr.net/npm/@startinblox/core@1/dist/index.js";
+customElements.define(
+  "custom-multiple-badge-small",
+  class extends LitElement {
+    static properties = {
+      value: { attribute: "value" },
+    };
 
-(async () => {
-  const expand = await makeExpand();
-  core.Sib.register({
-    name: "custom-multiple-badge-small",
-    use: [core.StoreMixin],
-    empty() {
-      this.element.innerHTML = "";
-    },
-    async populate() {
-      for (let chip of await expand(this.resource, "ldp:contains")) {
-        chip = await window.sibStore.getData(chip["@id"], CLIENT_CONTEXT);
-        let label = await expand(chip, "ofn:label");
-        this.element.innerHTML += `
-          <div class="chip small">${label}</div>
-        `;
+    createRenderRoot() {
+      return this;
+    }
+
+    render() {
+      if (!this.value) {
+        return nothing;
       }
-    },
-  });
-})();
+
+      let val = this.value;
+      if (typeof val === "string" && /^\[.*\]$/.test(val.trim())) {
+        try { val = JSON.parse(val); } catch {}
+      }
+
+      if (Array.isArray(val)) {
+        return html`${val.map(
+          (label) => html`<div class="chip">${label}</div>`,
+        )}`;
+      }
+      return html`<div class="chip small">${val}</div>`;
+    }
+  },
+);
