@@ -407,7 +407,7 @@ import * as utils from "@helpers/utils";
                 loader-id="loader-producers-list-${this.uniq}"
                 data-src="${this.producersSrc}"
                 filtered-by="producers-list-filters-${this.uniq}"
-                fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity, region(dfc-b:hasAddress.dfc-b:region)), set-description(dfc-b:hasDescription), set-tags(ofn:First_Nations_led, ofn:hasProduceCategory))))))"
+                fields="set-card-row(set-card-col(set-card-panel(set-card-wrapper(set-left-panel(ofn:logo_url), set-right-panel(set-title(dfc-b:name, dfc-b:hasAddress.dfc-b:hasCity, region(dfc-b:hasAddress.dfc-b:region)), set-description(dfc-b:hasDescription), set-tags(ofn:First_Nations_led, ofn:Produce_category))))))"
                 widget-set-card-row="div"
                 class-set-card-row="row"
                 widget-set-card-col="div"
@@ -437,7 +437,7 @@ import * as utils from "@helpers/utils";
                 class-dfc-b:hasDescription="col s12"
                 widget-set-tags="div"
                 widget-ofn:First_Nations_led="custom-badge-firstnationsled"
-                widget-ofn:hasProduceCategory="custom-multiple-badge"
+                widget-ofn:Produce_category="custom-multiple-badge"
                 next="${this.route}-producer-details"
               ></solid-display>
             </div>
@@ -767,12 +767,12 @@ import * as utils from "@helpers/utils";
                         <div class="row no-margin-bottom no-margin-left">
                           <solid-display
                             bind-resources=""
-                            fields="wrapper(ofn:hasProduceCategory), dfc-b:name"
+                            fields="wrapper(ofn:Produce_category), dfc-b:name"
                             class-wrapper="valign-wrapper"
                             widget-wrapper="div"
                             widget-dfc-b:name="solid-display-value"
                             class-dfc-b:name="flow-text"
-                            widget-ofn:hasProduceCategory="custom-multiple-badge-small"
+                            widget-ofn:Produce_category="custom-multiple-badge-small"
                             class="col s12"
                           ></solid-display>
                         </div>
