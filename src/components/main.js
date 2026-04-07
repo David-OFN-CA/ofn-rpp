@@ -14,7 +14,7 @@ import * as utils from "@helpers/utils";
 import {
   asyncQuerySelectorAll,
   asyncQuerySelector,
-} from "https://cdn.jsdelivr.net/npm/@startinblox/core@1/dist/helpers.js";
+} from "@startinblox/core/dist/helpers";
 
 (async () => {
   const expand = await utils.makeExpand();
