@@ -23,7 +23,7 @@ customElements.define(
 
       if (Array.isArray(val)) {
         return html`${val.map(
-          (label) => html`<div class="chip">${label}</div>`,
+          (label) => html`<div class="chip small">${label}</div>`,
         )}`;
       }
       return html`<div class="chip small">${val}</div>`;
